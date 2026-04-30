@@ -149,7 +149,7 @@ System.out.println("phiVanChuyen raw = " + request.getParameter("phiVanChuyen"))
 
             gioHangDAO.xoaToanBoGioHang(maNguoiDung);
 
-            session.setAttribute("checkoutSuccess", "Đặt hàng thành công.");
+            session.setAttribute("toastSuccess", "Đặt hàng thành công");
             response.sendRedirect(request.getContextPath() + "/gio_hang");
         } else {
             session.setAttribute("checkoutError", "Không thể tạo đơn hàng. Vui lòng thử lại.");

@@ -36,6 +36,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/favorite-section.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/best-seller-section.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/new-product-section.css">
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/shop-category.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/newsletter-bar.css">
@@ -46,3 +47,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/ma-giam-gia.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/checkout-popup.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/order-history.css">
+
+<%-- Toastr CSS --%>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+<%-- CSS chung của web --%>
+<link rel="stylesheet"
+      href="${pageContext.request.contextPath}/assets/css/variable.css">

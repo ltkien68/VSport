@@ -1097,5 +1097,57 @@ private void setParams(PreparedStatement ps, List<Object> params) throws Excepti
     return "ao";
 }   
     
+    public List<SanPham> getSanPhamMoiNhat(int limit) {
+    List<SanPham> list = new ArrayList<>();
+
+    String sql = """
+        SELECT 
+            sp.ma_san_pham,
+            sp.ten_san_pham,
+            sp.slug,
+            sp.anh_chinh,
+            sp.gia_niem_yet,
+            sp.gia_khuyen_mai,
+            sp.gia_san_pham,
+            sp.mo_ta_ngan,
+            sp.ngay_tao,
+            th.ten_thuong_hieu
+        FROM san_pham sp
+        LEFT JOIN thuong_hieu th ON sp.ma_thuong_hieu = th.ma_thuong_hieu
+        WHERE sp.trang_thai = 'dang_ban'
+        ORDER BY sp.ngay_tao DESC
+        LIMIT ?
+    """;
+
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setInt(1, limit);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+
+                sp.setMaSanPham(rs.getInt("ma_san_pham"));
+                sp.setTenSanPham(rs.getString("ten_san_pham"));
+                sp.setSlug(rs.getString("slug"));
+                sp.setAnhChinh(rs.getString("anh_chinh"));
+                sp.setGiaNiemYet(rs.getDouble("gia_niem_yet"));
+                sp.setGiaKhuyenMai(rs.getDouble("gia_khuyen_mai"));
+                sp.setGiaSanPham(rs.getDouble("gia_san_pham"));
+                sp.setMoTaNgan(rs.getString("mo_ta_ngan"));
+                sp.setNgayTao(rs.getTimestamp("ngay_tao"));
+
+                list.add(sp);
+            }
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return list;
+}
+    
 }
 

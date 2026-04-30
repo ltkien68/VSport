@@ -43,7 +43,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    if (profilePageData && profilePageData.dataset.openPopup === "true") {
+    if (profilePageData) {
+    const toastSuccess = (profilePageData.dataset.toastSuccess || "").trim();
+    const toastError = (profilePageData.dataset.toastError || "").trim();
+
+    if (toastSuccess && window.toastr) {
+        toastr.success(toastSuccess);
+    }
+
+    if (toastError && window.toastr) {
+        toastr.error(toastError);
+    }
+
+    if (profilePageData.dataset.openPopup === "true") {
         openPopup();
     }
+}
 });

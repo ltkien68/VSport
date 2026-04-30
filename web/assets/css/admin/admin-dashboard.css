@@ -152,6 +152,7 @@
 
 .admin-sidebar-sublink {
     text-decoration: none;
+    font-family: var(--font-body);
     font-size: var(--text-sm);
     color: rgba(255,255,255,0.6);
 }
@@ -323,6 +324,42 @@
     text-decoration: underline;
 }
 
+
+.admin-stat-trend-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-stat-trend-icon svg,
+.admin-stat-change svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2.4;
+}
+
+.admin-stat-change {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.admin-stat-change.positive,
+.admin-stat-trend-icon.positive,
+.profit-positive {
+    color: #16a34a;
+}
+
+.admin-stat-change.negative,
+.admin-stat-trend-icon.negative,
+.profit-negative {
+    color: #dc2626;
+}
+
+.admin-stat-change.neutral,
+.admin-stat-trend-icon.neutral {
+    color: #6b7280;
+}
 
 
 /* =========================

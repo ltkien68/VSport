@@ -72,20 +72,20 @@ public class CapNhatThongTinCaNhanServlet extends HttpServlet {
         avatarUrl = avatarUrl != null ? avatarUrl.trim() : "";
 
         if (hoTen.isEmpty()) {
-            session.setAttribute("error", "Họ tên không được để trống.");
+            session.setAttribute("toastError", "Họ tên không được để trống.");
             response.sendRedirect(request.getContextPath() + "/thong_tin_ca_nhan");
             return;
         }
 
         if (email.isEmpty()) {
-            session.setAttribute("error", "Email không được để trống.");
+            session.setAttribute("toastError", "Email không được để trống.");
             response.sendRedirect(request.getContextPath() + "/thong_tin_ca_nhan");
             return;
         }
 
         NguoiDung emailDaTonTai = nguoiDungDAO.getByEmailExceptId(email, nguoiDungDB.getMaNguoiDung());
         if (emailDaTonTai != null) {
-            session.setAttribute("error", "Email này đã được sử dụng.");
+            session.setAttribute("toastError", "Email này đã được sử dụng.");
             response.sendRedirect(request.getContextPath() + "/thong_tin_ca_nhan");
             return;
         }
@@ -93,7 +93,7 @@ public class CapNhatThongTinCaNhanServlet extends HttpServlet {
         if (!soDienThoai.isEmpty()) {
             NguoiDung sdtDaTonTai = nguoiDungDAO.getByPhoneExceptId(soDienThoai, nguoiDungDB.getMaNguoiDung());
             if (sdtDaTonTai != null) {
-                session.setAttribute("error", "Số điện thoại này đã được sử dụng.");
+                session.setAttribute("toastError", "Số điện thoại này đã được sử dụng.");
                 response.sendRedirect(request.getContextPath() + "/thong_tin_ca_nhan");
                 return;
             }
@@ -104,7 +104,7 @@ public class CapNhatThongTinCaNhanServlet extends HttpServlet {
             try {
                 ngaySinh = Date.valueOf(ngaySinhStr);
             } catch (Exception e) {
-                session.setAttribute("error", "Ngày sinh không hợp lệ.");
+                session.setAttribute("toastError", "Ngày sinh không hợp lệ.");
                 response.sendRedirect(request.getContextPath() + "/thong_tin_ca_nhan");
                 return;
             }
@@ -140,7 +140,7 @@ public class CapNhatThongTinCaNhanServlet extends HttpServlet {
                 }
 
                 if (!hopLe) {
-                    session.setAttribute("error", "Chỉ chấp nhận file ảnh: jpg, jpeg, png, gif, webp, bmp, svg, avif.");
+                    session.setAttribute("toastError", "Chỉ chấp nhận file ảnh: jpg, jpeg, png, gif, webp, bmp, svg, avif.");
                     response.sendRedirect(request.getContextPath() + "/thong_tin_ca_nhan");
                     return;
                 }
@@ -182,9 +182,9 @@ public class CapNhatThongTinCaNhanServlet extends HttpServlet {
         if (success) {
             NguoiDung nguoiDungMoi = nguoiDungDAO.getById(nguoiDungDB.getMaNguoiDung());
             session.setAttribute("nguoiDung", nguoiDungMoi);
-            session.setAttribute("success", "Cập nhật thông tin cá nhân thành công.");
+            session.setAttribute("toastSuccess", "Cập nhật thông tin cá nhân thành công.");
         } else {
-            session.setAttribute("error", "Cập nhật thất bại, vui lòng thử lại.");
+            session.setAttribute("toastError", "Cập nhật thất bại, vui lòng thử lại.");
         }
 
         response.sendRedirect(request.getContextPath() + "/thong_tin_ca_nhan");

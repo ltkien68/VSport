@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!res.ok) {
                 const errorText = await res.text();
                 console.error("Lỗi tải popup checkout:", errorText);
-                alert("Không thể mở popup thanh toán.");
+                toastr.error("Không thể mở popup thanh toán.");
                 return;
             }
 
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.body.classList.add("search-lock");
         } catch (error) {
             console.error("Lỗi fetch popup checkout:", error);
-            alert("Có lỗi khi tải popup thanh toán.");
+            toastr.error("Có lỗi khi tải popup thanh toán.");
         }
     }
 
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const maGiamGiaApplied = document.getElementById("maGiamGiaApplied");
 
         if (!maGiamGia) {
-            alert("Vui lòng chọn mã giảm giá.");
+            toastr.error("Vui lòng chọn mã giảm giá.");
             return;
         }
 

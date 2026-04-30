@@ -10,7 +10,8 @@
 
 <div class="profile-popup-overlay" id="profilePopupOverlay"></div>
 
-<div class="profile-popup" id="profilePopup">
+<div class="profile-popup" id="profilePopup"
+     >
     <div class="profile-popup-header">
         <h3>CẬP NHẬT THÔNG TIN CÁ NHÂN</h3>
         <button type="button" class="profile-popup-close" id="closeProfilePopup">&times;</button>

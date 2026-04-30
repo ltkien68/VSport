@@ -79,23 +79,53 @@ public class AdminDashboardServlet extends HttpServlet {
         int thanhVienMoiTuanTruoc = dashboardStatsDAO.getThanhVienMoiTuanTruoc();
 
         // =========================
+        // PHẦN TRĂM THAY ĐỔI
+        // =========================
+        double phanTramDonHang = tinhPhanTramThayDoi(donHangTuanNay, donHangTuanTruoc);
+        double phanTramDoanhThu = tinhPhanTramThayDoi(doanhThuTuanNay, doanhThuTuanTruoc);
+        double phanTramLoiNhuan = tinhPhanTramLoiNhuan(loiNhuanTuanNay, loiNhuanTuanTruoc);
+        double phanTramThanhVien = tinhPhanTramThayDoi(thanhVienMoiTuanNay, thanhVienMoiTuanTruoc);
+
+        String moTaLoiNhuan = moTaBienDongLoiNhuan(loiNhuanTuanNay, loiNhuanTuanTruoc, tongLoiNhuan);
+        String loaiBienDongLoiNhuan = loaiBienDongLoiNhuan(loiNhuanTuanNay, loiNhuanTuanTruoc);
+
+        // =========================
         // DỮ LIỆU THẬT CHO 2 KHỐI DƯỚI
         // =========================
         List<DonHang> dsDonHangGanDay = donHangDAO.getTatCaDonHangChoAdmin();
-        List<SanPham> dsSanPhamBanChay = sanPhamDAO.getSanPhamBanChay(6);
+        List<SanPham> dsSanPhamBanChay = sanPhamDAO.getSanPhamBanChay(10);
 
         // =========================
         // ĐẨY DATA SANG JSP
         // =========================
         request.setAttribute("tongDonHang", tongDonHang);
         request.setAttribute("tongDoanhThu", tongDoanhThu);
+        request.setAttribute("tongTienNhap", tongTienNhap);
         request.setAttribute("tongLoiNhuan", tongLoiNhuan);
         request.setAttribute("tongThanhVien", tongThanhVien);
 
-        request.setAttribute("phanTramDonHang", tinhPhanTramThayDoi(donHangTuanNay, donHangTuanTruoc));
-        request.setAttribute("phanTramDoanhThu", tinhPhanTramThayDoi(doanhThuTuanNay, doanhThuTuanTruoc));
-        request.setAttribute("phanTramLoiNhuan", tinhPhanTramThayDoi(loiNhuanTuanNay, loiNhuanTuanTruoc));
-        request.setAttribute("phanTramThanhVien", tinhPhanTramThayDoi(thanhVienMoiTuanNay, thanhVienMoiTuanTruoc));
+        request.setAttribute("donHangTuanNay", donHangTuanNay);
+        request.setAttribute("donHangTuanTruoc", donHangTuanTruoc);
+
+        request.setAttribute("doanhThuTuanNay", doanhThuTuanNay);
+        request.setAttribute("doanhThuTuanTruoc", doanhThuTuanTruoc);
+
+        request.setAttribute("tienNhapTuanNay", tienNhapTuanNay);
+        request.setAttribute("tienNhapTuanTruoc", tienNhapTuanTruoc);
+
+        request.setAttribute("loiNhuanTuanNay", loiNhuanTuanNay);
+        request.setAttribute("loiNhuanTuanTruoc", loiNhuanTuanTruoc);
+
+        request.setAttribute("thanhVienMoiTuanNay", thanhVienMoiTuanNay);
+        request.setAttribute("thanhVienMoiTuanTruoc", thanhVienMoiTuanTruoc);
+
+        request.setAttribute("phanTramDonHang", phanTramDonHang);
+        request.setAttribute("phanTramDoanhThu", phanTramDoanhThu);
+        request.setAttribute("phanTramLoiNhuan", phanTramLoiNhuan);
+        request.setAttribute("phanTramThanhVien", phanTramThanhVien);
+
+        request.setAttribute("moTaLoiNhuan", moTaLoiNhuan);
+        request.setAttribute("loaiBienDongLoiNhuan", loaiBienDongLoiNhuan);
 
         request.setAttribute("dsDonHangGanDay", dsDonHangGanDay);
         request.setAttribute("dsSanPhamBanChay", dsSanPhamBanChay);
@@ -117,8 +147,84 @@ public class AdminDashboardServlet extends HttpServlet {
             if (hienTai == 0) {
                 return 0;
             }
-            return 100;
+            return hienTai > 0 ? 100 : -100;
         }
+
         return ((hienTai - truocDo) / Math.abs(truocDo)) * 100.0;
+    }
+
+    private double tinhPhanTramLoiNhuan(double hienTai, double truocDo) {
+        if (truocDo == 0) {
+            if (hienTai == 0) {
+                return 0;
+            }
+            return hienTai > 0 ? 100 : -100;
+        }
+
+        return ((hienTai - truocDo) / Math.abs(truocDo)) * 100.0;
+    }
+
+    private String moTaBienDongLoiNhuan(double hienTai, double truocDo, double tongLoiNhuan) {
+        if (truocDo < 0 && hienTai > 0 && tongLoiNhuan > 0) {
+            return "Từ lỗ sang lãi";
+        }
+
+        if (truocDo > 0 && hienTai < 0) {
+            return "Từ lãi sang lỗ";
+        }
+
+        if (truocDo < 0 && hienTai < 0) {
+            if (hienTai > truocDo) {
+                return "Lỗ giảm";
+            }
+
+            if (hienTai < truocDo) {
+                return "Lỗ tăng";
+            }
+
+            return "Lỗ không đổi";
+        }
+
+        if (hienTai > truocDo) {
+            return "Tăng";
+        }
+
+        if (hienTai < truocDo) {
+            return "Giảm";
+        }
+
+        return "Không đổi";
+    }
+
+    private String loaiBienDongLoiNhuan(double hienTai, double truocDo) {
+        if (truocDo < 0 && hienTai > 0) {
+            return "positive";
+        }
+
+        if (truocDo > 0 && hienTai < 0) {
+            return "negative";
+        }
+
+        if (truocDo < 0 && hienTai < 0) {
+            if (hienTai > truocDo) {
+                return "positive";
+            }
+
+            if (hienTai < truocDo) {
+                return "negative";
+            }
+
+            return "neutral";
+        }
+
+        if (hienTai > truocDo) {
+            return "positive";
+        }
+
+        if (hienTai < truocDo) {
+            return "negative";
+        }
+
+        return "neutral";
     }
 }

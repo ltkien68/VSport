@@ -151,8 +151,8 @@
                 
             <div class="admin-sidebar-submenu">
                 <a class="admin-sidebar-sublink" href="${pageContext.request.contextPath}/admin/danh-muc">Danh Mục</a>
-                <a class="admin-sidebar-sublink" href="javascript:void(0)">Phiếu Nhập / Xuất</a>
-                <a class="admin-sidebar-sublink" href="javascript:void(0)">Báo Cáo</a>
+                <a class="admin-sidebar-sublink" href="${pageContext.request.contextPath}/admin/thuong-hieu">Thương Hiệu</a>
+                <a class="admin-sidebar-sublink" href="javascript:void(0)">Đội Bóng</a>
             </div>
 
             <a class="admin-sidebar-link" href="javascript:void(0)">

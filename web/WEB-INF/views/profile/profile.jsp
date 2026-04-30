@@ -80,15 +80,11 @@
 %>
 
 <%
-    String successMsg = (String) session.getAttribute("success");
-    String errorMsg = (String) session.getAttribute("error");
+    String toastSuccess = (String) session.getAttribute("toastSuccess");
+    String toastError = (String) session.getAttribute("toastError");
 
-    if (successMsg != null) {
-        session.removeAttribute("success");
-    }
-    if (errorMsg != null) {
-        session.removeAttribute("error");
-    }
+    if (toastSuccess != null) session.removeAttribute("toastSuccess");
+    if (toastError != null) session.removeAttribute("toastError");
 %>
 
 <%
@@ -253,7 +249,9 @@
 </section>
                 
                 <div id="profilePageData"
-     data-open-popup="<%= errorMsg != null ? "true" : "false" %>">
+                    data-open-popup="<%= toastError != null ? "true" : "false" %>"
+                    data-toast-success="<%= toastSuccess != null ? toastSuccess : "" %>"
+                    data-toast-error="<%= toastError != null ? toastError : "" %>">
 </div>
 
 <jsp:include page="/WEB-INF/views/profile/profile-edit-popup.jsp" />
@@ -272,6 +270,28 @@
 <script src="${pageContext.request.contextPath}/assets/js/common/scroll-reveal.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/pages/profile.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/components/search-popup.js"></script>
+
+<%-- jQuery bắt buộc cho Toastr --%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<%-- Toastr JS --%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+    toastr.options = {
+        closeButton: true,
+        progressBar: true,
+        newestOnTop: true,
+        preventDuplicates: true,
+        positionClass: "toast-top-right",
+        timeOut: "2500",
+        extendedTimeOut: "1000",
+        showDuration: "250",
+        hideDuration: "250",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut"
+    };
+</script>
 
 
 

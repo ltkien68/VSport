@@ -57,10 +57,7 @@
 
             <div class="club-breadcrumb-detail">
             <div class="club-container">
-                <a href="${pageContext.request.contextPath}/bong_da/<%= spInfo.getDoiBongSlug() %>" class="club-detail-back-link">↩ Trở lại</a>
-                <span class="club-detail-breadcrumb-divider">/</span>
-                <a href="${pageContext.request.contextPath}/trang_chu" class="club-detail-breadcrumb-home">Trang Chủ</a>
-                <span class="club-detail-breadcrumb-divider">/</span>
+                
                 <div class="club-breadcrumb-detail">
                     <div class="club-container">
                         <a href="${backUrl}" class="club-detail-back-link">↩ Trở lại</a>

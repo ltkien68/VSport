@@ -1,15 +1,11 @@
-/* =========================
-   ADMIN CATEGORY PAGE
-========================= */
-
-.admin-category-main {
+.admin-brand-main {
     padding: var(--space-4);
     background: var(--color-gray-100);
     min-height: 100vh;
     color: var(--color-black);
 }
 
-.admin-category-header {
+.admin-brand-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,8 +13,7 @@
     margin-bottom: var(--space-4);
 }
 
-.admin-category-label {
-    
+.admin-brand-label {
     font-family: Arial, sans-serif;
     font-size: var(--text-sm);
     color: var(--color-red);
@@ -28,7 +23,7 @@
     margin-bottom: 6px;
 }
 
-.admin-category-header h1 {
+.admin-brand-header h1 {
     text-transform: uppercase;
     font-family: var(--font-heading);
     font-size: var(--text-4xl);
@@ -36,13 +31,13 @@
     margin-bottom: 6px;
 }
 
-.admin-category-header span {
+.admin-brand-header span {
     font-family: Arial, sans-serif;
     font-size: var(--text-base);
     color: var(--color-gray-600);
 }
 
-.admin-category-add-btn {
+.admin-brand-add-btn {
     height: 44px;
     padding: 0 var(--space-4);
     border: none;
@@ -59,21 +54,17 @@
     transition: var(--transition-fast);
 }
 
-.admin-category-add-btn:hover {
+.admin-brand-add-btn:hover {
     background: var(--color-red);
     transform: translateY(-1px);
 }
 
-.admin-category-add-btn svg {
+.admin-brand-add-btn svg {
     width: 18px;
     height: 18px;
 }
 
-/* =========================
-   TOAST
-========================= */
-
-.admin-category-toast {
+.admin-brand-toast {
     padding: 14px var(--space-3);
     border-radius: var(--radius-md);
     font-family: Arial, sans-serif;
@@ -83,23 +74,19 @@
     transition: var(--transition-fast);
 }
 
-.admin-category-toast.success {
+.admin-brand-toast.success {
     background: rgba(24, 169, 87, 0.12);
     color: var(--color-green);
     border: 1px solid rgba(24, 169, 87, 0.25);
 }
 
-.admin-category-toast.error {
+.admin-brand-toast.error {
     background: var(--color-red-soft);
     color: var(--color-red);
     border: 1px solid rgba(225, 29, 72, 0.25);
 }
 
-/* =========================
-   CARD
-========================= */
-
-.admin-category-card {
+.admin-brand-card {
     background: var(--color-white);
     border: 1px solid var(--color-gray-200);
     border-radius: var(--radius-lg);
@@ -107,7 +94,7 @@
     overflow: hidden;
 }
 
-.admin-category-card-head {
+.admin-brand-card-head {
     padding: var(--space-4);
     display: flex;
     justify-content: space-between;
@@ -116,28 +103,24 @@
     border-bottom: 1px solid var(--color-gray-200);
 }
 
-.admin-category-card-head h2 {
+.admin-brand-card-head h2 {
     font-family: var(--font-heading);
     font-size: var(--text-3xl);
     color: var(--color-black);
     margin-bottom: 4px;
 }
 
-.admin-category-card-head p {
+.admin-brand-card-head p {
     font-family: Arial, sans-serif;
     font-size: var(--text-sm);
     color: var(--color-gray-600);
 }
 
-.admin-category-card-head strong {
+.admin-brand-card-head strong {
     color: var(--color-red);
 }
 
-/* =========================
-   SEARCH
-========================= */
-
-.admin-category-search {
+.admin-brand-search {
     width: 300px;
     height: 42px;
     border: 1px solid var(--color-gray-200);
@@ -149,14 +132,14 @@
     padding: 0 var(--space-2);
 }
 
-.admin-category-search svg {
+.admin-brand-search svg {
     width: 18px;
     height: 18px;
     color: var(--color-gray-600);
     flex-shrink: 0;
 }
 
-.admin-category-search input {
+.admin-brand-search input {
     width: 100%;
     border: none;
     outline: none;
@@ -166,16 +149,12 @@
     color: var(--color-black);
 }
 
-.admin-category-search input::placeholder {
+.admin-brand-search input::placeholder {
     color: var(--color-gray-400);
     font-family: Arial, sans-serif;
 }
 
-/* =========================
-   TABLE
-========================= */
-
-.admin-category-table-wrap {
+.admin-brand-table-wrap {
     width: 100%;
     overflow-x: auto;
     background: var(--color-white);
@@ -184,14 +163,14 @@
     overflow-y: auto;
 }
 
-.admin-category-table {
+.admin-brand-table {
     width: 100%;
     min-width: 850px;
     border-collapse: collapse;
 }
 
-.admin-category-table th,
-.admin-category-table td {
+.admin-brand-table th,
+.admin-brand-table td {
     padding: var(--space-3);
     text-align: left;
     border-bottom: 1px solid var(--color-gray-200);
@@ -201,7 +180,7 @@
     vertical-align: middle;
 }
 
-.admin-category-table th {
+.admin-brand-table th {
     background: var(--color-black);
     color: var(--color-white);
     font-weight: var(--fw-bold);
@@ -210,28 +189,28 @@
     letter-spacing: 0.04em;
 }
 
-.admin-category-table tbody tr {
+.admin-brand-table tbody tr {
     transition: var(--transition-fast);
 }
 
-.admin-category-table tbody tr:hover {
+.admin-brand-table tbody tr:hover {
     background: var(--color-red-soft);
 }
 
-.category-name {
+.brand-name {
     display: flex;
     align-items: center;
     gap: var(--space-2);
 }
 
-.category-name strong {
+.brand-name strong {
     font-family: Arial, sans-serif;
     font-size: var(--text-sm);
     font-weight: var(--fw-bold);
     color: var(--color-black);
 }
 
-.category-icon {
+.brand-icon {
     width: 38px;
     height: 38px;
     border-radius: var(--radius-md);
@@ -243,12 +222,12 @@
     flex-shrink: 0;
 }
 
-.category-icon svg {
+.brand-icon svg {
     width: 18px;
     height: 18px;
 }
 
-.category-slug {
+.brand-slug {
     display: inline-flex;
     align-items: center;
     padding: 7px 10px;
@@ -260,17 +239,13 @@
     font-weight: var(--fw-bold);
 }
 
-/* =========================
-   ACTIONS
-========================= */
-
-.category-actions {
+.brand-actions {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.category-action-btn {
+.brand-action-btn {
     width: 36px;
     height: 36px;
     border-radius: var(--radius-md);
@@ -284,39 +259,35 @@
     transition: var(--transition-fast);
 }
 
-.category-action-btn svg {
+.brand-action-btn svg {
     width: 17px;
     height: 17px;
 }
 
-.category-action-btn.edit:hover {
+.brand-action-btn.edit:hover {
     background: var(--color-black);
     border-color: var(--color-black);
     color: var(--color-white);
 }
 
-.category-action-btn.delete {
+.brand-action-btn.delete {
     color: var(--color-red);
 }
 
-.category-action-btn.delete:hover {
+.brand-action-btn.delete:hover {
     background: var(--color-red);
     border-color: var(--color-red);
     color: var(--color-white);
 }
 
-.admin-category-empty {
+.admin-brand-empty {
     text-align: center !important;
     padding: var(--space-6) !important;
     color: var(--color-gray-600) !important;
     font-family: Arial, sans-serif;
 }
 
-/* =========================
-   MODAL
-========================= */
-
-.category-modal-overlay {
+.brand-modal-overlay {
     position: fixed;
     inset: 0;
     background: rgba(11, 11, 11, 0.55);
@@ -326,12 +297,12 @@
     z-index: 900;
 }
 
-.category-modal-overlay.show {
+.brand-modal-overlay.show {
     opacity: 1;
     pointer-events: auto;
 }
 
-.category-modal {
+.brand-modal {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -349,13 +320,13 @@
     padding: var(--space-4);
 }
 
-.category-modal.show {
+.brand-modal.show {
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
     pointer-events: auto;
 }
 
-.category-modal-head {
+.brand-modal-head {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -363,7 +334,7 @@
     margin-bottom: var(--space-4);
 }
 
-.category-modal-head p {
+.brand-modal-head p {
     font-family: Arial, sans-serif;
     color: var(--color-red);
     font-size: var(--text-xs);
@@ -373,13 +344,13 @@
     margin-bottom: 4px;
 }
 
-.category-modal-head h2 {
+.brand-modal-head h2 {
     font-family: var(--font-heading);
     font-size: var(--text-3xl);
     color: var(--color-black);
 }
 
-.category-modal-close {
+.brand-modal-close {
     width: 36px;
     height: 36px;
     border: none;
@@ -393,35 +364,31 @@
     transition: var(--transition-fast);
 }
 
-.category-modal-close:hover {
+.brand-modal-close:hover {
     background: var(--color-black);
     color: var(--color-white);
 }
 
-/* =========================
-   FORM
-========================= */
-
-.category-form {
+.brand-form {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
 }
 
-.category-form-group {
+.brand-form-group {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.category-form-group label {
+.brand-form-group label {
     font-family: Arial, sans-serif;
     font-size: var(--text-sm);
     font-weight: var(--fw-bold);
     color: var(--color-black);
 }
 
-.category-form-group input {
+.brand-form-group input {
     height: 44px;
     border: 1px solid var(--color-gray-200);
     border-radius: var(--radius-md);
@@ -434,32 +401,32 @@
     transition: var(--transition-fast);
 }
 
-.category-form-group input::placeholder {
+.brand-form-group input::placeholder {
     color: var(--color-gray-400);
     font-family: Arial, sans-serif;
 }
 
-.category-form-group input:focus {
+.brand-form-group input:focus {
     border-color: var(--color-red);
     box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.12);
 }
 
-.category-form-group small {
+.brand-form-group small {
     font-family: Arial, sans-serif;
     font-size: var(--text-xs);
     color: var(--color-gray-600);
 }
 
-.category-form-actions {
+.brand-form-actions {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
     margin-top: var(--space-3);
 }
 
-.category-cancel-btn,
-.category-save-btn,
-.category-delete-submit {
+.brand-cancel-btn,
+.brand-save-btn,
+.brand-delete-submit {
     height: 42px;
     padding: 0 var(--space-4);
     border-radius: var(--radius-md);
@@ -470,33 +437,33 @@
     transition: var(--transition-fast);
 }
 
-.category-cancel-btn {
+.brand-cancel-btn {
     border: 1px solid var(--color-gray-200);
     background: var(--color-white);
     color: var(--color-black);
 }
 
-.category-cancel-btn:hover {
+.brand-cancel-btn:hover {
     background: var(--color-gray-100);
 }
 
-.category-save-btn {
+.brand-save-btn {
     border: none;
     background: var(--color-black);
     color: var(--color-white);
 }
 
-.category-save-btn:hover {
+.brand-save-btn:hover {
     background: var(--color-red);
 }
 
-.category-delete-submit {
+.brand-delete-submit {
     border: none;
     background: var(--color-red);
     color: var(--color-white);
 }
 
-.category-delete-submit:hover {
+.brand-delete-submit:hover {
     background: var(--color-red-hover);
 }
 
@@ -511,31 +478,27 @@
     color: var(--color-red);
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
 @media (max-width: 900px) {
-    .admin-category-main {
+    .admin-brand-main {
         padding: var(--space-3);
     }
 
-    .admin-category-header,
-    .admin-category-card-head {
+    .admin-brand-header,
+    .admin-brand-card-head {
         flex-direction: column;
         align-items: stretch;
     }
 
-    .admin-category-header h1 {
+    .admin-brand-header h1 {
         font-size: var(--text-3xl);
     }
 
-    .admin-category-card-head h2,
-    .category-modal-head h2 {
+    .admin-brand-card-head h2,
+    .brand-modal-head h2 {
         font-size: var(--text-2xl);
     }
 
-    .admin-category-search {
+    .admin-brand-search {
         width: 100%;
     }
 }

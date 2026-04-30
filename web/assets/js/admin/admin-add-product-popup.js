@@ -1,12 +1,4 @@
-toastr.options = {
-    closeButton: true,
-    progressBar: true,
-    positionClass: "toast-top-right",
-    timeOut: "2500",
-    showDuration: "300",
-    hideDuration: "300",
-    preventDuplicates: true
-};
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const popup = document.getElementById("addProductPopup");
@@ -15,6 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeBtn = document.getElementById("closeAddProductPopup");
     const cancelBtn = document.getElementById("cancelAddProductPopup");
     const form = document.getElementById("addProductWithCapitalForm");
+    
+    const productNameInput = document.querySelector("input[name='tenSanPham']");
+    const productSlugInput = document.querySelector("input[name='slug']");
 
     const addVariantBtn = document.getElementById("addVariantRowBtn");
     const variantRows = document.getElementById("variantRows");
@@ -32,6 +27,29 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!popup || !overlay || !openBtn || !form) {
         console.log("Popup elements not found");
         return;
+    }
+    
+    function makeSlug(text) {
+        return String(text || "")
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/đ/g, "d")
+            .replace(/Đ/g, "d")
+            .replace(/[^a-z0-9\s-]/g, "")
+            .trim()
+            .replace(/\s+/g, "-")
+            .replace(/-+/g, "-");
+    }
+
+    if (productNameInput && productSlugInput) {
+        productNameInput.addEventListener("input", function () {
+            productSlugInput.value = makeSlug(productNameInput.value);
+        });
+
+        productSlugInput.addEventListener("input", function () {
+            productSlugInput.value = makeSlug(productSlugInput.value);
+        });
     }
 
     function openPopup() {
@@ -172,15 +190,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const data = JSON.parse(text);
 
         if (data.success) {
-            toastr.success(data.message);
             closePopup();
             window.location.reload();
         } else {
-            toastr.error(data.message || "Có lỗi xảy ra.");
+            console.error(data.message || "Có lỗi xảy ra.");
         }
     } catch (error) {
-        console.error(error);
-        toastr.error("Không gửi được dữ liệu.");
+        console.error("Không gửi được dữ liệu.");
     }
 });
 

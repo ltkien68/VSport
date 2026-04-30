@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="model.GioHang" %>
 <%@ page import="model.GioHangSum" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <%
     List<GioHang> dsGioHang = (List<GioHang>) request.getAttribute("dsGioHang");
@@ -11,6 +12,15 @@
     int tongMatHangCart = tongQuan != null ? tongQuan.getTongMatHang() : 0;
     double tongTienCart = tongQuan != null ? tongQuan.getTongGiaTriSanPham() : 0;
     double tongCongCart = tongQuan != null ? tongQuan.getTongCong() : 0;
+%>
+
+<%
+    String checkoutSuccess = (String) session.getAttribute("checkoutSuccess");
+
+    if (checkoutSuccess != null) {
+        request.setAttribute("checkoutSuccess", checkoutSuccess);
+        session.removeAttribute("checkoutSuccess");
+    }
 %>
 
 <!DOCTYPE html>
@@ -161,6 +171,16 @@
         </div>
     </main>
         
+        <c:if test="${not empty checkoutSuccess}">
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    if (window.toastr) {
+                        toastr.success("${checkoutSuccess}");
+                    }
+                });
+            </script>
+        </c:if>
+        
         <script src="https://unpkg.com/lucide@latest"></script>
         <script>
           lucide.createIcons();
@@ -175,5 +195,27 @@
     <script src="${pageContext.request.contextPath}/assets/js/components/header.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/components/search-popup.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/components/checkout-popup.js"></script>
+    
+    <%-- jQuery bắt buộc cho Toastr --%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<%-- Toastr JS --%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+    toastr.options = {
+        closeButton: true,
+        progressBar: true,
+        newestOnTop: true,
+        preventDuplicates: true,
+        positionClass: "toast-top-right",
+        timeOut: "2500",
+        extendedTimeOut: "1000",
+        showDuration: "250",
+        hideDuration: "250",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut"
+    };
+</script>
 </body>
 </html>

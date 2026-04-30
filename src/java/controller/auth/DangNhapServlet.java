@@ -21,14 +21,6 @@ public class DangNhapServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        HttpSession session = request.getSession(false);
-
-        if (session != null && session.getAttribute("nguoiDung") != null) {
-            response.sendRedirect(request.getContextPath() + "/trang_chu");
-            return;
-        }
-
         response.sendRedirect(request.getContextPath() + "/trang_chu");
     }
 
@@ -58,57 +50,48 @@ public class DangNhapServlet extends HttpServlet {
 
         NguoiDung nguoiDung = nguoiDungDAO.login(dangNhap);
 
-        if (nguoiDung == null) {
-            session.setAttribute("loginError", "Đăng nhập thất bại.");
+        if (nguoiDung == null || !PasswordUtil.checkPassword(matKhau, nguoiDung.getMatKhau())) {
+            session.setAttribute("loginError", "Tài khoản hoặc mật khẩu không đúng.");
             session.setAttribute("openLoginPopup", true);
             response.sendRedirect(request.getContextPath() + "/trang_chu");
             return;
         }
 
-        // ✅ Check password trước
-        boolean dungMatKhau = PasswordUtil.checkPassword(matKhau, nguoiDung.getMatKhau());
-
-        if (!dungMatKhau) {
-            session.setAttribute("loginError", "Đăng nhập thất bại.");
+        if (!"hoat_dong".equalsIgnoreCase(nguoiDung.getTrangThai())) {
+            session.setAttribute("loginError", "Tài khoản của bạn đang bị khóa.");
             session.setAttribute("openLoginPopup", true);
             response.sendRedirect(request.getContextPath() + "/trang_chu");
             return;
         }
 
-        // ✅ Login thành công
         session.removeAttribute("loginError");
         session.removeAttribute("openLoginPopup");
 
         session.setAttribute("nguoiDung", nguoiDung);
         session.setAttribute("loginSuccess", true);
+        session.setAttribute("toastSuccess", "Đăng nhập thành công.");
         session.setMaxInactiveInterval(1800);
 
-        // ✅ Xử lý redirect theo role
         String vaiTro = nguoiDung.getVaiTro() != null ? nguoiDung.getVaiTro().trim() : "";
-        
-        if ("quan_tri".equalsIgnoreCase(vaiTro)) {
+
+        if ("quan_tri".equalsIgnoreCase(vaiTro) || "admin".equalsIgnoreCase(vaiTro)) {
             response.sendRedirect(request.getContextPath() + "/admin/dashboard");
             return;
         }
 
         if (!redirect.isEmpty()) {
-            if (!redirect.startsWith("/")) {
-                redirect = "/" + redirect;
-            }
-
             if (redirect.startsWith(request.getContextPath())) {
                 redirect = redirect.substring(request.getContextPath().length());
+            }
+
+            if (!redirect.startsWith("/")) {
+                redirect = "/" + redirect;
             }
 
             response.sendRedirect(request.getContextPath() + redirect);
             return;
         }
 
-        // 👇 Nếu không có redirect custom thì theo role
-        
         response.sendRedirect(request.getContextPath() + "/trang_chu");
-        
-        return;
     }
-    
 }

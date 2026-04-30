@@ -61,12 +61,16 @@
 
 .admin-capital-history-table-wrap {
     overflow-x: auto;
+    max-height: 550px;
+    
+    overflow-y: auto;
 }
 
 .admin-capital-history-table {
     width: 100%;
     border-collapse: collapse;
     min-width: 960px;
+    
 }
 
 .admin-capital-history-table thead th {

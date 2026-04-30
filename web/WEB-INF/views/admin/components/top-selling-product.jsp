@@ -22,7 +22,7 @@
                                     <fmt:formatNumber value="${sp.giaSanPham}" type="number" groupingUsed="true" maxFractionDigits="0"/>đ
                                 </span>
                                 <span>•</span>
-                                <span>Đã bán: <c:out value="${sp.daBan}"/></span>
+                                <span style="font-family: var(--font-heading); color: var(--color-red)">Đã bán: <c:out value="${sp.daBan}"/></span>
                             </div>
                         </div>
                     </div>

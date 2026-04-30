@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="model.NguoiDung" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <%
     NguoiDung nguoiDungPopup = (NguoiDung) session.getAttribute("nguoiDung");
@@ -7,6 +8,18 @@
     String loginError = (String) session.getAttribute("loginError");
     Boolean openLoginPopup = (Boolean) session.getAttribute("openLoginPopup");
     Boolean loginSuccess = (Boolean) session.getAttribute("loginSuccess");
+
+    String thongBao = (String) session.getAttribute("thongBao");
+
+    String registerError = (String) session.getAttribute("registerError");
+    Boolean openRegisterPopup = (Boolean) session.getAttribute("openRegisterPopup");
+
+    String registerHoTen = (String) session.getAttribute("registerHoTen");
+    String registerEmail = (String) session.getAttribute("registerEmail");
+    String registerSoDienThoai = (String) session.getAttribute("registerSoDienThoai");
+
+    String toastSuccess = (String) session.getAttribute("toastSuccess");
+    String toastError = (String) session.getAttribute("toastError");
 
     if (loginSuccess != null && loginSuccess) {
         request.setAttribute("loginSuccess", true);
@@ -22,26 +35,11 @@
         request.setAttribute("openLoginPopup", true);
         session.removeAttribute("openLoginPopup");
     }
-%>
-
-<% if (nguoiDungPopup == null) { %>
-
-<%
-    String thongBao = (String) session.getAttribute("thongBao");
 
     if (thongBao != null) {
         request.setAttribute("thongBao", thongBao);
         session.removeAttribute("thongBao");
     }
-%>
-
-<%
-    String registerError = (String) session.getAttribute("registerError");
-    Boolean openRegisterPopup = (Boolean) session.getAttribute("openRegisterPopup");
-
-    String registerHoTen = (String) session.getAttribute("registerHoTen");
-    String registerEmail = (String) session.getAttribute("registerEmail");
-    String registerSoDienThoai = (String) session.getAttribute("registerSoDienThoai");
 
     if (registerError != null) {
         request.setAttribute("registerError", registerError);
@@ -67,11 +65,39 @@
         request.setAttribute("registerSoDienThoai", registerSoDienThoai);
         session.removeAttribute("registerSoDienThoai");
     }
+
+    if (toastSuccess != null) {
+        request.setAttribute("toastSuccess", toastSuccess);
+        session.removeAttribute("toastSuccess");
+    }
+
+    if (toastError != null) {
+        request.setAttribute("toastError", toastError);
+        session.removeAttribute("toastError");
+    }
 %>
 
+<c:if test="${not empty toastSuccess}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.toastr) {
+                toastr.success("${toastSuccess}");
+            }
+        });
+    </script>
+</c:if>
 
+<c:if test="${not empty toastError}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.toastr) {
+                toastr.error("${toastError}");
+            }
+        });
+    </script>
+</c:if>
 
-
+<% if (nguoiDungPopup == null) { %>
 
 <div
     id="loginPopupOverlay"
@@ -80,8 +106,9 @@
     data-register-open="${openRegisterPopup ? 'true' : 'false'}"
     data-login-error="${loginError != null ? loginError : ''}"
     data-login-success="${loginSuccess ? 'true' : 'false'}"
+    data-register-error="${registerError != null ? registerError : ''}"
+    data-register-success-message="${thongBao != null ? thongBao : ''}"
 >
-    
     <div class="login-popup-panel">
         <button type="button" class="login-popup-close" id="closeLoginPopup" aria-label="Đóng">
             &times;
@@ -93,16 +120,18 @@
             </div>
 
             <h2 class="login-popup-title" id="authPopupTitle">CHÀO MỪNG TRỞ LẠI</h2>
+
             <p class="login-popup-subtitle" id="authPopupSubtitle">
                 Đăng nhập để không bỏ lỡ bất kỳ sản phẩm và ưu đãi nào.
             </p>
 
             <p class="login-popup-note" id="authPopupNote">
-                Nhập thông tin tài khoản của bạn để tiếp tục mua sắm cùng 
-                <span style="font-weight: bold"><span style="color: var(--color-red)">V</span>$PORT</span>
+                Nhập thông tin tài khoản của bạn để tiếp tục mua sắm cùng
+                <span style="font-weight: bold">
+                    <span style="color: var(--color-red)">V</span>$PORT
+                </span>
             </p>
 
-            <!-- FORM ĐĂNG NHẬP: GIỮ NGUYÊN -->
             <div id="loginFormWrap" class="auth-form-wrap active">
                 <div class="login-popup-switch">
                     <button type="button" class="login-switch-btn active" data-type="email">
@@ -113,7 +142,11 @@
                     </button>
                 </div>
 
-                <form action="${pageContext.request.contextPath}/auth_login" method="post" class="login-popup-form">
+                <form action="${pageContext.request.contextPath}/auth_login"
+                      method="post"
+                      class="login-popup-form"
+                      id="loginPopupForm">
+
                     <input type="hidden" name="redirect" value="${pageContext.request.contextPath}/trang_chu">
 
                     <div class="login-popup-field">
@@ -141,7 +174,10 @@
                                 required
                             >
 
-                            <button type="button" class="login-popup-password-toggle" id="togglePopupPassword" aria-label="Hiện mật khẩu">
+                            <button type="button"
+                                    class="login-popup-password-toggle"
+                                    id="togglePopupPassword"
+                                    aria-label="Hiện mật khẩu">
                                 <i data-lucide="eye-off"></i>
                             </button>
                         </div>
@@ -166,9 +202,12 @@
                 </form>
             </div>
 
-            <!-- FORM ĐĂNG KÝ: THÊM MỚI -->
             <div id="registerFormWrap" class="auth-form-wrap">
-                <form action="${pageContext.request.contextPath}/dang_ky" method="post" class="login-popup-form">
+                <form action="${pageContext.request.contextPath}/dang_ky"
+                      method="post"
+                      class="login-popup-form"
+                      id="registerPopupForm">
+
                     <div class="login-popup-field">
                         <label for="registerHoTen" class="login-popup-label">HỌ VÀ TÊN</label>
                         <input
@@ -210,6 +249,7 @@
 
                     <div class="login-popup-field">
                         <label for="registerPassword" class="login-popup-label">MẬT KHẨU</label>
+
                         <div class="login-popup-password-wrap">
                             <input
                                 type="password"
@@ -220,7 +260,9 @@
                                 required
                             >
 
-                            <button type="button" class="login-popup-password-toggle register-password-toggle" aria-label="Hiện mật khẩu">
+                            <button type="button"
+                                    class="login-popup-password-toggle register-password-toggle"
+                                    aria-label="Hiện mật khẩu">
                                 <i data-lucide="eye-off"></i>
                             </button>
                         </div>
@@ -228,6 +270,7 @@
 
                     <div class="login-popup-field">
                         <label for="registerConfirmPassword" class="login-popup-label">XÁC NHẬN MẬT KHẨU</label>
+
                         <div class="login-popup-password-wrap">
                             <input
                                 type="password"
@@ -238,7 +281,9 @@
                                 required
                             >
 
-                            <button type="button" class="login-popup-password-toggle register-password-toggle" aria-label="Hiện mật khẩu">
+                            <button type="button"
+                                    class="login-popup-password-toggle register-password-toggle"
+                                    aria-label="Hiện mật khẩu">
                                 <i data-lucide="eye-off"></i>
                             </button>
                         </div>
@@ -259,4 +304,5 @@
         </div>
     </div>
 </div>
+
 <% } %>

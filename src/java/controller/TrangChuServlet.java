@@ -28,8 +28,6 @@ public class TrangChuServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         
-        
-
         List<YeuThich> dsYeuThich = new ArrayList<>();
         boolean loginSuccess = false;
         boolean logoutSuccess = false;
@@ -57,12 +55,19 @@ public class TrangChuServlet extends HttpServlet {
         }
 
         List<SanPham> dsSanPhamBanChay = sanPhamDAO.getSanPhamBanChay(8);
-
+        
+        List<SanPham> dsSanPhamMoiThem = sanPhamDAO.getSanPhamMoiNhat(8);
+        
         request.setAttribute("dsYeuThich", dsYeuThich);
         request.setAttribute("loginSuccess", loginSuccess);
         request.setAttribute("logoutSuccess", logoutSuccess);
-        request.setAttribute("dsSanPhamBanChay", dsSanPhamBanChay);
+        request.setAttribute("dsSanPhamBanChay", dsSanPhamBanChay);   
+        request.setAttribute("dsSanPhamMoiThem", dsSanPhamMoiThem);
+
+        
 
         request.getRequestDispatcher("/WEB-INF/views/user/home.jsp").forward(request, response);
+        
+        
     }
 }

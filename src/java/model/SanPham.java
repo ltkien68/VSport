@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Date;
 import java.util.List;
 
 public class SanPham {
@@ -18,14 +19,14 @@ public class SanPham {
     private String moTaNgan;
     private String moTaChiTiet;
     private String danhMucSlug;
-
    
-
-    
     private String nhomSanPham;
 
     private double giaNiemYet;
     private double giaKhuyenMai;
+
+    
+    private Date ngayTao;
 
     public double getGiaSanPham() {
         return giaSanPham;
@@ -72,6 +73,15 @@ public class SanPham {
     public void setChiTiet(ChiTietSanPham chiTiet) {
         this.chiTiet = chiTiet;
     }
+    
+    public Date getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(Date ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+    
     
     private double diemTrungBinh;
     private int soLuongDanhGia;
