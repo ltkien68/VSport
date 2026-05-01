@@ -6,6 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Quản lý danh mục</title>
+    
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base/reset.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base/variables.css">

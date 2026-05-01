@@ -164,7 +164,23 @@
     margin-bottom: 14px;
 }
 
-.new-product-price strong {
+.new-product-old-price {
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: var(--color-gray-400);
+    text-decoration: line-through;
+    font-weight: 500;
+}
+
+.new-product-normal-price {
+    font-family: var(--font-body);
+    font-size: 28px;
+    color: var(--color-black);
+    font-weight: 900;
+    line-height: 1.1;
+}
+
+.new-product-sale-price {
     font-family: var(--font-body);
     font-size: 28px;
     color: var(--color-red);
@@ -179,6 +195,19 @@
     text-decoration: line-through;
     font-weight: 500;
 }
+
+.new-product-card-desc {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-gray-600);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 58px;
+} 
 
 
 

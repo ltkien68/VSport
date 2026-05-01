@@ -125,6 +125,13 @@ function updateEditCapitalPreview() {
 
         return row;
     }
+    
+    toastr.options = {
+    closeButton: true,
+    progressBar: true,
+    positionClass: "toast-top-right",
+    timeOut: "2500"
+};
 
     document.querySelectorAll(".open-edit-product-btn").forEach(btn => {
         btn.addEventListener("click", async function () {
@@ -153,7 +160,7 @@ function updateEditCapitalPreview() {
                 console.log("Edit data:", data);
 
                 if (!data.success) {
-                    alert(data.message || "Không lấy được sản phẩm.");
+                    toastr.error(data.message || "Không lấy được sản phẩm.");
                     return;
                 }
 
@@ -195,7 +202,7 @@ function updateEditCapitalPreview() {
                 openPopup();
             } catch (e) {
                 console.error("Không thể load dữ liệu sản phẩm:", e);
-                alert("Không thể load dữ liệu sản phẩm.");
+                toastr.error("Không thể load dữ liệu sản phẩm.");
             }
         });
     });
@@ -252,15 +259,15 @@ function updateEditCapitalPreview() {
         const data = JSON.parse(text);
 
         if (data.success) {
-            alert(data.message || "Cập nhật thành công.");
+            toastr.success(data.message || "Cập nhật thành công.");
             closePopup();
             window.location.reload();
         } else {
-            alert(data.message || "Có lỗi khi cập nhật.");
+            toastr.error(data.message || "Có lỗi khi cập nhật.");
         }
     } catch (e) {
         console.error("Submit update error:", e);
-        alert("Không gửi được dữ liệu cập nhật.");
+        toastr.error("Không gửi được dữ liệu cập nhật.");
     }
 });
 

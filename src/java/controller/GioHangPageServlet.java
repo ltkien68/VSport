@@ -26,6 +26,7 @@ public class GioHangPageServlet extends HttpServlet {
 
         if (userObj == null) {
             response.sendRedirect(request.getContextPath() + "/trang_chu");
+            
             return;
         }
 

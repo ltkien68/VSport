@@ -78,14 +78,26 @@ public class AdminSanPhamVonDAO {
                 throw new SQLException("Tổng số lượng nhập phải lớn hơn 0.");
             }
 
-            BigDecimal phanTramGiam = BigDecimal.valueOf((tongSoLuong / 5) * 1.0)
+            int phanTramGiamInt = Math.min((tongSoLuong / 10) * 2, 10);
+
+            BigDecimal phanTramGiam = BigDecimal.valueOf(phanTramGiamInt)
                     .divide(BigDecimal.valueOf(100), 4, RoundingMode.HALF_UP);
 
-            BigDecimal donGiaNhapThucTe = req.giaNhapGoc.multiply(BigDecimal.ONE.subtract(phanTramGiam))
+            BigDecimal tongTienNhapGoc = req.giaNhapGoc
+                    .multiply(BigDecimal.valueOf(tongSoLuong))
                     .setScale(2, RoundingMode.HALF_UP);
 
-            BigDecimal tongTienNhap = donGiaNhapThucTe.multiply(BigDecimal.valueOf(tongSoLuong))
+            BigDecimal tienGiam = tongTienNhapGoc
+                    .multiply(phanTramGiam)
                     .setScale(2, RoundingMode.HALF_UP);
+
+            BigDecimal tongTienNhap = tongTienNhapGoc
+                    .subtract(tienGiam)
+                    .setScale(2, RoundingMode.HALF_UP);
+
+            BigDecimal donGiaNhapThucTe = tongSoLuong > 0
+                    ? tongTienNhap.divide(BigDecimal.valueOf(tongSoLuong), 2, RoundingMode.HALF_UP)
+                    : BigDecimal.ZERO;
 
             BigDecimal soDu = vonShopDAO.getSoDuHienTai(conn);
             if (soDu.compareTo(tongTienNhap) < 0) {

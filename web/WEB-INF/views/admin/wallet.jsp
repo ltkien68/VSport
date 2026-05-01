@@ -7,6 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Vốn Shop</title>
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
+    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base/reset.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base/variables.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base/fonts.css">

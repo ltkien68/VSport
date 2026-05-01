@@ -23,6 +23,7 @@ public class DangXuatServlet extends HttpServlet {
         }
 
         HttpSession newSession = request.getSession(true);
+        newSession.setAttribute("toastSuccess", "Đăng xuất thành công");
         newSession.setAttribute("logoutSuccess", true);
 
         response.sendRedirect(request.getContextPath() + "/trang_chu");

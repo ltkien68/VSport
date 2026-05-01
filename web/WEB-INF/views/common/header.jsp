@@ -54,7 +54,7 @@
                 <button type="button" class="search-box" id="openSearchPopup">
                     <i data-lucide="search"></i>
                     <span>TÌM KIẾM</span>
-                </button>
+                </button>   
             </div>
 
             <a href="${pageContext.request.contextPath}/gio_hang" class="header-icon cart-link">

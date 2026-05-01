@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const popup = document.getElementById("addProductPopup");
     const overlay = document.getElementById("addProductPopupOverlay");
@@ -7,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeBtn = document.getElementById("closeAddProductPopup");
     const cancelBtn = document.getElementById("cancelAddProductPopup");
     const form = document.getElementById("addProductWithCapitalForm");
-    
+
     const productNameInput = document.querySelector("input[name='tenSanPham']");
     const productSlugInput = document.querySelector("input[name='slug']");
 
@@ -24,11 +22,47 @@ document.addEventListener("DOMContentLoaded", function () {
     const previewVonHienTai = document.getElementById("previewVonHienTai");
     const previewVonSau = document.getElementById("previewVonSau");
 
+    if (typeof toastr !== "undefined") {
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            newestOnTop: true,
+            preventDuplicates: true,
+            positionClass: "toast-top-right",
+            timeOut: "2500",
+            extendedTimeOut: "1200"
+        };
+    }
+
     if (!popup || !overlay || !openBtn || !form) {
         console.log("Popup elements not found");
         return;
     }
-    
+
+    function showSuccess(message) {
+        if (typeof toastr !== "undefined") {
+            toastr.success(message);
+        } else {
+            console.log(message);
+        }
+    }
+
+    function showError(message) {
+        if (typeof toastr !== "undefined") {
+            toastr.error(message);
+        } else {
+            console.error(message);
+        }
+    }
+
+    function showWarning(message) {
+        if (typeof toastr !== "undefined") {
+            toastr.warning(message);
+        } else {
+            console.warn(message);
+        }
+    }
+
     function makeSlug(text) {
         return String(text || "")
             .toLowerCase()
@@ -66,34 +100,73 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function formatMoney(n) {
-        return Number(n || 0).toLocaleString("vi-VN");
+        return Math.round(Number(n || 0)).toLocaleString("vi-VN");
     }
 
     function parseMoneyText(text) {
         return Number(String(text || "").replace(/[^\d]/g, "")) || 0;
     }
 
-    function updateCapitalPreview() {
-        const qtyInputs = document.querySelectorAll("input[name='soLuongTon']");
-        const giaNhap = Number(document.querySelector("input[name='giaNhapGoc']")?.value || 0);
+    function getNumberValue(selector) {
+        return Number(document.querySelector(selector)?.value || 0);
+    }
 
+    function getTotalQuantity() {
+        const qtyInputs = document.querySelectorAll("input[name='soLuongTon']");
         let totalQty = 0;
-        qtyInputs.forEach(input => {
-            totalQty += Number(input.value || 0);
+
+        qtyInputs.forEach(function (input) {
+            const value = Number(input.value || 0);
+            if (value > 0) {
+                totalQty += value;
+            }
         });
 
-        const discountPercent = Math.floor(totalQty / 5);
-        const realPrice = giaNhap * (1 - discountPercent / 100);
-        const totalCost = realPrice * totalQty;
+        return totalQty;
+    }
+
+    function calculateDiscountPercent(totalQty) {
+        // 10 sp giảm 2%, 20 sp giảm 4%, ... tối đa 10%
+        const discount = Math.floor(totalQty / 10) * 2;
+        return Math.min(discount, 10);
+    }
+
+    function updateCapitalPreview() {
+        const giaNhapGoc = getNumberValue("input[name='giaNhapGoc']");
+        const totalQty = getTotalQuantity();
+
+        const tongTienNhapGoc = giaNhapGoc * totalQty;
+        const discountPercent = calculateDiscountPercent(totalQty);
+        const tienGiam = tongTienNhapGoc * discountPercent / 100;
+        const tongTienNhapSauGiam = tongTienNhapGoc - tienGiam;
+
+        const giaNhapThucTe = totalQty > 0
+            ? tongTienNhapSauGiam / totalQty
+            : 0;
 
         const vonHienTai = parseMoneyText(previewVonHienTai?.innerText);
-        const vonSau = vonHienTai - totalCost;
+        const vonSau = vonHienTai - tongTienNhapSauGiam;
 
-        if (previewTongSoLuong) previewTongSoLuong.innerText = totalQty;
-        if (previewPhanTramGiam) previewPhanTramGiam.innerText = discountPercent + "%";
-        if (previewGiaNhapThucTe) previewGiaNhapThucTe.innerText = formatMoney(realPrice);
-        if (previewTongTienNhap) previewTongTienNhap.innerText = formatMoney(totalCost);
-        if (previewVonSau) previewVonSau.innerText = formatMoney(vonSau);
+        if (previewTongSoLuong) {
+            previewTongSoLuong.innerText = totalQty;
+        }
+
+        if (previewPhanTramGiam) {
+            previewPhanTramGiam.innerText = discountPercent + "%";
+        }
+
+        if (previewGiaNhapThucTe) {
+            previewGiaNhapThucTe.innerText = formatMoney(giaNhapThucTe);
+        }
+
+        if (previewTongTienNhap) {
+            previewTongTienNhap.innerText = formatMoney(tongTienNhapSauGiam);
+        }
+
+        if (previewVonSau) {
+            previewVonSau.innerText = formatMoney(vonSau);
+            previewVonSau.classList.toggle("negative", vonSau < 0);
+        }
     }
 
     openBtn.addEventListener("click", function (e) {
@@ -112,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const clone = firstRow.cloneNode(true);
 
-            clone.querySelectorAll("input").forEach(input => {
+            clone.querySelectorAll("input").forEach(function (input) {
                 input.value = "";
             });
 
@@ -128,9 +201,12 @@ document.addEventListener("DOMContentLoaded", function () {
         variantRows.addEventListener("click", function (e) {
             if (e.target.classList.contains("remove-variant-btn")) {
                 const rows = variantRows.querySelectorAll(".admin-variant-row");
+
                 if (rows.length > 1) {
                     e.target.closest(".admin-variant-row").remove();
                     updateCapitalPreview();
+                } else {
+                    showWarning("Phải có ít nhất 1 biến thể sản phẩm.");
                 }
             }
         });
@@ -150,55 +226,97 @@ document.addEventListener("DOMContentLoaded", function () {
         subImageRows.addEventListener("click", function (e) {
             if (e.target.classList.contains("remove-sub-image-btn")) {
                 const rows = subImageRows.querySelectorAll(".admin-sub-image-row");
+
                 if (rows.length > 1) {
                     e.target.closest(".admin-sub-image-row").remove();
+                } else {
+                    showWarning("Phải giữ lại ít nhất 1 dòng ảnh phụ.");
                 }
             }
         });
     }
 
     document.addEventListener("input", function (e) {
-        if (e.target.name === "soLuongTon" || e.target.name === "giaNhapGoc") {
+        if (
+            e.target.name === "soLuongTon" ||
+            e.target.name === "giaNhapGoc"
+        ) {
             updateCapitalPreview();
         }
     });
 
     form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
+        e.preventDefault();
+        e.stopImmediatePropagation();
 
-    try {
-        const formData = new FormData(form);
-        const payload = new URLSearchParams();
+        const totalQty = getTotalQuantity();
+        const giaNhapGoc = getNumberValue("input[name='giaNhapGoc']");
 
-        for (const [key, value] of formData.entries()) {
-            payload.append(key, value);
-            console.log(key, "=", value);
+        if (totalQty <= 0) {
+            showError("Phải nhập ít nhất 1 biến thể có số lượng lớn hơn 0.");
+            return;
         }
 
-        const response = await fetch(form.action, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-            },
-            body: payload.toString()
-        });
-
-        const text = await response.text();
-        console.log("RAW RESPONSE:", text);
-
-        const data = JSON.parse(text);
-
-        if (data.success) {
-            closePopup();
-            window.location.reload();
-        } else {
-            console.error(data.message || "Có lỗi xảy ra.");
+        if (giaNhapGoc <= 0) {
+            showError("Giá nhập gốc phải lớn hơn 0.");
+            return;
         }
-    } catch (error) {
-        console.error("Không gửi được dữ liệu.");
-    }
-});
+
+        try {
+            const formData = new FormData(form);
+            const payload = new URLSearchParams();
+
+            for (const [key, value] of formData.entries()) {
+                payload.append(key, value);
+            }
+
+            const submitBtn = form.querySelector("button[type='submit']");
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.dataset.oldText = submitBtn.innerText;
+                submitBtn.innerText = "Đang thêm...";
+            }
+
+            const response = await fetch(form.action, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+                },
+                body: payload.toString()
+            });
+
+            const text = await response.text();
+            let data;
+
+            try {
+                data = JSON.parse(text);
+            } catch (jsonError) {
+                console.error("RAW RESPONSE:", text);
+                throw new Error("Server trả về dữ liệu không hợp lệ.");
+            }
+
+            if (data.success) {
+                showSuccess(data.message || "Thêm sản phẩm thành công.");
+                closePopup();
+
+                setTimeout(function () {
+                    window.location.reload();
+                }, 900);
+            } else {
+                showError(data.message || "Có lỗi xảy ra khi thêm sản phẩm.");
+            }
+
+        } catch (error) {
+            console.error(error);
+            showError(error.message || "Không gửi được dữ liệu.");
+        } finally {
+            const submitBtn = form.querySelector("button[type='submit']");
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerText = submitBtn.dataset.oldText || "Thêm sản phẩm";
+            }
+        }
+    });
 
     updateCapitalPreview();
 });

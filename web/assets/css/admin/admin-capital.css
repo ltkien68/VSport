@@ -84,14 +84,21 @@
     color: #666;
 }
 
+
 .admin-capital-history-table tbody td {
-    padding: 16px 14px;
+    padding: 12px 14px;
     border-bottom: 1px solid #f1f1f1;
     font-family: var(--font-body);
     font-size: 18px;
     color: #111;
     vertical-align: middle;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
 }
+
 
 .capital-badge {
     display: inline-flex;

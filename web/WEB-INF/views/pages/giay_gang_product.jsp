@@ -68,10 +68,10 @@
                                  class="club-product-image club-product-image-secondary">
 
                             <button
-                                class="club-favorite-btn <%= daThich ? "active" : "" %>"
+                                class="favorite-btn <%= daThich ? "active" : "" %>"
                                 type="button"
-                                data-product-id="<%= sp.getMaSanPham() %>">
-                                <%= daThich ? "♥" : "♡" %>
+                                data-ma-san-pham="<%= sp.getMaSanPham() %>">
+                                <i data-lucide="heart"></i>
                             </button>
                         </div>
                     </a>

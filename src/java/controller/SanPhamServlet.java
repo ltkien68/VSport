@@ -106,11 +106,11 @@ public class SanPhamServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         List<YeuThich> dsYeuThich = new ArrayList<>();
 
-if (session != null && session.getAttribute("nguoiDung") != null) {
-    NguoiDung nguoiDung = (NguoiDung) session.getAttribute("nguoiDung");
-    YeuThichDAO yeuThichDAO = new YeuThichDAO();
-    dsYeuThich = yeuThichDAO.getDanhSachYeuThich(nguoiDung.getMaNguoiDung());
-}
+        if (session != null && session.getAttribute("nguoiDung") != null) {
+            NguoiDung nguoiDung = (NguoiDung) session.getAttribute("nguoiDung");
+            YeuThichDAO yeuThichDAO = new YeuThichDAO();
+            dsYeuThich = yeuThichDAO.getDanhSachYeuThich(nguoiDung.getMaNguoiDung());
+        }
 
 request.setAttribute("dsYeuThich", dsYeuThich);
 
