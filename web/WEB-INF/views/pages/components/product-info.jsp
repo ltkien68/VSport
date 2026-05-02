@@ -52,12 +52,12 @@
 
     <div class="right-header">
         <div class="pd-category-line">
-            Nam • <%= spInfo.getTenDanhMuc() != null ? spInfo.getTenDanhMuc() : "Bóng đá" %>
+            Nam • <%= spInfo.getTenDanhMuc() != null ? spInfo.getTenDanhMuc() : "Bóng đá"%>
         </div>
 
-            <div class="club-breadcrumb-detail">
+        <div class="club-breadcrumb-detail">
             <div class="club-container">
-                
+
                 <div class="club-breadcrumb-detail">
                     <div class="club-container">
                         <a href="${backUrl}" class="club-detail-back-link">↩ Trở lại</a>
@@ -77,76 +77,76 @@
 
     <div class="pd-rating-row">
         <span class="pd-rating-score">
-            <%= String.format("%.1f", spInfo.getDiemTrungBinh()) %>
+            <%= String.format("%.1f", spInfo.getDiemTrungBinh())%>
         </span>
 
         <span class="pd-rating-stars">
-            <%= renderStars(spInfo.getDiemTrungBinh()) %>
+            <%= renderStars(spInfo.getDiemTrungBinh())%>
         </span>
 
         <a href="#pd-reviews" class="pd-rating-count">
-            (<%= spInfo.getSoLuongDanhGia() %>)
+            (<%= spInfo.getSoLuongDanhGia()%>)
         </a>
     </div>
 
-    <h1 class="pd-product-name"><%= spInfo.getTenSanPham() %></h1>
+    <h1 class="pd-product-name"><%= spInfo.getTenSanPham()%></h1>
 
     <div class="pd-price-wrap">
-        <% if (isSale) { %>
-            <span class="pd-price-old"><%= String.format("%,.0f", spInfo.getGiaNiemYet()) %>đ</span>
-            <span class="pd-price-sale"><%= String.format("%,.0f", spInfo.getGiaSanPham()) %>đ</span>
-        <% } else { %>
-            <span class="pd-price-normal"><%= String.format("%,.0f", spInfo.getGiaSanPham()) %>đ</span>
-        <% } %>
+        <% if (isSale) {%>
+        <span class="pd-price-old"><%= String.format("%,.0f", spInfo.getGiaNiemYet())%>đ</span>
+        <span class="pd-price-sale"><%= String.format("%,.0f", spInfo.getGiaSanPham())%>đ</span>
+        <% } else {%>
+        <span class="pd-price-normal"><%= String.format("%,.0f", spInfo.getGiaSanPham())%>đ</span>
+        <% }%>
     </div>
 
-    <div class="pd-sale-note <%= isSale ? "is-sale" : "" %>">
-        <% if (isSale) { %>
-            Sản phẩm được giảm <%= (int)Math.round(percentSale) %>% so với giá niêm yết.
+    <div class="pd-sale-note <%= isSale ? "is-sale" : ""%>">
+        <% if (isSale) {%>
+        Sản phẩm được giảm <%= (int) Math.round(percentSale)%>% so với giá niêm yết.
         <% } else { %>
-            Sản phẩm này không được hưởng bất kỳ giảm giá khuyến mại và ưu đãi nào.
+        Sản phẩm này không được hưởng bất kỳ giảm giá khuyến mại và ưu đãi nào.
         <% } %>
     </div>
 
     <div class="pd-size-block">
-    <div class="pd-size-title">Kích cỡ</div>
+        <div class="pd-size-title">Kích cỡ</div>
 
-    <div class="pd-size-grid">
-    <% if (dsBienThe != null) {
-        for (BienTheSanPham bt : dsBienThe) {
-            String size = bt.getTenSize();
-            int tonKho = bt.getSoLuongTon();
-            boolean hetHang = tonKho <= 0;
-    %>
-        <button
-            type="button"
-            class="pd-size-btn <%= hetHang ? "out-of-stock" : "" %>"
-            data-ma-bien-the="<%= bt.getMaBienThe() %>"
-            data-ten-size="<%= size %>"
-            data-ton-kho="<%= tonKho %>">
-            <%= size %>
-        </button>
-    <%  }
-    } %>
-</div>
+        <div class="pd-size-grid">
+            <% if (dsBienThe != null) {
+                    for (BienTheSanPham bt : dsBienThe) {
+                        String size = bt.getTenSize();
+                        int tonKho = bt.getSoLuongTon();
+                        boolean hetHang = tonKho <= 0;
+            %>
+            <button
+                type="button"
+                class="pd-size-btn <%= hetHang ? "out-of-stock" : ""%>"
+                data-ma-bien-the="<%= bt.getMaBienThe()%>"
+                data-ten-size="<%= size%>"
+                data-ton-kho="<%= tonKho%>">
+                <%= size%>
+            </button>
+            <%  }
+        }%>
+        </div>
 
-    <div id="pd-size-guide" style="margin-top: 18px; font-size: 18px; font-weight: 700; font-family: 'Arial';">
-        Hãy chọn kích cỡ phù hợp
+        <div id="pd-size-guide" style="margin-top: 18px; font-size: 18px; font-weight: 700; font-family: 'Arial';">
+            Hãy chọn kích cỡ phù hợp
+        </div>
+
+        <input type="hidden" id="maSanPham" value="<%= spInfo.getMaSanPham()%>">
+        <input type="hidden" id="selectedVariantId" name="maBienThe" value="">
+        <input type="hidden" id="pdQuantityInput" value="1">
     </div>
 
-    <input type="hidden" id="maSanPham" value="<%= spInfo.getMaSanPham() %>">
-    <input type="hidden" id="selectedVariantId" name="maBienThe" value="">
-    <input type="hidden" id="pdQuantityInput" value="1">
-</div>
+    <div class="pd-action-row">
+        <button type="button" class="pd-add-cart-btn" id="pdAddCartBtn" disabled>
+            <span style="font-family: var(--font-heading);">THÊM VÀO GIỎ HÀNG</span>
+            <i data-lucide="shopping-basket" class="pd-cart-icon"></i>
+        </button>
 
-<div class="pd-action-row">
-    <button type="button" class="pd-add-cart-btn" id="pdAddCartBtn" disabled>
-        <span style="font-family: var(--font-heading);">THÊM VÀO GIỎ HÀNG</span>
-        <i data-lucide="shopping-basket" class="pd-cart-icon"></i>
-    </button>
-
-    <button type="button" class="pd-wishlist-btn">♡</button>
-</div>
+        <button type="button" class="pd-wishlist-btn">♡</button>
+    </div>
 
     <div class="pd-member-box">
         <div class="pd-member-top">
@@ -156,7 +156,7 @@
 
         <div class="pd-member-xu">
             <i data-lucide="circle-pound-sterling" class="pd-member-icon"></i>
-            <span><%= vsXu %> Xu VS</span>
+            <span><%= vsXu%> Xu VS</span>
         </div>
     </div>
 

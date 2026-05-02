@@ -71,7 +71,7 @@
                                 class="favorite-btn <%= daThich ? "active" : "" %>"
                                 type="button"
                                 data-ma-san-pham="<%= sp.getMaSanPham() %>">
-                                <i data-lucide="heart"></i>
+                                <%= daThich ? "♥" : "♡" %>
                             </button>
                         </div>
                     </a>

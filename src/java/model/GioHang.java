@@ -13,6 +13,24 @@ public class GioHang {
     private int soLuong;
     private double donGia;
     private String loaiPhienBan;
+    private String tenInAo;
+    private String soInAo;
+
+    public String getTenInAo() {
+        return tenInAo;
+    }
+
+    public void setTenInAo(String tenInAo) {
+        this.tenInAo = tenInAo;
+    }
+
+    public String getSoInAo() {
+        return soInAo;
+    }
+
+    public void setSoInAo(String soInAo) {
+        this.soInAo = soInAo;
+    }
     
     public int getMaGioHang() {
         return maGioHang;

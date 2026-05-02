@@ -282,6 +282,11 @@
     z-index: 2;
 }
 
+.favorite-btn.active {
+    color: var(--color-red);
+    font-weight: 700;
+}
+
 .club-product-info {
     padding: 16px 10px;
 }

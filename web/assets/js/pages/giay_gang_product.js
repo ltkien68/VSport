@@ -39,47 +39,72 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".favorite-btn").forEach(function (btn) {
-        btn.addEventListener("click", async function (e) {
+        btn.addEventListener("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
 
             const maSanPham = btn.dataset.maSanPham;
+            const currentButton = btn;
 
-            try {
-                const response = await fetch(`${window.APP_CONTEXT || ""}/yeu_thich/toggle`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-                    },
-                    body: `maSanPham=${encodeURIComponent(maSanPham)}`
-                });
+            fetch(`${window.APP_CONTEXT || window.contextPath || ""}/yeu_thich/toggle`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                    "X-Requested-With": "XMLHttpRequest"
+                },
+                body: "maSanPham=" + encodeURIComponent(maSanPham)
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                if (!data.success) {
+                    if (data.needLogin) {
+                        if (typeof openLoginPopup === "function") {
+                            openLoginPopup();
+                        }
 
-                const data = await response.json();
+                        if (typeof toastr !== "undefined") {
+                            toastr.warning(data.message || "Vui lòng đăng nhập để yêu thích sản phẩm.");
+                        }
 
-                if (data.success) {
-                    btn.classList.toggle("active", data.yeuThich);
-
-                    if (typeof lucide !== "undefined") {
-                        lucide.createIcons();
+                        return;
                     }
 
                     if (typeof toastr !== "undefined") {
-                        toastr.success(data.message || "Đã cập nhật yêu thích.");
-                    }
-                } else {
-                    if (typeof toastr !== "undefined") {
-                        toastr.warning(data.message || "Vui lòng đăng nhập để yêu thích sản phẩm.");
+                        toastr.error(data.message || "Có lỗi xảy ra.");
                     } else {
-                        console.warn(data.message);
+                        console.error(data.message || "Có lỗi xảy ra.");
+                    }
+
+                    return;
+                }
+
+                if (data.action === "added" || data.yeuThich === true) {
+                    currentButton.classList.add("active");
+                    currentButton.textContent = "♥";
+
+                    if (typeof toastr !== "undefined") {
+                        toastr.success(data.message || "Đã thêm vào yêu thích.");
+                    }
+                } else if (data.action === "removed" || data.yeuThich === false) {
+                    currentButton.classList.remove("active");
+                    currentButton.textContent = "♡";
+
+                    if (typeof toastr !== "undefined") {
+                        toastr.success(data.message || "Đã bỏ khỏi yêu thích.");
                     }
                 }
-            } catch (error) {
-                console.error(error);
+            })
+            .catch(function (error) {
+                console.error("Lỗi yêu thích:", error);
 
                 if (typeof toastr !== "undefined") {
-                    toastr.error("Không thể cập nhật yêu thích.");
+                    toastr.error("Không thể xử lý yêu thích lúc này.");
+                } else {
+                    console.error("Không thể xử lý yêu thích lúc này.");
                 }
-            }
+            });
         });
     });
 });

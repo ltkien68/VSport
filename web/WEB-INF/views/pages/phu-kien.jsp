@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Phụ kiện | VSport</title>
-        
+
         <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
         <jsp:include page="/WEB-INF/views/common/head.jsp" />
     </head>
@@ -19,7 +19,7 @@
             <%@ include file="/WEB-INF/views/common/header.jsp" %>
             <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
         </div>
-        
+
         <script>
             window.contextPath = "${pageContext.request.contextPath}";
         </script>
@@ -28,29 +28,29 @@
 
         <script src="https://unpkg.com/lucide@latest"></script>
         <script>
-          lucide.createIcons();
+            lucide.createIcons();
         </script>
-        
+
         <%-- jQuery bắt buộc cho Toastr --%>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<%-- Toastr JS --%>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <%-- Toastr JS --%>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-<script>
-    toastr.options = {
-        closeButton: true,
-        progressBar: true,
-        newestOnTop: true,
-        preventDuplicates: true,
-        positionClass: "toast-top-right",
-        timeOut: "2500",
-        extendedTimeOut: "1000",
-        showDuration: "250",
-        hideDuration: "250",
-        showMethod: "fadeIn",
-        hideMethod: "fadeOut"
-    };
-</script>
+        <script>
+                    toastr.options = {
+                        closeButton: true,
+                        progressBar: true,
+                        newestOnTop: true,
+                        preventDuplicates: true,
+                        positionClass: "toast-bottom-right",
+                        timeOut: "1000",
+                        extendedTimeOut: "1000",
+                        showDuration: "250",
+                        hideDuration: "250",
+                        showMethod: "fadeIn",
+                        hideMethod: "fadeOut"
+                    };
+        </script>
     </body>
 </html>
