@@ -352,31 +352,51 @@ body.home-page .header-shell.header-light .header-icon.logged-in {
     position: absolute;
     top: 120%;
     right: 0;
-    background: var(--color-white);
-    border: 1px solid var(--color-gray-100);
-    min-width: 220px;
+
+    background: var(--color-black); /* đổi sang nền tối */
+    border: 1px solid var(--color-gray-800);
+
+    min-width: 240px;
 
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
     transition: 0.25s ease;
 
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4); /* shadow đậm kiểu GitHub */
+    border-radius: 10px; /* bo góc mềm */
+
     z-index: 99999999;
 }
 
 /* item */
 .user-dropdown a {
     display: block;
-    padding: 14px 18px;
+    padding: 12px 16px; /* nhỏ lại cho gọn */
+
     text-decoration: none;
-    color: var(--color-black);
+    color: var(--color-gray-200); /* chữ xám sáng */
+
     font-family: var(--font-body);
-    font-size: 18px;
+    font-size: 18px; /* giảm từ 18 -> 14 cho giống GitHub */
+
+    transition: 0.2s;
 }
 
+/* hover giống GitHub */
 .user-dropdown a:hover {
-    background: var(--color-gray-100);
+    background: var(--color-gray-800);
+    color: var(--color-white);
+}
+
+/* item cuối (đăng xuất) hơi nổi */
+.user-dropdown a:last-child {
+    border-top: 1px solid var(--color-gray-800);
+    color: var(--color-red);
+}
+
+.user-dropdown a:last-child:hover {
+    background: rgba(225, 29, 72, 0.1);
 }
 
 /* hover show dropdown */
