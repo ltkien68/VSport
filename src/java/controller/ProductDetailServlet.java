@@ -36,6 +36,7 @@ public class ProductDetailServlet extends HttpServlet {
 
             SanPham sp = sanPhamDAO.getById(maSanPham);
 
+
             if (sp == null) {
                 request.getRequestDispatcher("/WEB-INF/views/error/404.jsp").forward(request, response);
                 return;
@@ -72,7 +73,9 @@ public class ProductDetailServlet extends HttpServlet {
     }
 
     private String xacDinhActivePage(SanPham sp) {
-        if (sp == null) return "trang_chu";
+        if (sp == null) {
+            return "trang_chu";
+        }
 
         int maDanhMuc = sp.getMaDanhMuc();
 
@@ -117,7 +120,9 @@ public class ProductDetailServlet extends HttpServlet {
     }
 
     private String xacDinhBreadcrumbLabel(SanPham sp) {
-        if (sp == null) return "Sản phẩm";
+        if (sp == null) {
+            return "Sản phẩm";
+        }
 
         int maDanhMuc = sp.getMaDanhMuc();
 

@@ -10,7 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let escHandlerBound = null;
 
     function setCartButtonEnabled(enabled) {
-        if (!addCartBtn) return;
+        if (!addCartBtn)
+            return;
 
         addCartBtn.disabled = !enabled;
         addCartBtn.style.opacity = enabled ? "1" : "0.6";
@@ -18,7 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function handleSizeSelection(button) {
-        if (!selectedVariantInput || !sizeGuide) return;
+        if (!selectedVariantInput || !sizeGuide)
+            return;
 
         sizeButtons.forEach(function (btn) {
             btn.classList.remove("active");
@@ -42,7 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function bindSizeEvents() {
-        if (!sizeButtons.length) return;
+        if (!sizeButtons.length)
+            return;
 
         setCartButtonEnabled(false);
 
@@ -54,7 +57,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function bindAccordionEvents() {
-        if (!accordionHeaders.length) return;
+        if (!accordionHeaders.length)
+            return;
 
         accordionHeaders.forEach(function (header) {
             header.addEventListener("click", function () {
@@ -95,7 +99,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const overlay = document.getElementById("cartPopupOverlay");
         const closeBtn = document.getElementById("cartPopupClose");
 
-        if (!overlay || !closeBtn) return;
+        if (!overlay || !closeBtn)
+            return;
 
         closeBtn.addEventListener("click", closePopup);
 
@@ -119,7 +124,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function bindAddToCartEvent() {
-        if (!addCartBtn || !popupRoot) return;
+        if (!addCartBtn || !popupRoot)
+            return;
 
         addCartBtn.addEventListener("click", async function () {
             const maSanPhamInput = document.getElementById("maSanPham");
@@ -140,10 +146,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+            const printData = window.getPrintShirtData ? window.getPrintShirtData() : {
+                tenInAo: "",
+                soInAo: ""
+            };
+
+            if (printData === null) {
+                return;
+            }
+
             const formData = new URLSearchParams();
             formData.append("maSanPham", maSanPham);
             formData.append("maBienThe", maBienThe);
             formData.append("soLuong", soLuong || "1");
+            formData.append("tenInAo", printData.tenInAo);
+            formData.append("soInAo", printData.soInAo);
+
+
+            console.log("PRINT DATA:", printData);
 
             try {
                 const response = await fetch(`${window.contextPath}/gio-hang/them`, {
@@ -163,7 +183,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!response.ok) {
                     const text = await response.text();
                     console.error("Add to cart failed:", text);
-                    throw new Error("Không thể thêm vào giỏ hàng");
+                    
+                    toastr.error(text || "Không thể thêm vào giỏ hàng.");
+                    
+                    return;
                 }
 
                 const html = await response.text();
@@ -189,5 +212,80 @@ document.addEventListener("DOMContentLoaded", function () {
     if (window.lucide) {
         lucide.createIcons();
     }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const printCheckbox = document.getElementById("printShirtCheckbox");
+    const printFields = document.getElementById("printShirtFields");
+    const tenInAoInput = document.getElementById("tenInAo");
+    const soInAoInput = document.getElementById("soInAo");
+
+    if (!printCheckbox || !printFields || !tenInAoInput || !soInAoInput)
+        return;
+
+    printCheckbox.addEventListener("change", function () {
+        const checked = this.checked;
+
+        printFields.classList.toggle("active", checked);
+
+        if (!checked) {
+            tenInAoInput.value = "";
+            soInAoInput.value = "";
+        }
+    });
+
+    tenInAoInput.addEventListener("input", function () {
+        this.value = this.value
+                .toUpperCase()
+                .replace(/[^A-ZÀ-Ỹ\s]/gi, "")
+                .slice(0, 20);
+    });
+
+    soInAoInput.addEventListener("input", function () {
+        this.value = this.value
+                .replace(/\D/g, "")
+                .slice(0, 2);
+    });
+
+    window.getPrintShirtData = function () {
+        if (!printCheckbox.checked) {
+            return {
+                tenInAo: "",
+                soInAo: ""
+            };
+        }
+
+        const tenInAo = tenInAoInput.value.trim();
+        const soInAo = soInAoInput.value.trim();
+
+        if (tenInAo.length === 0) {
+            toastr.error("Vui lòng nhập tên muốn in trên áo.");
+            tenInAoInput.focus();
+            return null;
+        }
+
+        if (tenInAo.length > 20) {
+            toastr.error("Tên in áo tối đa 20 ký tự.");
+            tenInAoInput.focus();
+            return null;
+        }
+
+        if (soInAo.length === 0) {
+            toastr.error("Vui lòng nhập số áo muốn in.");
+            soInAoInput.focus();
+            return null;
+        }
+
+        if (soInAo.length > 2) {
+            toastr.error("Số áo tối đa 2 ký tự.");
+            soInAoInput.focus();
+            return null;
+        }
+
+        return {
+            tenInAo: tenInAo,
+            soInAo: soInAo
+        };
+    };
 });
 

@@ -320,6 +320,8 @@
     margin-top: 26px;
 }
 
+
+
 @media (max-width: 1200px) {
     .cart-layout {
         grid-template-columns: 1fr;

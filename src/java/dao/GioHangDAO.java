@@ -13,41 +13,57 @@ import java.util.List;
 
 public class GioHangDAO {
 
-    public boolean themHoacCongDon(int maNguoiDung, int maSanPham, int maBienThe, int soLuong) {
+    public boolean themHoacCongDon(int maNguoiDung, int maSanPham, int maBienThe, int soLuong, String tenInAo, String soInAo) {
         String getPriceSql = """
-            SELECT 
-                CASE
-                    WHEN sp.gia_khuyen_mai IS NOT NULL AND sp.gia_khuyen_mai > 0 THEN sp.gia_khuyen_mai
-                    WHEN sp.gia_san_pham IS NOT NULL AND sp.gia_san_pham > 0 THEN sp.gia_san_pham
-                    ELSE sp.gia_niem_yet
-                END AS don_gia_ap_dung
-            FROM san_pham sp
-            WHERE sp.ma_san_pham = ?
-        """;
+        SELECT 
+            CASE
+                WHEN sp.gia_khuyen_mai IS NOT NULL AND sp.gia_khuyen_mai > 0 THEN sp.gia_khuyen_mai
+                WHEN sp.gia_san_pham IS NOT NULL AND sp.gia_san_pham > 0 THEN sp.gia_san_pham
+                ELSE sp.gia_niem_yet
+            END AS don_gia_ap_dung
+        FROM san_pham sp
+        WHERE sp.ma_san_pham = ?
+    """;
 
         String checkSql = """
-            SELECT ma_gio_hang, so_luong
-            FROM gio_hang
-            WHERE ma_nguoi_dung = ? AND ma_bien_the = ?
-        """;
+        SELECT ma_gio_hang, so_luong
+        FROM gio_hang
+        WHERE ma_nguoi_dung = ?
+          AND ma_san_pham = ?
+          AND ma_bien_the = ?
+          AND (
+                (ten_in_ao IS NULL AND ? IS NULL)
+                OR ten_in_ao = ?
+              )
+          AND (
+                (so_in_ao IS NULL AND ? IS NULL)
+                OR so_in_ao = ?
+              )
+        LIMIT 1
+    """;
 
         String updateSql = """
-            UPDATE gio_hang
-            SET so_luong = so_luong + ?,
-                don_gia = ?
-            WHERE ma_gio_hang = ?
-        """;
+        UPDATE gio_hang
+        SET so_luong = so_luong + ?,
+            don_gia = ?
+        WHERE ma_gio_hang = ?
+    """;
 
         String insertSql = """
-            INSERT INTO gio_hang(ma_nguoi_dung, ma_san_pham, ma_bien_the, so_luong, don_gia)
-            VALUES (?, ?, ?, ?, ?)
-        """;
+        INSERT INTO gio_hang(
+            ma_nguoi_dung,
+            ma_san_pham,
+            ma_bien_the,
+            so_luong,
+            don_gia,
+            ten_in_ao,
+            so_in_ao
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    """;
 
         try (
-            Connection conn = DBConnection.getConnection();
-            PreparedStatement psPrice = conn.prepareStatement(getPriceSql);
-            PreparedStatement psCheck = conn.prepareStatement(checkSql)
-        ) {
+                Connection conn = DBConnection.getConnection(); PreparedStatement psPrice = conn.prepareStatement(getPriceSql); PreparedStatement psCheck = conn.prepareStatement(checkSql)) {
             double donGiaApDung = 0;
 
             psPrice.setInt(1, maSanPham);
@@ -60,7 +76,12 @@ public class GioHangDAO {
             }
 
             psCheck.setInt(1, maNguoiDung);
-            psCheck.setInt(2, maBienThe);
+            psCheck.setInt(2, maSanPham);
+            psCheck.setInt(3, maBienThe);
+            psCheck.setString(4, tenInAo);
+            psCheck.setString(5, tenInAo);
+            psCheck.setString(6, soInAo);
+            psCheck.setString(7, soInAo);
 
             try (ResultSet rs = psCheck.executeQuery()) {
                 if (rs.next()) {
@@ -72,15 +93,17 @@ public class GioHangDAO {
                         psUpdate.setInt(3, maGioHang);
                         return psUpdate.executeUpdate() > 0;
                     }
-                } else {
-                    try (PreparedStatement psInsert = conn.prepareStatement(insertSql)) {
-                        psInsert.setInt(1, maNguoiDung);
-                        psInsert.setInt(2, maSanPham);
-                        psInsert.setInt(3, maBienThe);
-                        psInsert.setInt(4, soLuong);
-                        psInsert.setDouble(5, donGiaApDung);
-                        return psInsert.executeUpdate() > 0;
-                    }
+                }
+
+                try (PreparedStatement psInsert = conn.prepareStatement(insertSql)) {
+                    psInsert.setInt(1, maNguoiDung);
+                    psInsert.setInt(2, maSanPham);
+                    psInsert.setInt(3, maBienThe);
+                    psInsert.setInt(4, soLuong);
+                    psInsert.setDouble(5, donGiaApDung);
+                    psInsert.setString(6, tenInAo);
+                    psInsert.setString(7, soInAo);
+                    return psInsert.executeUpdate() > 0;
                 }
             }
         } catch (Exception e) {
@@ -90,33 +113,46 @@ public class GioHangDAO {
         return false;
     }
 
-    public GioHang getThongTinPopupItem(int maNguoiDung, int maBienThe) {
+    public GioHang getThongTinPopupItem(int maNguoiDung, int maBienThe, String tenInAo, String soInAo) {
         String sql = """
-            SELECT 
-                gh.ma_san_pham,
-                gh.ma_bien_the,
-                gh.so_luong AS so_luong_gio_hang,
-                gh.don_gia AS don_gia_gio_hang,
-                sp.ten_san_pham,
-                sp.anh_chinh,
-                sz.ten_size,
-                sp.loai_san_pham,
-                sp.mo_ta_ngan
-            FROM gio_hang gh
-            JOIN san_pham sp ON gh.ma_san_pham = sp.ma_san_pham
-            JOIN bien_the_san_pham bt ON gh.ma_bien_the = bt.ma_bien_the
-            JOIN size_san_pham sz ON bt.ma_size = sz.ma_size
-            WHERE gh.ma_nguoi_dung = ? AND gh.ma_bien_the = ?
-            ORDER BY gh.ma_gio_hang DESC
-            LIMIT 1
-        """;
+        SELECT 
+            gh.ma_san_pham,
+            gh.ma_bien_the,
+            gh.so_luong AS so_luong_gio_hang,
+            gh.don_gia AS don_gia_gio_hang,
+            gh.ten_in_ao,
+            gh.so_in_ao,
+            sp.ten_san_pham,
+            sp.anh_chinh,
+            sz.ten_size,
+            sp.loai_san_pham,
+            sp.mo_ta_ngan
+        FROM gio_hang gh
+        JOIN san_pham sp ON gh.ma_san_pham = sp.ma_san_pham
+        JOIN bien_the_san_pham bt ON gh.ma_bien_the = bt.ma_bien_the
+        JOIN size_san_pham sz ON bt.ma_size = sz.ma_size
+        WHERE gh.ma_nguoi_dung = ?
+          AND gh.ma_bien_the = ?
+          AND (
+                (gh.ten_in_ao IS NULL AND ? IS NULL)
+                OR gh.ten_in_ao = ?
+              )
+          AND (
+                (gh.so_in_ao IS NULL AND ? IS NULL)
+                OR gh.so_in_ao = ?
+              )
+        ORDER BY gh.ma_gio_hang DESC
+        LIMIT 1
+    """;
 
         try (
-            Connection conn = DBConnection.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql)
-        ) {
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, maNguoiDung);
             ps.setInt(2, maBienThe);
+            ps.setString(3, tenInAo);
+            ps.setString(4, tenInAo);
+            ps.setString(5, soInAo);
+            ps.setString(6, soInAo);
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -129,6 +165,9 @@ public class GioHangDAO {
                     item.setSoLuong(rs.getInt("so_luong_gio_hang"));
                     item.setDonGia(rs.getDouble("don_gia_gio_hang"));
                     item.setLoaiPhienBan(rs.getString("loai_san_pham"));
+
+                    item.setTenInAo(rs.getString("ten_in_ao"));
+                    item.setSoInAo(rs.getString("so_in_ao"));
 
                     String moTaNgan = rs.getString("mo_ta_ngan");
                     item.setMauSac(extractMauSac(moTaNgan));
@@ -154,9 +193,7 @@ public class GioHangDAO {
         """;
 
         try (
-            Connection conn = DBConnection.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql)
-        ) {
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, maNguoiDung);
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -191,6 +228,8 @@ public class GioHangDAO {
                 gh.ma_bien_the,
                 gh.so_luong,
                 gh.don_gia,
+                gh.ten_in_ao,
+                gh.so_in_ao,
                 sp.ten_san_pham,
                 sp.anh_chinh,
                 sp.loai_san_pham,
@@ -205,9 +244,7 @@ public class GioHangDAO {
         """;
 
         try (
-            Connection conn = DBConnection.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql)
-        ) {
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, maNguoiDung);
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -216,6 +253,8 @@ public class GioHangDAO {
                     item.setMaGioHang(rs.getInt("ma_gio_hang"));
                     item.setMaSanPham(rs.getInt("ma_san_pham"));
                     item.setMaBienThe(rs.getInt("ma_bien_the"));
+                    item.setTenInAo(rs.getString("ten_in_ao"));
+                    item.setSoInAo(rs.getString("so_in_ao"));
                     item.setTenSanPham(rs.getString("ten_san_pham"));
                     item.setAnhChinh(rs.getString("anh_chinh"));
                     item.setTenSize(rs.getString("ten_size"));
@@ -240,9 +279,7 @@ public class GioHangDAO {
         """;
 
         try (
-            Connection conn = DBConnection.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql)
-        ) {
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, maNguoiDung);
             ps.setInt(2, maBienThe);
             return ps.executeUpdate() > 0;
@@ -269,9 +306,7 @@ public class GioHangDAO {
         """;
 
         try (
-            Connection conn = DBConnection.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql)
-        ) {
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, maSanPham);
             ps.setInt(2, maSanPham);
             ps.setInt(3, limit);
@@ -304,56 +339,61 @@ public class GioHangDAO {
 
         String lower = moTaNgan.toLowerCase();
 
-        if (lower.contains("navy")) return "Collegiate Navy";
-        if (lower.contains("black")) return "Black";
-        if (lower.contains("white")) return "White";
-        if (lower.contains("red")) return "Red";
-        if (lower.contains("blue")) return "Blue";
+        if (lower.contains("navy")) {
+            return "Collegiate Navy";
+        }
+        if (lower.contains("black")) {
+            return "Black";
+        }
+        if (lower.contains("white")) {
+            return "White";
+        }
+        if (lower.contains("red")) {
+            return "Red";
+        }
+        if (lower.contains("blue")) {
+            return "Blue";
+        }
 
         return "Mặc định";
     }
-    
+
     public boolean capNhatSoLuongTheoMaGioHang(int maGioHang, int soLuong) {
-    String sql = "UPDATE gio_hang SET so_luong = ? WHERE ma_gio_hang = ?";
+        String sql = "UPDATE gio_hang SET so_luong = ? WHERE ma_gio_hang = ?";
 
-    try (
-        Connection conn = DBConnection.getConnection();
-        PreparedStatement ps = conn.prepareStatement(sql)
-    ) {
-        ps.setInt(1, soLuong);
-        ps.setInt(2, maGioHang);
+        try (
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, soLuong);
+            ps.setInt(2, maGioHang);
 
-        int rows = ps.executeUpdate();
-        System.out.println("rows updated = " + rows);
-        return rows > 0;
+            int rows = ps.executeUpdate();
+            System.out.println("rows updated = " + rows);
+            return rows > 0;
 
-    } catch (Exception e) {
-        e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
-    return false;
-}
-    
     public boolean xoaToanBoGioHang(int maNguoiDung) {
-    String sql = """
+        String sql = """
         DELETE FROM gio_hang
         WHERE ma_nguoi_dung = ?
     """;
 
-    try (Connection conn = DBConnection.getConnection();
-         PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
-        ps.setInt(1, maNguoiDung);
-        ps.executeUpdate();
-        return true;
+            ps.setInt(1, maNguoiDung);
+            ps.executeUpdate();
+            return true;
 
-    } catch (Exception e) {
-        e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
-    return false;
 }
-    
-    
-}
-

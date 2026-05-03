@@ -6,6 +6,8 @@
 <%@ page import="model.DoiBong" %>
 <%@ page import="model.BienTheSanPham" %>
 
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
 <%!
     public String renderStars(double rating) {
         StringBuilder html = new StringBuilder();
@@ -127,12 +129,42 @@
                 <%= size%>
             </button>
             <%  }
-        }%>
+                }%>
         </div>
 
         <div id="pd-size-guide" style="margin-top: 18px; font-size: 18px; font-weight: 700; font-family: 'Arial';">
-            Hãy chọn kích cỡ phù hợp
+            Hãy chọn kích cỡ phù hợp 
         </div>
+
+        <c:if test="${sp.nhomSanPham == '1'}">
+            <div class="print-shirt-box">
+                <label class="print-shirt-check">
+                    <input type="checkbox" id="printShirtCheckbox">
+                    <span class="print-shirt-fake-check"></span>
+                    <span>In tên số áo</span>
+                </label>
+
+                <div id="printShirtFields" class="print-shirt-fields">
+                    <div class="print-shirt-field">
+                        <label for="tenInAo">Tên in áo</label>
+                        <input type="text"
+                               id="tenInAo"
+                               maxlength="20"
+                               placeholder="VD: HIEU">
+                        <small>Tối đa 20 ký tự</small>
+                    </div>
+
+                    <div class="print-shirt-field print-shirt-number">
+                        <label for="soInAo">Số áo</label>
+                        <input type="text"
+                               id="soInAo"
+                               maxlength="2"
+                               placeholder="10">
+                        <small>Tối đa 2 số</small>
+                    </div>
+                </div>
+            </div>
+        </c:if>
 
         <input type="hidden" id="maSanPham" value="<%= spInfo.getMaSanPham()%>">
         <input type="hidden" id="selectedVariantId" name="maBienThe" value="">

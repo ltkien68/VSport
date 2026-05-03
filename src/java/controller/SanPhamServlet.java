@@ -102,7 +102,7 @@ public class SanPhamServlet extends HttpServlet {
                 giaMin,
                 giaMax
         );
-        
+
         HttpSession session = request.getSession(false);
         List<YeuThich> dsYeuThich = new ArrayList<>();
 
@@ -112,7 +112,7 @@ public class SanPhamServlet extends HttpServlet {
             dsYeuThich = yeuThichDAO.getDanhSachYeuThich(nguoiDung.getMaNguoiDung());
         }
 
-request.setAttribute("dsYeuThich", dsYeuThich);
+        request.setAttribute("dsYeuThich", dsYeuThich);
 
         request.setAttribute("doiBongHienTai", doiBongHienTai);
         request.setAttribute("danhSachSanPham", danhSachSanPham);
@@ -127,11 +127,13 @@ request.setAttribute("dsYeuThich", dsYeuThich);
         request.setAttribute("currentFilterAction", buildCurrentFilterAction(request));
 
         request.getRequestDispatcher("/WEB-INF/views/pages/club_jersey.jsp")
-               .forward(request, response);
+                .forward(request, response);
     }
 
     private String trimOrNull(String value) {
-        if (value == null) return null;
+        if (value == null) {
+            return null;
+        }
         value = value.trim();
         return value.isEmpty() ? null : value;
     }

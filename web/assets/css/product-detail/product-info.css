@@ -195,6 +195,108 @@ club-detail-breadcrumb-current:hover,
     color: var(--color-white);
 }
 
+
+
+.print-shirt-box {
+    margin-top: 28px;
+    margin-bottom: 28px;
+}
+
+.print-shirt-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: 24px;
+    color: var(--color-black);
+    user-select: none;
+}
+
+.print-shirt-check input {
+    display: none;
+}
+
+.print-shirt-fake-check {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--color-black);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-white);
+}
+
+.print-shirt-check input:checked + .print-shirt-fake-check {
+    background: var(--color-black);
+}
+
+.print-shirt-check input:checked + .print-shirt-fake-check::after {
+    content: "✓";
+    color: var(--color-white);
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.print-shirt-fields {
+    display: none;
+    grid-template-columns: 1fr 130px;
+    gap: 18px;
+    margin-top: 18px;
+    padding: 18px;
+    border: 1px solid var(--color-gray-200);
+    background: var(--color-gray-100);
+}
+
+.print-shirt-fields.active {
+    display: grid;
+}
+
+.print-shirt-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.print-shirt-field label {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    color: var(--color-black);
+}
+
+.print-shirt-field input {
+    height: 48px;
+    border: 1px solid var(--color-gray-400);
+    background: var(--color-white);
+    padding: 0 14px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    color: var(--color-black);
+    outline: none;
+    text-transform: uppercase;
+}
+
+.print-shirt-field input:focus {
+    border-color: var(--color-black);
+}
+
+.print-shirt-field small {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: var(--color-gray-600);
+}
+
+@media (max-width: 576px) {
+    .print-shirt-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .print-shirt-check {
+        font-size: 21px;
+    }
+}
+
 .pd-action-row {
     display: flex;
     gap: 16px;
