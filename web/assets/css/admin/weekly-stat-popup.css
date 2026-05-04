@@ -1,0 +1,151 @@
+.stat-clickable {
+    cursor: pointer;
+}
+
+.weekly-stat-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+}
+
+.weekly-stat-overlay.active {
+    display: flex;
+}
+
+.weekly-stat-popup {
+    width: 540px;
+    max-width: calc(100vw - 32px);
+    max-height: 82vh;
+    background: var(--color-white);
+    border-radius: 26px;
+    padding: 28px;
+    position: relative;
+    overflow-y: auto;
+    box-shadow: var(--shadow-md);
+    animation: weeklyPopupShow 0.25s ease;
+}
+
+@keyframes weeklyPopupShow {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.weekly-stat-close {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    border: none;
+    background: transparent;
+    font-size: 34px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--color-black);
+}
+
+.weekly-stat-head p {
+    color: var(--color-red);
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.weekly-stat-head h2 {
+    font-size: 30px;
+    margin-bottom: 24px;
+    color: var(--color-black);
+}
+
+.weekly-stat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.weekly-stat-item {
+    border: 1px solid var(--color-gray-200);
+    border-radius: 18px;
+    padding: 16px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    background: var(--color-white);
+}
+
+.weekly-stat-info strong {
+    font-size: 18px;
+    color: var(--color-black);
+}
+
+.weekly-stat-info span {
+    display: block;
+    color: var(--color-gray-600);
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.weekly-stat-value {
+    font-size: 22px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.weekly-stat-value.negative {
+    color: var(--color-red);
+}
+
+.weekly-stat-value.positive {
+    color: var(--color-green);
+}
+
+.weekly-stat-loading,
+.weekly-stat-empty {
+    padding: 18px;
+    border-radius: 16px;
+    background: var(--color-gray-100);
+    color: var(--color-gray-600);
+}
+
+.weekly-stat-item.current-week {
+    background: var(--color-white);
+    border: 2px solid var(--color-red);
+    box-shadow: 0 12px 30px rgba(225, 29, 72, 0.14);
+    position: relative;
+}
+
+.weekly-stat-item.current-week::before {
+    content: "hiện tại";
+    position: absolute;
+    top: -12px;
+    right: 22px;
+    background: var(--color-red);
+    color: var(--color-white);
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+.weekly-stat-item.current-week .weekly-stat-info strong {
+    color: var(--color-black);
+}
+
+.weekly-stat-item.current-week .weekly-stat-info span {
+    color: var(--color-gray-600);
+}
+
+.weekly-stat-item.current-week .weekly-stat-value {
+    color: var(--color-red);
+}

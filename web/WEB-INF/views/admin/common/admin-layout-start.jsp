@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/admin-dashboard.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/weekly-stat-popup.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base/variables.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base/fonts.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base/reset.css">

@@ -16,7 +16,7 @@
 
         <section class="admin-stats-grid">
 
-            <div class="admin-stat-card admin-stat-card--highlight">
+            <div class="admin-stat-card admin-stat-card--highlight stat-clickable" data-type="don_hang">
                 <div class="admin-stat-top">
                     <span>Tổng Đơn Hàng</span>
                     <span class="admin-stat-trend-icon ${phanTramDonHang >= 0 ? 'positive' : 'negative'}">
@@ -35,8 +35,8 @@
                 </div>
             </div>
 
-            <div class="admin-stat-card">
-                <div class="admin-stat-top">
+            <div class="admin-stat-card stat-clickable" data-type="doanh_thu">
+                <div class="admin-stat-top ">
                     <span>Tổng Doanh Thu</span>
                     <span class="admin-stat-trend-icon ${phanTramDoanhThu >= 0 ? 'positive' : 'negative'}">
                         <i data-lucide="${phanTramDoanhThu >= 0 ? 'trending-up' : 'trending-down'}"></i>
@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <div class="admin-stat-card">
+            <div class="admin-stat-card stat-clickable" data-type="loi_nhuan">
                 <div class="admin-stat-top">
                     <span>Tổng Lợi Nhuận</span>
                     <span class="admin-stat-trend-icon ${loaiBienDongLoiNhuan}">
@@ -73,7 +73,7 @@
                 </div>
             </div>
 
-            <div class="admin-stat-card">
+            <div class="admin-stat-card stat-clickable" data-type="thanh_vien">
                 <div class="admin-stat-top">
                     <span>Số Thành Viên</span>
                     <span class="admin-stat-trend-icon ${phanTramThanhVien >= 0 ? 'positive' : 'negative'}">
@@ -175,7 +175,14 @@
 
 </div>
 
+<script>
+    const contextPath = "${pageContext.request.contextPath}";
+</script>
+
+<jsp:include page="/WEB-INF/views/admin/components/weekly-stats-popup.jsp" />
+
 <script src="${pageContext.request.contextPath}/assets/js/admin/admin-dashboard.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/admin/weekly-stat-popup.js"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>
     lucide.createIcons();
