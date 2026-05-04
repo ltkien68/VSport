@@ -52,6 +52,3 @@
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-<%-- CSS chung của web --%>
-<link rel="stylesheet"
-      href="${pageContext.request.contextPath}/assets/css/variable.css">

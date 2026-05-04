@@ -100,20 +100,37 @@
                                             <div class="cart-item-color"><%= item.getMauSac() %></div>
                                             <div class="cart-item-size">Kích cỡ: <%= item.getTenSize() %></div>
 
-                                            <% if (item.getTenInAo() != null && !item.getTenInAo().isEmpty()
-                                                || item.getSoInAo() != null && !item.getSoInAo().isEmpty()) { %>
+                                            <div class="cart-print-info"
+                                                 data-cart-id="<%= item.getMaGioHang() %>"
+                                                 data-ten-in="<%= item.getTenInAo() == null ? "" : item.getTenInAo() %>"
+                                                 data-so-in="<%= item.getSoInAo() == null ? "" : item.getSoInAo() %>">
 
-                                            <div class="cart-item-print">
-                                                In áo:
-                                                <% if (item.getTenInAo() != null && !item.getTenInAo().isEmpty()) { %>
-                                                <span>Tên: <strong><%= item.getTenInAo() %></strong></span>
-                                                <% } %>
+                                                <div class="cart-item-print">
+                                                    In áo:
 
-                                                <% if (item.getSoInAo() != null && !item.getSoInAo().isEmpty()) { %>
-                                                <span>Số: <strong><%= item.getSoInAo() %></strong></span>
-                                                <% } %>
+                                                    <span>
+                                                        Tên:
+                                                        <strong>
+                                                            <%= (item.getTenInAo() == null || item.getTenInAo().isEmpty())
+                                                                    ? "Không in"
+                                                                    : item.getTenInAo() %>
+                                                        </strong>
+                                                    </span>
+
+                                                    <span>
+                                                        Số:
+                                                        <strong>
+                                                            <%= (item.getSoInAo() == null || item.getSoInAo().isEmpty())
+                                                                    ? "Không in"
+                                                                    : item.getSoInAo() %>
+                                                        </strong>
+                                                    </span>
+
+                                                    <button type="button" class="cart-print-edit-btn">
+                                                        Sửa
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <% } %>
                                         </div>
 
                                         <form action="${pageContext.request.contextPath}/gio_hang/xoa" method="post" class="cart-remove-form">
@@ -155,7 +172,7 @@
                         <h2 class="cart-summary-title">TÓM TẮT ĐƠN HÀNG</h2>
 
                         <div class="cart-summary-line">
-                            <span><%= tongMatHang %> các sản phẩm</span>
+                            <span><%= tongMatHangCart %> các sản phẩm</span>
                             <strong><%= String.format("%,.0f", tongTienCart) %>đ</strong>
                         </div>
 
@@ -188,6 +205,34 @@
             </div>
         </main>
 
+        <div id="cartPrintModal" class="cart-print-modal">
+            <div class="cart-print-modal-content">
+
+                <div class="cart-print-header">
+                    <h2 class="cart-print-title">THAY ĐỔI THÔNG TIN IN</h2>
+                    <button type="button" id="cartPrintClose">×</button>
+                </div>
+
+                <input type="hidden" id="editCartId">
+
+                <div class="cart-print-field">
+                    <label>Tên in áo</label>
+                    <input type="text" id="editTenInAo" maxlength="20">
+                </div>
+
+                <div class="cart-print-field">
+                    <label>Số áo</label>
+                    <input type="text" id="editSoInAo" maxlength="2">
+                </div>
+
+                <div class="cart-print-actions">
+                    <button type="button" id="savePrintBtn">Lưu</button>
+                    <button type="button" id="removePrintBtn">Xóa in áo</button>
+                </div>
+
+            </div>
+        </div>
+
     <c:if test="${not empty checkoutSuccess}">
         <script>
             document.addEventListener("DOMContentLoaded", function () {
@@ -212,6 +257,7 @@
     <script src="${pageContext.request.contextPath}/assets/js/components/header.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/components/search-popup.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/components/checkout-popup.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/pages/cart.js"></script>
 
     <%-- jQuery bắt buộc cho Toastr --%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

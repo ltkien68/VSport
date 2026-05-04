@@ -50,8 +50,12 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append("maGioHang", editCartId.value);
         formData.append("tenInAo", tenInAo);
         formData.append("soInAo", soInAo);
+        
+        
+        
+        
 
-        const response = await fetch(`${window.contextPath}/gio-hang/cap-nhat-in-ao`, {
+        const response = await fetch(`${window.contextPath}/gio_hang/cap-nhat-in-ao`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
@@ -85,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
             formData.append("maGioHang", box.dataset.cartId);
             formData.append("soLuong", value);
 
-            const response = await fetch(`${window.contextPath}/gio-hang/cap-nhat-so-luong`, {
+            const response = await fetch(`${window.contextPath}/gio_hang/cap-nhat-so-luong`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",

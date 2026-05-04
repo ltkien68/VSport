@@ -320,7 +320,224 @@
     margin-top: 26px;
 }
 
+.cart-item-print {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 15px;
+    color: var(--color-gray-600);
+}
 
+.cart-item-print strong {
+    color: var(--color-black);
+}
+
+.cart-print-edit-btn {
+    border: none;
+    background: none;
+    color: var(--color-red);
+    padding: 5px 12px;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 13px;
+    border-radius: 4px;
+}
+
+.cart-print-edit-form {
+    display: none;
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid var(--color-gray-200);
+    background: var(--color-gray-100);
+}
+
+.cart-print-edit-form.active {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+.cart-print-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.cart-print-field label {
+    font-size: 13px;
+    color: var(--color-gray-600);
+}
+
+.cart-print-field input {
+    height: 36px;
+    padding: 0 10px;
+    border: 1px solid var(--color-gray-200);
+    outline: none;
+}
+
+.cart-print-save-btn,
+.cart-print-cancel-btn {
+    height: 36px;
+    padding: 0 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.cart-print-save-btn {
+    background: var(--color-red);
+    color: var(--color-white);
+}
+
+.cart-print-cancel-btn {
+    background: var(--color-black);
+    color: var(--color-white);
+}
+
+/* overlay */
+
+.cart-print-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+/* title */
+.cart-print-title {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-black);
+}
+
+.cart-print-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+}
+
+.cart-print-modal.active {
+    display: flex;
+}
+
+/* box */
+.cart-print-modal-content {
+    width: 380px;
+    background: var(--color-white);
+    border-radius: 14px;
+    padding: 26px 24px 22px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    position: relative;
+    animation: modalFade 0.2s ease;
+}
+
+/* animation nhẹ */
+@keyframes modalFade {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* close button */
+#cartPrintClose {
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--color-gray-600);
+    transition: 0.2s;
+}
+
+#cartPrintClose:hover {
+    color: var(--color-black);
+}
+
+/* field */
+.cart-print-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 14px;
+}
+
+.cart-print-field label {
+    font-size: 14px;
+    color: var(--color-gray-600);
+}
+
+/* input */
+.cart-print-field input {
+    height: 40px;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 6px;
+    padding: 0 12px;
+    font-size: 15px;
+    font-family: var(--font-body);
+    transition: 0.2s;
+}
+
+.cart-print-field input:focus {
+    border-color: var(--color-black);
+    outline: none;
+}
+
+/* actions */
+.cart-print-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* nút chung */
+.cart-print-actions button {
+    flex: 1;
+    height: 42px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* nút đỏ */
+#savePrintBtn {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    background: var(--color-red);
+    color: var(--color-white);
+    border: none;
+}
+
+#savePrintBtn:hover {
+    background: var(--color-red-hover);
+}
+
+/* nút đen */
+#removePrintBtn {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    background: var(--color-black);
+    color: var(--color-white);
+    border: none;
+}
+
+#removePrintBtn:hover {
+    background: var(--color-gray-800);
+}
 
 @media (max-width: 1200px) {
     .cart-layout {

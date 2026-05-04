@@ -396,4 +396,30 @@ public class GioHangDAO {
         return false;
     }
 
+    public boolean capNhatInAo(int maNguoiDung, int maGioHang, String tenInAo, String soInAo) {
+        String sql = """
+        UPDATE gio_hang
+        SET ten_in_ao = ?, so_in_ao = ?
+        WHERE ma_gio_hang = ? AND ma_nguoi_dung = ?
+        """;
+
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, tenInAo);
+            ps.setString(2, soInAo);
+            ps.setInt(3, maGioHang);
+            ps.setInt(4, maNguoiDung);
+
+            int rows = ps.executeUpdate();
+            System.out.println("Update in áo rows = " + rows);
+            System.out.println("maGioHang = " + maGioHang);
+            System.out.println("rows = " + rows);
+
+            return rows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
