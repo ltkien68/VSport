@@ -235,6 +235,8 @@
             <file>file:/D:/Code_files/VSPORT/VsportWeb/web/WEB-INF/views/pages/components/new-product-section.jsp</file>
             <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/css/components/new-product-section.css</file>
             <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/js/components/new-product-section.js</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/js/pages/cart.js</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/src/java/controller/CapNhatInAoServlet.java</file>
         </group>
     </open-files>
 </project-private>
