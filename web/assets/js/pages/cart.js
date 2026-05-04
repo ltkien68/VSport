@@ -26,15 +26,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     editTenInAo.addEventListener("input", function () {
         this.value = this.value
-            .toUpperCase()
-            .replace(/[^A-ZÀ-Ỹ\s]/gi, "")
-            .slice(0, 20);
+                .toUpperCase()
+                .replace(/[^A-ZÀ-Ỹ\s]/gi, "")
+                .slice(0, 20);
     });
 
     editSoInAo.addEventListener("input", function () {
         this.value = this.value
-            .replace(/\D/g, "")
-            .slice(0, 2);
+                .replace(/\D/g, "")
+                .slice(0, 2);
     });
 
     saveBtn.addEventListener("click", async function () {
@@ -50,10 +50,10 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append("maGioHang", editCartId.value);
         formData.append("tenInAo", tenInAo);
         formData.append("soInAo", soInAo);
-        
-        
-        
-        
+
+
+
+
 
         const response = await fetch(`${window.contextPath}/gio_hang/cap-nhat-in-ao`, {
             method: "POST",
@@ -78,8 +78,10 @@ document.addEventListener("DOMContentLoaded", function () {
         input.addEventListener("change", async function () {
             let value = parseInt(input.value || "1", 10);
 
-            if (isNaN(value) || value < 1) value = 1;
-            if (value > 20) value = 20;
+            if (isNaN(value) || value < 1)
+                value = 1;
+            if (value > 100)
+                value = 100;
 
             input.value = value;
 
@@ -103,6 +105,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 toastr.error(text || "Không thể cập nhật số lượng.");
                 return;
             }
+
+            toastr.success("Đã cập nhật số lượng.");
+
+            // delay nhẹ để thấy toast rồi mới reload
+            setTimeout(() => {
+                location.reload();
+            }, 600);
 
             location.reload();
         });

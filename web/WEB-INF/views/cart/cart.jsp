@@ -149,7 +149,7 @@
                                                 <input type="hidden" name="maGioHang" value="<%= item.getMaGioHang() %>">
 
                                                 <select name="soLuong" class="cart-item-qty" onchange="this.form.submit()">
-                                                    <% for (int i = 1; i <= 20; i++) { %>
+                                                    <% for (int i = 1; i <= 100; i++) { %>
                                                     <option value="<%= i %>" <%= i == item.getSoLuong() ? "selected" : "" %>>
                                                         <%= i %>
                                                     </option>

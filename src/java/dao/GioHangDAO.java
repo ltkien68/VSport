@@ -422,4 +422,28 @@ public class GioHangDAO {
         }
     }
 
+    public int layTonKhoTheoMaGioHang(int maGioHang) {
+        String sql = """
+        SELECT bt.so_luong_ton
+        FROM gio_hang gh
+        JOIN bien_the_san_pham bt ON gh.ma_bien_the = bt.ma_bien_the
+        WHERE gh.ma_gio_hang = ?
+    """;
+
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, maGioHang);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("so_luong_ton");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
 }
