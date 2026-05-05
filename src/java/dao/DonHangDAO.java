@@ -67,9 +67,11 @@ public class DonHangDAO {
                 ten_size,
                 gia_mua,
                 so_luong,
-                thanh_tien
+                thanh_tien,
+                ten_in_ao,
+                so_in_ao
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """;
 
         Connection conn = null;
@@ -183,6 +185,10 @@ public class DonHangDAO {
                 psChiTiet.setDouble(6, giaMua);
                 psChiTiet.setInt(7, soLuong);
                 psChiTiet.setDouble(8, thanhTien);
+
+                psChiTiet.setString(9, item.getTenInAo());
+                psChiTiet.setString(10, item.getSoInAo());
+
                 psChiTiet.addBatch();
             }
 
@@ -194,20 +200,38 @@ public class DonHangDAO {
         } catch (Exception e) {
             e.printStackTrace();
             try {
-                if (conn != null) conn.rollback();
+                if (conn != null) {
+                    conn.rollback();
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         } finally {
-            try { if (rs != null) rs.close(); } catch (Exception ignored) {}
-            try { if (psChiTiet != null) psChiTiet.close(); } catch (Exception ignored) {}
-            try { if (psDonHang != null) psDonHang.close(); } catch (Exception ignored) {}
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception ignored) {
+            }
+            try {
+                if (psChiTiet != null) {
+                    psChiTiet.close();
+                }
+            } catch (Exception ignored) {
+            }
+            try {
+                if (psDonHang != null) {
+                    psDonHang.close();
+                }
+            } catch (Exception ignored) {
+            }
             try {
                 if (conn != null) {
                     conn.setAutoCommit(true);
                     conn.close();
                 }
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
 
         return false;
@@ -228,8 +252,7 @@ public class DonHangDAO {
               AND so_luong_ton >= ?
         """;
 
-        try (PreparedStatement psCheck = conn.prepareStatement(sqlCheck);
-             PreparedStatement psUpdate = conn.prepareStatement(sqlUpdate)) {
+        try (PreparedStatement psCheck = conn.prepareStatement(sqlCheck); PreparedStatement psUpdate = conn.prepareStatement(sqlUpdate)) {
 
             for (GioHang item : dsGioHang) {
                 int maBienThe = item.getMaBienThe();
@@ -300,8 +323,7 @@ public class DonHangDAO {
             ORDER BY dh.ngay_dat DESC, dh.ma_don_hang DESC
         """;
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, maNguoiDung);
 
@@ -362,6 +384,8 @@ public class DonHangDAO {
                 ct.gia_mua,
                 ct.so_luong,
                 ct.thanh_tien,
+                ct.ten_in_ao,
+                ct.so_in_ao,
                 sp.anh_chinh
             FROM chi_tiet_don_hang ct
             LEFT JOIN san_pham sp ON ct.ma_san_pham = sp.ma_san_pham
@@ -369,8 +393,7 @@ public class DonHangDAO {
             ORDER BY ct.ma_chi_tiet_don_hang ASC
         """;
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, maDonHang);
 
@@ -383,6 +406,8 @@ public class DonHangDAO {
                     item.setMaBienThe(rs.getInt("ma_bien_the"));
                     item.setTenSanPham(rs.getString("ten_san_pham"));
                     item.setTenSize(rs.getString("ten_size"));
+                    item.setTenInAo(rs.getString("ten_in_ao"));
+                    item.setSoInAo(rs.getString("so_in_ao"));
                     item.setGiaMua(rs.getDouble("gia_mua"));
                     item.setSoLuong(rs.getInt("so_luong"));
                     item.setThanhTien(rs.getDouble("thanh_tien"));
@@ -399,8 +424,6 @@ public class DonHangDAO {
         return list;
     }
 
-    
-
     public boolean capNhatTrangThaiChoLayHang(int maDonHang) {
         String sql = """
             UPDATE don_hang
@@ -410,8 +433,7 @@ public class DonHangDAO {
               AND trang_thai_don_hang = 'cho_xac_nhan'
         """;
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, maDonHang);
             return ps.executeUpdate() > 0;
@@ -422,12 +444,11 @@ public class DonHangDAO {
 
         return false;
     }
+
     // Admin bấm xác nhận đơn: cho_xac_nhan -> da_xac_nhan
     public boolean capNhatTrangThaiDaXacNhan(int maDonHang) {
         return capNhatTrangThaiChoLayHang(maDonHang);
     }
-    
-    
 
     // =========================================================
     // AUTO 1: nếu admin không xác nhận, sau 2 phút -> cho_lay_hang
@@ -444,8 +465,7 @@ public class DonHangDAO {
               AND ngay_xac_nhan IS NULL
         """;
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             return ps.executeUpdate();
 
@@ -455,7 +475,7 @@ public class DonHangDAO {
 
         return 0;
     }
-    
+
     public int tuDongChuyenDangGiaoSau2PhutLayHang() {
         String sql = """
             UPDATE don_hang
@@ -467,8 +487,7 @@ public class DonHangDAO {
               AND ngay_bat_dau_giao IS NULL
         """;
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             return ps.executeUpdate();
 
@@ -502,7 +521,9 @@ public class DonHangDAO {
         } catch (Exception e) {
             e.printStackTrace();
             try {
-                if (conn != null) conn.rollback();
+                if (conn != null) {
+                    conn.rollback();
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -512,7 +533,8 @@ public class DonHangDAO {
                     conn.setAutoCommit(true);
                     conn.close();
                 }
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
 
         return false;
@@ -538,8 +560,7 @@ public class DonHangDAO {
             conn = DBConnection.getConnection();
             conn.setAutoCommit(false);
 
-            try (PreparedStatement psSelect = conn.prepareStatement(sqlSelect);
-                 ResultSet rs = psSelect.executeQuery()) {
+            try (PreparedStatement psSelect = conn.prepareStatement(sqlSelect); ResultSet rs = psSelect.executeQuery()) {
 
                 while (rs.next()) {
                     int maDonHang = rs.getInt("ma_don_hang");
@@ -557,7 +578,9 @@ public class DonHangDAO {
         } catch (Exception e) {
             e.printStackTrace();
             try {
-                if (conn != null) conn.rollback();
+                if (conn != null) {
+                    conn.rollback();
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -567,7 +590,8 @@ public class DonHangDAO {
                     conn.setAutoCommit(true);
                     conn.close();
                 }
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
 
         return 0;
@@ -599,8 +623,7 @@ public class DonHangDAO {
             SET sp.da_ban = sp.da_ban + ct.tong_ban
         """;
 
-        try (PreparedStatement psUpdateDon = conn.prepareStatement(sqlUpdateDon);
-             PreparedStatement psUpdateDaBan = conn.prepareStatement(sqlUpdateDaBan)) {
+        try (PreparedStatement psUpdateDon = conn.prepareStatement(sqlUpdateDon); PreparedStatement psUpdateDaBan = conn.prepareStatement(sqlUpdateDaBan)) {
 
             psUpdateDon.setInt(1, maDonHang);
             int updated = psUpdateDon.executeUpdate();
@@ -615,7 +638,7 @@ public class DonHangDAO {
             return true;
         }
     }
-    
+
     public int capNhatThanhToanSauKhiHoanThanh() {
         String sqlSelect = """
             SELECT ma_don_hang
@@ -643,8 +666,7 @@ public class DonHangDAO {
 
             List<Integer> dsMaDonHang = new ArrayList<>();
 
-            try (PreparedStatement psSelect = conn.prepareStatement(sqlSelect);
-                 ResultSet rs = psSelect.executeQuery()) {
+            try (PreparedStatement psSelect = conn.prepareStatement(sqlSelect); ResultSet rs = psSelect.executeQuery()) {
 
                 while (rs.next()) {
                     dsMaDonHang.add(rs.getInt("ma_don_hang"));
@@ -676,7 +698,9 @@ public class DonHangDAO {
             e.printStackTrace();
 
             try {
-                if (conn != null) conn.rollback();
+                if (conn != null) {
+                    conn.rollback();
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -686,37 +710,38 @@ public class DonHangDAO {
                     conn.setAutoCommit(true);
                     conn.close();
                 }
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
 
         return 0;
     }
-    
+
     private boolean daGhiNhanDoanhThu(Connection conn, int maDonHang) throws Exception {
-    String sql = """
+        String sql = """
         SELECT 1
         FROM doanh_thu_shop
         WHERE ma_don_hang = ?
         LIMIT 1
     """;
 
-    try (PreparedStatement ps = conn.prepareStatement(sql)) {
-        ps.setInt(1, maDonHang);
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, maDonHang);
 
-        try (ResultSet rs = ps.executeQuery()) {
-            return rs.next();
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
         }
     }
-}
-    
+
     private boolean xuLyCongVonVaGhiDoanhThu(Connection conn, int maDonHang) throws Exception {
 
-    if (daGhiNhanDoanhThu(conn, maDonHang)) {
-        // Đã ghi doanh thu rồi => tránh cộng vốn 2 lần
-        return false;
-    }
+        if (daGhiNhanDoanhThu(conn, maDonHang)) {
+            // Đã ghi doanh thu rồi => tránh cộng vốn 2 lần
+            return false;
+        }
 
-    String sqlLayDonHang = """
+        String sqlLayDonHang = """
         SELECT ma_don_hang, ma_nguoi_dung, tong_thanh_toan
         FROM don_hang
         WHERE ma_don_hang = ?
@@ -724,21 +749,21 @@ public class DonHangDAO {
         LIMIT 1
     """;
 
-    String sqlLaySoDuQuy = """
+        String sqlLaySoDuQuy = """
         SELECT so_du_hien_tai
         FROM quy_von_shop
         WHERE ma_quy_von = 1
         FOR UPDATE
     """;
 
-    String sqlCapNhatQuy = """
+        String sqlCapNhatQuy = """
         UPDATE quy_von_shop
         SET so_du_hien_tai = ?,
             ngay_cap_nhat = CURRENT_TIMESTAMP
         WHERE ma_quy_von = 1
     """;
 
-    String sqlInsertLichSuVon = """
+        String sqlInsertLichSuVon = """
         INSERT INTO lich_su_von_shop (
             ma_quy_von,
             loai_bien_dong,
@@ -752,7 +777,7 @@ public class DonHangDAO {
         VALUES (?, ?, ?, ?, ?, ?, ?, NOW())
     """;
 
-    String sqlInsertDoanhThu = """
+        String sqlInsertDoanhThu = """
         INSERT INTO doanh_thu_shop (
             ma_don_hang,
             ma_nguoi_dung,
@@ -763,94 +788,93 @@ public class DonHangDAO {
         VALUES (?, ?, ?, ?, NOW())
     """;
 
-    double tongThanhToan = 0;
-    Integer maNguoiDung = null;
+        double tongThanhToan = 0;
+        Integer maNguoiDung = null;
 
-    // 1. lấy thông tin đơn hàng
-    try (PreparedStatement ps = conn.prepareStatement(sqlLayDonHang)) {
-        ps.setInt(1, maDonHang);
+        // 1. lấy thông tin đơn hàng
+        try (PreparedStatement ps = conn.prepareStatement(sqlLayDonHang)) {
+            ps.setInt(1, maDonHang);
 
-        try (ResultSet rs = ps.executeQuery()) {
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) {
+                    return false;
+                }
+
+                tongThanhToan = rs.getDouble("tong_thanh_toan");
+
+                int value = rs.getInt("ma_nguoi_dung");
+                if (!rs.wasNull()) {
+                    maNguoiDung = value;
+                }
+            }
+        }
+
+        if (tongThanhToan <= 0) {
+            return false;
+        }
+
+        // 2. lock quỹ vốn và lấy số dư trước
+        double soDuTruoc;
+        double soDuSau;
+
+        try (PreparedStatement ps = conn.prepareStatement(sqlLaySoDuQuy); ResultSet rs = ps.executeQuery()) {
+
             if (!rs.next()) {
-                return false;
+                throw new Exception("Không tìm thấy quỹ vốn shop ma_quy_von = 1");
             }
 
-            tongThanhToan = rs.getDouble("tong_thanh_toan");
+            soDuTruoc = rs.getDouble("so_du_hien_tai");
+        }
 
-            int value = rs.getInt("ma_nguoi_dung");
-            if (!rs.wasNull()) {
-                maNguoiDung = value;
+        soDuSau = soDuTruoc + tongThanhToan;
+
+        // 3. cập nhật quỹ vốn
+        try (PreparedStatement ps = conn.prepareStatement(sqlCapNhatQuy)) {
+            ps.setDouble(1, soDuSau);
+
+            int updated = ps.executeUpdate();
+            if (updated <= 0) {
+                throw new Exception("Không cập nhật được quỹ vốn shop");
             }
         }
-    }
 
-    if (tongThanhToan <= 0) {
-        return false;
-    }
+        // 4. ghi lịch sử vốn shop
+        try (PreparedStatement ps = conn.prepareStatement(sqlInsertLichSuVon)) {
+            ps.setInt(1, 1); // ma_quy_von
+            ps.setString(2, "cong_von_ngay");
+            ps.setDouble(3, tongThanhToan);
+            ps.setDouble(4, soDuTruoc);
+            ps.setDouble(5, soDuSau);
+            ps.setString(6, "Cộng vốn từ đơn hàng #" + maDonHang + " đã thanh toán");
+            ps.setNull(7, Types.INTEGER); // ma_san_pham = NULL vì đây là doanh thu theo đơn, không phải theo 1 sản phẩm
 
-    // 2. lock quỹ vốn và lấy số dư trước
-    double soDuTruoc;
-    double soDuSau;
-
-    try (PreparedStatement ps = conn.prepareStatement(sqlLaySoDuQuy);
-         ResultSet rs = ps.executeQuery()) {
-
-        if (!rs.next()) {
-            throw new Exception("Không tìm thấy quỹ vốn shop ma_quy_von = 1");
+            ps.executeUpdate();
         }
 
-        soDuTruoc = rs.getDouble("so_du_hien_tai");
-    }
+        // 5. ghi doanh thu shop
+        try (PreparedStatement ps = conn.prepareStatement(sqlInsertDoanhThu)) {
+            ps.setInt(1, maDonHang);
 
-    soDuSau = soDuTruoc + tongThanhToan;
+            if (maNguoiDung != null) {
+                ps.setInt(2, maNguoiDung);
+            } else {
+                ps.setNull(2, Types.INTEGER);
+            }
 
-    // 3. cập nhật quỹ vốn
-    try (PreparedStatement ps = conn.prepareStatement(sqlCapNhatQuy)) {
-        ps.setDouble(1, soDuSau);
+            ps.setDouble(3, tongThanhToan);
+            ps.setString(4, "Ghi nhận doanh thu từ đơn hàng #" + maDonHang);
 
-        int updated = ps.executeUpdate();
-        if (updated <= 0) {
-            throw new Exception("Không cập nhật được quỹ vốn shop");
-        }
-    }
-
-    // 4. ghi lịch sử vốn shop
-    try (PreparedStatement ps = conn.prepareStatement(sqlInsertLichSuVon)) {
-        ps.setInt(1, 1); // ma_quy_von
-        ps.setString(2, "cong_von_ngay");
-        ps.setDouble(3, tongThanhToan);
-        ps.setDouble(4, soDuTruoc);
-        ps.setDouble(5, soDuSau);
-        ps.setString(6, "Cộng vốn từ đơn hàng #" + maDonHang + " đã thanh toán");
-        ps.setNull(7, Types.INTEGER); // ma_san_pham = NULL vì đây là doanh thu theo đơn, không phải theo 1 sản phẩm
-
-        ps.executeUpdate();
-    }
-
-    // 5. ghi doanh thu shop
-    try (PreparedStatement ps = conn.prepareStatement(sqlInsertDoanhThu)) {
-        ps.setInt(1, maDonHang);
-
-        if (maNguoiDung != null) {
-            ps.setInt(2, maNguoiDung);
-        } else {
-            ps.setNull(2, Types.INTEGER);
+            ps.executeUpdate();
         }
 
-        ps.setDouble(3, tongThanhToan);
-        ps.setString(4, "Ghi nhận doanh thu từ đơn hàng #" + maDonHang);
-
-        ps.executeUpdate();
+        return true;
     }
-
-    return true;
-}
 
     // Nếu hủy đơn trước khi giao thì cộng lại tồn kho
     public boolean huyDonHangVaHoanTonVaVoucher(int maDonHang, int maNguoiDung) {
-    Connection conn = null;
+        Connection conn = null;
 
-    String sqlUpdateOrder = """
+        String sqlUpdateOrder = """
         UPDATE don_hang
         SET trang_thai_don_hang = 'da_huy'
         WHERE ma_don_hang = ?
@@ -858,19 +882,19 @@ public class DonHangDAO {
           AND trang_thai_don_hang = 'cho_xac_nhan'
     """;
 
-    String sqlSelectChiTiet = """
+        String sqlSelectChiTiet = """
         SELECT ma_bien_the, so_luong
         FROM chi_tiet_don_hang
         WHERE ma_don_hang = ?
     """;
 
-    String sqlRestoreStock = """
+        String sqlRestoreStock = """
         UPDATE bien_the_san_pham
         SET so_luong_ton = so_luong_ton + ?
         WHERE ma_bien_the = ?
     """;
 
-    String sqlSelectVoucherId = """
+        String sqlSelectVoucherId = """
         SELECT ma_giam_gia
         FROM don_hang
         WHERE ma_don_hang = ?
@@ -878,137 +902,138 @@ public class DonHangDAO {
         LIMIT 1
     """;
 
-    try {
-        conn = DBConnection.getConnection();
-        conn.setAutoCommit(false);
+        try {
+            conn = DBConnection.getConnection();
+            conn.setAutoCommit(false);
 
-        int updatedOrder;
+            int updatedOrder;
 
-        try (PreparedStatement ps = conn.prepareStatement(sqlUpdateOrder)) {
-            ps.setInt(1, maDonHang);
-            ps.setInt(2, maNguoiDung);
-            updatedOrder = ps.executeUpdate();
-        }
-
-        if (updatedOrder <= 0) {
-            conn.rollback();
-            return false;
-        }
-
-        // 1. Hoàn tồn kho sản phẩm
-        try (PreparedStatement psSelect = conn.prepareStatement(sqlSelectChiTiet);
-             PreparedStatement psRestore = conn.prepareStatement(sqlRestoreStock)) {
-
-            psSelect.setInt(1, maDonHang);
-
-            try (ResultSet rs = psSelect.executeQuery()) {
-                while (rs.next()) {
-                    int soLuong = rs.getInt("so_luong");
-                    int maBienThe = rs.getInt("ma_bien_the");
-
-                    psRestore.setInt(1, soLuong);
-                    psRestore.setInt(2, maBienThe);
-                    psRestore.addBatch();
-                }
+            try (PreparedStatement ps = conn.prepareStatement(sqlUpdateOrder)) {
+                ps.setInt(1, maDonHang);
+                ps.setInt(2, maNguoiDung);
+                updatedOrder = ps.executeUpdate();
             }
 
-            psRestore.executeBatch();
-        }
-
-        // 2. Lấy đúng ID mã giảm giá từ đơn
-        Integer maGiamGiaId = null;
-
-        try (PreparedStatement ps = conn.prepareStatement(sqlSelectVoucherId)) {
-            ps.setInt(1, maDonHang);
-            ps.setInt(2, maNguoiDung);
-
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    int value = rs.getInt("ma_giam_gia");
-                    if (!rs.wasNull()) {
-                        maGiamGiaId = value;
-                    }
-                }
-            }
-        }
-
-        // 3. Hoàn trạng thái mã cho user + ghi lịch sử hoàn mã
-        if (maGiamGiaId != null) {
-            MaGiamGiaDAO maGiamGiaDAO = new MaGiamGiaDAO();
-
-            boolean hoanMaOk = maGiamGiaDAO.xuLyHoanMaKhiHuyDon(
-                    maNguoiDung,
-                    maGiamGiaId,
-                    maDonHang,
-                    conn
-            );
-
-            if (!hoanMaOk) {
+            if (updatedOrder <= 0) {
                 conn.rollback();
                 return false;
             }
-        }
 
-        conn.commit();
-        return true;
+            // 1. Hoàn tồn kho sản phẩm
+            try (PreparedStatement psSelect = conn.prepareStatement(sqlSelectChiTiet); PreparedStatement psRestore = conn.prepareStatement(sqlRestoreStock)) {
 
-    } catch (Exception e) {
-        e.printStackTrace();
-        try {
-            if (conn != null) conn.rollback();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return false;
-    } finally {
-        try {
-            if (conn != null) {
-                conn.setAutoCommit(true);
-                conn.close();
+                psSelect.setInt(1, maDonHang);
+
+                try (ResultSet rs = psSelect.executeQuery()) {
+                    while (rs.next()) {
+                        int soLuong = rs.getInt("so_luong");
+                        int maBienThe = rs.getInt("ma_bien_the");
+
+                        psRestore.setInt(1, soLuong);
+                        psRestore.setInt(2, maBienThe);
+                        psRestore.addBatch();
+                    }
+                }
+
+                psRestore.executeBatch();
             }
+
+            // 2. Lấy đúng ID mã giảm giá từ đơn
+            Integer maGiamGiaId = null;
+
+            try (PreparedStatement ps = conn.prepareStatement(sqlSelectVoucherId)) {
+                ps.setInt(1, maDonHang);
+                ps.setInt(2, maNguoiDung);
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        int value = rs.getInt("ma_giam_gia");
+                        if (!rs.wasNull()) {
+                            maGiamGiaId = value;
+                        }
+                    }
+                }
+            }
+
+            // 3. Hoàn trạng thái mã cho user + ghi lịch sử hoàn mã
+            if (maGiamGiaId != null) {
+                MaGiamGiaDAO maGiamGiaDAO = new MaGiamGiaDAO();
+
+                boolean hoanMaOk = maGiamGiaDAO.xuLyHoanMaKhiHuyDon(
+                        maNguoiDung,
+                        maGiamGiaId,
+                        maDonHang,
+                        conn
+                );
+
+                if (!hoanMaOk) {
+                    conn.rollback();
+                    return false;
+                }
+            }
+
+            conn.commit();
+            return true;
+
         } catch (Exception e) {
             e.printStackTrace();
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            return false;
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.setAutoCommit(true);
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-}
-    
+
     private boolean xuLyTienSauThanhToan(Connection conn, int maDonHang) throws Exception {
 
-    // 1. Lấy tổng tiền đơn
-    String sqlGetTien = """
+        // 1. Lấy tổng tiền đơn
+        String sqlGetTien = """
         SELECT tong_thanh_toan
         FROM don_hang
         WHERE ma_don_hang = ?
     """;
 
-    double tongTien = 0;
+        double tongTien = 0;
 
-    try (PreparedStatement ps = conn.prepareStatement(sqlGetTien)) {
-        ps.setInt(1, maDonHang);
-        ResultSet rs = ps.executeQuery();
+        try (PreparedStatement ps = conn.prepareStatement(sqlGetTien)) {
+            ps.setInt(1, maDonHang);
+            ResultSet rs = ps.executeQuery();
 
-        if (rs.next()) {
-            tongTien = rs.getDouble("tong_thanh_toan");
-        } else {
-            throw new Exception("Không tìm thấy đơn hàng");
+            if (rs.next()) {
+                tongTien = rs.getDouble("tong_thanh_toan");
+            } else {
+                throw new Exception("Không tìm thấy đơn hàng");
+            }
         }
-    }
 
-    // 2. Cộng vào quỹ vốn
-    String sqlUpdateQuy = """
+        // 2. Cộng vào quỹ vốn
+        String sqlUpdateQuy = """
         UPDATE quy_von_shop
         SET so_du_hien_tai = so_du_hien_tai + ?,
             ngay_cap_nhat = NOW()
         WHERE ma_quy_von = 1
     """;
 
-    try (PreparedStatement ps = conn.prepareStatement(sqlUpdateQuy)) {
-        ps.setDouble(1, tongTien);
-        ps.executeUpdate();
-    }
+        try (PreparedStatement ps = conn.prepareStatement(sqlUpdateQuy)) {
+            ps.setDouble(1, tongTien);
+            ps.executeUpdate();
+        }
 
-    // 3. Ghi lịch sử vốn
-    String sqlInsertLichSu = """
+        // 3. Ghi lịch sử vốn
+        String sqlInsertLichSu = """
         INSERT INTO lich_su_von_shop(
             so_tien,
             loai,
@@ -1018,14 +1043,14 @@ public class DonHangDAO {
         VALUES (?, 'cong', ?, NOW())
     """;
 
-    try (PreparedStatement ps = conn.prepareStatement(sqlInsertLichSu)) {
-        ps.setDouble(1, tongTien);
-        ps.setString(2, "Doanh thu đơn #" + maDonHang);
-        ps.executeUpdate();
-    }
+        try (PreparedStatement ps = conn.prepareStatement(sqlInsertLichSu)) {
+            ps.setDouble(1, tongTien);
+            ps.setString(2, "Doanh thu đơn #" + maDonHang);
+            ps.executeUpdate();
+        }
 
-    // 4. Ghi doanh thu
-    String sqlInsertDoanhThu = """
+        // 4. Ghi doanh thu
+        String sqlInsertDoanhThu = """
         INSERT INTO doanh_thu_shop(
             ma_don_hang,
             tong_tien_don_hang,
@@ -1034,20 +1059,20 @@ public class DonHangDAO {
         VALUES (?, ?, ?)
     """;
 
-    try (PreparedStatement ps = conn.prepareStatement(sqlInsertDoanhThu)) {
-        ps.setInt(1, maDonHang);
-        ps.setDouble(2, tongTien);
-        ps.setString(3, "Đơn hàng đã thanh toán");
-        ps.executeUpdate();
+        try (PreparedStatement ps = conn.prepareStatement(sqlInsertDoanhThu)) {
+            ps.setInt(1, maDonHang);
+            ps.setDouble(2, tongTien);
+            ps.setString(3, "Đơn hàng đã thanh toán");
+            ps.executeUpdate();
+        }
+
+        return true;
     }
 
-    return true;
-}
-    
     public List<DonHang> getTatCaDonHangChoAdmin() {
-    List<DonHang> list = new ArrayList<>();
+        List<DonHang> list = new ArrayList<>();
 
-    String sql = """
+        String sql = """
         SELECT 
             dh.ma_don_hang,
             dh.ma_nguoi_dung,
@@ -1077,64 +1102,64 @@ public class DonHangDAO {
         ORDER BY dh.ngay_dat DESC, dh.ma_don_hang DESC
     """;
 
-    try (Connection conn = DBConnection.getConnection();
-         PreparedStatement ps = conn.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
-        while (rs.next()) {
-            DonHang item = new DonHang();
+            while (rs.next()) {
+                DonHang item = new DonHang();
 
-            item.setMaDonHang(rs.getInt("ma_don_hang"));
-            item.setMaNguoiDung(rs.getInt("ma_nguoi_dung"));
+                item.setMaDonHang(rs.getInt("ma_don_hang"));
+                item.setMaNguoiDung(rs.getInt("ma_nguoi_dung"));
 
-            try {
-                item.setTenNguoiDung(rs.getString("ten_nguoi_dung"));
-            } catch (Exception ignored) {}
+                try {
+                    item.setTenNguoiDung(rs.getString("ten_nguoi_dung"));
+                } catch (Exception ignored) {
+                }
 
-            try {
-                item.setEmailNguoiDung(rs.getString("email"));
-            } catch (Exception ignored) {}
+                try {
+                    item.setEmailNguoiDung(rs.getString("email"));
+                } catch (Exception ignored) {
+                }
 
-            item.setHoTenNguoiNhan(rs.getString("ho_ten_nguoi_nhan"));
-            item.setSoDienThoaiNguoiNhan(rs.getString("so_dien_thoai_nguoi_nhan"));
-            item.setDiaChiGiaoHang(rs.getString("dia_chi_giao_hang"));
-            item.setTongTienHang(rs.getDouble("tong_tien_hang"));
-            item.setPhiVanChuyen(rs.getDouble("phi_van_chuyen"));
-            item.setGiamGia(rs.getDouble("giam_gia"));
-            item.setTongThanhToan(rs.getDouble("tong_thanh_toan"));
-            item.setPhuongThucThanhToan(rs.getString("phuong_thuc_thanh_toan"));
-            item.setTrangThaiThanhToan(rs.getString("trang_thai_thanh_toan"));
-            item.setTrangThaiDonHang(rs.getString("trang_thai_don_hang"));
+                item.setHoTenNguoiNhan(rs.getString("ho_ten_nguoi_nhan"));
+                item.setSoDienThoaiNguoiNhan(rs.getString("so_dien_thoai_nguoi_nhan"));
+                item.setDiaChiGiaoHang(rs.getString("dia_chi_giao_hang"));
+                item.setTongTienHang(rs.getDouble("tong_tien_hang"));
+                item.setPhiVanChuyen(rs.getDouble("phi_van_chuyen"));
+                item.setGiamGia(rs.getDouble("giam_gia"));
+                item.setTongThanhToan(rs.getDouble("tong_thanh_toan"));
+                item.setPhuongThucThanhToan(rs.getString("phuong_thuc_thanh_toan"));
+                item.setTrangThaiThanhToan(rs.getString("trang_thai_thanh_toan"));
+                item.setTrangThaiDonHang(rs.getString("trang_thai_don_hang"));
 
-            int maGiamGia = rs.getInt("ma_giam_gia");
-            if (rs.wasNull()) {
-                item.setMaGiamGia(null);
-            } else {
-                item.setMaGiamGia(maGiamGia);
+                int maGiamGia = rs.getInt("ma_giam_gia");
+                if (rs.wasNull()) {
+                    item.setMaGiamGia(null);
+                } else {
+                    item.setMaGiamGia(maGiamGia);
+                }
+
+                item.setMaCode(rs.getString("ma_code"));
+                item.setGhiChu(rs.getString("ghi_chu"));
+                item.setNgayDat(rs.getTimestamp("ngay_dat"));
+                item.setNgayXacNhan(rs.getTimestamp("ngay_xac_nhan"));
+                item.setNgayBatDauGiao(rs.getTimestamp("ngay_bat_dau_giao"));
+                item.setNgayGiaoDuKien(rs.getTimestamp("ngay_giao_du_kien"));
+                item.setNgayDaGiao(rs.getTimestamp("ngay_giao_thanh_cong"));
+
+                list.add(item);
             }
 
-            item.setMaCode(rs.getString("ma_code"));
-            item.setGhiChu(rs.getString("ghi_chu"));
-            item.setNgayDat(rs.getTimestamp("ngay_dat"));
-            item.setNgayXacNhan(rs.getTimestamp("ngay_xac_nhan"));
-            item.setNgayBatDauGiao(rs.getTimestamp("ngay_bat_dau_giao"));
-            item.setNgayGiaoDuKien(rs.getTimestamp("ngay_giao_du_kien"));
-            item.setNgayDaGiao(rs.getTimestamp("ngay_giao_thanh_cong"));
-
-            list.add(item);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-    } catch (Exception e) {
-        e.printStackTrace();
+        return list;
     }
 
-    return list;
-}
+    public List<DonHang> getLichSuDonHangChoAdmin() {
+        List<DonHang> list = new ArrayList<>();
 
-public List<DonHang> getLichSuDonHangChoAdmin() {
-    List<DonHang> list = new ArrayList<>();
-
-    String sql = """
+        String sql = """
         SELECT 
             dh.ma_don_hang,
             dh.ma_nguoi_dung,
@@ -1162,63 +1187,63 @@ public List<DonHang> getLichSuDonHangChoAdmin() {
             dh.ma_don_hang DESC
     """;
 
-    try (Connection conn = DBConnection.getConnection();
-         PreparedStatement ps = conn.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
-        while (rs.next()) {
-            DonHang item = new DonHang();
+            while (rs.next()) {
+                DonHang item = new DonHang();
 
-            item.setMaDonHang(rs.getInt("ma_don_hang"));
-            item.setMaNguoiDung(rs.getInt("ma_nguoi_dung"));
+                item.setMaDonHang(rs.getInt("ma_don_hang"));
+                item.setMaNguoiDung(rs.getInt("ma_nguoi_dung"));
 
-            try {
-                item.setTenNguoiDung(rs.getString("ten_nguoi_dung"));
-            } catch (Exception ignored) {}
+                try {
+                    item.setTenNguoiDung(rs.getString("ten_nguoi_dung"));
+                } catch (Exception ignored) {
+                }
 
-            try {
-                item.setEmailNguoiDung(rs.getString("email"));
-            } catch (Exception ignored) {}
+                try {
+                    item.setEmailNguoiDung(rs.getString("email"));
+                } catch (Exception ignored) {
+                }
 
-            item.setHoTenNguoiNhan(rs.getString("ho_ten_nguoi_nhan"));
-            item.setSoDienThoaiNguoiNhan(rs.getString("so_dien_thoai_nguoi_nhan"));
-            item.setDiaChiGiaoHang(rs.getString("dia_chi_giao_hang"));
-            item.setTongThanhToan(rs.getDouble("tong_thanh_toan"));
-            item.setPhuongThucThanhToan(rs.getString("phuong_thuc_thanh_toan"));
-            item.setTrangThaiThanhToan(rs.getString("trang_thai_thanh_toan"));
-            item.setTrangThaiDonHang(rs.getString("trang_thai_don_hang"));
-            item.setNgayDat(rs.getTimestamp("ngay_dat"));
-            item.setNgayXacNhan(rs.getTimestamp("ngay_xac_nhan"));
-            item.setNgayBatDauGiao(rs.getTimestamp("ngay_bat_dau_giao"));
-            item.setNgayDaGiao(rs.getTimestamp("ngay_giao_thanh_cong"));
+                item.setHoTenNguoiNhan(rs.getString("ho_ten_nguoi_nhan"));
+                item.setSoDienThoaiNguoiNhan(rs.getString("so_dien_thoai_nguoi_nhan"));
+                item.setDiaChiGiaoHang(rs.getString("dia_chi_giao_hang"));
+                item.setTongThanhToan(rs.getDouble("tong_thanh_toan"));
+                item.setPhuongThucThanhToan(rs.getString("phuong_thuc_thanh_toan"));
+                item.setTrangThaiThanhToan(rs.getString("trang_thai_thanh_toan"));
+                item.setTrangThaiDonHang(rs.getString("trang_thai_don_hang"));
+                item.setNgayDat(rs.getTimestamp("ngay_dat"));
+                item.setNgayXacNhan(rs.getTimestamp("ngay_xac_nhan"));
+                item.setNgayBatDauGiao(rs.getTimestamp("ngay_bat_dau_giao"));
+                item.setNgayDaGiao(rs.getTimestamp("ngay_giao_thanh_cong"));
 
-            list.add(item);
+                list.add(item);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-    } catch (Exception e) {
-        e.printStackTrace();
+        return list;
     }
 
-    return list;
-}
-
-public int countDonHangDaGiao() {
-    String sql = """
+    public int countDonHangDaGiao() {
+        String sql = """
         SELECT COUNT(*) 
         FROM don_hang
         WHERE trang_thai_don_hang = 'da_giao'
     """;
 
-    try (Connection conn = DBConnection.getConnection();
-         PreparedStatement ps = conn.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
-        if (rs.next()) return rs.getInt(1);
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
 
-    } catch (Exception e) {
-        e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
-
-    return 0;
-}
 }

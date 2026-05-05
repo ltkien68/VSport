@@ -19,8 +19,6 @@ import java.util.List;
 
 @WebServlet(name = "TaoDonHangServlet", urlPatterns = {"/don_hang/tao"})
 public class TaoDonHangServlet extends HttpServlet {
-    
-    
 
     private final GioHangDAO gioHangDAO = new GioHangDAO();
     private final MaGiamGiaDAO maGiamGiaDAO = new MaGiamGiaDAO();
@@ -31,10 +29,10 @@ public class TaoDonHangServlet extends HttpServlet {
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
-        
+
         System.out.println("maGiamGia raw = " + request.getParameter("maGiamGia"));
-System.out.println("maPtvc raw = " + request.getParameter("maPtvc"));
-System.out.println("phiVanChuyen raw = " + request.getParameter("phiVanChuyen"));
+        System.out.println("maPtvc raw = " + request.getParameter("maPtvc"));
+        System.out.println("phiVanChuyen raw = " + request.getParameter("phiVanChuyen"));
 
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("nguoiDung") == null) {

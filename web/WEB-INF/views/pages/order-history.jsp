@@ -152,19 +152,27 @@
                                                                 </p>
                                                                 <p class="order-product-qty">Số lượng: ${ct.soLuong}</p>
 
-                                                                <c:if test="${not empty ct.tenInAo or not empty ct.soInAo}">
-                                                                    <div class="order-print-note">
-                                                                        <span>In áo:</span>
+                                                                <div class="order-print-info">
+                                                                    <c:if test="${not empty ct.tenInAo or not empty ct.soInAo}">
+                                                                        <div class="order-print-row">
+                                                                            <span class="order-print-label">In áo:</span>
 
-                                                                        <c:if test="${not empty ct.tenInAo}">
-                                                                            <span>Tên: <strong>${ct.tenInAo}</strong></span>
-                                                                        </c:if>
+                                                                            <c:choose>
+                                                                                <c:when test="${not empty ct.tenInAo and not empty ct.soInAo}">
+                                                                                    <span class="order-print-value">${ct.tenInAo} - #${ct.soInAo}</span>
+                                                                                </c:when>
 
-                                                                        <c:if test="${not empty ct.soInAo}">
-                                                                            <span>Số: <strong>${ct.soInAo}</strong></span>
-                                                                        </c:if>
-                                                                    </div>
-                                                                </c:if>
+                                                                                <c:when test="${not empty ct.tenInAo}">
+                                                                                    <span class="order-print-value">${ct.tenInAo}</span>
+                                                                                </c:when>
+
+                                                                                <c:when test="${not empty ct.soInAo}">
+                                                                                    <span class="order-print-value">${ct.soInAo}</span>
+                                                                                </c:when>
+                                                                            </c:choose>
+                                                                        </div>
+                                                                    </c:if>
+                                                                </div>
                                                             </div>
                                                         </div>
 
@@ -326,7 +334,7 @@
         </script>
 
         <script>
-    window.contextPath = "${pageContext.request.contextPath}";
+            window.contextPath = "${pageContext.request.contextPath}";
         </script>
         <script src="${pageContext.request.contextPath}/assets/js/common/scroll-reveal.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/components/search-popup.js"></script>
