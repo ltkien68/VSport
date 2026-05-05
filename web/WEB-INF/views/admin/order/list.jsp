@@ -125,7 +125,21 @@
                                                                 <div class="admin-order-product-name">${ct.tenSanPham}</div>
                                                                 <div class="admin-order-product-meta">
                                                                     <span>Size: ${empty ct.tenSize ? '-' : ct.tenSize}</span>
-                                                                    <span>SL: ${ct.soLuong}</span>
+
+                                                                    <span>
+                                                                        SL: ${ct.soLuong}
+                                                                        <span class="admin-order-print-inline ${empty ct.tenInAo and empty ct.soInAo ? 'no-print' : 'has-print'}">
+                                                                            <c:choose>
+                                                                                <c:when test="${not empty ct.tenInAo or not empty ct.soInAo}">
+                                                                                    (${ct.tenInAo}${not empty ct.soInAo ? ' - ' : ''}${ct.soInAo})
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                    (Không in)
+                                                                                </c:otherwise>
+                                                                            </c:choose>
+                                                                        </span>
+                                                                    </span>
+
                                                                     <span>Đơn giá:
                                                                         <fmt:formatNumber value="${ct.giaMua}" type="number" groupingUsed="true" maxFractionDigits="0"/>đ
                                                                     </span>
@@ -274,8 +288,22 @@
                                                         <c:forEach var="ct" items="${mapChiTietLichSu[donHang.maDonHang]}">
                                                             <div class="history-detail-product-item">
                                                                 <span>${ct.tenSanPham}</span>
+
                                                                 <span>Size: ${empty ct.tenSize ? '-' : ct.tenSize}</span>
+
                                                                 <span>SL: ${ct.soLuong}</span>
+
+                                                                <span>
+                                                                    <c:choose>
+                                                                        <c:when test="${not empty ct.tenInAo or not empty ct.soInAo}">
+                                                                            ${ct.tenInAo}${not empty ct.soInAo ? ' - ' : ''}${ct.soInAo}
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            Không in
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </span>
+
                                                                 <span>
                                                                     <fmt:formatNumber value="${ct.thanhTien}" type="number" groupingUsed="true" maxFractionDigits="0"/>đ
                                                                 </span>
@@ -297,7 +325,7 @@
         </div>
 
         <script>
-    window.contextPath = "${pageContext.request.contextPath}";
+            window.contextPath = "${pageContext.request.contextPath}";
         </script>
         <script src="${pageContext.request.contextPath}/assets/js/admin/admin-order-management.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/admin/admin-dashboard.js"></script>

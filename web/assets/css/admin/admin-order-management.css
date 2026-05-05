@@ -323,6 +323,21 @@
     color: var(--color-gray-600);
 }
 
+.admin-order-print-inline {
+    margin-left: 6px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.admin-order-print-inline.has-print {
+    color: var(--color-red);
+}
+
+.admin-order-print-inline.no-print {
+    color: var(--color-gray-400);
+    font-style: italic;
+}
+
 .admin-order-product-right {
     white-space: nowrap;
     color: var(--color-black);
@@ -485,7 +500,7 @@
 
 .history-detail-product-item {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr;
     gap: var(--space-2);
     padding: var(--space-3);
     background: var(--color-white);
@@ -494,6 +509,19 @@
     font-family: var(--font-body);
     font-size: var(--text-sm);
     color: var(--color-black);
+}
+
+.history-detail-product-item span:nth-child(4) {
+    font-weight: 500;
+}
+
+.history-detail-product-item span:nth-child(4):not(:contains("Không in")) {
+    color: var(--color-red);
+}
+
+.history-detail-product-item span:nth-child(4):contains("Không in") {
+    color: var(--color-gray-400);
+    font-style: italic;
 }
 
 @media (max-width: 1200px) {

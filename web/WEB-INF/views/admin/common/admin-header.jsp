@@ -21,10 +21,10 @@
     <div class="admin-topbar-right">
         <button class="admin-icon-btn" type="button"><i data-lucide="bell"></i></button>
         <button 
-    class="admin-icon-btn" 
-    type="button"
-    onclick="window.location.href='${pageContext.request.contextPath}/dang_xuat'">
-    <i data-lucide="log-out"></i>
-</button>
+            class="admin-icon-btn" 
+            type="button"
+            onclick="window.location.href = '${pageContext.request.contextPath}/dang_xuat'">
+            <i data-lucide="log-out"></i>
+        </button>
     </div>
 </header>

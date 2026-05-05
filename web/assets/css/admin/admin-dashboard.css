@@ -535,6 +535,13 @@
 .admin-topbar-right .admin-icon-btn {
     border: none;
     background: none;
+    cursor: pointer;
+    
+    transition: color 0.25 ease; 
+}
+
+.admin-topbar-right .admin-icon-btn:hover {
+    color: var(--color-red);
 }
 
 .admin-topbar-right .admin-icon-btn .lucide {
