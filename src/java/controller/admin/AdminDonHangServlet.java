@@ -64,6 +64,18 @@ public class AdminDonHangServlet extends HttpServlet {
         mapThanhToan.put("chua_thanh_toan", "Chưa thanh toán");
         mapThanhToan.put("da_thanh_toan", "Đã thanh toán");
 
+        int soDonDangXuLy = 0;
+
+        for (DonHang dh : dsDonHang) {
+            String ttDon = dh.getTrangThaiDonHang();
+
+            if (!"da_giao".equals(ttDon)
+                    && !"da_huy".equals(ttDon)) {
+                soDonDangXuLy++;
+            }
+        }
+
+        request.setAttribute("soDonDangXuLy", soDonDangXuLy);
         request.setAttribute("dsDonHang", dsDonHang);
         request.setAttribute("dsLichSuDonHang", dsLichSuDonHang);
         request.setAttribute("mapChiTiet", mapChiTiet);

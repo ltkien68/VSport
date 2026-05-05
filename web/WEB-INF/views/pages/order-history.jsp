@@ -159,7 +159,7 @@
 
                                                                             <c:choose>
                                                                                 <c:when test="${not empty ct.tenInAo and not empty ct.soInAo}">
-                                                                                    <span class="order-print-value">${ct.tenInAo} - #${ct.soInAo}</span>
+                                                                                    <span class="order-print-value">${ct.tenInAo} - ${ct.soInAo}</span>
                                                                                 </c:when>
 
                                                                                 <c:when test="${not empty ct.tenInAo}">
