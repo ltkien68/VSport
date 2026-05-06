@@ -28,16 +28,20 @@ public class DashboardWeeklyStatsDAO {
 
     private List<ThongKeTuan> getDonHangTheoTuan() {
         String sql = """
-            SELECT 
-                YEARWEEK(ngay_dat, 1) AS ma_tuan,
-                MIN(DATE(ngay_dat)) AS tu_ngay,
-                MAX(DATE(ngay_dat)) AS den_ngay,
-                COUNT(*) AS gia_tri
-            FROM don_hang
-            WHERE trang_thai_don_hang = 'da_giao'
-            GROUP BY YEARWEEK(ngay_dat, 1)
+            SELECT *
+            FROM (
+                SELECT 
+                    YEARWEEK(ngay_dat, 1) AS ma_tuan,
+                    MIN(DATE(ngay_dat)) AS tu_ngay,
+                    MAX(DATE(ngay_dat)) AS den_ngay,
+                    COUNT(*) AS gia_tri
+                FROM don_hang
+                WHERE trang_thai_don_hang = 'da_giao'
+                GROUP BY YEARWEEK(ngay_dat, 1)
+                ORDER BY ma_tuan DESC
+                LIMIT 8
+            ) recent_weeks
             ORDER BY ma_tuan ASC
-            LIMIT 8
         """;
 
         return queryWeeklyStats(sql);
@@ -45,16 +49,20 @@ public class DashboardWeeklyStatsDAO {
 
     private List<ThongKeTuan> getDoanhThuTheoTuan() {
         String sql = """
-            SELECT 
-                YEARWEEK(ngay_dat, 1) AS ma_tuan,
-                MIN(DATE(ngay_dat)) AS tu_ngay,
-                MAX(DATE(ngay_dat)) AS den_ngay,
-                SUM(tong_thanh_toan) AS gia_tri
-            FROM don_hang
-            WHERE trang_thai_don_hang = 'da_giao'
-            GROUP BY YEARWEEK(ngay_dat, 1)
+            SELECT *
+            FROM (
+                SELECT 
+                    YEARWEEK(ngay_dat, 1) AS ma_tuan,
+                    MIN(DATE(ngay_dat)) AS tu_ngay,
+                    MAX(DATE(ngay_dat)) AS den_ngay,
+                    SUM(tong_thanh_toan) AS gia_tri
+                FROM don_hang
+                WHERE trang_thai_don_hang = 'da_giao'
+                GROUP BY YEARWEEK(ngay_dat, 1)
+                ORDER BY ma_tuan DESC
+                LIMIT 8
+            ) recent_weeks
             ORDER BY ma_tuan ASC
-            LIMIT 8
         """;
 
         return queryWeeklyStats(sql);
@@ -103,16 +111,20 @@ public class DashboardWeeklyStatsDAO {
 
     private List<ThongKeTuan> getThanhVienTheoTuan() {
         String sql = """
-            SELECT 
-                YEARWEEK(ngay_tao, 1) AS ma_tuan,
-                MIN(DATE(ngay_tao)) AS tu_ngay,
-                MAX(DATE(ngay_tao)) AS den_ngay,
-                COUNT(*) AS gia_tri
-            FROM nguoi_dung
-            WHERE vai_tro = 'khach_hang'
-            GROUP BY YEARWEEK(ngay_tao, 1)
+            SELECT *
+            FROM (
+                SELECT 
+                    YEARWEEK(ngay_tao, 1) AS ma_tuan,
+                    MIN(DATE(ngay_tao)) AS tu_ngay,
+                    MAX(DATE(ngay_tao)) AS den_ngay,
+                    COUNT(*) AS gia_tri
+                FROM nguoi_dung
+                WHERE vai_tro = 'khach_hang'
+                GROUP BY YEARWEEK(ngay_tao, 1)
+                ORDER BY ma_tuan DESC
+                LIMIT 8
+            ) recent_weeks
             ORDER BY ma_tuan ASC
-            LIMIT 8
         """;
 
         return queryWeeklyStats(sql);

@@ -41,37 +41,37 @@
 
     <div class="pd-accordion-item" id="pd-reviews">
         <button class="pd-accordion-header active" type="button">
-            <span>Đánh giá (<%= spAcc.getSoLuongDanhGia() %>)</span>
+            <span>Đánh giá (<%= spAcc.getSoLuongDanhGia()%>)</span>
             <span class="pd-accordion-right">
                 <span class="pd-rating-stars">
-    <%= renderStars(spAcc.getDiemTrungBinh()) %>
-    <span class="pd-rating-number"><%= String.format("%.1f", spAcc.getDiemTrungBinh()) %></span>
-</span>
+                    <%= renderStars(spAcc.getDiemTrungBinh())%>
+                    <span class="pd-rating-number"><%= String.format("%.1f", spAcc.getDiemTrungBinh())%></span>
+                </span>
                 <i data-lucide="chevron-down" class="pd-arrow"></i>
             </span>
         </button>
         <div class="pd-accordion-body show">
             <% if (dsDanhGia != null && !dsDanhGia.isEmpty()) { %>
-                <% for (DanhGiaSanPham dg : dsDanhGia) { %>
-                    <div class="pd-review-item">
-                        <div class="pd-review-top">
-                            <strong><%= dg.getTenNguoiDung() != null ? dg.getTenNguoiDung() : "Người dùng" %></strong>
-                            <span class="pd-review-stars-wrap">
-    <span class="pd-review-stars">
-        <%= renderStars(dg.getSoSao()) %>
-    </span>
-    <span class="pd-review-score"><%= String.format("%.1f", dg.getSoSao()) %></span>
-</span>
-                        </div>
-                        <div class="pd-review-date"><%= dg.getNgayDanhGia() %></div>
-                        <div class="pd-review-content">
-                            <%= dg.getNoiDung() != null ? dg.getNoiDung() : "Người dùng chưa để lại nội dung." %>
-                        </div>
-                    </div>
-                <% } %>
-            <% } else { %>
-                <div class="pd-empty-content">Chưa có đánh giá nào. Hiện tại tạm mặc định sản phẩm đang đẹp trai 5 sao.</div>
+            <% for (DanhGiaSanPham dg : dsDanhGia) {%>
+            <div class="pd-review-item">
+                <div class="pd-review-top">
+                    <strong><%= dg.getTenNguoiDung() != null ? dg.getTenNguoiDung() : "Người dùng"%></strong>
+                    <span class="pd-review-stars-wrap">
+                        <span class="pd-review-stars">
+                            <%= renderStars(dg.getSoSao())%>
+                        </span>
+                        <span class="pd-review-score"><%= String.format("%.1f", dg.getSoSao())%></span>
+                    </span>
+                </div>
+                <div class="pd-review-date"><%= dg.getNgayDanhGia()%></div>
+                <div class="pd-review-content">
+                    <%= dg.getNoiDung() != null ? dg.getNoiDung() : "Người dùng chưa để lại nội dung."%>
+                </div>
+            </div>
             <% } %>
+            <% } else { %>
+            <div class="pd-empty-content">Chưa có đánh giá nào. Hiện tại tạm mặc định sản phẩm đang đẹp trai 5 sao.</div>
+            <% }%>
         </div>
     </div>
 
@@ -84,7 +84,7 @@
             <div class="pd-accordion-content">
                 <%= (ct != null && ct.getThuocTinh1() != null && ct.getThuocTinh1().trim().equalsIgnoreCase("Kích cỡ và độ vừa vặn"))
                         ? (ct.getGiaTri1() != null ? ct.getGiaTri1() : "")
-                        : "Thông tin đang được cập nhật." %>
+                        : "Thông tin đang được cập nhật."%>
             </div>
         </div>
     </div>
@@ -96,7 +96,7 @@
         </button>
         <div class="pd-accordion-body">
             <div class="pd-accordion-content">
-                <%= spAcc.getMoTaNgan() != null ? spAcc.getMoTaNgan() : "Chưa có mô tả." %>
+                <%= spAcc.getMoTaNgan() != null ? spAcc.getMoTaNgan() : "Chưa có mô tả."%>
             </div>
         </div>
     </div>
@@ -108,9 +108,35 @@
         </button>
         <div class="pd-accordion-body">
             <div class="pd-accordion-content">
-                <%= (ct != null && ct.getThuocTinh2() != null && ct.getThuocTinh2().trim().equalsIgnoreCase("Thông tin chi tiết"))
-                        ? (ct.getGiaTri2() != null ? ct.getGiaTri2() : "")
-                        : (spAcc.getMoTaChiTiet() != null ? spAcc.getMoTaChiTiet() : "Thông tin đang được cập nhật.") %>
+
+                <%
+                    boolean hasDetail = false;
+                %>
+
+                <% if (ct != null && ct.getThuocTinh1() != null && ct.getGiaTri1() != null) {
+                        hasDetail = true;
+                %>
+                <p><strong><%= ct.getThuocTinh1()%>:</strong> <%= ct.getGiaTri1()%></p>
+                <% } %>
+
+                <% if (ct != null && ct.getThuocTinh2() != null && ct.getGiaTri2() != null) {
+                        hasDetail = true;
+                %>
+                <p><strong><%= ct.getThuocTinh2()%>:</strong> <%= ct.getGiaTri2()%></p>
+                <% } %>
+
+                <% if (ct != null && ct.getThuocTinh3() != null && ct.getGiaTri3() != null) {
+                        hasDetail = true;
+                %>
+                <p><strong><%= ct.getThuocTinh3()%>:</strong> <%= ct.getGiaTri3()%></p>
+                <% } %>
+
+                <% if (!hasDetail) {%>
+                <%="Thông tin đang được cập nhật."%>
+                <% }%>
+                
+                <%= spAcc.getMoTaChiTiet() != null ? spAcc.getMoTaChiTiet() : ""%>
+
             </div>
         </div>
     </div>
@@ -124,7 +150,7 @@
             <div class="pd-accordion-content">
                 <%= (ct != null && ct.getThuocTinh3() != null && ct.getThuocTinh3().trim().equalsIgnoreCase("Chăm sóc"))
                         ? (ct.getGiaTri3() != null ? ct.getGiaTri3() : "")
-                        : "Giặt ở nhiệt độ thấp, không dùng chất tẩy mạnh, phơi nơi thoáng mát." %>
+                        : "Giặt ở nhiệt độ thấp, không dùng chất tẩy mạnh, phơi nơi thoáng mát."%>
             </div>
         </div>
     </div>

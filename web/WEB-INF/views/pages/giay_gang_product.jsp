@@ -26,105 +26,109 @@
 
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/giay_gang_product.css">
-    <jsp:include page="/WEB-INF/views/common/head.jsp" />
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/giay_gang_product.css">
+        <jsp:include page="/WEB-INF/views/common/head.jsp" />
+    </head>
+    <body>
 
-<main class="club-products-page">
+        <main class="club-products-page">
 
-    <section class="club-hero club-hero-simple">
-        <div class="club-container">
-            <h1 class="club-title"><%= pageTitle %></h1>
-        </div>
-        <div class="club-hero-bottom-strip"></div>
-    </section>
+            <section class="club-hero club-hero-simple">
+                <div class="club-container">
+                    <h1 class="club-title"><%= pageTitle%></h1>
+                </div>
+                <div class="club-hero-bottom-strip"></div>
+            </section>
 
-    <%@ include file="/WEB-INF/views/common/giay_gang_product_nav.jsp" %>
+            <%@ include file="/WEB-INF/views/common/giay_gang_product_nav.jsp" %>
 
-    <section class="club-products-section">
-        <div class="club-container">
-            <div class="club-products-grid">
+            <section class="club-products-section">
+                <div class="club-container">
+                    <div class="club-products-grid">
 
-                <%
-                    if (danhSachSanPham != null) {
-                        for (int i = 0; i < danhSachSanPham.size(); i++) {
-                            SanPham sp = danhSachSanPham.get(i);
-                            boolean daThich = sanPhamDaThich.contains(sp.getMaSanPham());
-                %>
+                        <%                    if (danhSachSanPham != null) {
+                                for (int i = 0; i < danhSachSanPham.size(); i++) {
+                                    SanPham sp = danhSachSanPham.get(i);
+                                    boolean daThich = sanPhamDaThich.contains(sp.getMaSanPham());
+                        %>
 
-                <div class="club-product-card <%= (sp.getGiaKhuyenMai() > 0 && sp.getGiaKhuyenMai() > 0) ? "has-sale" : "" %>">
-                    <a href="${pageContext.request.contextPath}/chi-tiet-san-pham/<%= sp.getMaSanPham() %>" class="club-product-image-link">
-                        <div class="club-product-image-wrap">
+                        <div class="club-product-card <%= (sp.getGiaKhuyenMai() > 0 && sp.getGiaKhuyenMai() > 0) ? "has-sale" : ""%>">
+                            <a href="${pageContext.request.contextPath}/chi-tiet-san-pham/<%= sp.getMaSanPham()%>" class="club-product-image-link">
+                                <div class="club-product-image-wrap">
 
-                            <img src="${pageContext.request.contextPath}/<%= sp.getAnhChinh() %>"
-                                 alt="<%= sp.getTenSanPham() %>"
-                                 class="club-product-image club-product-image-primary">
+                                    <img src="${pageContext.request.contextPath}/<%= sp.getAnhChinh()%>"
+                                         alt="<%= sp.getTenSanPham()%>"
+                                         class="club-product-image club-product-image-primary">
 
-                            <img src="${pageContext.request.contextPath}/<%= sp.getAnhChinh() != null ? sp.getAnhChinh().replace("1.avif", "2.avif") : "" %>"
-                                 alt="<%= sp.getTenSanPham() %>"
-                                 class="club-product-image club-product-image-secondary">
+                                    <img src="${pageContext.request.contextPath}/<%= sp.getAnhChinh() != null ? sp.getAnhChinh().replace("1.avif", "2.avif") : ""%>"
+                                         alt="<%= sp.getTenSanPham()%>"
+                                         class="club-product-image club-product-image-secondary">
 
-                            <button
-                                class="favorite-btn <%= daThich ? "active" : "" %>"
-                                type="button"
-                                data-ma-san-pham="<%= sp.getMaSanPham() %>">
-                                <%= daThich ? "♥" : "♡" %>
-                            </button>
+                                    <button
+                                        class="favorite-btn <%= daThich ? "active" : ""%>"
+                                        type="button"
+                                        data-ma-san-pham="<%= sp.getMaSanPham()%>">
+                                        <%= daThich ? "♥" : "♡"%>
+                                    </button>
+                                </div>
+                            </a>
+
+                            <div class="club-product-info">
+                                <p class="club-product-price <%= (sp.getGiaKhuyenMai() > 0 && sp.getGiaKhuyenMai() > 0) ? "is-sale" : ""%>">
+
+                                    <% if (sp.getGiaKhuyenMai() > 0 && sp.getGiaKhuyenMai() > 0) {%>
+                                    <span class="club-product-price-old">
+                                        <%= String.format("%,.0f", sp.getGiaNiemYet())%>đ
+                                    </span>
+
+                                    <span class="club-product-price-sale">
+                                        <%= String.format("%,.0f", sp.getGiaSanPham())%>đ
+                                    </span>
+                                    <% } else {%>
+                                    <span class="club-product-price-normal">
+                                        <%= String.format("%,.0f", sp.getGiaSanPham())%>đ
+                                    </span>
+                                    <% }%>
+                                </p>
+
+                                <h3 class="club-product-name"><%= sp.getTenSanPham()%></h3>
+
+                                <p class="club-product-desc">
+                                    <%= sp.getMoTaNgan() != null ? sp.getMoTaNgan() : ""%>
+                                </p>
+                            </div>
                         </div>
-                    </a>
 
-                    <div class="club-product-info">
-                        <p class="club-product-price <%= (sp.getGiaKhuyenMai() > 0 && sp.getGiaKhuyenMai() > 0) ? "is-sale" : "" %>">
+                        <%
+                            java.util.Random rd = new java.util.Random();
 
-                            <% if (sp.getGiaKhuyenMai() > 0 && sp.getGiaKhuyenMai() > 0) { %>
-                                <span class="club-product-price-old">
-                                    <%= String.format("%,.0f", sp.getGiaNiemYet()) %>đ
-                                </span>
+                            if (((i + 1) % 8 == 0) && (i + 1) < danhSachSanPham.size()) {
 
-                                <span class="club-product-price-sale">
-                                    <%= String.format("%,.0f", sp.getGiaSanPham()) %>đ
-                                </span>
-                            <% } else { %>
-                                <span class="club-product-price-normal">
-                                    <%= String.format("%,.0f", sp.getGiaSanPham()) %>đ
-                                </span>
-                            <% } %>
-                        </p>
+                                int randomBanner = rd.nextInt(1) + 1;
+                        %>
+                        <div class="club-inline-banner">
+                            <img
+                                src="${pageContext.request.contextPath}/assets/images/banners/shoes-banners/<%= randomBanner%>.avif"
+                                alt="Football Banner"
+                                class="club-inline-banner-image">
+                        </div>
+                        <%
+                                    }
+                                }
+                            }
+                        %>
 
-                        <h3 class="club-product-name"><%= sp.getTenSanPham() %></h3>
-
-                        <p class="club-product-desc">
-                            <%= sp.getMoTaNgan() != null ? sp.getMoTaNgan() : "" %>
-                        </p>
                     </div>
                 </div>
+            </section>
 
-                <%
-                            if (((i + 1) % 8 == 0) && (i + 1) < danhSachSanPham.size()) {
-                %>
-                    <div class="club-inline-banner">
-                        <div class="club-inline-banner-inner">
-                            <span>🔥 PERFORMANCE FOOTBALL GEAR</span>
-                        </div>
-                    </div>
-                <%
-                            }
-                        }
-                    }
-                %>
+        </main>
 
-            </div>
-        </div>
-    </section>
-
-</main>
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 
 
-</body>
+    </body>
 </html>
