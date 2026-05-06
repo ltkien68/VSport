@@ -103,7 +103,7 @@
                 </div>
 
                 <%
-                            if ((i == 5 || i == 9 || i == 17) && (i + 1) < danhSachSanPham.size()) {
+                            if (((i + 1) % 8 == 0) && (i + 1) < danhSachSanPham.size()) {
                 %>
                     <div class="club-inline-banner">
                         <div class="club-inline-banner-inner">
