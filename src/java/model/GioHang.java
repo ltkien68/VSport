@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class GioHang {
 
     private int maGioHang;
@@ -15,6 +17,17 @@ public class GioHang {
     private String loaiPhienBan;
     private String tenInAo;
     private String soInAo;
+    private boolean hetHang;
+
+    private List<GioHang> dsQuaTang;
+
+    public List<GioHang> getDsQuaTang() {
+        return dsQuaTang;
+    }
+
+    public void setDsQuaTang(List<GioHang> dsQuaTang) {
+        this.dsQuaTang = dsQuaTang;
+    }
 
     public String getTenInAo() {
         return tenInAo;
@@ -118,5 +131,13 @@ public class GioHang {
 
     public void setNhomSanPham(String nhomSanPham) {
         this.nhomSanPham = nhomSanPham;
+    }
+    
+    public boolean isHetHang() {
+        return hetHang;
+    }
+
+    public void setHetHang(boolean hetHang) {
+        this.hetHang = hetHang;
     }
 }

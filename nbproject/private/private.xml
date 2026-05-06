@@ -238,6 +238,9 @@
             <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/js/pages/cart.js</file>
             <file>file:/D:/Code_files/VSPORT/VsportWeb/src/java/controller/CapNhatInAoServlet.java</file>
             <file>file:/D:/Code_files/VSPORT/VsportWeb/web/WEB-INF/views/admin/components/weekly-stats-popup.jsp</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/js/admin/weekly-stat-popup.js</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/src/java/controller/admin/AdminWeeklyStatsServlet.java</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/src/java/dao/DashboardWeeklyStatsDAO.java</file>
         </group>
     </open-files>
 </project-private>

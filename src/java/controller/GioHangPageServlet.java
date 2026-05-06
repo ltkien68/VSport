@@ -15,8 +15,6 @@ import java.util.List;
 
 @WebServlet(name = "GioHangPageServlet", urlPatterns = {"/gio_hang"})
 public class GioHangPageServlet extends HttpServlet {
-    
-    
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -26,7 +24,7 @@ public class GioHangPageServlet extends HttpServlet {
 
         if (userObj == null) {
             response.sendRedirect(request.getContextPath() + "/trang_chu");
-            
+
             return;
         }
 
@@ -36,6 +34,15 @@ public class GioHangPageServlet extends HttpServlet {
         GioHangDAO gioHangDAO = new GioHangDAO();
         List<GioHang> dsGioHang = gioHangDAO.getDanhSachGioHang(maNguoiDung);
         GioHangSum tongQuan = gioHangDAO.getTongQuanGioHang(maNguoiDung);
+
+        for (GioHang item : dsGioHang) {
+            List<GioHang> dsQua = gioHangDAO.layQuaTangTheoSanPham(
+                    item.getMaSanPham(),
+                    item.getSoLuong()
+            );
+
+            item.setDsQuaTang(dsQua);
+        }
 
         request.setAttribute("dsGioHang", dsGioHang);
         request.setAttribute("tongQuan", tongQuan);

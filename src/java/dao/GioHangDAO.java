@@ -1,5 +1,6 @@
 package dao;
 
+import java.math.BigDecimal;
 import model.GioHang;
 import model.GioHangSum;
 import model.SanPham;
@@ -448,6 +449,61 @@ public class GioHangDAO {
         }
 
         return 0;
+    }
+
+    public List<GioHang> layQuaTangTheoSanPham(int maSanPhamChinh, int soLuongMua) {
+        List<GioHang> ds = new ArrayList<>();
+
+        String sql = """
+            SELECT 
+                sp.ma_san_pham,
+                sp.ten_san_pham,
+                sp.anh_chinh,
+                qt.so_luong_qua,
+                bt.ma_bien_the,
+                sz.ten_size
+            FROM qua_tang_san_pham qt
+            JOIN san_pham sp ON qt.ma_san_pham_qua = sp.ma_san_pham
+            LEFT JOIN bien_the_san_pham bt 
+                  ON qt.ma_bien_the_qua = bt.ma_bien_the
+              
+              LEFT JOIN size_san_pham sz 
+                  ON bt.ma_size = sz.ma_size
+              
+              WHERE qt.ma_san_pham_chinh = ?
+                AND qt.trang_thai = 1
+                AND sp.trang_thai = 'dang_ban'
+                AND (
+                    (bt.so_luong_ton >= qt.so_luong_qua)
+                    OR (bt.ma_bien_the IS NULL AND sp.so_luong_ton > 0)
+                )
+        """;
+
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, maSanPhamChinh);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                GioHang q = new GioHang();
+                q.setMaSanPham(rs.getInt("ma_san_pham"));
+                q.setTenSanPham(rs.getString("ten_san_pham"));
+                q.setAnhChinh(rs.getString("anh_chinh"));
+                q.setSoLuong(rs.getInt("so_luong_qua") * soLuongMua);
+                if (rs.getInt("so_luong_ton") < rs.getInt("so_luong_qua")) {
+                    q.setHetHang(true);
+                }
+                q.setMaBienThe(rs.getInt("ma_bien_the"));
+                q.setTenSize(rs.getString("ten_size"));
+                q.setDonGia(0);
+                ds.add(q);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ds;
     }
 
 }
