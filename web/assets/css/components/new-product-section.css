@@ -120,20 +120,25 @@
 
 .new-product-badge {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    padding: 10px 20px;
-    background: var(--color-red);
-    color: var(--color-white);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-heading);
-    font-size: 14px;
-    font-weight: 800;
-    z-index: 2;
+    top: 10px;
+    right: 10px;
+
+    width: 78px;
+    height: auto;
+
+    z-index: 3;
     pointer-events: none;
+
+    object-fit: contain;
+
+    transform: rotate(8deg);
+    filter: drop-shadow(0 4px 10px rgba(225, 29, 72, 0.25));
+
+    transition: transform 0.3s ease;
+}
+
+.new-product-card:hover .new-product-badge {
+    transform: rotate(12deg) scale(1.06);
 }
 
 .new-product-info {

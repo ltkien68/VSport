@@ -5,6 +5,7 @@
 <section class="best-seller-section best-seller-reveal-section" id="bestSellerSection">
     <div class="best-seller-container">
         <div class="best-seller-head best-seller-reveal-title">
+            <p class="best-seller-kicker">Top Picks</p>
             <h2 class="best-seller-title">SẢN PHẨM BÁN CHẠY</h2>
             <span class="best-seller-line"></span>
         </div>
@@ -31,18 +32,7 @@
                                                      alt="${sp.tenSanPham}"
                                                      class="best-seller-image" />
 
-                                                <c:if test="${sp.daBan > 0}">
-                                                    <div class="best-seller-sold-circle">
-                                                        <c:choose>
-                                                            <c:when test="${sp.daBan > 999}">
-                                                                ĐÃ BÁN: 999+
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                ĐÃ BÁN: ${sp.daBan}
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </div>
-                                                </c:if>
+                                                
                                             </div>
 
                                             <div class="best-seller-info">

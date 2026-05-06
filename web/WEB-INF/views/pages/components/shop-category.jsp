@@ -3,6 +3,7 @@
 <section class="shop-category-section">
     <div class="shop-category-container">
         <div class="shop-category-heading">
+            <p class="shop-category-kicker">Categories</p>
             <h2>DANH MỤC SẢN PHẨM</h2>
             <span class="shop-category-line"></span>
         </div>

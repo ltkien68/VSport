@@ -14,6 +14,7 @@
 
         <!-- TITLE -->
         <div class="home-favorite-head home-favorite-reveal-title">
+            <p class="home-favorite-kicker">Your Wishlist</p>
             <h2 class="home-favorite-title">SẢN PHẨM CỦA BẠN</h2>
             <span class="home-favorite-line"></span>
         </div>

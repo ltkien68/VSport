@@ -31,7 +31,9 @@
                                              alt="${sp.tenSanPham}"
                                              class="new-product-image">
 
-                                        <span class="new-product-badge">Mới</span>
+                                        <img src="${pageContext.request.contextPath}/assets/images/others/news.png"
+                                             alt="new.png"
+                                             class="new-product-badge">
                                     </div>
 
                                     <div class="new-product-info">

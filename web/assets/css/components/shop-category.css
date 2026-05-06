@@ -20,6 +20,16 @@
     margin-bottom: 48px;
 }
 
+.shop-category-kicker {
+    margin: 0 0 8px;
+    font-family: var(--font-body-2);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-red);
+}
+
 .shop-category-heading h2 {
     margin: 0;
     font-family: var(--font-heading);

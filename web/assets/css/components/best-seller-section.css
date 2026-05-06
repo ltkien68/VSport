@@ -17,6 +17,16 @@
     margin-bottom: 38px;
 }
 
+.best-seller-kicker {
+    margin: 0 0 8px;
+    font-family: var(--font-body-2);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-red);
+}
+
 .best-seller-title {
     margin: 0;
     font-family: var(--font-heading);
@@ -99,23 +109,6 @@
     padding: 20px 6px 0;
 }
 
-.best-seller-sold-circle {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    padding: 10px 20px;
-    background: var(--color-red);
-    color: var(--color-white);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-heading);
-    font-size: 14px;
-    font-weight: 800;
-    z-index: 2;
-    pointer-events: none;
-}
 
 .best-seller-price {
     display: flex;
