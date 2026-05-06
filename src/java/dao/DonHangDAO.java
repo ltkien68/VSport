@@ -121,7 +121,11 @@ public class DonHangDAO {
                 psDonHang.setNull(10, Types.INTEGER);
             }
 
-            psDonHang.setString(11, "chua_thanh_toan");
+            if ("chuyen_khoan".equals(phuongThucThanhToan)) {
+                psDonHang.setString(11, "cho_xac_nhan");
+            } else {
+                psDonHang.setString(11, "chua_thanh_toan");
+            }
             psDonHang.setString(12, "cho_xac_nhan");
 
             if (maGiamGia != null && maGiamGia > 0) {
@@ -463,6 +467,10 @@ public class DonHangDAO {
               AND ngay_dat IS NOT NULL
               AND ngay_dat <= DATE_SUB(NOW(), INTERVAL 2 MINUTE)
               AND ngay_xac_nhan IS NULL
+              AND (
+                    phuong_thuc_thanh_toan = 'cod'
+                    OR trang_thai_thanh_toan = 'da_thanh_toan'
+              )
         """;
 
         try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -1245,6 +1253,30 @@ public class DonHangDAO {
         }
 
         return 0;
+    }
+
+    public boolean xacNhanThanhToanChuyenKhoan(int maDonHang) {
+        String sql = """
+            UPDATE don_hang
+            SET trang_thai_thanh_toan = 'da_thanh_toan',
+                trang_thai_don_hang = 'cho_lay_hang',
+                ngay_xac_nhan = NOW()
+            WHERE ma_don_hang = ?
+              AND phuong_thuc_thanh_toan = 'chuyen_khoan'
+              AND trang_thai_thanh_toan = 'cho_xac_nhan'
+              AND trang_thai_don_hang = 'cho_xac_nhan'
+        """;
+
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, maDonHang);
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
 }

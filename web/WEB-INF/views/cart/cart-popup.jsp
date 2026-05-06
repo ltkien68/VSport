@@ -45,20 +45,27 @@
                             <div>Kích cỡ: <%= item != null && item.getTenSize() != null ? item.getTenSize() : ""%></div>
                             <div>Số lượng: <%= item != null ? item.getSoLuong() : 1%></div>
 
-                            <c:choose>
-                                <c:when test="${not empty popupItem.tenInAo or not empty popupItem.soInAo}">
-                                    <p class="cart-popup-print">
-                                        Nội dung in:
-                                        <span>${popupItem.tenInAo} - ${popupItem.soInAo}</span>
-                                    </p>
-                                </c:when>
-                                <c:otherwise>
-                                    <p class="cart-popup-print">
-                                        Nội dung in:
-                                        <span>Không in</span>
-                                    </p>
-                                </c:otherwise>
-                            </c:choose>
+                            <% if (item != null && "1".equals(item.getNhomSanPham())) { %>
+                            <p class="cart-popup-print">
+                                Nội dung in:
+                                <span>
+                                    <%
+                                        boolean coTenIn = item.getTenInAo() != null && !item.getTenInAo().isBlank();
+                                        boolean coSoIn = item.getSoInAo() != null && !item.getSoInAo().isBlank();
+
+                                        if (coTenIn || coSoIn) {
+                                            out.print((coTenIn ? item.getTenInAo() : ""));
+                                            if (coTenIn && coSoIn) {
+                                                out.print(" - ");
+                                            }
+                                            out.print((coSoIn ? item.getSoInAo() : ""));
+                                        } else {
+                                            out.print("Không in");
+                                        }
+                                    %>
+                                </span>
+                            </p>
+                            <% } %>
                         </div>
                     </div>
                 </div>

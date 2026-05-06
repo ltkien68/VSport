@@ -2,11 +2,11 @@ package model;
 
 public class GioHang {
 
-    
     private int maGioHang;
     private int maSanPham;
     private int maBienThe;
     private String tenSanPham;
+    private String nhomSanPham;
     private String anhChinh;
     private String tenSize;
     private String mauSac;
@@ -31,7 +31,7 @@ public class GioHang {
     public void setSoInAo(String soInAo) {
         this.soInAo = soInAo;
     }
-    
+
     public int getMaGioHang() {
         return maGioHang;
     }
@@ -110,5 +110,13 @@ public class GioHang {
 
     public void setLoaiPhienBan(String loaiPhienBan) {
         this.loaiPhienBan = loaiPhienBan;
+    }
+
+    public String getNhomSanPham() {
+        return nhomSanPham;
+    }
+
+    public void setNhomSanPham(String nhomSanPham) {
+        this.nhomSanPham = nhomSanPham;
     }
 }

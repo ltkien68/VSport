@@ -1,59 +1,65 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const approveButtons = document.querySelectorAll(".btn-duyet-don");
+    const approveButtons = document.querySelectorAll(
+            ".btn-duyet-don, .btn-xac-nhan-thanh-toan"
+            );
+
     const toggleButtons = document.querySelectorAll(".btn-toggle-history-detail");
     const historyRows = document.querySelectorAll(".history-row-toggle");
     const orderCards = document.querySelectorAll(".admin-order-card");
 
-    approveButtons.forEach((button) => {
+    approveButtons.forEach(function (button) {
         button.addEventListener("click", function () {
             const maDonHang = this.dataset.maDonHang;
+            const action = this.dataset.action || "duyet_don";
 
-            if (!confirm("Duyệt đơn #" + maDonHang + " ?")) return;
+            let confirmMessage = "Duyệt đơn #" + maDonHang + " ?";
+            let confirmTitle = "Duyệt đơn hàng";
 
-            fetch(window.contextPath + "/admin/don-hang/duyet", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: "maDonHang=" + encodeURIComponent(maDonHang)
-            })
-            .then(async (res) => {
-                const text = await res.text();
-                if (!res.ok) throw new Error(text || "Lỗi duyệt đơn");
-                return text;
-            })
-            .then((msg) => {
-                alert(msg);
-                window.location.reload();
-            })
-            .catch((err) => {
-                alert(err.message || "Có lỗi xảy ra");
+            if (action === "xac_nhan_thanh_toan") {
+                confirmTitle = "Xác nhận thanh toán";
+                confirmMessage = "Xác nhận đã nhận thanh toán cho đơn #" + maDonHang + " ?";
+            }
+
+            showAdminConfirm({
+                title: confirmTitle,
+                message: confirmMessage,
+                onConfirm: function () {
+                    xuLyDonHang(maDonHang, action);
+                }
             });
         });
     });
 
-    toggleButtons.forEach((button) => {
+    toggleButtons.forEach(function (button) {
         button.addEventListener("click", function () {
             const targetId = this.dataset.target;
             const panel = document.getElementById(targetId);
-            if (!panel) return;
+
+            if (!panel) {
+                return;
+            }
 
             panel.classList.toggle("open");
         });
     });
 
-    historyRows.forEach((row) => {
+    historyRows.forEach(function (row) {
         row.addEventListener("click", function () {
             const targetId = this.dataset.target;
             const detailRow = document.getElementById(targetId);
-            if (!detailRow) return;
+
+            if (!detailRow) {
+                return;
+            }
 
             detailRow.classList.toggle("open");
         });
     });
 
     function formatDuration(ms) {
-        if (ms <= 0) return "00d 00h 00m 00s";
+        if (ms <= 0) {
+            return "00d 00h 00m 00s";
+        }
 
         let totalSeconds = Math.floor(ms / 1000);
 
@@ -67,17 +73,17 @@ document.addEventListener("DOMContentLoaded", function () {
         const seconds = totalSeconds % 60;
 
         return (
-            String(days).padStart(2, "0") + "d " +
-            String(hours).padStart(2, "0") + "h " +
-            String(minutes).padStart(2, "0") + "m " +
-            String(seconds).padStart(2, "0") + "s"
-        );
+                String(days).padStart(2, "0") + "d "
+                + String(hours).padStart(2, "0") + "h "
+                + String(minutes).padStart(2, "0") + "m "
+                + String(seconds).padStart(2, "0") + "s"
+                );
     }
 
     function updateCountdowns() {
         const now = Date.now();
 
-        orderCards.forEach((card) => {
+        orderCards.forEach(function (card) {
             const orderStatus = card.dataset.orderStatus;
             const paymentStatus = card.dataset.paymentStatus;
 
@@ -89,7 +95,18 @@ document.addEventListener("DOMContentLoaded", function () {
             const countdownEl = card.querySelector(".js-countdown");
             const subEl = card.querySelector(".js-countdown-sub");
 
-            if (!countdownEl || !subEl) return;
+            if (!countdownEl || !subEl) {
+                return;
+            }
+
+            if (
+                    orderStatus === "cho_xac_nhan"
+                    && paymentStatus === "cho_xac_nhan"
+                    ) {
+                countdownEl.textContent = "Chờ thanh toán";
+                subEl.textContent = "Đơn chuyển khoản đang chờ admin xác nhận thanh toán";
+                return;
+            }
 
             if (orderStatus === "cho_xac_nhan") {
                 if (!ngayDat) {
@@ -108,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     countdownEl.textContent = "Đến hạn";
                     subEl.textContent = "Đang chờ backend chuyển sang chờ lấy hàng";
                 }
+
                 return;
             }
 
@@ -128,6 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     countdownEl.textContent = "Đến hạn";
                     subEl.textContent = "Đang chờ backend chuyển sang đang giao";
                 }
+
                 return;
             }
 
@@ -148,6 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     countdownEl.textContent = "Đến hạn";
                     subEl.textContent = "Đang chờ backend chuyển sang đã giao";
                 }
+
                 return;
             }
 
@@ -168,6 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     countdownEl.textContent = "Đến hạn";
                     subEl.textContent = "Đang chờ backend cập nhật thanh toán";
                 }
+
                 return;
             }
 
@@ -186,6 +207,80 @@ document.addEventListener("DOMContentLoaded", function () {
             countdownEl.textContent = "--";
             subEl.textContent = "Không có dữ liệu tiến trình";
         });
+    }
+
+    function showAdminConfirm(options) {
+        const overlay = document.getElementById("adminConfirmOverlay");
+        const titleEl = document.getElementById("adminConfirmTitle");
+        const messageEl = document.getElementById("adminConfirmMessage");
+        const cancelBtn = document.getElementById("adminConfirmCancel");
+        const okBtn = document.getElementById("adminConfirmOk");
+
+        if (!overlay || !titleEl || !messageEl || !cancelBtn || !okBtn) {
+            if (options && typeof options.onConfirm === "function") {
+                options.onConfirm();
+            }
+            return;
+        }
+
+        titleEl.textContent = options.title || "Xác nhận thao tác";
+        messageEl.textContent = options.message || "Bạn có chắc muốn thực hiện thao tác này?";
+
+        overlay.classList.add("open");
+
+        const closeModal = function () {
+            overlay.classList.remove("open");
+            okBtn.onclick = null;
+            cancelBtn.onclick = null;
+            overlay.onclick = null;
+        };
+
+        cancelBtn.onclick = closeModal;
+
+        overlay.onclick = function (e) {
+            if (e.target === overlay) {
+                closeModal();
+            }
+        };
+
+        okBtn.onclick = function () {
+            closeModal();
+
+            if (typeof options.onConfirm === "function") {
+                options.onConfirm();
+            }
+        };
+    }
+
+    function xuLyDonHang(maDonHang, action) {
+        fetch(window.contextPath + "/admin/don-hang/duyet", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body:
+                    "maDonHang=" + encodeURIComponent(maDonHang)
+                    + "&action=" + encodeURIComponent(action)
+        })
+                .then(async function (res) {
+                    const text = await res.text();
+
+                    if (!res.ok) {
+                        throw new Error(text || "Lỗi xử lý đơn hàng");
+                    }
+
+                    return text;
+                })
+                .then(function (msg) {
+                    toastr.success(msg || "Thao tác thành công");
+
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 700);
+                })
+                .catch(function (err) {
+                    toastr.error(err.message || "Có lỗi xảy ra");
+                });
     }
 
     updateCountdowns();

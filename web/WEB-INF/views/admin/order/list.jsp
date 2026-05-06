@@ -154,19 +154,44 @@
                                             </div>
 
                                             <div class="admin-order-actions">
-                                                <c:if test="${donHang.trangThaiDonHang == 'cho_xac_nhan'}">
-                                                    <button type="button"
-                                                            class="admin-order-btn admin-order-btn-primary btn-duyet-don"
-                                                            data-ma-don-hang="${donHang.maDonHang}">
-                                                        Duyệt đơn
-                                                    </button>
-                                                </c:if>
+
+                                                <c:choose>
+
+                                                    <%-- COD thì duyệt đơn --%>
+                                                    <c:when test="${donHang.trangThaiDonHang == 'cho_xac_nhan'
+                                                                    && donHang.phuongThucThanhToan == 'cod'}">
+
+                                                        <button type="button"
+                                                                class="admin-order-btn admin-order-btn-primary btn-duyet-don"
+                                                                data-ma-don-hang="${donHang.maDonHang}"
+                                                                data-action="duyet_don">
+                                                            Duyệt đơn
+                                                        </button>
+
+                                                    </c:when>
+
+                                                    <%-- Chuyển khoản thì xác nhận thanh toán --%>
+                                                    <c:when test="${donHang.trangThaiDonHang == 'cho_xac_nhan'
+                                                                    && donHang.phuongThucThanhToan == 'chuyen_khoan'
+                                                                    && donHang.trangThaiThanhToan != 'da_thanh_toan'}">
+
+                                                        <button type="button"
+                                                                class="admin-order-btn admin-order-btn-primary btn-xac-nhan-thanh-toan"
+                                                                data-ma-don-hang="${donHang.maDonHang}"
+                                                                data-action="xac_nhan_thanh_toan">
+                                                            Xác nhận thanh toán
+                                                        </button>
+
+                                                    </c:when>
+
+                                                </c:choose>
 
                                                 <button type="button"
                                                         class="admin-order-btn admin-order-btn-dark btn-toggle-history-detail"
                                                         data-target="admin-detail-${donHang.maDonHang}">
                                                     Chi tiết mốc thời gian
                                                 </button>
+
                                             </div>
 
                                             <div class="admin-order-detail-panel" id="admin-detail-${donHang.maDonHang}">
@@ -355,5 +380,21 @@
                 hideMethod: "fadeOut"
             };
         </script>
+
+        <div class="admin-confirm-overlay" id="adminConfirmOverlay">
+            <div class="admin-confirm-modal">
+                <h3 id="adminConfirmTitle">Xác nhận thao tác</h3>
+                <p id="adminConfirmMessage">Bạn có chắc muốn thực hiện thao tác này?</p>
+
+                <div class="admin-confirm-actions">
+                    <button type="button" class="admin-confirm-btn cancel" id="adminConfirmCancel">
+                        Hủy
+                    </button>
+                    <button type="button" class="admin-confirm-btn confirm" id="adminConfirmOk">
+                        Xác nhận
+                    </button>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

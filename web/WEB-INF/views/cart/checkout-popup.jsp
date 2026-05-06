@@ -65,10 +65,10 @@
                             <c:forEach var="vc" items="${dsVanChuyen}" varStatus="loop">
                                 <label class="checkout-radio-card">
                                     <input type="radio"
-                                        name="shippingPreview"
-                                        value="${vc.phiVanChuyen}"
-                                        data-ma-ptvc="${vc.maPtvc}"
-                                        ${vc.maPtvc == maPtvcDaChon ? 'checked' : ''} />
+                                           name="shippingPreview"
+                                           value="${vc.phiVanChuyen}"
+                                           data-ma-ptvc="${vc.maPtvc}"
+                                           ${vc.maPtvc == maPtvcDaChon ? 'checked' : ''} />
                                     <span class="checkout-radio-content">
                                         <span class="checkout-radio-top">
                                             <strong>${vc.tenPhuongThuc}</strong>
@@ -94,25 +94,72 @@
                         <h3 class="checkout-card-title">Phương thức thanh toán</h3>
 
                         <div class="checkout-payment-list">
-                            <label class="checkout-radio-card">
-                                <input type="radio" name="phuongThucThanhToan" value="cod" checked />
+
+                            <!-- COD -->
+                            <label class="checkout-radio-card active" data-payment="cod">
+
+                                <input type="radio"
+                                       name="phuongThucThanhToan"
+                                       value="cod"
+                                       checked />
+
                                 <span class="checkout-radio-content">
+
                                     <span class="checkout-radio-top">
                                         <strong>Thanh toán khi nhận hàng</strong>
                                     </span>
-                                    <span class="checkout-radio-sub">COD</span>
+
+                                    <span class="checkout-radio-sub">
+                                        COD
+                                    </span>
+
                                 </span>
                             </label>
 
-                            <label class="checkout-radio-card">
-                                <input type="radio" name="phuongThucThanhToan" value="chuyen_khoan" />
+                            <!-- QR -->
+                            <label class="checkout-radio-card" data-payment="chuyen_khoan">
+
+                                <input type="radio"
+                                       name="phuongThucThanhToan"
+                                       value="chuyen_khoan" />
+
                                 <span class="checkout-radio-content">
+
                                     <span class="checkout-radio-top">
                                         <strong>Chuyển khoản</strong>
                                     </span>
-                                    <span class="checkout-radio-sub">Xác nhận thủ công sau khi thanh toán</span>
+
+                                    <span class="checkout-radio-sub">
+                                        Xác nhận thủ công sau khi thanh toán
+                                    </span>
+
+                                    <!-- BOX QR -->
+                                    <div class="checkout-qr-box">
+
+                                        <img id="vietQrImage"
+                                             class="checkout-qr-image"
+                                             src=""
+                                             alt="QR thanh toán">
+
+                                        <div class="checkout-qr-info">
+                                            <p>Ngân hàng: <b>MB Bank</b></p>
+                                            <p>Số tài khoản: <b>0333568051111</b></p>
+                                            <p>Chủ tài khoản: <b>LE TRUNG KIEN</b></p>
+                                            <p>
+                                                Nội dung:
+                                                <b id="vietQrContent">VSPORT</b>
+                                            </p>
+                                        </div>
+
+                                        <p class="checkout-qr-note">
+                                            Sau khi chuyển khoản, đơn hàng sẽ chờ admin xác nhận thanh toán.
+                                        </p>
+
+                                    </div>
+
                                 </span>
                             </label>
+
                         </div>
                     </div>
                 </div>
@@ -193,11 +240,15 @@
                             <strong id="discountPreview">- <fmt:formatNumber value="${giamGia}" type="number"/>đ</strong>
                         </div>
 
+                        <input type="hidden"
+                               id="tongThanhToanFinal"
+                               value="${tongThanhToan}" />
+
                         <div class="checkout-summary-row total">
                             <span>Tổng cộng</span>
                             <strong id="totalPreview"><fmt:formatNumber value="${tongThanhToan}" type="number"/>đ</strong>
                         </div>
-                        
+
                         <input type="hidden" name="maGiamGiaApplied" id="maGiamGiaApplied" value="${maGiamGiaDaChon}" />
 
                         <button type="submit" class="checkout-submit-btn">

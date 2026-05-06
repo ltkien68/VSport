@@ -123,6 +123,7 @@ public class GioHangDAO {
             gh.ten_in_ao,
             gh.so_in_ao,
             sp.ten_san_pham,
+            sp.nhom_san_pham,
             sp.anh_chinh,
             sz.ten_size,
             sp.loai_san_pham,
@@ -162,6 +163,7 @@ public class GioHangDAO {
                     item.setTenSanPham(rs.getString("ten_san_pham"));
                     item.setAnhChinh(rs.getString("anh_chinh"));
                     item.setTenSize(rs.getString("ten_size"));
+                    item.setNhomSanPham(rs.getString("nhom_san_pham"));
                     item.setSoLuong(rs.getInt("so_luong_gio_hang"));
                     item.setDonGia(rs.getDouble("don_gia_gio_hang"));
                     item.setLoaiPhienBan(rs.getString("loai_san_pham"));
@@ -230,6 +232,7 @@ public class GioHangDAO {
                 gh.don_gia,
                 gh.ten_in_ao,
                 gh.so_in_ao,
+                sp.nhom_san_pham,
                 sp.ten_san_pham,
                 sp.anh_chinh,
                 sp.loai_san_pham,
@@ -256,6 +259,7 @@ public class GioHangDAO {
                     item.setTenInAo(rs.getString("ten_in_ao"));
                     item.setSoInAo(rs.getString("so_in_ao"));
                     item.setTenSanPham(rs.getString("ten_san_pham"));
+                    item.setNhomSanPham(rs.getString("nhom_san_pham"));
                     item.setAnhChinh(rs.getString("anh_chinh"));
                     item.setTenSize(rs.getString("ten_size"));
                     item.setSoLuong(rs.getInt("so_luong"));

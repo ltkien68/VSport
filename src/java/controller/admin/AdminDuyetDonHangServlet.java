@@ -22,6 +22,7 @@ public class AdminDuyetDonHangServlet extends HttpServlet {
         response.setContentType("text/plain;charset=UTF-8");
 
         String maDonHangRaw = request.getParameter("maDonHang");
+        String action = request.getParameter("action");
 
         if (maDonHangRaw == null || maDonHangRaw.trim().isEmpty()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -30,6 +31,7 @@ public class AdminDuyetDonHangServlet extends HttpServlet {
         }
 
         int maDonHang;
+
         try {
             maDonHang = Integer.parseInt(maDonHangRaw.trim());
         } catch (NumberFormatException e) {
@@ -38,14 +40,29 @@ public class AdminDuyetDonHangServlet extends HttpServlet {
             return;
         }
 
-        boolean ok = donHangDAO.capNhatTrangThaiChoLayHang(maDonHang);
+        boolean ok;
+        String successMessage;
+        String errorMessage;
+
+        if ("xac_nhan_thanh_toan".equals(action)) {
+
+            ok = donHangDAO.xacNhanThanhToanChuyenKhoan(maDonHang);
+            successMessage = "Xác nhận thanh toán thành công";
+            errorMessage = "Không thể xác nhận thanh toán";
+
+        } else {
+
+            ok = donHangDAO.capNhatTrangThaiDaXacNhan(maDonHang);
+            successMessage = "Duyệt đơn thành công";
+            errorMessage = "Không thể duyệt đơn hoặc đơn không còn ở trạng thái chờ xác nhận";
+        }
 
         if (ok) {
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().write("Duyệt đơn thành công");
+            response.getWriter().write(successMessage);
         } else {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("Không thể duyệt đơn hoặc đơn không còn ở trạng thái chờ xác nhận");
+            response.getWriter().write(errorMessage);
         }
     }
 }

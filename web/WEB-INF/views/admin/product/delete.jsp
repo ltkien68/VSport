@@ -9,9 +9,6 @@
     </div>
 
     <div class="admin-delete-popup-body">
-        <p class="admin-delete-popup-text">
-            M muốn xóa sản phẩm:
-        </p>
         <p class="admin-delete-popup-name" id="deleteProductName"></p>
         <p class="admin-delete-popup-note">
             Hành động này sẽ xóa biến thể, ảnh phụ và dữ liệu liên quan của sản phẩm này.

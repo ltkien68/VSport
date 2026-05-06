@@ -1,8 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.GioHang" %>
 <%@ page import="model.GioHangSum" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <%
     List<GioHang> dsGioHang = (List<GioHang>) request.getAttribute("dsGioHang");
@@ -71,12 +71,12 @@
                         <img src="${pageContext.request.contextPath}/assets/images/others/yildiz.webp" alt="yildiz" class="cart-empty-right-img"/>
                     </section>
                 </div>
-                <% } else { %>
+                <% } else {%>
                 <section class="cart-layout">
                     <div class="cart-left">
                         <div class="cart-heading-row">
                             <h1 class="cart-title">GIỎ HÀNG CỦA BẠN</h1>
-                            <span class="cart-count-page">(<%= tongMatHangCart %> các sản phẩm)</span>
+                            <span class="cart-count-page">(<%= tongMatHangCart%> các sản phẩm)</span>
                         </div>
 
                         <p class="cart-note">
@@ -84,27 +84,29 @@
                         </p>
 
                         <div class="cart-list">
-                            <% for (GioHang item : dsGioHang) { 
-                                double thanhTien = item.getSoLuong() * item.getDonGia();
+                            <% for (GioHang item : dsGioHang) {
+                                    double thanhTien = item.getSoLuong() * item.getDonGia();
                             %>
                             <div class="cart-item">
                                 <div class="cart-item-image">
-                                    <img src="${pageContext.request.contextPath}/<%= item.getAnhChinh() %>"
-                                         alt="<%= item.getTenSanPham() %>">
+                                    <img src="${pageContext.request.contextPath}/<%= item.getAnhChinh()%>"
+                                         alt="<%= item.getTenSanPham()%>">
                                 </div>
 
                                 <div class="cart-item-content">
                                     <div class="cart-item-top">
                                         <div class="cart-item-info">
-                                            <h3 class="cart-item-name"><%= item.getTenSanPham() %></h3>
-                                            <div class="cart-item-color"><%= item.getMauSac() %></div>
-                                            <div class="cart-item-size">Kích cỡ: <%= item.getTenSize() %></div>
+                                            <h3 class="cart-item-name"><%= item.getTenSanPham()%></h3>
+                                            <div class="cart-item-color"><%= item.getMauSac()%></div>
+                                            <div class="cart-item-size">Kích cỡ: <%= item.getTenSize()%></div>
 
                                             <div class="cart-print-info"
-                                                 data-cart-id="<%= item.getMaGioHang() %>"
-                                                 data-ten-in="<%= item.getTenInAo() == null ? "" : item.getTenInAo() %>"
-                                                 data-so-in="<%= item.getSoInAo() == null ? "" : item.getSoInAo() %>">
+                                                 data-cart-id="<%= item.getMaGioHang()%>"
+                                                 data-ten-in="<%= item.getTenInAo() == null ? "" : item.getTenInAo()%>"
+                                                 data-so-in="<%= item.getSoInAo() == null ? "" : item.getSoInAo()%>">
 
+
+                                                <% if ("1".equals(item.getNhomSanPham())) {%>
                                                 <div class="cart-item-print">
                                                     In áo:
 
@@ -113,7 +115,7 @@
                                                         <strong>
                                                             <%= (item.getTenInAo() == null || item.getTenInAo().isEmpty())
                                                                     ? "Không in"
-                                                                    : item.getTenInAo() %>
+                                                                    : item.getTenInAo()%>
                                                         </strong>
                                                     </span>
 
@@ -122,7 +124,7 @@
                                                         <strong>
                                                             <%= (item.getSoInAo() == null || item.getSoInAo().isEmpty())
                                                                     ? "Không in"
-                                                                    : item.getSoInAo() %>
+                                                                    : item.getSoInAo()%>
                                                         </strong>
                                                     </span>
 
@@ -130,11 +132,13 @@
                                                         Sửa
                                                     </button>
                                                 </div>
+                                                <% }%>
+
                                             </div>
                                         </div>
 
                                         <form action="${pageContext.request.contextPath}/gio_hang/xoa" method="post" class="cart-remove-form">
-                                            <input type="hidden" name="maBienThe" value="<%= item.getMaBienThe() %>">
+                                            <input type="hidden" name="maBienThe" value="<%= item.getMaBienThe()%>">
                                             <button type="submit" class="cart-remove-btn" title="Xóa khỏi giỏ">
                                                 <i data-lucide="trash"></i>
                                             </button>
@@ -146,25 +150,25 @@
                                             <form action="${pageContext.request.contextPath}/gio_hang/cap_nhat_so_luong"
                                                   method="post"
                                                   class="cart-qty-form">
-                                                <input type="hidden" name="maGioHang" value="<%= item.getMaGioHang() %>">
+                                                <input type="hidden" name="maGioHang" value="<%= item.getMaGioHang()%>">
 
                                                 <select name="soLuong" class="cart-item-qty" onchange="this.form.submit()">
-                                                    <% for (int i = 1; i <= 100; i++) { %>
-                                                    <option value="<%= i %>" <%= i == item.getSoLuong() ? "selected" : "" %>>
-                                                        <%= i %>
+                                                    <% for (int i = 1; i <= 100; i++) {%>
+                                                    <option value="<%= i%>" <%= i == item.getSoLuong() ? "selected" : ""%>>
+                                                        <%= i%>
                                                     </option>
-                                                    <% } %>
+                                                    <% }%>
                                                 </select>
                                             </form>
                                         </div>
 
                                         <div class="cart-item-price">
-                                            <%= String.format("%,.0f", thanhTien) %>đ
+                                            <%= String.format("%,.0f", thanhTien)%>đ
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <% } %>
+                            <% }%>
                         </div>
                     </div>
 
@@ -172,8 +176,8 @@
                         <h2 class="cart-summary-title">TÓM TẮT ĐƠN HÀNG</h2>
 
                         <div class="cart-summary-line">
-                            <span><%= tongMatHangCart %> các sản phẩm</span>
-                            <strong><%= String.format("%,.0f", tongTienCart) %>đ</strong>
+                            <span><%= tongMatHangCart%> các sản phẩm</span>
+                            <strong><%= String.format("%,.0f", tongTienCart)%>đ</strong>
                         </div>
 
                         <div class="cart-summary-line">
@@ -184,7 +188,7 @@
                         <div class="cart-summary-total">
                             <div class="cart-summary-line cart-summary-total-line">
                                 <span>Tổng</span>
-                                <strong><%= String.format("%,.0f", tongCongCart) %>đ</strong>
+                                <strong><%= String.format("%,.0f", tongCongCart)%>đ</strong>
                             </div>
                             <div class="cart-summary-tax">(Đã bao gồm thuế)</div>
                         </div>
@@ -201,7 +205,7 @@
                         <div id="checkoutPopupRoot"></div>
                     </aside>
                 </section>
-                <% } %>
+                <% }%>
             </div>
         </main>
 
@@ -233,52 +237,52 @@
             </div>
         </div>
 
-    <c:if test="${not empty checkoutSuccess}">
+        <c:if test="${not empty checkoutSuccess}">
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    if (window.toastr) {
+                        toastr.success("${checkoutSuccess}");
+                    }
+                });
+            </script>
+        </c:if>
+
+        <script src="https://unpkg.com/lucide@latest"></script>
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                if (window.toastr) {
-                    toastr.success("${checkoutSuccess}");
-                }
-            });
+                lucide.createIcons();
         </script>
-    </c:if>
-
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-            lucide.createIcons();
-    </script>
 
 
-    <script>
-        window.contextPath = "${pageContext.request.contextPath}";
-    </script>
-    <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+        <script>
+            window.contextPath = "${pageContext.request.contextPath}";
+        </script>
+        <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
-    <script src="${pageContext.request.contextPath}/assets/js/components/header.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/components/search-popup.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/components/checkout-popup.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/pages/cart.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/components/header.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/components/search-popup.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/components/checkout-popup.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/pages/cart.js"></script>
 
-    <%-- jQuery bắt buộc cho Toastr --%>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <%-- jQuery bắt buộc cho Toastr --%>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <%-- Toastr JS --%>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <%-- Toastr JS --%>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-    <script>
-        toastr.options = {
-            closeButton: true,
-            progressBar: true,
-            newestOnTop: true,
-            preventDuplicates: true,
-            positionClass: "toast-bottom-right",
-            timeOut: "1000",
-            extendedTimeOut: "1000",
-            showDuration: "250",
-            hideDuration: "250",
-            showMethod: "fadeIn",
-            hideMethod: "fadeOut"
-        };
-    </script>
-</body>
+        <script>
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                newestOnTop: true,
+                preventDuplicates: true,
+                positionClass: "toast-bottom-right",
+                timeOut: "1000",
+                extendedTimeOut: "1000",
+                showDuration: "250",
+                hideDuration: "250",
+                showMethod: "fadeIn",
+                hideMethod: "fadeOut"
+            };
+        </script>
+    </body>
 </html>

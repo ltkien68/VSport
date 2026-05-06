@@ -524,6 +524,108 @@
     font-style: italic;
 }
 
+
+.admin-confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.25s ease;
+    z-index: 9998;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-confirm-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.admin-confirm-modal {
+    width: min(460px, calc(100vw - 24px));
+    background: var(--color-white);
+    border-radius: 22px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
+
+    padding: 0;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.96);
+    transition: 0.25s ease;
+}
+
+.admin-confirm-overlay.open .admin-confirm-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.admin-confirm-modal h3 {
+    margin: 0;
+    padding: 20px 22px;
+
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--color-black);
+
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.admin-confirm-modal p {
+    margin: 0;
+    padding: 20px 22px 0;
+
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-gray-600);
+}
+
+.admin-confirm-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+
+    padding: 0 22px 22px;
+    margin-top: 20px;
+}
+
+.admin-confirm-btn {
+    border: none;
+    border-radius: 12px;
+    padding: 12px 18px;
+
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 800;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.admin-confirm-btn.cancel {
+    background: var(--color-gray-100);
+    color: var(--color-black);
+}
+
+.admin-confirm-btn.cancel:hover {
+    background: var(--color-gray-200);
+}
+
+.admin-confirm-btn.confirm {
+    background: var(--color-red);
+    color: var(--color-white);
+}
+
+.admin-confirm-btn.confirm:hover {
+    background: var(--color-red-hover);
+}
+
 @media (max-width: 1200px) {
     .admin-order-card-body {
         grid-template-columns: 1fr;
