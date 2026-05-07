@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
@@ -221,19 +221,31 @@
                                 </div>
 
                                 <c:if test="${not empty item.dsQuaTang}">
-                                    <div class="checkout-gift-list">
-                                        <c:forEach var="gift" items="${item.dsQuaTang}">
-                                            <div class="checkout-gift-item">
-                                                <img src="${pageContext.request.contextPath}/${gift.anhChinh}" alt="${gift.tenSanPham}"/>
+                                    <c:forEach var="gift" items="${item.dsQuaTang}">
+                                        <div class="checkout-gift-inline">
+                                            <div class="checkout-gift-product">
+                                                <img class="checkout-gift-thumb"
+                                                     src="${pageContext.request.contextPath}/${gift.anhChinh}"
+                                                     alt="${gift.tenSanPham}" />
 
-                                                <div>
-                                                    <p class="checkout-gift-name">${gift.tenSanPham}</p>
-                                                    <p class="checkout-gift-sub">Số lượng: ${gift.soLuong}</p>
-
+                                                <div class="checkout-gift-info">
+                                                    <p class="checkout-gift-name">
+                                                        <span class="checkout-gift-label">Quà Tặng</span>
+                                                        ${gift.tenSanPham}
+                                                    </p>
+                                                    <p class="checkout-gift-shop">Được tặng kèm theo sản phẩm</p>
                                                 </div>
                                             </div>
-                                        </c:forEach>
-                                    </div>
+
+                                            <div class="checkout-gift-qty">
+                                                ${gift.soLuong}
+                                            </div>
+
+                                            <div class="checkout-gift-price">
+                                                0đ
+                                            </div>
+                                        </div>
+                                    </c:forEach>
                                 </c:if>
                             </c:forEach>
                         </div>

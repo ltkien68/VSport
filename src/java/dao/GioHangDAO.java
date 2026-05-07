@@ -461,30 +461,26 @@ public class GioHangDAO {
                 sp.anh_chinh,
                 qt.so_luong_qua,
                 bt.ma_bien_the,
-                COALESCE(bt.so_luong_ton, sp.so_luong_ton) AS so_luong_ton,
+                bt.so_luong_ton,
                 sz.ten_size
             FROM qua_tang_san_pham qt
             JOIN san_pham sp 
                 ON qt.ma_san_pham_qua = sp.ma_san_pham
-            LEFT JOIN bien_the_san_pham bt 
+            JOIN bien_the_san_pham bt 
                 ON qt.ma_bien_the_qua = bt.ma_bien_the
             LEFT JOIN size_san_pham sz 
                 ON bt.ma_size = sz.ma_size
+            JOIN danh_muc dm ON sp.ma_danh_muc = dm.ma_danh_muc
             WHERE qt.ma_san_pham_chinh = ?
-              AND qt.trang_thai = 1
+              AND dm.slug = 'qua-tang'
               AND sp.trang_thai = 'dang_ban'
-              AND (
-                    (bt.ma_bien_the IS NOT NULL AND bt.so_luong_ton >= qt.so_luong_qua * ?)
-                    OR
-                    (bt.ma_bien_the IS NULL AND sp.so_luong_ton >= qt.so_luong_qua * ?)
-              )
+              AND bt.so_luong_ton >= qt.so_luong_qua * ?
         """;
 
         try (
-            Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, maSanPhamChinh);
             ps.setInt(2, soLuongMua);
-            ps.setInt(3, soLuongMua);
 
             ResultSet rs = ps.executeQuery();
 

@@ -346,6 +346,82 @@
     white-space: nowrap;
 }
 
+/* =========================
+   GIFT LIST
+========================= */
+
+.checkout-gift-inline {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 60px 90px;
+    align-items: center;
+    gap: 16px;
+
+    margin-top: -6px;
+    padding: 8px 0 14px 0;
+
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.checkout-gift-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.checkout-gift-thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    background: var(--color-gray-100);
+}
+
+.checkout-gift-info {
+    min-width: 0;
+}
+
+.checkout-gift-name {
+    margin: 0 0 4px;
+    font-size: var(--text-sm);
+    color: var(--color-gray-700);
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.checkout-gift-label {
+    display: inline-block;
+    margin-right: 6px;
+    padding: 1px 4px;
+
+    border: 1px solid var(--color-red);
+    color: var(--color-red);
+    background: #fff;
+
+    font-size: 11px;
+    line-height: 1.2;
+}
+
+.checkout-gift-shop {
+    margin: 0;
+    font-size: 12px;
+    color: var(--color-gray-600);
+}
+
+
+.checkout-gift-qty {
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--color-black);
+}
+
+.checkout-gift-price {
+    text-align: right;
+    font-size: var(--text-sm);
+    color: var(--color-red);
+}
+
 .checkout-summary-card {
     background: var(--color-black);
     color: var(--color-white);

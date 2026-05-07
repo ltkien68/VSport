@@ -483,10 +483,21 @@
 }
 
 .profile-popup-close {
+    width: 42px;
+    height: 42px;
     border: none;
-    background: transparent;
+    border-radius: 999px;
+    background: var(--color-gray-100);
     font-size: 34px;
     cursor: pointer;
+    
+    transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.profile-popup-close:hover {
+    background: var(--color-red-soft);
+    color: var(--color-red);
+    transform: rotate(90deg);
 }
 
 .profile-popup-form {

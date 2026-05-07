@@ -14,7 +14,7 @@
      >
     <div class="profile-popup-header">
         <h3>CẬP NHẬT THÔNG TIN CÁ NHÂN</h3>
-        <button type="button" class="profile-popup-close" id="closeProfilePopup">&times;</button>
+        <button type="button" class="profile-popup-close" id="closeProfilePopup">x</button>
     </div>
 
     <form class="profile-popup-form"

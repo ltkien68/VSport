@@ -51,7 +51,14 @@ public class CheckoutPopupServlet extends HttpServlet {
             return;
         }
 
-        
+        for (GioHang item : dsGioHang) {
+            List<GioHang> dsQuaTang = gioHangDAO.layQuaTangTheoSanPham(
+                    item.getMaSanPham(),
+                    item.getSoLuong()
+            );
+
+            item.setDsQuaTang(dsQuaTang);
+        }
 
         List<PhuongThucVanChuyen> dsVanChuyen = phuongThucVanChuyenDAO.getDanhSachDangHoatDong();
         if (dsVanChuyen == null) {
