@@ -20,7 +20,7 @@ public class SanPham {
     private String moTaChiTiet;
     private String danhMucSlug;
    
-    private String nhomSanPham;
+    private int nhomSanPham;
 
     private double giaNiemYet;
     private double giaKhuyenMai;
@@ -122,11 +122,11 @@ public class SanPham {
         this.tongTonKho = tongTonKho;
     }
     
-    public String getNhomSanPham() {
+    public int getNhomSanPham() {
         return nhomSanPham;
     }
 
-    public void setNhomSanPham(String nhomSanPham) {
+    public void setNhomSanPham(int nhomSanPham) {
         this.nhomSanPham = nhomSanPham;
     }
 
