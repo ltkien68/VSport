@@ -461,41 +461,46 @@ public class GioHangDAO {
                 sp.anh_chinh,
                 qt.so_luong_qua,
                 bt.ma_bien_the,
+                COALESCE(bt.so_luong_ton, sp.so_luong_ton) AS so_luong_ton,
                 sz.ten_size
             FROM qua_tang_san_pham qt
-            JOIN san_pham sp ON qt.ma_san_pham_qua = sp.ma_san_pham
+            JOIN san_pham sp 
+                ON qt.ma_san_pham_qua = sp.ma_san_pham
             LEFT JOIN bien_the_san_pham bt 
-                  ON qt.ma_bien_the_qua = bt.ma_bien_the
-              
-              LEFT JOIN size_san_pham sz 
-                  ON bt.ma_size = sz.ma_size
-              
-              WHERE qt.ma_san_pham_chinh = ?
-                AND qt.trang_thai = 1
-                AND sp.trang_thai = 'dang_ban'
-                AND (
-                    (bt.so_luong_ton >= qt.so_luong_qua)
-                    OR (bt.ma_bien_the IS NULL AND sp.so_luong_ton > 0)
-                )
+                ON qt.ma_bien_the_qua = bt.ma_bien_the
+            LEFT JOIN size_san_pham sz 
+                ON bt.ma_size = sz.ma_size
+            WHERE qt.ma_san_pham_chinh = ?
+              AND qt.trang_thai = 1
+              AND sp.trang_thai = 'dang_ban'
+              AND (
+                    (bt.ma_bien_the IS NOT NULL AND bt.so_luong_ton >= qt.so_luong_qua * ?)
+                    OR
+                    (bt.ma_bien_the IS NULL AND sp.so_luong_ton >= qt.so_luong_qua * ?)
+              )
         """;
 
-        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-
+        try (
+            Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, maSanPhamChinh);
+            ps.setInt(2, soLuongMua);
+            ps.setInt(3, soLuongMua);
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
+                int soLuongQua = rs.getInt("so_luong_qua") * soLuongMua;
+
                 GioHang q = new GioHang();
                 q.setMaSanPham(rs.getInt("ma_san_pham"));
                 q.setTenSanPham(rs.getString("ten_san_pham"));
                 q.setAnhChinh(rs.getString("anh_chinh"));
-                q.setSoLuong(rs.getInt("so_luong_qua") * soLuongMua);
-                if (rs.getInt("so_luong_ton") < rs.getInt("so_luong_qua")) {
-                    q.setHetHang(true);
-                }
+                q.setSoLuong(soLuongQua);
                 q.setMaBienThe(rs.getInt("ma_bien_the"));
                 q.setTenSize(rs.getString("ten_size"));
                 q.setDonGia(0);
+                q.setHetHang(false);
+
                 ds.add(q);
             }
 

@@ -51,6 +51,8 @@ public class CheckoutPopupServlet extends HttpServlet {
             return;
         }
 
+        
+
         List<PhuongThucVanChuyen> dsVanChuyen = phuongThucVanChuyenDAO.getDanhSachDangHoatDong();
         if (dsVanChuyen == null) {
             dsVanChuyen = new ArrayList<>();

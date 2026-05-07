@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
@@ -218,6 +219,22 @@
                                         <fmt:formatNumber value="${item.donGia * item.soLuong}" type="number"/>đ
                                     </div>
                                 </div>
+
+                                <c:if test="${not empty item.dsQuaTang}">
+                                    <div class="checkout-gift-list">
+                                        <c:forEach var="gift" items="${item.dsQuaTang}">
+                                            <div class="checkout-gift-item">
+                                                <img src="${pageContext.request.contextPath}/${gift.anhChinh}" alt="${gift.tenSanPham}"/>
+
+                                                <div>
+                                                    <p class="checkout-gift-name">${gift.tenSanPham}</p>
+                                                    <p class="checkout-gift-sub">Số lượng: ${gift.soLuong}</p>
+
+                                                </div>
+                                            </div>
+                                        </c:forEach>
+                                    </div>
+                                </c:if>
                             </c:forEach>
                         </div>
                     </div>
