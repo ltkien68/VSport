@@ -111,7 +111,7 @@
 >
     <div class="login-popup-panel">
         <button type="button" class="login-popup-close" id="closeLoginPopup" aria-label="Đóng">
-            x
+            ×
         </button>
 
         <div class="login-popup-inner">

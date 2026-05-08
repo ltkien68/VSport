@@ -19,6 +19,10 @@ public class SanPham {
     private String moTaNgan;
     private String moTaChiTiet;
     private String danhMucSlug;
+
+    
+    
+    private String tenNhomSanPham;
    
     private int nhomSanPham;
 
@@ -264,5 +268,13 @@ public class SanPham {
 
     public void setDoiBongSlug(String doiBongSlug) {
         this.doiBongSlug = doiBongSlug;
+    }
+    
+    public String getTenNhomSanPham() {
+        return tenNhomSanPham;
+    }
+
+    public void setTenNhomSanPham(String tenNhomSanPham) {
+        this.tenNhomSanPham = tenNhomSanPham;
     }
 }

@@ -611,6 +611,39 @@ public class SanPhamDAO {
         return list;
     }
 
+    public List<SanPham> getTatCaSanPham() {
+        List<SanPham> list = new ArrayList<>();
+
+        String sql = """
+        SELECT ma_san_pham, ten_san_pham, anh_chinh, gia_san_pham, nhom_san_pham
+        FROM san_pham
+        WHERE nhom_san_pham != 5
+        ORDER BY ngay_tao DESC
+    """;
+
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMaSanPham(rs.getInt("ma_san_pham"));
+                sp.setTenSanPham(rs.getString("ten_san_pham"));
+                sp.setAnhChinh(rs.getString("anh_chinh"));
+                sp.setGiaSanPham(rs.getDouble("gia_san_pham"));
+                sp.setNhomSanPham(rs.getInt("nhom_san_pham"));
+                sp.setTenNhomSanPham(
+                        getTenNhomSanPham(rs.getInt("nhom_san_pham"))
+                );
+
+                list.add(sp);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
     public List<SanPham> getSanPhamDaLoc(
             String doiBongSlug,
             String nhomSanPham,
@@ -712,6 +745,61 @@ public class SanPhamDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(mapResultSetToSanPham(rs));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    private String getTenNhomSanPham(int nhom) {
+        switch (nhom) {
+            case 1:
+                return "Áo Bóng Đá";
+
+            case 2:
+                return "Giày Bóng Đá";
+
+            case 3:
+                return "Phụ Kiện";
+
+            case 4:
+                return "Đồ Tập";
+
+            case 5:
+                return "Quà Tặng";
+
+            default:
+                return "Khác";
+        }
+    }
+
+    public List<SanPham> getSanPhamQuaTang() {
+        List<SanPham> list = new ArrayList<>();
+
+        String sql = """
+        SELECT ma_san_pham, ten_san_pham, anh_chinh, gia_san_pham, nhom_san_pham
+        FROM san_pham
+        WHERE nhom_san_pham = 5
+        ORDER BY ngay_tao DESC
+    """;
+
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMaSanPham(rs.getInt("ma_san_pham"));
+                sp.setTenSanPham(rs.getString("ten_san_pham"));
+                sp.setAnhChinh(rs.getString("anh_chinh"));
+                sp.setGiaSanPham(rs.getDouble("gia_san_pham"));
+                sp.setNhomSanPham(rs.getInt("nhom_san_pham"));
+                sp.setTenNhomSanPham(
+                        getTenNhomSanPham(rs.getInt("nhom_san_pham"))
+                );
+
+                list.add(sp);
             }
 
         } catch (Exception e) {
@@ -1107,13 +1195,13 @@ public class SanPhamDAO {
             sp.gia_niem_yet,
             sp.gia_khuyen_mai,
             sp.gia_san_pham,
-            sp.nhom_san_pham,
             sp.mo_ta_ngan,
             sp.ngay_tao,
             th.ten_thuong_hieu
         FROM san_pham sp
         LEFT JOIN thuong_hieu th ON sp.ma_thuong_hieu = th.ma_thuong_hieu
-        WHERE sp.trang_thai = 'dang_ban'
+        WHERE sp.nhom_san_pham != 5
+        AND sp.trang_thai = 'dang_ban'
         ORDER BY sp.ngay_tao DESC
         LIMIT ?
     """;
@@ -1127,7 +1215,6 @@ public class SanPhamDAO {
                     SanPham sp = new SanPham();
 
                     sp.setMaSanPham(rs.getInt("ma_san_pham"));
-                    sp.setNhomSanPham(rs.getInt("nhom_san_pham"));
                     sp.setTenSanPham(rs.getString("ten_san_pham"));
                     sp.setSlug(rs.getString("slug"));
                     sp.setAnhChinh(rs.getString("anh_chinh"));

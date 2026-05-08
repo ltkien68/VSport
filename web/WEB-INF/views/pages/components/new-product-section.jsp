@@ -22,68 +22,64 @@
                     <div id="newProductTrack" class="new-product-track">
 
                         <c:forEach var="sp" items="${dsSanPhamMoiThem}">
-                            <c:forEach var="sp" items="${dsSanPhamMoiThem}">
 
-                                <c:if test="${sp.nhomSanPham != 5}">
 
-                                    <div class="new-product-slide">
-                                        <a href="${pageContext.request.contextPath}/chi-tiet-san-pham/${sp.maSanPham}"
-                                           class="new-product-card">
+                            <div class="new-product-slide">
+                                <a href="${pageContext.request.contextPath}/chi-tiet-san-pham/${sp.maSanPham}"
+                                   class="new-product-card">
 
-                                            <div class="new-product-image-wrap">
-                                                <img src="${pageContext.request.contextPath}/${sp.anhChinh}"
-                                                     alt="${sp.tenSanPham}"
-                                                     class="new-product-image">
+                                    <div class="new-product-image-wrap">
+                                        <img src="${pageContext.request.contextPath}/${sp.anhChinh}"
+                                             alt="${sp.tenSanPham}"
+                                             class="new-product-image">
 
-                                                <img src="${pageContext.request.contextPath}/assets/images/others/news.png"
-                                                     alt="new.png"
-                                                     class="new-product-badge">
-                                            </div>
-
-                                            <div class="new-product-info">
-                                                <div class="new-product-price">
-
-                                                    <c:choose>
-                                                        <c:when test="${sp.giaKhuyenMai != null && sp.giaKhuyenMai > 0}">
-                                                            <span class="new-product-sale-price">
-                                                                <fmt:formatNumber value="${sp.giaKhuyenMai}" type="number" groupingUsed="true"/>đ
-                                                            </span>
-
-                                                            <span class="new-product-old-price">
-                                                                <fmt:formatNumber value="${sp.giaNiemYet}" type="number" groupingUsed="true"/>đ
-                                                            </span>
-                                                        </c:when>
-
-                                                        <c:otherwise>
-                                                            <span class="new-product-normal-price">
-                                                                <fmt:formatNumber value="${sp.giaSanPham}" type="number" groupingUsed="true"/>đ
-                                                            </span>
-                                                        </c:otherwise>
-                                                    </c:choose>
-
-                                                </div>
-
-                                                <h3 class="new-product-card-title">${sp.tenSanPham}</h3>
-
-                                                <p class="new-product-card-desc">
-                                                <c:choose>
-                                                    <c:when test="${not empty sp.moTaNgan}">
-                                                        ${sp.moTaNgan}
-                                                    </c:when>
-
-                                                    <c:otherwise>
-                                                        Sản phẩm mới.
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                </p>
-                                            </div>
-
-                                        </a>
+                                        <img src="${pageContext.request.contextPath}/assets/images/others/news.png"
+                                             alt="new.png"
+                                             class="new-product-badge">
                                     </div>
 
-                                </c:if>
+                                    <div class="new-product-info">
+                                        <div class="new-product-price">
 
-                            </c:forEach>
+                                            <c:choose>
+                                                <c:when test="${sp.giaKhuyenMai != null && sp.giaKhuyenMai > 0}">
+                                                    <span class="new-product-sale-price">
+                                                        <fmt:formatNumber value="${sp.giaKhuyenMai}" type="number" groupingUsed="true"/>đ
+                                                    </span>
+
+                                                    <span class="new-product-old-price">
+                                                        <fmt:formatNumber value="${sp.giaNiemYet}" type="number" groupingUsed="true"/>đ
+                                                    </span>
+                                                </c:when>
+
+                                                <c:otherwise>
+                                                    <span class="new-product-normal-price">
+                                                        <fmt:formatNumber value="${sp.giaSanPham}" type="number" groupingUsed="true"/>đ
+                                                    </span>
+                                                </c:otherwise>
+                                            </c:choose>
+
+                                        </div>
+
+                                        <h3 class="new-product-card-title">${sp.tenSanPham}</h3>
+
+                                        <p class="new-product-card-desc">
+                                        <c:choose>
+                                            <c:when test="${not empty sp.moTaNgan}">
+                                                ${sp.moTaNgan}
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                Sản phẩm mới.
+                                            </c:otherwise>
+                                        </c:choose>
+                                        </p>
+                                    </div>
+
+                                </a>
+                            </div>
+
+
                         </c:forEach>
 
                     </div>
