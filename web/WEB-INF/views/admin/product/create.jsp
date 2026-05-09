@@ -6,7 +6,7 @@
 <div class="admin-product-popup" id="addProductPopup">
     <div class="admin-product-popup-header">
         <h2>Thêm sản phẩm mới</h2>
-        <button type="button" class="admin-product-popup-close" id="closeAddProductPopup">×</button>
+            <button type="button" class="admin-product-popup-close" id="closeAddProductPopup">×</button>
     </div>
 
     <form id="addProductWithCapitalForm"

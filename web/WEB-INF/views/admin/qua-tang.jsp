@@ -3,6 +3,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="model.SanPham" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <%
     List<SanPham> dsSanPham = (List<SanPham>) request.getAttribute("dsSanPham");
@@ -69,10 +70,105 @@
                                 <p class="admin-gift-subtitle">Chọn sản phẩm thường và quản lý danh sách sản phẩm quà tặng.</p>
                             </div>
 
-                            <button type="button" class="admin-gift-btn admin-gift-btn-primary">
+                            <!-- BUTTON -->
+                            <button type="button"
+                                    class="admin-gift-btn admin-gift-btn-primary"
+                                    id="openGiftPopupBtn">
+
                                 <span>＋</span>
                                 <span>Thêm Quà Tặng</span>
                             </button>
+
+                            <!-- POPUP -->
+                            <div class="gift-popup-overlay" id="giftPopup">
+
+                                <div class="gift-popup-box">
+
+                                    <!-- HEADER -->
+                                    <div class="gift-popup-header">
+                                        <h2>Tạo Liên Kết Quà Tặng</h2>
+
+                                        <button type="button"
+                                                class="gift-popup-close"
+                                                id="closeGiftPopupBtn">
+                                            ×
+                                        </button>
+                                    </div>
+
+                                    <!-- FORM -->
+                                    <form action="${pageContext.request.contextPath}/admin/qua-tang/them-qua-tang"
+                                          method="post"
+                                          class="gift-popup-form">
+
+                                        <!-- SẢN PHẨM CHÍNH -->
+                                        <div class="gift-form-group">
+                                            <label>Sản phẩm chính</label>
+
+                                            <select name="maSanPhamChinh" required>
+                                                <option value="">-- Chọn sản phẩm --</option>
+
+                                                <c:forEach var="sp" items="${dsSanPham}">
+                                                    <option value="${sp.maSanPham}">
+                                                        ${sp.tenSanPham}
+                                                    </option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+
+                                        <!-- QUÀ TẶNG -->
+                                        <div class="gift-form-group">
+                                            <label>Sản phẩm quà tặng</label>
+
+                                            <select name="maSanPhamQua" id="giftProductSelect" required>
+                                                <option value="">-- Chọn quà tặng --</option>
+
+                                                <c:forEach var="q" items="${dsQuaTang}">
+                                                    <option value="${q.maSanPham}">
+                                                        ${q.tenSanPham}
+                                                    </option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+
+                                        <!-- BIẾN THỂ -->
+                                        <div class="gift-form-group">
+                                            <label>Biến thể quà</label>
+
+                                            <select name="maBienTheQua" id="giftVariantSelect">
+                                                <option value="0">Không có size</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- SỐ LƯỢNG -->
+                                        <div class="gift-form-group">
+                                            <label>Số lượng quà</label>
+
+                                            <input type="number"
+                                                   name="soLuongQua"
+                                                   min="1"
+                                                   value="1"
+                                                   required>
+                                        </div>
+
+                                        <!-- ACTION -->
+                                        <div class="gift-popup-actions">
+
+                                            <button type="button"
+                                                    class="admin-gift-btn admin-gift-btn-cancel"
+                                                    id="cancelGiftPopupBtn">
+                                                Hủy
+                                            </button>
+
+                                            <button type="submit"
+                                                    class="admin-gift-btn admin-gift-btn-primary">
+                                                Tạo Quà Tặng
+                                            </button>
+
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
                         </div>
 
                         <!-- LIST SẢN PHẨM -->
@@ -218,5 +314,6 @@
         <script>
             lucide.createIcons();
         </script>
+        <script src="${pageContext.request.contextPath}/assets/js/admin/admin-qua-tang.js"></script>
     </body>
 </html>
