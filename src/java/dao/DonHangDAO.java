@@ -69,9 +69,11 @@ public class DonHangDAO {
                 so_luong,
                 thanh_tien,
                 ten_in_ao,
-                so_in_ao
+                so_in_ao,
+                la_qua_tang,
+                ma_san_pham_chinh
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """;
 
         Connection conn = null;
@@ -101,6 +103,29 @@ public class DonHangDAO {
             conn.setAutoCommit(false);
 
             // 1. Trừ tồn kho
+            for (GioHang item : dsGioHang) {
+
+                System.out.println("SP: " + item.getTenSanPham());
+
+                if (item.getDsQuaTang() != null) {
+
+                    for (GioHang qt : item.getDsQuaTang()) {
+
+                        System.out.println(
+                                "QUA: "
+                                + qt.getTenSanPham()
+                                + " - BienThe: "
+                                + qt.getMaBienThe()
+                                + " - SL: "
+                                + qt.getSoLuong()
+                        );
+                    }
+
+                } else {
+
+                    System.out.println("KHONG CO QUA");
+                }
+            }
             kiemTraVaTruTonKho(conn, dsGioHang);
 
             // 2. Insert đơn hàng
@@ -192,8 +217,41 @@ public class DonHangDAO {
 
                 psChiTiet.setString(9, item.getTenInAo());
                 psChiTiet.setString(10, item.getSoInAo());
+                psChiTiet.setBoolean(11, false);
+                psChiTiet.setNull(12, Types.INTEGER);
 
                 psChiTiet.addBatch();
+
+                if (item.getDsQuaTang() != null) {
+
+                    for (GioHang qt : item.getDsQuaTang()) {
+
+                        psChiTiet.setInt(1, maDonHang);
+                        psChiTiet.setInt(2, qt.getMaSanPham());
+
+                        if (qt.getMaBienThe() > 0) {
+                            psChiTiet.setInt(3, qt.getMaBienThe());
+                        } else {
+                            psChiTiet.setNull(3, Types.INTEGER);
+                        }
+
+                        psChiTiet.setString(4, qt.getTenSanPham());
+                        psChiTiet.setString(5, qt.getTenSize());
+
+                        psChiTiet.setDouble(6, 0);
+                        psChiTiet.setInt(7, qt.getSoLuong());
+                        psChiTiet.setDouble(8, 0);
+
+                        psChiTiet.setNull(9, Types.VARCHAR);
+                        psChiTiet.setNull(10, Types.VARCHAR);
+
+                        psChiTiet.setBoolean(11, true);
+
+                        psChiTiet.setInt(12, item.getMaSanPham());
+
+                        psChiTiet.addBatch();
+                    }
+                }
             }
 
             psChiTiet.executeBatch();
@@ -241,55 +299,94 @@ public class DonHangDAO {
         return false;
     }
 
-    private void kiemTraVaTruTonKho(Connection conn, List<GioHang> dsGioHang) throws Exception {
+    private void truTonKhoBienThe(
+            Connection conn,
+            PreparedStatement psCheck,
+            PreparedStatement psUpdate,
+            int maBienThe,
+            int soLuong
+    ) throws Exception {
+
+        if (maBienThe <= 0) {
+            throw new Exception("Thiếu mã biến thể.");
+        }
+
+        if (soLuong <= 0) {
+            throw new Exception("Số lượng không hợp lệ.");
+        }
+
+        psCheck.setInt(1, maBienThe);
+
+        try (ResultSet rs = psCheck.executeQuery()) {
+
+            if (!rs.next()) {
+                throw new Exception("Biến thể không tồn tại: " + maBienThe);
+            }
+
+            int tonKho = rs.getInt("so_luong_ton");
+
+            if (tonKho < soLuong) {
+                throw new Exception("Không đủ tồn kho cho biến thể " + maBienThe);
+            }
+        }
+
+        psUpdate.setInt(1, soLuong);
+        psUpdate.setInt(2, maBienThe);
+        psUpdate.setInt(3, soLuong);
+
+        int updated = psUpdate.executeUpdate();
+
+        if (updated <= 0) {
+            throw new Exception("Không thể cập nhật tồn kho.");
+        }
+    }
+
+    private void kiemTraVaTruTonKho(
+            Connection conn,
+            List<GioHang> dsGioHang
+    ) throws Exception {
+
         String sqlCheck = """
-            SELECT so_luong_ton
-            FROM bien_the_san_pham
-            WHERE ma_bien_the = ?
-            FOR UPDATE
-        """;
+        SELECT so_luong_ton
+        FROM bien_the_san_pham
+        WHERE ma_bien_the = ?
+        FOR UPDATE
+    """;
 
         String sqlUpdate = """
-            UPDATE bien_the_san_pham
-            SET so_luong_ton = so_luong_ton - ?
-            WHERE ma_bien_the = ?
-              AND so_luong_ton >= ?
-        """;
+        UPDATE bien_the_san_pham
+        SET so_luong_ton = so_luong_ton - ?
+        WHERE ma_bien_the = ?
+          AND so_luong_ton >= ?
+    """;
 
-        try (PreparedStatement psCheck = conn.prepareStatement(sqlCheck); PreparedStatement psUpdate = conn.prepareStatement(sqlUpdate)) {
+        try (
+                PreparedStatement psCheck = conn.prepareStatement(sqlCheck); PreparedStatement psUpdate = conn.prepareStatement(sqlUpdate)) {
 
             for (GioHang item : dsGioHang) {
-                int maBienThe = item.getMaBienThe();
-                int soLuongMua = item.getSoLuong();
 
-                if (maBienThe <= 0) {
-                    throw new Exception("Thiếu mã biến thể trong giỏ hàng.");
-                }
+                // SP chính
+                truTonKhoBienThe(
+                        conn,
+                        psCheck,
+                        psUpdate,
+                        item.getMaBienThe(),
+                        item.getSoLuong()
+                );
 
-                if (soLuongMua <= 0) {
-                    throw new Exception("Số lượng mua không hợp lệ.");
-                }
+                // Quà tặng
+                if (item.getDsQuaTang() != null) {
 
-                psCheck.setInt(1, maBienThe);
+                    for (GioHang qt : item.getDsQuaTang()) {
 
-                try (ResultSet rs = psCheck.executeQuery()) {
-                    if (!rs.next()) {
-                        throw new Exception("Biến thể không tồn tại: " + maBienThe);
+                        truTonKhoBienThe(
+                                conn,
+                                psCheck,
+                                psUpdate,
+                                qt.getMaBienThe(),
+                                qt.getSoLuong()
+                        );
                     }
-
-                    int tonKho = rs.getInt("so_luong_ton");
-                    if (tonKho < soLuongMua) {
-                        throw new Exception("Không đủ tồn kho cho biến thể " + maBienThe);
-                    }
-                }
-
-                psUpdate.setInt(1, soLuongMua);
-                psUpdate.setInt(2, maBienThe);
-                psUpdate.setInt(3, soLuongMua);
-
-                int updated = psUpdate.executeUpdate();
-                if (updated <= 0) {
-                    throw new Exception("Không thể cập nhật tồn kho cho biến thể " + maBienThe);
                 }
             }
         }

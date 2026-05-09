@@ -122,6 +122,13 @@ public class TaoDonHangServlet extends HttpServlet {
             tongThanhToan = 0;
         }
 
+        for (GioHang item : dsGioHang) {
+
+            List<GioHang> dsQuaTang = gioHangDAO.layQuaTangTheoSanPham(item.getMaSanPham(), item.getSoLuong());
+
+            item.setDsQuaTang(dsQuaTang);
+        }
+
         boolean taoThanhCong = donHangDAO.taoDonHang(
                 maNguoiDung,
                 hoTenNguoiNhan.trim(),

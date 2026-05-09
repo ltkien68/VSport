@@ -1,6 +1,7 @@
 package controller;
 
 import dao.DonHangDAO;
+import dao.SanPhamDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import model.ChiTietDonHang;
 import model.DonHang;
 import model.NguoiDung;
+import model.SanPham;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,6 +22,8 @@ import java.util.Map;
 public class DonHangServlet extends HttpServlet {
 
     private final DonHangDAO donHangDAO = new DonHangDAO();
+
+    private final SanPhamDAO sanPhamDAO = new SanPhamDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -49,13 +53,18 @@ public class DonHangServlet extends HttpServlet {
         // 3. Load đơn hàng của user
         List<DonHang> dsDonHang = donHangDAO.getDanhSachDonHangTheoNguoiDung(maNguoiDung);
         Map<Integer, List<ChiTietDonHang>> mapChiTiet = new HashMap<>();
+        Map<Integer, List<SanPham>> mapQuaTang = new HashMap<>();
 
         for (DonHang donHang : dsDonHang) {
-            List<ChiTietDonHang> dsChiTiet =
-                    donHangDAO.getChiTietDonHangTheoMaDonHang(donHang.getMaDonHang());
+            List<ChiTietDonHang> dsChiTiet
+                    = donHangDAO.getChiTietDonHangTheoMaDonHang(donHang.getMaDonHang());
             mapChiTiet.put(donHang.getMaDonHang(), dsChiTiet);
+
+            List<SanPham> dsQuaTang = sanPhamDAO.getSanPhamQuaTang();
+            mapQuaTang.put(donHang.getMaDonHang(), dsQuaTang);
         }
 
+        request.setAttribute("mapQuaTang", mapQuaTang);
         request.setAttribute("dsDonHang", dsDonHang);
         request.setAttribute("mapChiTiet", mapChiTiet);
         request.setAttribute("nguoiDung", nguoiDung);
