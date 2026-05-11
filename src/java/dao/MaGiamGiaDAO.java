@@ -1036,7 +1036,8 @@ public class MaGiamGiaDAO {
     public boolean xoaMaGiamGia(int maGiamGia) {
 
         String sql = """
-            DELETE FROM ma_giam_gia
+            UPDATE ma_giam_gia
+            SET trang_thai = 'an'
             WHERE ma_giam_gia = ?
         """;
 

@@ -850,7 +850,8 @@ public class DonHangDAO {
         SELECT ma_don_hang, ma_nguoi_dung, tong_thanh_toan
         FROM don_hang
         WHERE ma_don_hang = ?
-          AND trang_thai_thanh_toan = 'da_thanh_toan'
+            AND trang_thai_thanh_toan = 'da_thanh_toan'
+            AND trang_thai_don_hang = 'da_giao'
         LIMIT 1
     """;
 
