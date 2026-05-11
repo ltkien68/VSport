@@ -739,6 +739,8 @@ public class DonHangDAO {
 
             psUpdateDaBan.setInt(1, maDonHang);
             psUpdateDaBan.executeUpdate();
+            
+            xuLyCongVonVaGhiDoanhThu(conn, maDonHang);
 
             return true;
         }
