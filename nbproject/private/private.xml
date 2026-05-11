@@ -241,6 +241,9 @@
             <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/js/admin/weekly-stat-popup.js</file>
             <file>file:/D:/Code_files/VSPORT/VsportWeb/src/java/controller/admin/AdminWeeklyStatsServlet.java</file>
             <file>file:/D:/Code_files/VSPORT/VsportWeb/src/java/dao/DashboardWeeklyStatsDAO.java</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/web/WEB-INF/views/admin/qua-tang.jsp</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/css/admin/admin-qua-tang.css</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/src/java/controller/admin/AdminQuaTangServlet.java</file>
         </group>
     </open-files>
 </project-private>

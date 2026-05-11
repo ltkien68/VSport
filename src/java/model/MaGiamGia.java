@@ -8,7 +8,7 @@ public class MaGiamGia {
     private String maCode;
     private String tenMa;
     private BigDecimal giaTriGiam;
-    private BigDecimal dieuKienToiThieu;
+    private BigDecimal dieuKienToiThieu;    
     private Timestamp ngayBatDau;
     private Timestamp ngayKetThuc;
     private int soLuong;

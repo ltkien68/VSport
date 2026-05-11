@@ -153,6 +153,8 @@
                 <a class="admin-sidebar-sublink" href="${pageContext.request.contextPath}/admin/danh-muc">Danh Mục</a>
                 <a class="admin-sidebar-sublink" href="${pageContext.request.contextPath}/admin/thuong-hieu">Thương Hiệu</a>
                 <a class="admin-sidebar-sublink" href="javascript:void(0)">Đội Bóng</a>
+                <a class="admin-sidebar-sublink" href="${pageContext.request.contextPath}/admin/qua-tang">Quà tặng</a>
+                <a class="admin-sidebar-sublink" href="${pageContext.request.contextPath}/admin/ma-giam-gia">Mã giảm giá</a>
             </div>
 
             <a class="admin-sidebar-link" href="javascript:void(0)">

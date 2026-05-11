@@ -21,8 +21,7 @@ public class MaGiamGiaDAO {
     public int getTongXuNguoiDung(int maNguoiDung) {
         String sql = "SELECT so_xu FROM nguoi_dung WHERE ma_nguoi_dung = ?";
 
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, maNguoiDung);
 
@@ -74,8 +73,7 @@ public class MaGiamGiaDAO {
                 d.ngay_doi DESC
         """;
 
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, maNguoiDung);
 
@@ -91,11 +89,11 @@ public class MaGiamGiaDAO {
 
         return list;
     }
-    
-    public List<MaGiamGia> getDanhSachMaSoHuuKhaDung(int maNguoiDung) {
-    List<MaGiamGia> list = new ArrayList<>();
 
-    String sql = """
+    public List<MaGiamGia> getDanhSachMaSoHuuKhaDung(int maNguoiDung) {
+        List<MaGiamGia> list = new ArrayList<>();
+
+        String sql = """
         SELECT 
             d.ma_doi,
             d.so_xu_da_doi,
@@ -125,23 +123,22 @@ public class MaGiamGiaDAO {
         ORDER BY d.ngay_doi DESC
     """;
 
-    try (Connection conn = getConnection();
-         PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
-        ps.setInt(1, maNguoiDung);
+            ps.setInt(1, maNguoiDung);
 
-        try (ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                list.add(mapSoHuu(rs));
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(mapSoHuu(rs));
+                }
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-    } catch (Exception e) {
-        e.printStackTrace();
+        return list;
     }
-
-    return list;
-}
 
     public List<MaGiamGia> getDanhSachMaCoTheDoi() {
         List<MaGiamGia> list = new ArrayList<>();
@@ -170,9 +167,7 @@ public class MaGiamGiaDAO {
             ORDER BY so_xu_can ASC, ngay_ket_thuc ASC
         """;
 
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 list.add(mapBase(rs));
@@ -186,9 +181,9 @@ public class MaGiamGiaDAO {
     }
 
     public List<LichSuMaGiamGia> getLichSuNhanVaDungMa(int maNguoiDung) {
-    List<LichSuMaGiamGia> list = new ArrayList<>();
+        List<LichSuMaGiamGia> list = new ArrayList<>();
 
-    String sql = """
+        String sql = """
         SELECT 
             x.loai_lich_su,
             x.ma_code,
@@ -230,42 +225,41 @@ public class MaGiamGiaDAO {
         ORDER BY x.thoi_gian DESC
     """;
 
-    try (Connection conn = getConnection();
-         PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
-        ps.setInt(1, maNguoiDung);
-        ps.setInt(2, maNguoiDung);
+            ps.setInt(1, maNguoiDung);
+            ps.setInt(2, maNguoiDung);
 
-        try (ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                LichSuMaGiamGia item = new LichSuMaGiamGia();
-                item.setLoaiLichSu(rs.getString("loai_lich_su"));
-                item.setMaCode(rs.getString("ma_code"));
-                item.setTenMa(rs.getString("ten_ma"));
-                item.setThoiGian(rs.getTimestamp("thoi_gian"));
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    LichSuMaGiamGia item = new LichSuMaGiamGia();
+                    item.setLoaiLichSu(rs.getString("loai_lich_su"));
+                    item.setMaCode(rs.getString("ma_code"));
+                    item.setTenMa(rs.getString("ten_ma"));
+                    item.setThoiGian(rs.getTimestamp("thoi_gian"));
 
-                int thayDoiXu = rs.getInt("thay_doi_xu");
-                if (!rs.wasNull()) {
-                    item.setThayDoiXu(thayDoiXu);
-                } else {
-                    item.setThayDoiXu(null);
+                    int thayDoiXu = rs.getInt("thay_doi_xu");
+                    if (!rs.wasNull()) {
+                        item.setThayDoiXu(thayDoiXu);
+                    } else {
+                        item.setThayDoiXu(null);
+                    }
+
+                    BigDecimal soTienGiam = rs.getBigDecimal("so_tien_giam");
+                    item.setSoTienGiam(soTienGiam);
+
+                    item.setMoTa(rs.getString("mo_ta"));
+                    item.setTrangThai(rs.getString("trang_thai"));
+                    list.add(item);
                 }
-
-                BigDecimal soTienGiam = rs.getBigDecimal("so_tien_giam");
-                item.setSoTienGiam(soTienGiam);
-
-                item.setMoTa(rs.getString("mo_ta"));
-                item.setTrangThai(rs.getString("trang_thai"));
-                list.add(item);
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-    } catch (Exception e) {
-        e.printStackTrace();
+        return list;
     }
-
-    return list;
-}
 
     public String doiMaBangXu(int maNguoiDung, int maGiamGia) {
         Connection conn = null;
@@ -382,10 +376,7 @@ public class MaGiamGiaDAO {
                 return "not_enough_xu";
             }
 
-            try (PreparedStatement ps1 = conn.prepareStatement(sqlUpdateXu);
-                 PreparedStatement ps2 = conn.prepareStatement(sqlUpdateStock);
-                 PreparedStatement ps3 = conn.prepareStatement(sqlInsertDoi);
-                 PreparedStatement ps4 = conn.prepareStatement(sqlInsertLichSuXu)) {
+            try (PreparedStatement ps1 = conn.prepareStatement(sqlUpdateXu); PreparedStatement ps2 = conn.prepareStatement(sqlUpdateStock); PreparedStatement ps3 = conn.prepareStatement(sqlInsertDoi); PreparedStatement ps4 = conn.prepareStatement(sqlInsertLichSuXu)) {
 
                 ps1.setInt(1, soXuCan);
                 ps1.setInt(2, maNguoiDung);
@@ -411,7 +402,9 @@ public class MaGiamGiaDAO {
         } catch (Exception e) {
             e.printStackTrace();
             try {
-                if (conn != null) conn.rollback();
+                if (conn != null) {
+                    conn.rollback();
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -427,8 +420,6 @@ public class MaGiamGiaDAO {
         }
     }
 
-    
-
     public boolean nguoiDungCoMaChuaDung(int maNguoiDung, int maGiamGia) {
         String sql = """
             SELECT 1
@@ -439,8 +430,7 @@ public class MaGiamGiaDAO {
             LIMIT 1
         """;
 
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, maNguoiDung);
             ps.setInt(2, maGiamGia);
@@ -464,8 +454,7 @@ public class MaGiamGiaDAO {
             LIMIT 1
         """;
 
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, maNguoiDung);
             ps.setInt(2, maGiamGia);
@@ -487,8 +476,7 @@ public class MaGiamGiaDAO {
             VALUES (?, ?)
         """;
 
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, maNguoiDung);
             ps.setInt(2, maGiamGia);
@@ -509,8 +497,7 @@ public class MaGiamGiaDAO {
             WHERE ma_giam_gia = ?
         """;
 
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, maGiamGia);
             return ps.executeUpdate() > 0;
@@ -533,8 +520,7 @@ public class MaGiamGiaDAO {
             LIMIT 1
         """;
 
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, maNguoiDung);
             ps.setInt(2, maGiamGia);
@@ -575,8 +561,7 @@ public class MaGiamGiaDAO {
             ORDER BY d.ngay_doi DESC
         """;
 
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, maNguoiDung);
 
@@ -605,9 +590,9 @@ public class MaGiamGiaDAO {
 
         return list;
     }
-    
+
     public MaGiamGiaResult kiemTraMaGiamGiaTheoId(int maGiamGia, int maNguoiDung, double tongTienHang) {
-    String sql = """
+        String sql = """
         SELECT 
             ma_giam_gia,
             ma_code,
@@ -629,64 +614,63 @@ public class MaGiamGiaDAO {
         LIMIT 1
     """;
 
-    try (Connection conn = getConnection();
-         PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
-        ps.setInt(1, maGiamGia);
+            ps.setInt(1, maGiamGia);
 
-        try (ResultSet rs = ps.executeQuery()) {
+            try (ResultSet rs = ps.executeQuery()) {
 
-            if (!rs.next()) {
-                return new MaGiamGiaResult(false, "Mã giảm giá không tồn tại hoặc đã hết hạn.");
-            }
-
-            double giaTriGiam = rs.getDouble("gia_tri_giam");
-            double dieuKienToiThieu = rs.getDouble("dieu_kien_toi_thieu");
-            String loaiGiam = rs.getString("loai_giam");
-            double giamToiDa = rs.getDouble("giam_toi_da");
-            boolean giamToiDaNull = rs.wasNull();
-            String maCode = rs.getString("ma_code"); // chỉ để hiển thị
-
-            if (!nguoiDungCoMaChuaDung(maNguoiDung, maGiamGia)) {
-                return new MaGiamGiaResult(false, "Bạn chưa sở hữu mã này hoặc mã đã được sử dụng.");
-            }
-
-            if (tongTienHang < dieuKienToiThieu) {
-                return new MaGiamGiaResult(false, "Đơn hàng chưa đạt giá trị tối thiểu để dùng mã.");
-            }
-
-            double soTienGiam = 0;
-
-            if ("tien".equals(loaiGiam)) {
-                soTienGiam = giaTriGiam;
-            } else if ("phan_tram".equals(loaiGiam)) {
-                soTienGiam = tongTienHang * giaTriGiam / 100.0;
-
-                if (!giamToiDaNull && giamToiDa > 0 && soTienGiam > giamToiDa) {
-                    soTienGiam = giamToiDa;
+                if (!rs.next()) {
+                    return new MaGiamGiaResult(false, "Mã giảm giá không tồn tại hoặc đã hết hạn.");
                 }
+
+                double giaTriGiam = rs.getDouble("gia_tri_giam");
+                double dieuKienToiThieu = rs.getDouble("dieu_kien_toi_thieu");
+                String loaiGiam = rs.getString("loai_giam");
+                double giamToiDa = rs.getDouble("giam_toi_da");
+                boolean giamToiDaNull = rs.wasNull();
+                String maCode = rs.getString("ma_code"); // chỉ để hiển thị
+
+                if (!nguoiDungCoMaChuaDung(maNguoiDung, maGiamGia)) {
+                    return new MaGiamGiaResult(false, "Bạn chưa sở hữu mã này hoặc mã đã được sử dụng.");
+                }
+
+                if (tongTienHang < dieuKienToiThieu) {
+                    return new MaGiamGiaResult(false, "Đơn hàng chưa đạt giá trị tối thiểu để dùng mã.");
+                }
+
+                double soTienGiam = 0;
+
+                if ("tien".equals(loaiGiam)) {
+                    soTienGiam = giaTriGiam;
+                } else if ("phan_tram".equals(loaiGiam)) {
+                    soTienGiam = tongTienHang * giaTriGiam / 100.0;
+
+                    if (!giamToiDaNull && giamToiDa > 0 && soTienGiam > giamToiDa) {
+                        soTienGiam = giamToiDa;
+                    }
+                }
+
+                if (soTienGiam > tongTienHang) {
+                    soTienGiam = tongTienHang;
+                }
+
+                MaGiamGiaResult result = new MaGiamGiaResult(true, "Áp dụng mã thành công.");
+                result.setMaGiamGia(maGiamGia);
+                result.setMaCode(maCode);
+                result.setSoTienGiam(soTienGiam);
+                result.setLoaiGiam(loaiGiam);
+                result.setGiaTriGiam(giaTriGiam);
+
+                return result;
             }
 
-            if (soTienGiam > tongTienHang) {
-                soTienGiam = tongTienHang;
-            }
-
-            MaGiamGiaResult result = new MaGiamGiaResult(true, "Áp dụng mã thành công.");
-            result.setMaGiamGia(maGiamGia);
-            result.setMaCode(maCode);
-            result.setSoTienGiam(soTienGiam);
-            result.setLoaiGiam(loaiGiam);
-            result.setGiaTriGiam(giaTriGiam);
-
-            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-    } catch (Exception e) {
-        e.printStackTrace();
+        return new MaGiamGiaResult(false, "Có lỗi khi kiểm tra mã giảm giá.");
     }
-
-    return new MaGiamGiaResult(false, "Có lỗi khi kiểm tra mã giảm giá.");
-}
 
     private MaGiamGia mapBase(ResultSet rs) throws SQLException {
         MaGiamGia item = new MaGiamGia();
@@ -714,48 +698,47 @@ public class MaGiamGiaDAO {
         item.setTrangThaiSoHuu(rs.getString("trang_thai_so_huu"));
         return item;
     }
-    
+
     public MaGiamGia getMaGiamGiaTheoId(int id) {
-    String sql = "SELECT * FROM ma_giam_gia WHERE ma_giam_gia = ?";
+        String sql = "SELECT * FROM ma_giam_gia WHERE ma_giam_gia = ?";
 
-    try (Connection conn = DBConnection.getConnection();
-         PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
-        ps.setInt(1, id);
+            ps.setInt(1, id);
 
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            MaGiamGia m = new MaGiamGia();
-            m.setMaGiamGia(rs.getInt("ma_giam_gia"));
-            m.setMaCode(rs.getString("ma_code"));
-            m.setLoaiGiam(rs.getString("loai_giam"));
-            m.setGiaTriGiam(rs.getBigDecimal("gia_tri_giam"));
-            m.setGiamToiDa(rs.getBigDecimal("giam_toi_da"));
-            return m;
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                MaGiamGia m = new MaGiamGia();
+                m.setMaGiamGia(rs.getInt("ma_giam_gia"));
+                m.setMaCode(rs.getString("ma_code"));
+                m.setLoaiGiam(rs.getString("loai_giam"));
+                m.setGiaTriGiam(rs.getBigDecimal("gia_tri_giam"));
+                m.setGiamToiDa(rs.getBigDecimal("giam_toi_da"));
+                return m;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-    } catch (Exception e) {
-        e.printStackTrace();
+        return null;
     }
 
-    return null;
-}
-    
     public boolean congLaiSoLuongMa(int maGiamGia, Connection conn) throws SQLException {
-    String sql = """
+        String sql = """
         UPDATE ma_giam_gia
         SET so_luong = so_luong + 1
         WHERE ma_giam_gia = ?
     """;
 
-    try (PreparedStatement ps = conn.prepareStatement(sql)) {
-        ps.setInt(1, maGiamGia);
-        return ps.executeUpdate() > 0;
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, maGiamGia);
+            return ps.executeUpdate() > 0;
+        }
     }
-}
 
-public boolean hoanTrangThaiMaChoNguoiDung(int maNguoiDung, int maGiamGia, Connection conn) throws SQLException {
-    String sql = """
+    public boolean hoanTrangThaiMaChoNguoiDung(int maNguoiDung, int maGiamGia, Connection conn) throws SQLException {
+        String sql = """
         UPDATE doi_xu_ma_giam_gia
         SET trang_thai = 'chua_dung'
         WHERE ma_nguoi_dung = ?
@@ -765,60 +748,60 @@ public boolean hoanTrangThaiMaChoNguoiDung(int maNguoiDung, int maGiamGia, Conne
         LIMIT 1
     """;
 
-    try (PreparedStatement ps = conn.prepareStatement(sql)) {
-        ps.setInt(1, maNguoiDung);
-        ps.setInt(2, maGiamGia);
-        return ps.executeUpdate() > 0;
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, maNguoiDung);
+            ps.setInt(2, maGiamGia);
+            return ps.executeUpdate() > 0;
+        }
     }
-}
 
-public boolean themLichSuDungMa(int maNguoiDung, int maGiamGia, Integer maDonHang, double soTienGiam, Connection conn) throws SQLException {
-    String sql = """
+    public boolean themLichSuDungMa(int maNguoiDung, int maGiamGia, Integer maDonHang, double soTienGiam, Connection conn) throws SQLException {
+        String sql = """
         INSERT INTO lich_su_ma_giam_gia
         (ma_nguoi_dung, ma_giam_gia, ma_don_hang, loai_lich_su, so_tien_giam, mo_ta, ngay_tao)
         VALUES (?, ?, ?, 'dung_ma', ?, ?, CURRENT_TIMESTAMP)
     """;
 
-    try (PreparedStatement ps = conn.prepareStatement(sql)) {
-        ps.setInt(1, maNguoiDung);
-        ps.setInt(2, maGiamGia);
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, maNguoiDung);
+            ps.setInt(2, maGiamGia);
 
-        if (maDonHang != null) {
-            ps.setInt(3, maDonHang);
-        } else {
-            ps.setNull(3, Types.INTEGER);
+            if (maDonHang != null) {
+                ps.setInt(3, maDonHang);
+            } else {
+                ps.setNull(3, Types.INTEGER);
+            }
+
+            ps.setDouble(4, soTienGiam);
+            ps.setString(5, "Sử dụng mã giảm giá cho đơn hàng #" + maDonHang);
+            return ps.executeUpdate() > 0;
         }
-
-        ps.setDouble(4, soTienGiam);
-        ps.setString(5, "Sử dụng mã giảm giá cho đơn hàng #" + maDonHang);
-        return ps.executeUpdate() > 0;
     }
-}
 
-public boolean themLichSuHoanMa(int maNguoiDung, int maGiamGia, Integer maDonHang, String moTa, Connection conn) throws SQLException {
-    String sql = """
+    public boolean themLichSuHoanMa(int maNguoiDung, int maGiamGia, Integer maDonHang, String moTa, Connection conn) throws SQLException {
+        String sql = """
         INSERT INTO lich_su_ma_giam_gia
         (ma_nguoi_dung, ma_giam_gia, ma_don_hang, loai_lich_su, so_tien_giam, mo_ta, ngay_tao)
         VALUES (?, ?, ?, 'hoan_ma', NULL, ?, CURRENT_TIMESTAMP)
     """;
 
-    try (PreparedStatement ps = conn.prepareStatement(sql)) {
-        ps.setInt(1, maNguoiDung);
-        ps.setInt(2, maGiamGia);
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, maNguoiDung);
+            ps.setInt(2, maGiamGia);
 
-        if (maDonHang != null) {
-            ps.setInt(3, maDonHang);
-        } else {
-            ps.setNull(3, Types.INTEGER);
+            if (maDonHang != null) {
+                ps.setInt(3, maDonHang);
+            } else {
+                ps.setNull(3, Types.INTEGER);
+            }
+
+            ps.setString(4, moTa);
+            return ps.executeUpdate() > 0;
         }
-
-        ps.setString(4, moTa);
-        return ps.executeUpdate() > 0;
     }
-}
 
-public boolean capNhatTrangThaiMaDaDungSauDatHangConn(int maNguoiDung, int maGiamGia, Connection conn) throws SQLException {
-    String sql = """
+    public boolean capNhatTrangThaiMaDaDungSauDatHangConn(int maNguoiDung, int maGiamGia, Connection conn) throws SQLException {
+        String sql = """
         UPDATE doi_xu_ma_giam_gia
         SET trang_thai = 'da_dung'
         WHERE ma_nguoi_dung = ?
@@ -828,34 +811,276 @@ public boolean capNhatTrangThaiMaDaDungSauDatHangConn(int maNguoiDung, int maGia
         LIMIT 1
     """;
 
-    try (PreparedStatement ps = conn.prepareStatement(sql)) {
-        ps.setInt(1, maNguoiDung);
-        ps.setInt(2, maGiamGia);
-        return ps.executeUpdate() > 0;
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, maNguoiDung);
+            ps.setInt(2, maGiamGia);
+            return ps.executeUpdate() > 0;
+        }
     }
-}
 
-public boolean xuLySuDungMaChoDonHang(int maNguoiDung, int maGiamGia, int maDonHang, double soTienGiam, Connection conn) throws SQLException {
-    boolean updated = capNhatTrangThaiMaDaDungSauDatHangConn(maNguoiDung, maGiamGia, conn);
-    if (!updated) {
+    public boolean xuLySuDungMaChoDonHang(int maNguoiDung, int maGiamGia, int maDonHang, double soTienGiam, Connection conn) throws SQLException {
+        boolean updated = capNhatTrangThaiMaDaDungSauDatHangConn(maNguoiDung, maGiamGia, conn);
+        if (!updated) {
+            return false;
+        }
+
+        return themLichSuDungMa(maNguoiDung, maGiamGia, maDonHang, soTienGiam, conn);
+    }
+
+    public boolean xuLyHoanMaKhiHuyDon(int maNguoiDung, int maGiamGia, int maDonHang, Connection conn) throws SQLException {
+        boolean hoanTrangThai = hoanTrangThaiMaChoNguoiDung(maNguoiDung, maGiamGia, conn);
+        if (!hoanTrangThai) {
+            return false;
+        }
+
+        return themLichSuHoanMa(
+                maNguoiDung,
+                maGiamGia,
+                maDonHang,
+                "Hoàn lại mã giảm giá do hủy đơn hàng #" + maDonHang,
+                conn
+        );
+    }
+
+    // =========================
+    // GET ALL
+    // =========================
+    public List<MaGiamGia> getAllMaGiamGia() {
+        List<MaGiamGia> list = new ArrayList<>();
+
+        String sql = """
+            SELECT *
+            FROM ma_giam_gia
+            ORDER BY ma_giam_gia DESC
+        """;
+
+        try (
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+
+                MaGiamGia mg = new MaGiamGia();
+
+                mg.setMaGiamGia(rs.getInt("ma_giam_gia"));
+                mg.setMaCode(rs.getString("ma_code"));
+                mg.setTenMa(rs.getString("ten_ma"));
+                mg.setGiaTriGiam(rs.getBigDecimal("gia_tri_giam"));
+                mg.setDieuKienToiThieu(rs.getBigDecimal("dieu_kien_toi_thieu"));
+                mg.setNgayBatDau(rs.getTimestamp("ngay_bat_dau"));
+                mg.setNgayKetThuc(rs.getTimestamp("ngay_ket_thuc"));
+                mg.setSoLuong(rs.getInt("so_luong"));
+                mg.setTrangThai(rs.getString("trang_thai"));
+                mg.setLoaiGiam(rs.getString("loai_giam"));
+                mg.setGiamToiDa(rs.getBigDecimal("giam_toi_da"));
+                mg.setSoXuCan(rs.getInt("so_xu_can"));
+                mg.setHienThiDoiXu(rs.getBoolean("hien_thi_doi_xu"));
+
+                list.add(mg);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    // =========================
+    // GET BY ID
+    // =========================
+    public MaGiamGia getMaGiamGiaById(int maGiamGia) {
+
+        String sql = """
+            SELECT *
+            FROM ma_giam_gia
+            WHERE ma_giam_gia = ?
+        """;
+
+        try (
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, maGiamGia);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                if (rs.next()) {
+
+                    MaGiamGia mg = new MaGiamGia();
+
+                    mg.setMaGiamGia(rs.getInt("ma_giam_gia"));
+                    mg.setMaCode(rs.getString("ma_code"));
+                    mg.setTenMa(rs.getString("ten_ma"));
+                    mg.setGiaTriGiam(rs.getBigDecimal("gia_tri_giam"));
+                    mg.setDieuKienToiThieu(rs.getBigDecimal("dieu_kien_toi_thieu"));
+                    mg.setNgayBatDau(rs.getTimestamp("ngay_bat_dau"));
+                    mg.setNgayKetThuc(rs.getTimestamp("ngay_ket_thuc"));
+                    mg.setSoLuong(rs.getInt("so_luong"));
+                    mg.setTrangThai(rs.getString("trang_thai"));
+                    mg.setLoaiGiam(rs.getString("loai_giam"));
+                    mg.setGiamToiDa(rs.getBigDecimal("giam_toi_da"));
+                    mg.setSoXuCan(rs.getInt("so_xu_can"));
+                    mg.setHienThiDoiXu(rs.getBoolean("hien_thi_doi_xu"));
+
+                    return mg;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    // =========================
+    // INSERT
+    // =========================
+    public boolean themMaGiamGia(MaGiamGia mg) {
+
+        String sql = """
+            INSERT INTO ma_giam_gia (
+                ma_code,
+                ten_ma,
+                gia_tri_giam,
+                dieu_kien_toi_thieu,
+                ngay_bat_dau,
+                ngay_ket_thuc,
+                so_luong,
+                trang_thai,
+                loai_giam,
+                giam_toi_da,
+                so_xu_can,
+                hien_thi_doi_xu
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """;
+
+        try (
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, mg.getMaCode());
+            ps.setString(2, mg.getTenMa());
+            ps.setBigDecimal(3, mg.getGiaTriGiam());
+            ps.setBigDecimal(4, mg.getDieuKienToiThieu());
+            ps.setTimestamp(5, mg.getNgayBatDau());
+            ps.setTimestamp(6, mg.getNgayKetThuc());
+            ps.setInt(7, mg.getSoLuong());
+            ps.setString(8, mg.getTrangThai());
+            ps.setString(9, mg.getLoaiGiam());
+            ps.setBigDecimal(10, mg.getGiamToiDa());
+            ps.setInt(11, mg.getSoXuCan());
+            ps.setBoolean(12, mg.isHienThiDoiXu());
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
 
-    return themLichSuDungMa(maNguoiDung, maGiamGia, maDonHang, soTienGiam, conn);
-}
+    // =========================
+    // UPDATE
+    // =========================
+    public boolean suaMaGiamGia(MaGiamGia mg) {
 
-public boolean xuLyHoanMaKhiHuyDon(int maNguoiDung, int maGiamGia, int maDonHang, Connection conn) throws SQLException {
-    boolean hoanTrangThai = hoanTrangThaiMaChoNguoiDung(maNguoiDung, maGiamGia, conn);
-    if (!hoanTrangThai) {
+        String sql = """
+            UPDATE ma_giam_gia
+            SET
+                ma_code = ?,
+                ten_ma = ?,
+                gia_tri_giam = ?,
+                dieu_kien_toi_thieu = ?,
+                ngay_bat_dau = ?,
+                ngay_ket_thuc = ?,
+                so_luong = ?,
+                trang_thai = ?,
+                loai_giam = ?,
+                giam_toi_da = ?,
+                so_xu_can = ?,
+                hien_thi_doi_xu = ?
+            WHERE ma_giam_gia = ?
+        """;
+
+        try (
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, mg.getMaCode());
+            ps.setString(2, mg.getTenMa());
+            ps.setBigDecimal(3, mg.getGiaTriGiam());
+            ps.setBigDecimal(4, mg.getDieuKienToiThieu());
+            ps.setTimestamp(5, mg.getNgayBatDau());
+            ps.setTimestamp(6, mg.getNgayKetThuc());
+            ps.setInt(7, mg.getSoLuong());
+            ps.setString(8, mg.getTrangThai());
+            ps.setString(9, mg.getLoaiGiam());
+            ps.setBigDecimal(10, mg.getGiamToiDa());
+            ps.setInt(11, mg.getSoXuCan());
+            ps.setBoolean(12, mg.isHienThiDoiXu());
+
+            ps.setInt(13, mg.getMaGiamGia());
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
 
-    return themLichSuHoanMa(
-            maNguoiDung,
-            maGiamGia,
-            maDonHang,
-            "Hoàn lại mã giảm giá do hủy đơn hàng #" + maDonHang,
-            conn
-    );
-}
+    // =========================
+    // DELETE
+    // =========================
+    public boolean xoaMaGiamGia(int maGiamGia) {
+
+        String sql = """
+            DELETE FROM ma_giam_gia
+            WHERE ma_giam_gia = ?
+        """;
+
+        try (
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, maGiamGia);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    // =========================
+    // CHECK CODE EXISTS
+    // =========================
+    public boolean isMaCodeExists(String maCode) {
+
+        String sql = """
+            SELECT COUNT(*)
+            FROM ma_giam_gia
+            WHERE ma_code = ?
+        """;
+
+        try (
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, maCode);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }
