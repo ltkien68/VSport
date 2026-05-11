@@ -10,7 +10,9 @@
     boolean isTatCa = (thuongHieuDaChon == null || thuongHieuDaChon.length == 0)
             && (loaiDaChon == null || loaiDaChon.length == 0);
 
-    boolean isQuaBongDa = false;
+    boolean isQuaBongDaSize5 = false;
+    boolean isQuaBongDaSize4 = false;
+
     boolean isTatChan = false;
     boolean isBalo = false;
     boolean isBangCo = false;
@@ -19,9 +21,13 @@
     if (loaiDaChon != null) {
 
         for (String loai : loaiDaChon) {
-            
-            if ("qua-bong-da".equals(loai) || "qua-bong-da".equals(loai)) {
-                isQuaBongDa = true;
+
+            if ("qua-bong-da-size-5".equals(loai) || "qua-bong-da-size-5".equals(loai)) {
+                isQuaBongDaSize5 = true;
+            }
+
+            if ("qua-bong-da-size-4".equals(loai) || "qua-bong-da-size-4".equals(loai)) {
+                isQuaBongDaSize4 = true;
             }
 
             if ("tat-chan".equals(loai) || "tat_chan".equals(loai)) {
@@ -67,12 +73,21 @@
 
                     </a>
 
-                    <a href="${pageContext.request.contextPath}/phu_kien?loai=qua-bong-da"
-                       class="club-filter-link <%= isQuaBongDa ? "active" : ""%>">
+                    <a href="${pageContext.request.contextPath}/phu_kien?loai=qua-bong-da-size-4"
+                       class="club-filter-link <%= isQuaBongDaSize4 ? "active" : ""%>">
 
-                        Quả bóng đá
+                        Quả bóng đá size 4
 
                     </a>
+
+                    <a href="${pageContext.request.contextPath}/phu_kien?loai=qua-bong-da-size-5"
+                       class="club-filter-link <%= isQuaBongDaSize5 ? "active" : ""%>">
+
+                        Quả bóng đá size 5
+
+                    </a>
+
+
 
                     <a href="${pageContext.request.contextPath}/phu_kien?loai=tat-chan"
                        class="club-filter-link <%= isTatChan ? "active" : ""%>">

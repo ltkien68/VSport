@@ -244,6 +244,8 @@
             <file>file:/D:/Code_files/VSPORT/VsportWeb/web/WEB-INF/views/admin/qua-tang.jsp</file>
             <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/css/admin/admin-qua-tang.css</file>
             <file>file:/D:/Code_files/VSPORT/VsportWeb/src/java/controller/admin/AdminQuaTangServlet.java</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/web/WEB-INF/views/pages/phu_kien_product.jsp</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/web/WEB-INF/views/common/phu_kien_product_nav.jsp</file>
         </group>
     </open-files>
 </project-private>

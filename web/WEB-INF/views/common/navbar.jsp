@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-String path = request.getServletPath(); // /bong_da
-String lastPart = path.substring(path.lastIndexOf("/") + 1);
+    String path = request.getServletPath(); // /bong_da
+    String lastPart = path.substring(path.lastIndexOf("/") + 1);
 %>
 
 <nav class="main-navbar">
@@ -38,7 +38,7 @@ String lastPart = path.substring(path.lastIndexOf("/") + 1);
                             </ul>
                         </div>
 
-                        
+
                     </div>
                 </div>
             </li>
@@ -57,9 +57,9 @@ String lastPart = path.substring(path.lastIndexOf("/") + 1);
                                 <li><a href="${pageContext.request.contextPath}/giay_gang_bong_da?loai=giay-san-co-tu-nhien">Giày sân cỏ tự nhiên</a></li>
                             </ul>
                         </div>
-                          
-                        
-  
+
+
+
                     </div>
                 </div>
             </li>
@@ -71,8 +71,22 @@ String lastPart = path.substring(path.lastIndexOf("/") + 1);
 
                 <div class="mega-menu">
                     <div class="mega-menu-inner">
+                        <div class="mega-column">
+                            <a href="${pageContext.request.contextPath}/giay_gang_bong_da" class="mega-title">Quả bóng đá</a>
+                            <ul class="mega-submenu">
+                                <li><a href="${pageContext.request.contextPath}/phu_kien?loai=qua-bong-da-size-4">Bóng size 4</a></li>
+                                <li><a href="${pageContext.request.contextPath}/phu_kien?loai=qua-bong-da-size-5">Bóng size 5</a></li>
+                            </ul>
+                        </div>
 
-                        
+                        <div class="mega-column">
+                            <a href="${pageContext.request.contextPath}/giay_gang_bong_da" class="mega-title">Tất bóng đá</a>
+                            <ul class="mega-submenu">
+                                <li><a href="${pageContext.request.contextPath}/phu_kien?loai=tat-bong-da-co-ngan">Tất cổ ngắn</a></li>
+                                <li><a href="${pageContext.request.contextPath}/phu_kien?loai=tat-bong-da-co-cao">Tất cổ cao</a></li>
+                            </ul>
+                        </div>
+
                     </div>
                 </div>
             </li>
@@ -85,8 +99,8 @@ String lastPart = path.substring(path.lastIndexOf("/") + 1);
                 <div class="mega-menu">
                     <div class="mega-menu-inner">
 
-                       
-          
+
+
                     </div>
                 </div>
             </li>
@@ -99,12 +113,12 @@ String lastPart = path.substring(path.lastIndexOf("/") + 1);
                 <div class="mega-menu">
                     <div class="mega-menu-inner">
 
-                        
+
                     </div>
                 </div>
             </li>
 
-            
+
             </li>
 
         </ul>

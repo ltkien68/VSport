@@ -85,7 +85,7 @@ public class PhuKienServlet extends HttpServlet {
             );
         }
 
-        request.setAttribute("pageTitle", "PHỤ KIỆN");
+        request.setAttribute("pageTitle", "PHỤ KIỆN · ĐAM MÊ · BÓNG ĐÁ");
         request.setAttribute("danhMucSlug", DANH_MUC_SLUG);
 
         request.setAttribute("danhSachSanPham", danhSachSanPham);
