@@ -1,8 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Map" %>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="model.SanPham" %>
+<%@ page import="model.BienTheSanPham" %>
+<%@ page import="model.QuaTangSanPham" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <%
@@ -15,10 +18,18 @@
     if (dsQuaTang == null) {
         dsQuaTang = new ArrayList<>();
     }
+    
 
     DecimalFormat priceFormat = new DecimalFormat("#,###");
     String contextPath = request.getContextPath();
 %>
+
+<%
+Map<Integer, List<QuaTangSanPham>> quaTangMap =
+    (Map<Integer, List<QuaTangSanPham>>) request.getAttribute("quaTangMap");
+%>
+
+
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -134,8 +145,8 @@
                                         <div class="gift-form-group">
                                             <label>Biến thể quà</label>
 
-                                            <select name="maBienTheQua" id="giftVariantSelect">
-                                                <option value="0">Không có size</option>
+                                            <select name="maBienTheQua" id="giftVariantSelect" required>
+                                                <option value="0">Chọn quà trước</option>
                                             </select>
                                         </div>
 
@@ -161,7 +172,7 @@
 
                                             <button type="submit"
                                                     class="admin-gift-btn admin-gift-btn-primary">
-                                                Tạo Quà Tặng
+                                                Tạo Quà Tặng 
                                             </button>
 
                                         </div>
@@ -175,10 +186,9 @@
                         <div class="admin-gift-card admin-gift-card-short">
                             <div class="admin-gift-card-head">
                                 <div>
-                                    <h2>Danh sách sản phẩm</h2>
-                                    <p>Sản phẩm có thể chọn làm quà tặng</p>
+                                    <h2>Sản phẩm có quà tặng</h2>
+                                    <p>Chỉ hiển thị sản phẩm đã được gắn quà</p>
                                 </div>
-                                <span class="admin-gift-count"><%= dsSanPham.size()%> sản phẩm</span>
                             </div>
 
                             <div class="admin-gift-table-wrap">
@@ -188,52 +198,110 @@
                                             <th>Mã</th>
                                             <th>Sản phẩm</th>
                                             <th>Giá</th>
-                                            <th>Nhóm</th>
-                                            <th>Thao tác</th>
+                                            <th>Quà tặng</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        <% if (dsSanPham.isEmpty()) { %>
+
+                                        <%
+                                            if (quaTangMap == null || quaTangMap.isEmpty()) {
+                                        %>
                                         <tr>
                                             <td colspan="5" class="admin-gift-empty-cell">
-                                                Không có sản phẩm nào
+                                                Chưa có sản phẩm nào được gắn quà
                                             </td>
                                         </tr>
-                                        <% } else { %>
-                                        <% for (SanPham sp : dsSanPham) {%>
-                                        <tr>
-                                            <td>V$<%= sp.getMaSanPham()%></td>
+                                        <%
+                                            } else {
+                                                for (SanPham sp : dsSanPham) {
+
+                                                    List<QuaTangSanPham> gifts =
+                                                        quaTangMap.get(sp.getMaSanPham());
+
+                                                    if (gifts == null || gifts.isEmpty()) continue;
+                                        %>
+
+                                        <!-- PRODUCT ROW -->
+                                        <tr class="gift-parent" onclick="toggleGift(<%= sp.getMaSanPham() %>)">
+                                            <td>V$<%= sp.getMaSanPham() %></td>
 
                                             <td>
                                                 <div class="admin-gift-product-cell">
                                                     <div class="admin-gift-thumb">
-                                                        <img src="<%= contextPath + "/" + sp.getAnhChinh()%>"
-                                                             alt="<%= sp.getTenSanPham()%>">
+                                                        <img src="<%= contextPath + "/" + sp.getAnhChinh() %>">
                                                     </div>
                                                     <div class="admin-gift-name">
-                                                        <%= sp.getTenSanPham()%>
+                                                        <%= sp.getTenSanPham() %>
                                                     </div>
                                                 </div>
                                             </td>
 
-                                            <td><%= priceFormat.format(sp.getGiaSanPham())%>₫</td>
+                                            <td><%= priceFormat.format(sp.getGiaSanPham()) %>₫</td>
 
                                             <td>
-                                                <span class="admin-gift-group-badge">
-                                                    <%= sp.getTenNhomSanPham()%>
+                                                <span class="admin-gift-status-badge">
+                                                    <%= gifts.size() %> quà
                                                 </span>
                                             </td>
 
                                             <td>
-                                                <a class="admin-gift-action-link"
-                                                   href="<%= contextPath%>/admin/qua-tang/them?maSanPham=<%= sp.getMaSanPham()%>">
-                                                    Chọn
-                                                </a>
+                                                <span class="arrow">
+                                                    <i data-lucide="chevron-down"></i>
+                                                </span>
                                             </td>
                                         </tr>
-                                        <% } %>
-                                        <% }%>
+
+                                        <!-- GIFT DROPDOWN -->
+                                        <tr id="gift-<%= sp.getMaSanPham() %>" class="gift-child">
+                                            <td colspan="5">
+
+                                                <div class="gift-dropdown">
+
+                                                    <%
+                                                        for (QuaTangSanPham qt : gifts) {
+                                                    %>
+
+                                                    <div class="gift-item">
+
+                                                        <img src="<%= contextPath + "/" + qt.getAnhSanPhamQua() %>">
+
+                                                        <div style="flex:1;">
+                                                            <b><%= qt.getTenSanPhamQua() %></b>
+                                                            <p>Số lượng: <%= qt.getSoLuongQua() %></p>
+                                                        </div>
+
+                                                        <!-- 🔥 BUTTON XÓA -->
+                                                        <form action="<%= contextPath %>/admin/qua-tang" method="post"
+                                                              onsubmit="return confirm('Xóa quà tặng này?');"
+                                                              style="margin-left:auto;">
+
+                                                            <input type="hidden" name="action" value="xoa">
+                                                            <input type="hidden" name="maQuaTang" value="<%= qt.getMaQuaTang() %>">
+
+                                                            <button type="submit" class="gift-delete-btn">
+                                                                Xóa
+                                                            </button>
+
+                                                        </form>
+
+                                                    </div>
+
+                                                    <%
+                                                        }
+                                                    %>
+
+                                                </div>
+
+                                            </td>
+                                        </tr>
+
+                                        <%
+                                                }
+                                            }
+                                        %>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -309,6 +377,31 @@
                 </div>
             </main>
         </div>
+
+        <script>
+            const bienTheMap = {
+            <%
+            for (SanPham sp : dsQuaTang) {
+            %>
+            "<%= sp.getMaSanPham() %>": [
+            <%
+            if (sp.getDanhSachBienThe() != null) {
+            for (BienTheSanPham bt : sp.getDanhSachBienThe()) {
+            %>
+            {
+            maBienThe: <%= bt.getMaBienThe() %>,
+                    t: "<%= bt.getTenSize() %>",
+                    soLuongTon: <%= bt.getSoLuongTon() %>
+            },
+            <%
+            }
+            }
+            %>
+            ],
+            <%
+            }
+            %>
+            };</script>
 
         <script src="https://unpkg.com/lucide@latest"></script>
         <script>

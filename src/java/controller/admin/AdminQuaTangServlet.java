@@ -5,11 +5,19 @@
 package controller.admin;
 
 import dao.SanPhamDAO;
+import dao.BienTheSanPhamDAO;
+import dao.QuaTangSanPhamDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import model.SanPham;
 import model.NguoiDung;
+import model.BienTheSanPham;
+import model.QuaTangSanPham;
+
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,10 +26,14 @@ import java.util.List;
 public class AdminQuaTangServlet extends HttpServlet {
 
     private SanPhamDAO sanPhamDAO;
+    private BienTheSanPhamDAO bienTheSanPhamDAO;
+    private QuaTangSanPhamDAO quaTangSanPhamDAO;
 
     @Override
     public void init() {
         sanPhamDAO = new SanPhamDAO();
+        bienTheSanPhamDAO = new BienTheSanPhamDAO();
+        quaTangSanPhamDAO = new QuaTangSanPhamDAO();
     }
 
     @Override
@@ -38,14 +50,83 @@ public class AdminQuaTangServlet extends HttpServlet {
         List<SanPham> dsSanPham = sanPhamDAO.getTatCaSanPham();
         List<SanPham> dsQuaTang = sanPhamDAO.getSanPhamQuaTang();
 
+        Map<Integer, List<BienTheSanPham>> bienTheSanPhamMap = new HashMap<>();
+
+        for (SanPham sp : dsQuaTang) {
+            List<BienTheSanPham> danhSachBienThe = bienTheSanPhamDAO.getByProductId(sp.getMaSanPham());
+            bienTheSanPhamMap.put(sp.getMaSanPham(), danhSachBienThe);
+
+            // Gán luôn vào object SanPham nếu muốn (cần thêm field trong model)
+            sp.setDanhSachBienThe(danhSachBienThe);
+        }
+
+        List<QuaTangSanPham> dsQuaTangSanPham = quaTangSanPhamDAO.getAll();
+        Map<Integer, List<QuaTangSanPham>> quaTangMap = new HashMap<>();
+
+        for (QuaTangSanPham qt : dsQuaTangSanPham) {
+
+            if (qt.getTrangThai() != 1) {
+                continue; // lọc ở đây
+            }
+            int maSP = qt.getMaSanPhamChinh();
+
+            quaTangMap
+                    .computeIfAbsent(maSP, k -> new ArrayList<>())
+                    .add(qt);
+        }
+
+        System.out.println("SIZE QUÀ: " + dsQuaTang.size());
+        System.out.println("MAP: " + quaTangMap);
+
         request.setAttribute("dsSanPham", dsSanPham);
         request.setAttribute("dsQuaTang", dsQuaTang);
+        request.setAttribute("dsQuaTangSanPham", dsQuaTangSanPham);
+        request.setAttribute("bienTheMap", bienTheSanPhamMap);
+        request.setAttribute("quaTangMap", quaTangMap);
 
         request.getRequestDispatcher("/WEB-INF/views/admin/qua-tang.jsp")
                 .forward(request, response);
     }
 
-    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+        if (!isAdmin(request, response)) {
+            return;
+        }
+
+        String action = request.getParameter("action");
+
+        if ("xoa".equals(action)) {
+            xoaQuaTang(request, response);
+
+        } else {
+            response.sendRedirect(request.getContextPath() + "/admin/qua-tang");
+        }
+    }
+
+    private void xoaQuaTang(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+
+        int maQuaTang = parseInt(request.getParameter("maQuaTang"));
+
+        if (maQuaTang <= 0) {
+            redirectWithMessage(request, response, "error", "Mã quà tặng không hợp lệ!");
+            return;
+        }
+
+        boolean ok = quaTangSanPhamDAO.xoaQuaTang(maQuaTang);
+
+        if (ok) {
+            redirectWithMessage(request, response, "success", "Xóa quà tặng thành công!");
+        } else {
+            redirectWithMessage(request, response, "error", "Xóa thất bại!");
+        }
+    }
 
     private boolean isAdmin(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
@@ -76,7 +157,7 @@ public class AdminQuaTangServlet extends HttpServlet {
         session.setAttribute("toastType", type);
         session.setAttribute("toastMessage", message);
 
-        response.sendRedirect(request.getContextPath() + "/admin/thuong-hieu");
+        response.sendRedirect(request.getContextPath() + "/admin/qua-tang");
     }
 
     private boolean isEmpty(String value) {

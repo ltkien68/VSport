@@ -9,9 +9,17 @@ public class QuaTangSanPham {
     private int soLuongQua;
     private int trangThai;
 
+    
+    private String loaiQua;
+
     // thông tin render
     private String tenSanPhamQua;
-    private String anhChinh;
+    private String anhSanPhamQua;
+
+    
+    
+    private String tenSanPhamChinh;
+    private String anhSanPhamChinh;
 
     public int getMaQuaTang() {
         return maQuaTang;
@@ -69,16 +77,41 @@ public class QuaTangSanPham {
         this.tenSanPhamQua = tenSanPhamQua;
     }
 
-    public String getAnhChinh() {
-        return anhChinh;
+    public String getAnhSanPhamQua() {
+        return anhSanPhamQua;
     }
 
-    public void setAnhChinh(String anhChinh) {
-        this.anhChinh = anhChinh;
+    public void setAnhSanPhamQua(String anhSanPhamQua) {
+        this.anhSanPhamQua = anhSanPhamQua;
     }
 
     public QuaTangSanPham() {
     }
+    
+    public String getLoaiQua() {
+        return loaiQua;
+    }
+
+    public void setLoaiQua(String loaiQua) {
+        this.loaiQua = loaiQua;
+    }
+    
+    public String getTenSanPhamChinh() {
+        return tenSanPhamChinh;
+    }
+
+    public void setTenSanPhamChinh(String tenSanPhamChinh) {
+        this.tenSanPhamChinh = tenSanPhamChinh;
+    }
+
+    public String getAnhSanPhamChinh() {
+        return anhSanPhamChinh;
+    }
+
+    public void setAnhSanPhamChinh(String anhSanPhamChinh) {
+        this.anhSanPhamChinh = anhSanPhamChinh;
+    }
+    
 
     // getter setter
 }

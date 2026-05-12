@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import model.BienTheSanPham;
 
+import java.util.Map;
+import java.util.LinkedHashMap;
+
 public class SanPhamDAO {
 
     private void appendPlaceholders(StringBuilder sql, int length) {
@@ -299,7 +302,7 @@ public class SanPhamDAO {
     """;
 
         try (
-                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, doiBongSlug);
             ps.setString(2, nhomSlug);
 
@@ -778,36 +781,67 @@ public class SanPhamDAO {
     }
 
     public List<SanPham> getSanPhamQuaTang() {
-        List<SanPham> list = new ArrayList<>();
+        Map<Integer, SanPham> map = new LinkedHashMap<>();
 
         String sql = """
-        SELECT ma_san_pham, ten_san_pham, anh_chinh, gia_san_pham, nhom_san_pham
-        FROM san_pham
-        WHERE nhom_san_pham = 5
-        ORDER BY ngay_tao DESC
+        SELECT 
+            sp.ma_san_pham, 
+            sp.ten_san_pham, 
+            sp.anh_chinh, 
+            sp.gia_san_pham, 
+            sp.nhom_san_pham,
+            sp.ngay_tao,
+            bt.ma_bien_the, 
+            bt.ma_size, 
+            bt.so_luong_ton,
+                     
+            sz.ten_size AS ten_size
+        FROM san_pham sp
+        LEFT JOIN bien_the_san_pham bt ON sp.ma_san_pham = bt.ma_san_pham
+        LEFT JOIN size_san_pham sz ON bt.ma_size = sz.ma_size
+        WHERE sp.nhom_san_pham = 5
+        ORDER BY sp.ngay_tao DESC, sp.ma_san_pham, bt.ma_bien_the
     """;
 
         try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                SanPham sp = new SanPham();
-                sp.setMaSanPham(rs.getInt("ma_san_pham"));
-                sp.setTenSanPham(rs.getString("ten_san_pham"));
-                sp.setAnhChinh(rs.getString("anh_chinh"));
-                sp.setGiaSanPham(rs.getDouble("gia_san_pham"));
-                sp.setNhomSanPham(rs.getInt("nhom_san_pham"));
-                sp.setTenNhomSanPham(
-                        getTenNhomSanPham(rs.getInt("nhom_san_pham"))
-                );
+                int maSp = rs.getInt("ma_san_pham");
+                SanPham sp = map.get(maSp);
+                
+                System.out.println(rs.getString("ten_size"));
 
-                list.add(sp);
+                // Nếu sản phẩm chưa có trong map thì tạo mới
+                if (sp == null) {
+                    sp = new SanPham();
+                    sp.setMaSanPham(maSp);
+                    sp.setTenSanPham(rs.getString("ten_san_pham"));
+                    sp.setAnhChinh(rs.getString("anh_chinh"));
+                    sp.setGiaSanPham(rs.getDouble("gia_san_pham"));
+                    sp.setNhomSanPham(rs.getInt("nhom_san_pham"));
+                    sp.setTenNhomSanPham(getTenNhomSanPham(rs.getInt("nhom_san_pham")));
+                    sp.setDanhSachBienThe(new ArrayList<>()); // khởi tạo list
+                    map.put(maSp, sp);
+                }
+
+                // Xử lý biến thể (nếu có)
+                int maBienThe = rs.getInt("ma_bien_the");
+                if (!rs.wasNull()) { // có biến thể
+                    BienTheSanPham bt = new BienTheSanPham();
+                    bt.setMaBienThe(maBienThe);
+                    bt.setMaSize(rs.getInt("ma_size"));
+                    bt.setTenSize(rs.getString("ten_size"));
+                    bt.setSoLuongTon(rs.getInt("so_luong_ton"));
+                    // Nếu cần, set thêm các trường khác
+                    sp.getDanhSachBienThe().add(bt);
+                }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return list;
+        return new ArrayList<>(map.values());
     }
 
     public List<SanPham> getSanPhamBanChay(int limit) {
@@ -1235,7 +1269,5 @@ public class SanPhamDAO {
 
         return list;
     }
-    
-  
 
 }

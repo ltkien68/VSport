@@ -4,13 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 public class SanPham {
+
     private int maSanPham;
     private int maDanhMuc;
     private int maThuongHieu;
-    
+
     private Integer maDoiBong;
 
-    
     private int tongTonKho;
 
     private String tenSanPham;
@@ -20,16 +20,13 @@ public class SanPham {
     private String moTaChiTiet;
     private String danhMucSlug;
 
-    
-    
     private String tenNhomSanPham;
-   
+
     private int nhomSanPham;
 
     private double giaNiemYet;
     private double giaKhuyenMai;
 
-    
     private Date ngayTao;
 
     public double getGiaSanPham() {
@@ -77,7 +74,7 @@ public class SanPham {
     public void setChiTiet(ChiTietSanPham chiTiet) {
         this.chiTiet = chiTiet;
     }
-    
+
     public Date getNgayTao() {
         return ngayTao;
     }
@@ -85,11 +82,10 @@ public class SanPham {
     public void setNgayTao(Date ngayTao) {
         this.ngayTao = ngayTao;
     }
-    
-    
+
     private double diemTrungBinh;
     private int soLuongDanhGia;
-    
+
     private List<String> dsAnh;
     private ChiTietSanPham chiTiet;
 
@@ -98,6 +94,8 @@ public class SanPham {
     private String tenThuongHieu;
     private String tenDoiBong;
     private String doiBongSlug;
+
+    private List<BienTheSanPham> danhSachBienThe;
 
     public SanPham() {
     }
@@ -117,7 +115,7 @@ public class SanPham {
     public void setMaDanhMuc(int maDanhMuc) {
         this.maDanhMuc = maDanhMuc;
     }
-    
+
     public int getTongTonKho() {
         return tongTonKho;
     }
@@ -125,7 +123,7 @@ public class SanPham {
     public void setTongTonKho(int tongTonKho) {
         this.tongTonKho = tongTonKho;
     }
-    
+
     public int getNhomSanPham() {
         return nhomSanPham;
     }
@@ -157,8 +155,8 @@ public class SanPham {
     public void setTenSanPham(String tenSanPham) {
         this.tenSanPham = tenSanPham;
     }
-    
-     public String getDanhMucSlug() {
+
+    public String getDanhMucSlug() {
         return danhMucSlug;
     }
 
@@ -269,7 +267,7 @@ public class SanPham {
     public void setDoiBongSlug(String doiBongSlug) {
         this.doiBongSlug = doiBongSlug;
     }
-    
+
     public String getTenNhomSanPham() {
         return tenNhomSanPham;
     }
@@ -277,4 +275,13 @@ public class SanPham {
     public void setTenNhomSanPham(String tenNhomSanPham) {
         this.tenNhomSanPham = tenNhomSanPham;
     }
+
+    public List<BienTheSanPham> getDanhSachBienThe() {
+        return danhSachBienThe;
+    }
+
+    public void setDanhSachBienThe(List<BienTheSanPham> danhSachBienThe) {
+        this.danhSachBienThe = danhSachBienThe;
+    }
+
 }
