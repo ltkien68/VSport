@@ -44,8 +44,8 @@ async function loadOrderChart() {
 
                             hoverBackgroundColor:
                                     '#d62839',
+                            
 
-                            borderRadius: 12,
 
                             borderSkipped: false,
 
