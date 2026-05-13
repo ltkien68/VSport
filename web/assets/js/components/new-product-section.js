@@ -5,10 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const nextBtn = document.querySelector(".new-product-next");
     const dotsWrap = document.getElementById("newProductDots");
 
-    if (!track || !viewport || !prevBtn || !nextBtn) return;
+    if (!track || !viewport || !prevBtn || !nextBtn)
+        return;
 
     const slides = Array.from(track.querySelectorAll(".new-product-slide"));
-    if (!slides.length) return;
+    if (!slides.length)
+        return;
 
     let currentPage = 0;
     let slidesPerPage = getSlidesPerPage();
@@ -17,9 +19,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function getSlidesPerPage() {
         const width = window.innerWidth;
 
-        if (width <= 640) return 1;
-        if (width <= 992) return 2;
-        if (width <= 1200) return 3;
+        if (width <= 640)
+            return 1;
+        if (width <= 992)
+            return 2;
+        if (width <= 1200)
+            return 3;
         return 4;
     }
 
@@ -33,11 +38,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function renderDots() {
-        if (!dotsWrap) return;
+        if (!dotsWrap)
+            return;
 
         dotsWrap.innerHTML = "";
 
-        if (totalPages <= 1) return;
+        if (totalPages <= 1)
+            return;
 
         for (let i = 0; i < totalPages; i++) {
             const dot = document.createElement("button");
@@ -100,28 +107,113 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
     const newProductSection = document.getElementById("newProductSection");
-    if (!newProductSection) return;
+    if (!newProductSection)
+        return;
 
     newProductSection.classList.add("is-hidden");
 
     const observer = new IntersectionObserver(
-        function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    newProductSection.classList.add("is-visible");
-                    newProductSection.classList.remove("is-hidden", "is-leaving");
-                } else {
-                    newProductSection.classList.remove("is-visible", "is-hidden");
-                    newProductSection.classList.add("is-leaving");
-                }
-            });
-        },
-        {
-            threshold: 0.16,
-            root: null,
-            rootMargin: "0px 0px -8% 0px"
-        }
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        newProductSection.classList.add("is-visible");
+                        newProductSection.classList.remove("is-hidden", "is-leaving");
+                    } else {
+                        newProductSection.classList.remove("is-visible", "is-hidden");
+                        newProductSection.classList.add("is-leaving");
+                    }
+                });
+            },
+            {
+                threshold: 0.16,
+                root: null,
+                rootMargin: "0px 0px -8% 0px"
+            }
     );
 
     observer.observe(newProductSection);
 });
+
+const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+-/";
+
+function randomChar() {
+    return chars[Math.floor(Math.random() * chars.length)];
+}
+
+function scrambleText(el, duration = 600, delayStep = 18) {
+    const originalText = el.textContent.trim();
+    const letters = originalText.split("");
+
+    el.innerHTML = "";
+
+    const spans = letters.map((char) => {
+        const span = document.createElement("span");
+        span.textContent = char === " " ? " " : randomChar();
+        span.dataset.final = char;
+        el.appendChild(span);
+        return span;
+    });
+
+    let start = null;
+
+    function animate(timestamp) {
+        if (!start)
+            start = timestamp;
+        const progress = timestamp - start;
+
+        spans.forEach((span, i) => {
+            if (span.dataset.final === " ")
+                return;
+
+            const revealTime = i * 10;
+
+            if (progress > revealTime) {
+                const remaining = duration - progress;
+
+                if (remaining > 0) {
+                    if (Math.random() > 0.5) {
+                        span.textContent = randomChar();
+                    }
+                } else {
+                    // final state
+                    span.textContent = span.dataset.final;
+                }
+            }
+        });
+
+        if (progress < duration + letters.length * delayStep) {
+            requestAnimationFrame(animate);
+        } else {
+            // đảm bảo reset chính xác
+            spans.forEach((s) => (s.textContent = s.dataset.final));
+        }
+    }
+
+    requestAnimationFrame(animate);
+}
+
+// Intersection Observer trigger
+function initScrambleOnScroll() {
+    const title = document.querySelector(".new-product-reveal-title h2");
+
+    if (!title)
+        return;
+
+    const observer = new IntersectionObserver(
+            (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                scrambleText(title);
+                observer.disconnect(); // chạy 1 lần cho “cinematic feel”
+            }
+        });
+    },
+            {
+                threshold: 0.6,
+            }
+    );
+
+    observer.observe(title);
+}
+
+document.addEventListener("DOMContentLoaded", initScrambleOnScroll);

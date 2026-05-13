@@ -51,12 +51,7 @@
     display: block;
 }
 
-.new-product-head span {
-    margin-top: 14px;
-    font-family: var(--font-body);
-    font-size: 18px;
-    color: var(--color-gray-600);
-}
+
 
 /* =========================
    SLIDER
