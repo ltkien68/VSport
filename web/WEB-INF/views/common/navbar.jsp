@@ -72,7 +72,7 @@
                 <div class="mega-menu">
                     <div class="mega-menu-inner">
                         <div class="mega-column">
-                            <a href="${pageContext.request.contextPath}/giay_gang_bong_da" class="mega-title">Quả bóng đá</a>
+                            <a href="${pageContext.request.contextPath}/phu_kien" class="mega-title">Quả bóng đá</a>
                             <ul class="mega-submenu">
                                 <li><a href="${pageContext.request.contextPath}/phu_kien?loai=qua-bong-da-size-4">Bóng size 4</a></li>
                                 <li><a href="${pageContext.request.contextPath}/phu_kien?loai=qua-bong-da-size-5">Bóng size 5</a></li>
@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="mega-column">
-                            <a href="${pageContext.request.contextPath}/giay_gang_bong_da" class="mega-title">Tất bóng đá</a>
+                            <a href="${pageContext.request.contextPath}/phu_kien" class="mega-title">Tất bóng đá</a>
                             <ul class="mega-submenu">
                                 <li><a href="${pageContext.request.contextPath}/phu_kien?loai=tat-bong-da-co-ngan">Tất cổ ngắn</a></li>
                                 <li><a href="${pageContext.request.contextPath}/phu_kien?loai=tat-bong-da-co-cao">Tất cổ cao</a></li>

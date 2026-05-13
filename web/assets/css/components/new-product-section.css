@@ -132,7 +132,6 @@
     object-fit: contain;
 
     transform: rotate(8deg);
-    filter: drop-shadow(0 4px 10px rgba(225, 29, 72, 0.25));
 
     transition: transform 0.3s ease;
 }

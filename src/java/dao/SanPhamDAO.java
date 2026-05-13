@@ -13,8 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 import model.BienTheSanPham;
 
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
+
 import java.util.Map;
 import java.util.LinkedHashMap;
+import java.util.Set;
+import java.util.HashSet;
 
 public class SanPhamDAO {
 
@@ -302,7 +307,7 @@ public class SanPhamDAO {
     """;
 
         try (
-            Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, doiBongSlug);
             ps.setString(2, nhomSlug);
 
@@ -648,6 +653,95 @@ public class SanPhamDAO {
         return list;
     }
 
+    public List<SanPham> getRandomSanPham(int limit) {
+
+        List<SanPham> list = new ArrayList<>();
+
+        String sqlGetMax = "SELECT MAX(ma_san_pham) FROM san_pham";
+        String sqlGetData = """
+        SELECT 
+            ma_san_pham,
+            ma_danh_muc,
+            ma_thuong_hieu,
+            ma_doi_bong,
+            ten_san_pham,
+            slug,
+            loai_san_pham,
+            mo_ta_ngan,
+            mo_ta_chi_tiet,
+            gia_niem_yet,
+            gia_khuyen_mai,
+            gia_san_pham,
+            nhom_san_pham,
+            da_ban,
+            anh_chinh,
+            trang_thai
+        FROM san_pham
+        WHERE ma_san_pham IN (%s)
+        AND nhom_san_pham != 5
+        AND trang_thai = 'dang_ban'
+    """;
+
+        try (Connection conn = DBConnection.getConnection()) {
+
+            // 1. lấy max id
+            int maxId = 0;
+
+            try (PreparedStatement ps = conn.prepareStatement(sqlGetMax); ResultSet rs = ps.executeQuery()) {
+
+                if (rs.next()) {
+                    maxId = rs.getInt(1);
+                }
+            }
+
+            if (maxId == 0) {
+                return list;
+            }
+
+            // 2. tạo danh sách id random
+            Set<Integer> ids = new HashSet<>();
+
+            ThreadLocalRandom random = ThreadLocalRandom.current();
+
+            while (ids.size() < limit) {
+                ids.add(random.nextInt(1, maxId + 1));
+            }
+
+            // 3. build IN clause
+            String placeholders = ids.stream()
+                    .map(id -> "?")
+                    .collect(Collectors.joining(","));
+
+            String sql = String.format(sqlGetData, placeholders);
+
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+                int index = 1;
+                for (Integer id : ids) {
+                    ps.setInt(index++, id);
+                }
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+
+                        SanPham sp = mapResultSetToSanPham(rs);
+
+                        sp.setTenNhomSanPham(
+                                getTenNhomSanPham(sp.getNhomSanPham())
+                        );
+
+                        list.add(sp);
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
     public List<SanPham> getSanPhamDaLoc(
             String doiBongSlug,
             String nhomSanPham,
@@ -808,7 +902,7 @@ public class SanPhamDAO {
             while (rs.next()) {
                 int maSp = rs.getInt("ma_san_pham");
                 SanPham sp = map.get(maSp);
-                
+
                 System.out.println(rs.getString("ten_size"));
 
                 // Nếu sản phẩm chưa có trong map thì tạo mới

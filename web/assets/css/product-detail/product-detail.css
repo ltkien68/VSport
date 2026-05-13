@@ -26,6 +26,11 @@
     align-self: start;
 }
 
+.pd-bottom-recommend {
+    width: 100%;
+    max-width: 1440px;
+}
+
 @media (max-width: 1280px) {
     .pd-page {
         padding: 24px 28px 72px;

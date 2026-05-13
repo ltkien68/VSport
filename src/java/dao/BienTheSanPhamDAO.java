@@ -42,9 +42,7 @@ public class BienTheSanPhamDAO {
         """;
 
         try (
-            Connection conn = DBConnection.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql)
-        ) {
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, maSanPham);
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -77,9 +75,7 @@ public class BienTheSanPhamDAO {
         """;
 
         try (
-            Connection conn = DBConnection.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql)
-        ) {
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, maBienThe);
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -112,9 +108,7 @@ public class BienTheSanPhamDAO {
         """;
 
         try (
-            Connection conn = DBConnection.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql)
-        ) {
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, maSanPham);
             ps.setInt(2, maSize);
 
@@ -148,9 +142,7 @@ public class BienTheSanPhamDAO {
         """;
 
         try (
-            Connection conn = DBConnection.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql)
-        ) {
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, maSanPham);
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -167,60 +159,69 @@ public class BienTheSanPhamDAO {
     }
 
     private BienTheSanPham mapResultSet(ResultSet rs) throws Exception {
-    BienTheSanPham bt = new BienTheSanPham();
+        BienTheSanPham bt = new BienTheSanPham();
 
-    bt.setMaBienThe(rs.getInt("ma_bien_the"));
-    bt.setMaSanPham(rs.getInt("ma_san_pham"));
-    bt.setMaSize((Integer) rs.getObject("ma_size"));
-    bt.setSoLuongTon(rs.getInt("so_luong_ton"));
+        bt.setMaBienThe(rs.getInt("ma_bien_the"));
+        bt.setMaSanPham(rs.getInt("ma_san_pham"));
+        bt.setMaSize((Integer) rs.getObject("ma_size"));
+        bt.setSoLuongTon(rs.getInt("so_luong_ton"));
 
-    Object giaRiengObj = rs.getObject("gia_rieng");
-    if (giaRiengObj != null) {
-        bt.setGiaRieng(((Number) giaRiengObj).doubleValue());
-    } else {
-        bt.setGiaRieng(null);
+        Object giaRiengObj = rs.getObject("gia_rieng");
+        if (giaRiengObj != null) {
+            bt.setGiaRieng(((Number) giaRiengObj).doubleValue());
+        } else {
+            bt.setGiaRieng(null);
+        }
+
+        String tenSize = rs.getString("ten_size");
+        bt.setTenSize(tenSize != null ? tenSize : "Mặc định");
+
+        Object giaHienThiObj = rs.getObject("gia_hien_thi");
+        if (giaHienThiObj != null) {
+            bt.setGiaHienThi(((Number) giaHienThiObj).doubleValue());
+        } else {
+            bt.setGiaHienThi(0);
+        }
+
+        return bt;
+
     }
 
-    String tenSize = rs.getString("ten_size");
-    bt.setTenSize(tenSize != null ? tenSize : "Mặc định");
-
-    Object giaHienThiObj = rs.getObject("gia_hien_thi");
-    if (giaHienThiObj != null) {
-        bt.setGiaHienThi(((Number) giaHienThiObj).doubleValue());
-    } else {
-        bt.setGiaHienThi(0);
-    }
-
-    return bt;
-    
-    
-}
-    
     private String xacDinhLoaiSizeApDung(SanPham sp) {
-    if (sp == null) return "ao";
+        if (sp == null) {
+            return "ao";
+        }
 
-    String loaiSanPham = sp.getLoaiSanPham() != null
-            ? sp.getLoaiSanPham().trim().toLowerCase()
-            : "";
+        String loaiSanPham = sp.getLoaiSanPham() != null
+                ? sp.getLoaiSanPham().trim().toLowerCase()
+                : "";
 
-    int maDanhMuc = sp.getMaDanhMuc();
+        int maDanhMuc = sp.getMaDanhMuc();
 
-    if (loaiSanPham.contains("giay")) return "giay";
-    if (loaiSanPham.contains("gang")) return "gang";
-    if (loaiSanPham.contains("bong")) return "bong";
+        if (loaiSanPham.startsWith("giay")) {
+            return "giay";
+        }
+        if (loaiSanPham.startsWith("gang")) {
+            return "gang";
+        }
+        if (loaiSanPham.startsWith("qua-bong")) {
+            return "qua-bong";
+        }
 
-    if (maDanhMuc == 2) return "giay"; // fallback
-    return "ao";
-}
-    
+        if (maDanhMuc == 2) {
+            return "giay"; // fallback
+        }
+        return "ao";
+    }
+
     public List<BienTheSanPham> getBienTheTheoLoaiSizeByProductId(int maSanPham) {
-    List<BienTheSanPham> list = new ArrayList<>();
+        List<BienTheSanPham> list = new ArrayList<>();
 
-    SanPhamDAO sanPhamDAO = new SanPhamDAO();
-    SanPham sp = sanPhamDAO.getById(maSanPham);
-    String loaiSizeApDung = xacDinhLoaiSizeApDung(sp);
+        SanPhamDAO sanPhamDAO = new SanPhamDAO();
+        SanPham sp = sanPhamDAO.getById(maSanPham);
+        String loaiSizeApDung = xacDinhLoaiSizeApDung(sp);
 
-    String sql = """
+        String sql = """
         SELECT
             bt.ma_bien_the,
             bt.ma_san_pham,
@@ -250,34 +251,33 @@ public class BienTheSanPhamDAO {
             sz.ten_size ASC
     """;
 
-    try (
-        Connection conn = DBConnection.getConnection();
-        PreparedStatement ps = conn.prepareStatement(sql)
-    ) {
-        ps.setInt(1, maSanPham);
-        ps.setString(2, loaiSizeApDung);
+        try (
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, maSanPham);
+            ps.setString(2, loaiSizeApDung);
 
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            BienTheSanPham bt = new BienTheSanPham();
-            bt.setMaBienThe(rs.getInt("ma_bien_the"));
-            bt.setMaSanPham(rs.getInt("ma_san_pham"));
-            bt.setMaSize(rs.getInt("ma_size"));
-            bt.setSoLuongTon(rs.getInt("so_luong_ton"));
-            bt.setGiaRieng(rs.getDouble("gia_rieng"));
-            bt.setTenSize(rs.getString("ten_size"));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                BienTheSanPham bt = new BienTheSanPham();
+                bt.setMaBienThe(rs.getInt("ma_bien_the"));
+                bt.setMaSanPham(rs.getInt("ma_san_pham"));
+                bt.setMaSize(rs.getInt("ma_size"));
+                bt.setSoLuongTon(rs.getInt("so_luong_ton"));
+                bt.setGiaRieng(rs.getDouble("gia_rieng"));
+                bt.setTenSize(rs.getString("ten_size"));
 
-            try {
-                bt.setLoaiSize(rs.getString("loai_size"));
-            } catch (Exception ignored) {}
+                try {
+                    bt.setLoaiSize(rs.getString("loai_size"));
+                } catch (Exception ignored) {
+                }
 
-            list.add(bt);
+                list.add(bt);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-    } catch (Exception e) {
-        e.printStackTrace();
+        return list;
     }
-
-    return list;
-}
 }

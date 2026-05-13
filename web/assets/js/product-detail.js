@@ -183,9 +183,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!response.ok) {
                     const text = await response.text();
                     console.error("Add to cart failed:", text);
-                    
+
                     toastr.error(text || "Không thể thêm vào giỏ hàng.");
-                    
+
                     return;
                 }
 
@@ -287,5 +287,48 @@ document.addEventListener("DOMContentLoaded", function () {
             soInAo: soInAo
         };
     };
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const randomSection =
+            document.getElementById("pdRandomSection");
+
+    if (!randomSection) {
+        return;
+    }
+
+    randomSection.classList.add("is-hidden");
+
+    const observer = new IntersectionObserver(
+            function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        randomSection.classList.add("is-visible");
+
+                        randomSection.classList.remove("is-hidden");
+
+                    } else {
+
+                        randomSection.classList.remove("is-visible");
+
+                        randomSection.classList.add("is-hidden");
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.12,
+                root: null,
+                rootMargin: "0px 0px -8% 0px"
+            }
+    );
+
+    observer.observe(randomSection);
+
 });
 

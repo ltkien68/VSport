@@ -30,6 +30,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product-detail/product-info.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product-detail/product-fit.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product-detail/product-accordion.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product-detail/product-recommend.css">
+
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/filter-popup.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/login-popup.css">

@@ -1,0 +1,332 @@
+.pd-random-section {
+    width: 100%;
+    padding: 84px 0 90px;
+    background: var(--color-white);
+    overflow: hidden;
+    font-family: var(--font-body);
+}
+
+.pd-random-container {
+    width: 100%;
+}
+
+/* =========================
+   HEAD
+========================= */
+
+.pd-random-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 52px;
+}
+
+.pd-random-kicker {
+    margin: 0 0 8px;
+    font-family: var(--font-body-2);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-red);
+}
+
+.pd-random-title {
+    margin: 0;
+
+    font-family: var(--font-heading);
+    font-size: 42px;
+    line-height: 1;
+
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    color: var(--color-black);
+}
+
+.pd-random-line {
+    width: 260px;
+    height: 3px;
+    background: var(--color-red);
+    margin-top: 14px;
+    display: block;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.pd-random-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.pd-random-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 42px;
+}
+
+.pd-random-btn {
+    padding: 12px 28px;
+    border: 2px solid var(--color-black);
+    background: transparent;
+
+    font-family: var(--font-body);
+    font-weight: 800;
+
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.pd-random-btn:hover {
+    background: var(--color-black);
+    color: #fff;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.pd-random-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+
+    backface-visibility: hidden;
+    transform: translateZ(0);
+
+    font-family: var(--font-body);
+}
+
+.pd-random-image-wrap {
+    position: relative;
+    background: var(--color-gray-200);
+    overflow: hidden;
+    aspect-ratio: 1 / 1.18;
+}
+
+.pd-random-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+
+    transition: transform 0.4s ease;
+}
+
+.pd-random-card:hover .pd-random-image {
+    transform: scale(1.03);
+}
+
+/* =========================
+   INFO
+========================= */
+
+.pd-random-info {
+    padding: 20px 6px 0;
+    font-family: var(--font-body);
+}
+
+/* =========================
+   PRICE
+========================= */
+
+.pd-random-price-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    margin-top: 20px;
+    margin-bottom: 14px;
+
+    font-family: var(--font-body);
+}
+
+.pd-random-old-price {
+    font-size: 18px;
+    color: var(--color-gray-400);
+    text-decoration: line-through;
+    font-weight: 500;
+}
+
+.pd-random-sale-price {
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--color-red);
+}
+
+.pd-random-normal-price {
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--color-black);
+}
+
+/* =========================
+   NAME
+========================= */
+
+.pd-random-name {
+    margin: 0 0 14px;
+
+    font-size: 28px;
+    line-height: 1.28;
+    font-weight: 900;
+
+    color: var(--color-black);
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+
+    min-height: 72px;
+
+    font-family: var(--font-body);
+}
+
+/* =========================
+   DESC
+========================= */
+
+.pd-random-desc {
+    margin: 0;
+
+    font-size: 18px;
+    line-height: 1.6;
+
+    color: var(--color-gray-600);
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+
+    min-height: 58px;
+
+    font-family: var(--font-body);
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.pd-random-empty {
+    text-align: center;
+    padding: 32px 0;
+    font-size: 18px;
+    color: var(--color-gray-600);
+    font-family: var(--font-body);
+}
+
+/* =========================
+   REVEAL
+========================= */
+
+.pd-random-reveal-title {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(4px);
+
+    transition:
+        opacity 0.28s ease-out,
+        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.34s ease-out;
+}
+
+.pd-random-reveal-grid {
+    opacity: 0;
+    transform: translateY(64px);
+    filter: blur(6px);
+
+    transition:
+        opacity 0.3s ease-out,
+        transform 0.62s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.38s ease-out;
+}
+
+.pd-random-reveal-section.is-visible .pd-random-reveal-title,
+.pd-random-reveal-section.is-visible .pd-random-reveal-grid {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+.pd-random-reveal-section.is-hidden .pd-random-reveal-title {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(4px);
+}
+
+.pd-random-reveal-section.is-hidden .pd-random-reveal-grid {
+    opacity: 0;
+    transform: translateY(64px);
+    filter: blur(6px);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1200px) {
+
+    .pd-random-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pd-random-title {
+        font-size: 36px;
+    }
+
+    .pd-random-name {
+        font-size: 24px;
+    }
+
+    .pd-random-normal-price,
+    .pd-random-sale-price {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .pd-random-section {
+        padding: 64px 0 72px;
+    }
+
+    .pd-random-grid {
+        grid-template-columns: 1fr;
+        gap: 34px;
+    }
+
+    .pd-random-title {
+        font-size: 28px;
+    }
+
+    .pd-random-name {
+        font-size: 20px;
+    }
+
+    .pd-random-desc {
+        font-size: 15px;
+        min-height: auto;
+    }
+
+    .pd-random-normal-price,
+    .pd-random-sale-price {
+        font-size: 22px;
+    }
+}

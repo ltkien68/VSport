@@ -36,7 +36,6 @@ public class ProductDetailServlet extends HttpServlet {
 
             SanPham sp = sanPhamDAO.getById(maSanPham);
 
-
             if (sp == null) {
                 request.getRequestDispatcher("/WEB-INF/views/error/404.jsp").forward(request, response);
                 return;
@@ -51,6 +50,12 @@ public class ProductDetailServlet extends HttpServlet {
             String activePage = xacDinhActivePage(sp);
             String backUrl = xacDinhBackUrl(request, sp);
             String breadcrumbLabel = xacDinhBreadcrumbLabel(sp);
+            
+            List<SanPham> dsGoiY = sanPhamDAO.getRandomSanPham(20);
+            
+            System.out.println("dsGoiY size = " + dsGoiY.size());
+
+            request.setAttribute("dsGoiY", dsGoiY);
 
             request.setAttribute("sp", sp);
             request.setAttribute("spInfo", sp);
@@ -60,6 +65,8 @@ public class ProductDetailServlet extends HttpServlet {
             request.setAttribute("activePage", activePage);
             request.setAttribute("backUrl", backUrl);
             request.setAttribute("breadcrumbLabel", breadcrumbLabel);
+
+            
 
             request.getRequestDispatcher("/WEB-INF/views/pages/product-detail.jsp").forward(request, response);
 

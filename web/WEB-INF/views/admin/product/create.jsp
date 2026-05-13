@@ -6,7 +6,7 @@
 <div class="admin-product-popup" id="addProductPopup">
     <div class="admin-product-popup-header">
         <h2>Thêm sản phẩm mới</h2>
-            <button type="button" class="admin-product-popup-close" id="closeAddProductPopup">×</button>
+        <button type="button" class="admin-product-popup-close" id="closeAddProductPopup">×</button>
     </div>
 
     <form id="addProductWithCapitalForm"
@@ -53,8 +53,8 @@
                     </c:forEach>
                 </select>
             </div>
-                    
-                    <div class="admin-form-group">
+
+            <div class="admin-form-group">
                 <label>Nhóm sản phẩm</label>
                 <input type="number" name="nhomSanPham" placeholder="1 / 2..." required>
             </div>
@@ -131,7 +131,29 @@
                 <div class="admin-variant-row">
                     <select name="maSize" required>
                         <c:forEach var="size" items="${dsSize}">
-                            <option value="${size.maSize}">${size.tenSize}</option>
+                            <option value="${size.maSize}"><c:choose>
+                                <c:when test="${size.loaiSize == 'ao'}">
+                                    Size áo
+                                </c:when>
+
+                                <c:when test="${size.loaiSize == 'giay'}">
+                                    Size giày
+                                </c:when>
+
+                                <c:when test="${size.loaiSize == 'gang'}">
+                                    Size găng
+                                </c:when>
+
+                                <c:when test="${size.loaiSize == 'qua-bong'}">
+                                    Size bóng
+                                </c:when>
+
+                                <c:otherwise>
+                                    Size khác
+                                </c:otherwise>
+                            </c:choose>
+
+                            - ${size.tenSize}</option>
                         </c:forEach>
                     </select>
                     <input type="number" name="soLuongTon" min="0" placeholder="Số lượng" required>
