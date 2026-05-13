@@ -4,8 +4,11 @@
     Boolean loginSuccessFlag = (Boolean) request.getAttribute("loginSuccess");
     Boolean logoutSuccessFlag = (Boolean) request.getAttribute("logoutSuccess");
 
-    if (loginSuccessFlag == null) loginSuccessFlag = false;
-    if (logoutSuccessFlag == null) logoutSuccessFlag = false;
+    if (loginSuccessFlag == null) {
+        loginSuccessFlag = false;
+    }
+    if (logoutSuccessFlag == null)
+        logoutSuccessFlag = false;
 %>
 <!DOCTYPE html>
 <html lang="vi">
@@ -43,24 +46,28 @@
     </head>
 
     <body class="home-page"
-          data-login-success="<%= loginSuccessFlag %>"
-          data-logout-success="<%= logoutSuccessFlag %>"
+          data-login-success="<%= loginSuccessFlag%>"
+          data-logout-success="<%= logoutSuccessFlag%>"
           >
 
         <!-- HEADER -->
-        <div class="header-shell" id="siteHeaderShell">
-            <%@ include file="/WEB-INF/views/common/header.jsp" %>
-            <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
+        <div id="app">
+            <div class="header-shell" id="siteHeaderShell">
+                <%@ include file="/WEB-INF/views/common/header.jsp" %>
+                <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
+            </div>
+
+
+            <%@ include file="/WEB-INF/views/common/banner.jsp" %>
+            <%@ include file="/WEB-INF/views/auth/login-popup.jsp" %>
+            <%@ include file="/WEB-INF/views/pages/components/new-product-section.jsp" %>
+            <%@ include file="/WEB-INF/views/pages/components/favorite-section.jsp" %>
+            <%@ include file="/WEB-INF/views/pages/components/best-seller-section.jsp" %>
+            <%@ include file="/WEB-INF/views/pages/components/shop-category.jsp" %>
+            <%@ include file="/WEB-INF/views/pages/components/newsletter-bar.jsp" %>
+
+            <%@ include file="/WEB-INF/views/common/footer.jsp" %>
         </div>
-
-
-        <%@ include file="/WEB-INF/views/common/banner.jsp" %>
-        <%@ include file="/WEB-INF/views/auth/login-popup.jsp" %>
-        <%@ include file="/WEB-INF/views/pages/components/new-product-section.jsp" %>
-        <%@ include file="/WEB-INF/views/pages/components/favorite-section.jsp" %>
-        <%@ include file="/WEB-INF/views/pages/components/best-seller-section.jsp" %>
-        <%@ include file="/WEB-INF/views/pages/components/shop-category.jsp" %>
-        <%@ include file="/WEB-INF/views/pages/components/newsletter-bar.jsp" %>
 
 
         <script>
@@ -86,7 +93,9 @@
         <script type="module" src="${pageContext.request.contextPath}/assets/js/components/new-product-section.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/components/newsletter-bar.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/common/scroll-reveal.js"></script>
-                <script src="${pageContext.request.contextPath}/assets/js/common/hover-float.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/common/hover-float.js"></script>
+        
+        <script src="${pageContext.request.contextPath}/assets/js/common/loading.js"></script>
 
 
 
@@ -119,7 +128,7 @@
         </script>
 
 
-        <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+
 
     </body>
 </html>

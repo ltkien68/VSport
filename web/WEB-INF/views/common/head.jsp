@@ -21,6 +21,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/club_products.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/club_product_nav.css">
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/loading.css">
+
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/cart-popup.css">
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/cart.css">
