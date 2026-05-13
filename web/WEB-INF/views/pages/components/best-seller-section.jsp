@@ -32,40 +32,24 @@
                                                      alt="${sp.tenSanPham}"
                                                      class="best-seller-image" />
 
-                                                
+
                                             </div>
 
                                             <div class="best-seller-info">
-                                                <div class="best-seller-price">
-                                                    <c:choose>
-                                                        <c:when test="${sp.giaKhuyenMai > 0}">
-                                                            <span class="best-seller-old-price">
-                                                                <fmt:formatNumber value="${sp.giaNiemYet}" type="number"/>đ
-                                                            </span>
-                                                            <span class="best-seller-sale-price">
-                                                                <fmt:formatNumber value="${sp.giaSanPham}" type="number"/>đ
-                                                            </span>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <span class="best-seller-normal-price">
-                                                                <fmt:formatNumber value="${sp.giaSanPham}" type="number"/>đ
-                                                            </span>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </div>
 
-                                                <h3 class="best-seller-card-title">${sp.tenSanPham}</h3>
 
-                                                <p class="best-seller-card-desc">
-                                                    <c:choose>
-                                                        <c:when test="${not empty sp.moTaNgan}">
-                                                            ${sp.moTaNgan}
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            Sản phẩm nổi bật được nhiều khách hàng lựa chọn.
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </p>
+                                                <h3 class="best-seller-card-title">
+                                                    <span class="best-title-wrap">
+                                                        <span class="best-arrow">
+                                                            <i data-lucide="arrow-right"></i>
+                                                        </span>
+                                                        <span class="best-text">
+                                                            ${sp.tenSanPham}
+                                                        </span>
+                                                    </span>
+                                                </h3>
+
+
                                             </div>
                                         </a>
                                     </div>

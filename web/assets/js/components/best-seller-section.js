@@ -125,3 +125,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
     observer.observe(bestSellerSection);
 });
+
+document.querySelectorAll(".best-seller-card").forEach((card) => {
+    const title = card.querySelector(".best-seller-card-title");
+    if (!title) return;
+
+    const arrow = title.querySelector(".best-arrow");
+    const text = title.querySelector(".best-text");
+
+    let target = 0;
+    let current = 0;
+    let velocity = 0;
+    let raf;
+
+    function animate() {
+        const force = (target - current) * 0.2;
+        velocity += force;
+        velocity *= 0.78;
+        current += velocity;
+
+        // arrow chạy vào
+        const arrowX = (-16 + current * 16);
+        arrow.style.transform = `translateX(${arrowX}px)`;
+        arrow.style.opacity = current;
+
+        // text đẩy sang phải
+        const textX = current * 18;
+        text.style.transform = `translateX(${textX}px)`;
+
+        if (Math.abs(velocity) > 0.01) {
+            raf = requestAnimationFrame(animate);
+        }
+    }
+
+    card.addEventListener("mouseenter", () => {
+        target = 1;
+        cancelAnimationFrame(raf);
+        animate();
+    });
+
+    card.addEventListener("mouseleave", () => {
+        target = 0;
+        cancelAnimationFrame(raf);
+        animate();
+    });
+});

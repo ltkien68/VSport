@@ -23,7 +23,7 @@
                 <h3>BỘ KIT CLB</h3>
             </a>
 
-            <a href="${pageContext.request.contextPath}/ao_anime" class="shop-category-card">
+            <a href="${pageContext.request.contextPath}/giay_gang_bong_da" class="shop-category-card">
                 <div class="shop-category-image">
                     <img src="${pageContext.request.contextPath}/assets/images/others/category/ao-ky-niem.webp" alt="Áo anime">
                 </div>

@@ -1,6 +1,6 @@
 .home-favorite-section {
     width: 100%;
-    padding: 60px 24px 72px;
+    padding: 0px 24px 72px;
     background: var(--color-white);
 }
 
@@ -36,6 +36,35 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--color-black);
+    
+
+    white-space: normal; /* cho phép xuống dòng toàn bộ card */
+
+}
+
+.home-favorite-name {
+    margin-top: 12px;
+    white-space: normal;
+}
+
+/* wrapper giống new-product */
+.fav-title-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+/* arrow hidden ban đầu */
+.fav-arrow {
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+/* text bình thường */
+.fav-text {
+    white-space: normal;
 }
 
 .home-favorite-line {
@@ -87,8 +116,11 @@
 .home-favorite-image-wrap {
     position: relative;
     background: var(--color-gray-200);
+    border-radius: 20px;
     overflow: hidden;
     aspect-ratio: 1 / 1.18;
+
+    perspective: 1200px;
 }
 
 .home-favorite-image {
@@ -96,12 +128,12 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s ease;
+
+    transition: transform 0.15s ease;
+    will-change: transform;
+    transform-style: preserve-3d;
 }
 
-.home-favorite-card:hover .home-favorite-image {
-    transform: scale(1.03);
-}
 
 .home-favorite-info {
     padding: 20px 6px 0;

@@ -125,3 +125,202 @@ document.addEventListener("DOMContentLoaded", function () {
 
     observer.observe(favoriteSection);
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const titleEl = document.querySelector('.home-favorite-title');
+    if (!titleEl) return;
+
+    const fullText = titleEl.innerText;                 // "SẢN PHẨM CỦA BẠN"
+    let currentText = '';
+    let isAnimating = false;
+    let timeouts = [];
+
+    function clearTimeouts() {
+        timeouts.forEach(t => clearTimeout(t));
+        timeouts = [];
+    }
+
+    function stopAll() {
+        clearTimeouts();
+        isAnimating = false;
+    }
+
+    // Hiệu ứng gõ từng chữ, có thể gây lỗi tại vị trí chỉ định
+    function startTypewriterWithMistake() {
+        stopAll();
+        titleEl.innerText = '';
+        currentText = '';
+        let i = 0;
+        let mistakeTriggered = false;
+
+        function typeNext() {
+            if (i >= fullText.length) {
+                isAnimating = false;
+                return;
+            }
+
+            // Chọn vị trí gây lỗi (ví dụ: sau khi gõ được 5 chữ thì gõ sai)
+            if (!mistakeTriggered && i === 5) {
+                // Gõ sai: thay vì 'P' thì gõ 'X'
+                const wrongChar = 'X';
+                currentText += wrongChar;
+                titleEl.innerText = currentText;
+                i++;  // vẫn tăng i nhưng ký tự bị sai
+                mistakeTriggered = true;
+
+                // Sau 500ms, xóa ký tự sai
+                const t1 = setTimeout(() => {
+                    currentText = currentText.slice(0, -1);
+                    titleEl.innerText = currentText;
+                    i--; // lùi lại để gõ lại đúng
+
+                    // Sau 150ms, gõ đúng ký tự
+                    const t2 = setTimeout(() => {
+                        const correctChar = fullText.charAt(i);
+                        currentText += correctChar;
+                        titleEl.innerText = currentText;
+                        i++;
+                        // Tiếp tục gõ các ký tự còn lại bình thường
+                        typeNext();
+                    }, 10);
+                    timeouts.push(t2);
+                }, 50);
+                timeouts.push(t1);
+                return;
+            }
+
+            // Gõ bình thường
+            currentText += fullText.charAt(i);
+            titleEl.innerText = currentText;
+            i++;
+            const t = setTimeout(typeNext, 20);
+            timeouts.push(t);
+        }
+
+        isAnimating = true;
+        typeNext();
+    }
+
+    // Hiệu ứng xóa chữ (từng ký tự)
+    function startErase() {
+        if (!isAnimating && titleEl.innerText === '') return;
+        stopAll();
+        let text = titleEl.innerText;
+        if (text === '') return;
+
+        function eraseNext() {
+            if (text.length === 0) {
+                titleEl.innerText = '';
+                isAnimating = false;
+                return;
+            }
+            text = text.slice(0, -1);
+            titleEl.innerText = text;
+            const t = setTimeout(eraseNext, 10);
+            timeouts.push(t);
+        }
+        isAnimating = true;
+        eraseNext();
+    }
+
+    // Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Khi vào viewport: chạy hiệu ứng gõ (chỉ khi chưa có full text)
+                if (titleEl.innerText !== fullText) {
+                    startTypewriterWithMistake();
+                }
+            } else {
+                // Khi ra khỏi viewport: xóa hết chữ
+                if (titleEl.innerText.length > 0) {
+                    startErase();
+                } else {
+                    stopAll();
+                }
+            }
+        });
+    }, { threshold: 0.4 });
+
+    observer.observe(titleEl);
+});
+
+document.querySelectorAll(".home-favorite-card").forEach((card) => {
+    const img = card.querySelector(".home-favorite-image");
+
+    let raf;
+
+    card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        cancelAnimationFrame(raf);
+
+        raf = requestAnimationFrame(() => {
+            img.style.transform = `
+                perspective(1200px)
+                rotateX(${-y * 12}deg)
+                rotateY(${x * 12}deg)
+                scale(1.08)
+                translateZ(30px)
+            `;
+        });
+    });
+
+    card.addEventListener("mouseleave", () => {
+        img.style.transform = `
+            perspective(1200px)
+            rotateX(0deg)
+            rotateY(0deg)
+            scale(1)
+            translateZ(0px)
+        `;
+    });
+});
+
+document.querySelectorAll(".home-favorite-card").forEach((card) => {
+    const title = card.querySelector(".home-favorite-name");
+    if (!title) return;
+
+    const arrow = title.querySelector(".fav-arrow");
+    const text = title.querySelector(".fav-text");
+
+    let target = 0;
+    let current = 0;
+    let velocity = 0;
+    let raf;
+
+    function animate() {
+        const force = (target - current) * 0.2;
+        velocity += force;
+        velocity *= 0.78;
+        current += velocity;
+
+        // arrow chạy vào
+        const arrowX = (-16 + current * 16);
+        arrow.style.transform = `translateX(${arrowX}px)`;
+        arrow.style.opacity = current;
+
+        // text đẩy sang phải
+        const textX = current * 18;
+        text.style.transform = `translateX(${textX}px)`;
+
+        if (Math.abs(velocity) > 0.01) {
+            raf = requestAnimationFrame(animate);
+        }
+    }
+
+    card.addEventListener("mouseenter", () => {
+        target = 1;
+        cancelAnimationFrame(raf);
+        animate();
+    });
+
+    card.addEventListener("mouseleave", () => {
+        target = 0;
+        cancelAnimationFrame(raf);
+        animate();
+    });
+});

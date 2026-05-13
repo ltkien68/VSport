@@ -1,6 +1,6 @@
 .best-seller-section {
     width: 100%;
-    padding: 60px 24px 72px;
+    padding: 0px 24px 72px;
     background: var(--color-white);
 }
 
@@ -88,6 +88,7 @@
 
 .best-seller-image-wrap {
     position: relative;
+    border-radius: 20px;
     background: var(--color-gray-200);
     overflow: hidden;
     aspect-ratio: 1 / 1.18;
@@ -150,6 +151,31 @@
     line-height: 1.28;
     font-weight: 900;
     color: var(--color-black);
+}
+
+.best-seller-card-title {
+    margin-top: 10px;
+    white-space: normal;
+}
+
+/* wrapper giữ layout 1 dòng */
+.best-title-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+/* arrow ban đầu ẩn */
+.best-arrow {
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+/* text */
+.best-text {
+    white-space: normal;
 }
 
 .best-seller-card-desc {
