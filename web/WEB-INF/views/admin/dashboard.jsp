@@ -98,7 +98,26 @@
             <div class="admin-panel">
                 <div class="admin-panel-head">
                     <div>
-                        <h3>Total Sales</h3>
+                        <h3>Đơn Hàng</h3>
+                        <p><fmt:formatNumber value="${tongDonHang}" type="number" groupingUsed="true" maxFractionDigits="0"/></p>
+                    </div>
+                    <div class="admin-legend">
+                        <span><i class="dot current"></i>Hiện Tại</span>
+                        <span><i class="dot last"></i>Tuần Trước</span>
+                    </div>
+                </div>
+
+                <div class="admin-placeholder-box">
+                    <%@ include file="/WEB-INF/views/admin/components/weekly-order-chart.jsp" %>
+                </div>
+
+
+            </div>
+
+            <div class="admin-panel">
+                <div class="admin-panel-head">
+                    <div>
+                        <h3>Doanh Thu</h3>
                         <p><fmt:formatNumber value="${tongDoanhThu}" type="number" groupingUsed="true" maxFractionDigits="0"/>đ</p>
                     </div>
                     <div class="admin-legend">
@@ -108,33 +127,14 @@
                 </div>
 
                 <div class="admin-placeholder-box">
-                    <div class="admin-placeholder-title">chart-sales.jsp</div>
-                    <div class="admin-placeholder-sub">Khu biểu đồ line chart sẽ include sau</div>
+                    <%@ include file="/WEB-INF/views/admin/components/weekly-revenue-chart.jsp" %>
                 </div>
             </div>
 
             <div class="admin-panel">
                 <div class="admin-panel-head">
                     <div>
-                        <h3>Total Visitors</h3>
-                        <p><fmt:formatNumber value="${tongThanhVien}" type="number" groupingUsed="true" maxFractionDigits="0"/></p>
-                    </div>
-                    <div class="admin-legend">
-                        <span><i class="dot current"></i>Hiện Tại</span>
-                        <span><i class="dot last"></i>Tuần Trước</span>
-                    </div>
-                </div>
-
-                <div class="admin-placeholder-box">
-                    <div class="admin-placeholder-title">chart-visitors.jsp</div>
-                    <div class="admin-placeholder-sub">Khu biểu đồ bar chart sẽ include sau</div>
-                </div>
-            </div>
-
-            <div class="admin-panel">
-                <div class="admin-panel-head">
-                    <div>
-                        <h3>Earning Growth</h3>
+                        <h3>Thành Viên</h3>
                         <p><fmt:formatNumber value="${tongLoiNhuan}" type="number" groupingUsed="true" maxFractionDigits="0"/>đ</p>
                     </div>
                     <div class="admin-legend">
@@ -144,8 +144,7 @@
                 </div>
 
                 <div class="admin-placeholder-box">
-                    <div class="admin-placeholder-title">chart-earning.jsp</div>
-                    <div class="admin-placeholder-sub">Khu biểu đồ tăng trưởng sẽ include sau</div>
+                    <%@ include file="/WEB-INF/views/admin/components/weekly-member-chart.jsp" %>
                 </div>
             </div>
         </section>
@@ -180,9 +179,17 @@
 </script>
 
 <jsp:include page="/WEB-INF/views/admin/components/weekly-stats-popup.jsp" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script src="${pageContext.request.contextPath}/assets/js/admin/admin-weekly-revenue-chart.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/admin/admin-weekly-order-chart.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/admin/admin-weekly-member-chart.js"></script>
+
 
 <script src="${pageContext.request.contextPath}/assets/js/admin/admin-dashboard.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/admin/weekly-stat-popup.js"></script>
+
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>
     lucide.createIcons();

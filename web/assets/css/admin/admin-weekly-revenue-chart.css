@@ -1,0 +1,147 @@
+.revenue-chart-card {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(135deg, #ffffff, #fff5f5);
+    border-radius: 26px;
+    padding: 28px;
+    overflow: hidden;
+
+    box-shadow:
+            0 10px 30px rgba(0,0,0,0.08);
+
+}
+
+.revenue-chart-card::before{
+    content:"";
+    position:absolute;
+    top:-100px;
+    right:-100px;
+
+    width:220px;
+    height:220px;
+
+    background:rgba(255,0,0,.06);
+    border-radius:50%;
+}
+
+
+.chart-loading{
+    position:absolute;
+    inset:0;
+
+    background:rgba(255,255,255,.85);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    z-index:10;
+
+    transition:.4s;
+}
+
+.chart-loading.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.loader{
+    width:52px;
+    height:52px;
+
+    border:4px solid #eee;
+    border-top:4px solid #e63946;
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+}
+
+.chart-card{
+    width:100%;
+    height:100%;
+    position:relative;
+
+    background:#fff;
+    border-radius:18px;
+
+    overflow:hidden;
+}
+
+/* canvas */
+
+#weeklyRevenueChart{
+    width:100% !important;
+    height:100% !important;
+    position:relative;
+    z-index:2;
+}
+
+/* skeleton */
+
+.chart-skeleton{
+    position:absolute;
+    inset:0;
+
+    background:#fff;
+
+    z-index:3;
+
+    overflow:hidden;
+
+    transition:.45s ease;
+}
+
+.chart-skeleton.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+/* wave */
+
+.skeleton-wave{
+    position:absolute;
+
+    left:-40%;
+    top:0;
+
+    width:40%;
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(0,0,0,.06),
+        transparent
+    );
+
+    animation:waveMove 1.2s linear infinite;
+}
+
+@keyframes waveMove{
+
+    from{
+        left:-40%;
+    }
+
+    to{
+        left:120%;
+    }
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes chartFadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}

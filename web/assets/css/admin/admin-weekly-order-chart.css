@@ -1,0 +1,61 @@
+.order-chart-card{
+    width:100%;
+    height:100%;
+    position:relative;
+}
+
+#weeklyOrderChart{
+    width:100% !important;
+    height:100% !important;
+    display:block;
+}
+
+.order-chart-skeleton{
+    position:absolute;
+    inset:0;
+
+    background:#fff;
+
+    z-index:3;
+
+    overflow:hidden;
+
+    transition:.45s ease;
+}
+
+.order-chart-skeleton.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+/* wave */
+
+.order-skeleton-wave{
+    position:absolute;
+
+    left:-40%;
+    top:0;
+
+    width:40%;
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(0,0,0,.06),
+        transparent
+    );
+
+    animation:waveMove 1.2s linear infinite;
+}
+
+@keyframes waveMove{
+
+    from{
+        left:-40%;
+    }
+
+    to{
+        left:120%;
+    }
+}

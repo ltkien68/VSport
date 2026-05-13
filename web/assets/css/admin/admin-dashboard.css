@@ -494,15 +494,24 @@
 ========================= */
 
 .admin-placeholder-box {
-    height: 180px;
-    border: 2px dashed var(--color-gray-200);
+    height: 340px;
+
     border-radius: var(--radius-md);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-1);
-    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.chart-card{
+    width:100%;
+    height:100%;
+    position:relative;
+}
+
+#weeklyRevenueChart{
+    width:100% !important;
+    height:100% !important;
 }
 
 .admin-placeholder-box--tall {

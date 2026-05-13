@@ -244,6 +244,10 @@
             <file>file:/D:/Code_files/VSPORT/VsportWeb/web/WEB-INF/views/admin/qua-tang.jsp</file>
             <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/css/admin/admin-qua-tang.css</file>
             <file>file:/D:/Code_files/VSPORT/VsportWeb/src/java/controller/admin/AdminQuaTangServlet.java</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/src/java/controller/admin/AdminThemQuaTangServlet.java</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/src/java/dao/QuaTangSanPhamDAO.java</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/src/java/model/QuaTangSanPham.java</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/js/admin/admin-qua-tang.js</file>
         </group>
     </open-files>
 </project-private>
