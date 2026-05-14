@@ -53,6 +53,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/checkout-popup.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/order-history.css">
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/review-popup.css">
+
 <%-- Toastr CSS --%>
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">

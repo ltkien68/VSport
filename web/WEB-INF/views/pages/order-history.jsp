@@ -152,6 +152,53 @@
                                                                 </p>
                                                                 <p class="order-product-qty">Số lượng: ${ct.soLuong}</p>
 
+                                                                <c:if test="${donHang.trangThaiDonHang == 'da_giao'}">
+
+                                                                    <c:set
+                                                                        var="reviewKey"
+                                                                        value="${donHang.maDonHang}-${ct.maSanPham}"
+                                                                        />
+
+                                                                    <c:choose>
+
+                                                                        <%-- ĐÃ ĐÁNH GIÁ --%>
+                                                                        <c:when test="${mapDaDanhGia[reviewKey]}">
+
+                                                                            <button
+                                                                                type="button"
+                                                                                class="order-review-btn reviewed"
+                                                                                disabled
+                                                                                >
+                                                                                ✓ Đã đánh giá
+                                                                            </button>
+
+                                                                        </c:when>
+
+                                                                        <%-- CHƯA ĐÁNH GIÁ --%>
+                                                                        <c:otherwise>
+
+                                                                            <button
+                                                                                type="button"
+                                                                                class="order-review-btn open-review-popup"
+
+                                                                                data-ma-don-hang="${donHang.maDonHang}"
+                                                                                data-ma-san-pham="${ct.maSanPham}"
+                                                                                data-ma-nguoi-dung="${nguoiDung.maNguoiDung}"
+
+                                                                                data-ten-san-pham="${ct.tenSanPham}"
+                                                                                data-anh="${ct.anhChinh}"
+                                                                                >
+
+                                                                                Đánh giá
+
+                                                                            </button>
+
+                                                                        </c:otherwise>
+
+                                                                    </c:choose>
+
+                                                                </c:if>
+
                                                                 <div class="order-print-info">
                                                                     <c:if test="${not empty ct.tenInAo or not empty ct.soInAo}">
                                                                         <div class="order-print-row">
@@ -192,11 +239,7 @@
                                         <div class="order-card-actions">
                                             <div class="order-card-actions-left">
                                                 <c:choose>
-                                                    <c:when test="${donHang.trangThaiDonHang == 'da_giao'}">
-                                                        <button type="button" class="order-btn order-btn-primary">
-                                                            Đánh Giá
-                                                        </button>
-                                                    </c:when>
+
 
                                                     <c:when test="${donHang.trangThaiDonHang == 'cho_xac_nhan'}">
                                                         <button type="button" class="order-btn order-btn-danger btn-huy-don" data-ma-don-hang="${donHang.maDonHang}">
@@ -298,6 +341,7 @@
             </div>
         </section>
 
+        <jsp:include page="/WEB-INF/views/pages/components/review-popup.jsp" />
         <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
         <script src="https://unpkg.com/lucide@latest"></script>
@@ -340,6 +384,9 @@
         <script src="${pageContext.request.contextPath}/assets/js/components/search-popup.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/components/login-popup.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/components/header.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/components/review-popup.js"></script>
+
+
 
         <div class="cancel-order-modal" id="cancelOrderModal">
             <div class="cancel-order-overlay" id="cancelOrderOverlay"></div>

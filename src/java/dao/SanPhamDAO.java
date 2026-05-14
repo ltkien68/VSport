@@ -475,7 +475,7 @@ public class SanPhamDAO {
                 dg.setSoSao(rs.getDouble("so_sao"));
                 dg.setNoiDung(rs.getString("noi_dung"));
                 dg.setAnhDanhGia(rs.getString("anh_danh_gia"));
-                dg.setNgayDanhGia(rs.getString("ngay_danh_gia"));
+                dg.setNgayDanhGia(rs.getTimestamp("ngay_danh_gia"));
                 dg.setTenNguoiDung(rs.getString("ho_ten"));
                 list.add(dg);
             }

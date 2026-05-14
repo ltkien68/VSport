@@ -37,6 +37,39 @@
     List<DanhGiaSanPham> dsDanhGia = (List<DanhGiaSanPham>) request.getAttribute("dsDanhGia");
 %>
 
+<%!
+    public String maskName(String fullName) {
+
+        if (fullName == null || fullName.trim().isEmpty()) {
+            return "Người dùng";
+        }
+
+        String[] words = fullName.trim().split("\\s+");
+
+        StringBuilder result = new StringBuilder();
+
+        for (String word : words) {
+
+            if (word.length() <= 1) {
+
+                result.append(word).append(" ");
+
+            } else {
+
+                result.append(word.charAt(0));
+
+                for (int i = 1; i < word.length(); i++) {
+                    result.append("*");
+                }
+
+                result.append(" ");
+            }
+        }
+
+        return result.toString().trim();
+    }
+%>
+
 <div class="pd-accordion-list">
 
     <div class="pd-accordion-item" id="pd-reviews">
@@ -55,7 +88,9 @@
             <% for (DanhGiaSanPham dg : dsDanhGia) {%>
             <div class="pd-review-item">
                 <div class="pd-review-top">
-                    <strong><%= dg.getTenNguoiDung() != null ? dg.getTenNguoiDung() : "Người dùng"%></strong>
+                    <strong>
+                        <%= maskName(dg.getTenNguoiDung())%>
+                    </strong>
                     <span class="pd-review-stars-wrap">
                         <span class="pd-review-stars">
                             <%= renderStars(dg.getSoSao())%>
@@ -134,7 +169,7 @@
                 <% if (!hasDetail) {%>
                 <%="Thông tin đang được cập nhật."%>
                 <% }%>
-                
+
                 <%= spAcc.getMoTaChiTiet() != null ? spAcc.getMoTaChiTiet() : ""%>
 
             </div>

@@ -35,6 +35,26 @@
     line-height: 1.8;
 }
 
+.order-review-btn {
+    font-family: var(--font-body);
+}
+
+.order-review-btn.reviewed {
+
+    background: #f1f1f1;
+
+    font-family: var(--font-body);
+
+
+    color: #666;
+
+    border: 1px solid #ddd;
+
+    cursor: not-allowed;
+
+    opacity: 0.9;
+}
+
 .order-tabs {
     display: flex;
     align-items: center;
