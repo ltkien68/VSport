@@ -59,63 +59,64 @@
 
             <a href="${pageContext.request.contextPath}/gio_hang" class="header-icon cart-link">
                 <i data-lucide="handbag"></i>
-                <span class="cart-count"><%= tongMatHang %></span>
+                <span class="cart-count"><%= tongMatHang%></span>
             </a>
 
             <div class="header-user">
 
-    <% if (!isLogin) { %>
-        <!-- CHƯA LOGIN -->
-        <a href="javascript:void(0)"
-           class="header-icon"
-           id="openLoginPopup">
-            <i data-lucide="user"></i>
-        </a>
-    <% } else { %>
-        <!-- ĐÃ LOGIN -->
-        <a href="javascript:void(0)"
-           class="header-icon logged-in">
-            <i data-lucide="user"></i>
-        </a>
+                <% if (!isLogin) { %>
+                <!-- CHƯA LOGIN -->
+                <a href="javascript:void(0)"
+                   class="header-icon"
+                   id="openLoginPopup">
+                    <i data-lucide="user"></i>
+                </a>
+                <% } else { %>
+                <!-- ĐÃ LOGIN -->
+                <a href="javascript:void(0)"
+                   class="header-icon logged-in">
+                    <i data-lucide="user"></i>
+                </a>
 
-        <div class="user-dropdown">
-            <a href="${pageContext.request.contextPath}/thong_tin_ca_nhan">Thông tin tài khoản</a>
-            <a href="${pageContext.request.contextPath}/don-hang?tab=cho_xac_nhan">Lịch sử đơn hàng</a>
-            <a href="${pageContext.request.contextPath}/dang_xuat">Đăng xuất</a>
-        </div>
-    <% } %>
+                <div class="user-dropdown">
+                    <a href="${pageContext.request.contextPath}/thong_tin_ca_nhan">Thông tin tài khoản</a>
+                    <a href="${pageContext.request.contextPath}/don-hang?tab=cho_xac_nhan">Lịch sử đơn hàng</a>
+                    <a href="${pageContext.request.contextPath}/dang_xuat">Đăng xuất</a>
+                </div>
+                <% }%>
 
-</div>
-    
-    <div class="theme-toggle-wrap">
-    <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Chuyển giao diện">
-        <span class="theme-toggle-track">
-            <i data-lucide="sun" class="theme-icon theme-icon-sun"></i>
-            <i data-lucide="moon" class="theme-icon theme-icon-moon"></i>
-            <span class="theme-toggle-thumb"></span>
-        </span>
-    </button>
-</div>
+            </div>
+
+            <div class="theme-toggle-wrap">
+                <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Chuyển giao diện">
+                    <span class="theme-toggle-track">
+                        <i data-lucide="sun" class="theme-icon theme-icon-sun"></i>
+                        <i data-lucide="moon" class="theme-icon theme-icon-moon"></i>
+                        <span class="theme-toggle-thumb"></span>
+                    </span>
+                </button>
+            </div>
         </div>
     </div>
-                
-    
+
+
     <script>
-    (function () {
-        try {
-            const theme = localStorage.getItem("theme");
-            if (theme === "dark") {
-                document.documentElement.classList.add("dark-mode");
-            } else {
-                document.documentElement.classList.remove("dark-mode");
+        (function () {
+            try {
+                const theme = localStorage.getItem("theme");
+                if (theme === "dark") {
+                    document.documentElement.classList.add("dark-mode");
+                } else {
+                    document.documentElement.classList.remove("dark-mode");
+                }
+            } catch (e) {
             }
-        } catch (e) {}
-    })();
+        })();
     </script>
-                
+
 </header>
-                
-                <div class="search-overlay" id="searchOverlay">
+
+<div class="search-overlay" id="searchOverlay">
     <div class="search-overlay-inner">
         <button type="button" class="search-close-btn" id="closeSearchPopup">×</button>
 
@@ -131,7 +132,7 @@
                     class="search-input-popup"
                     placeholder="VD: Áo Real 26,..."
                     autocomplete="off"
-                />
+                    />
                 <button type="button" class="search-clear-btn" id="clearSearchBtn">×</button>
             </div>
         </div>

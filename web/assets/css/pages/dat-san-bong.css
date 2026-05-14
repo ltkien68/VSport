@@ -1,0 +1,101 @@
+/* dat-san-bong.css */
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+}
+
+/* Nút quay lại trang chủ - góc trái trên cùng */
+.back-home-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: inherit;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.back-home-btn:hover {
+    background: #ff3366;
+    transform: scale(1.02);
+}
+
+/* Thông tin điều khiển */
+.info-panel {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 100;
+    font-family: monospace;
+}
+
+/* Overlay đặt sân (có thể thêm form sau) */
+.booking-overlay {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 20px;
+    width: 280px;
+    color: white;
+    z-index: 100;
+    border: 1px solid rgba(255,255,255,0.2);
+    pointer-events: auto;
+    font-family: inherit;
+}
+
+.booking-overlay h3 {
+    margin: 0 0 12px 0;
+    font-size: 20px;
+}
+
+.booking-overlay button {
+    background: #ff3366;
+    border: none;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.booking-overlay button:hover {
+    background: #ff6680;
+}
+
+@media (max-width: 600px) {
+    .booking-overlay {
+        width: 240px;
+        padding: 16px;
+        bottom: 20px;
+        right: 20px;
+    }
+    .back-home-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
