@@ -25,6 +25,13 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--color-red);
+    
+    
+}
+
+.best-seller-title.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .best-seller-title {
@@ -36,6 +43,9 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--color-black);
+    opacity: 0;
+    transform: translateY(-40px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .best-seller-line {
