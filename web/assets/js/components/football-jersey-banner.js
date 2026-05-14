@@ -126,3 +126,118 @@ document.addEventListener("DOMContentLoaded", function () {
 
     startAutoplay();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const scrollSection =
+            document.getElementById("footballBannerScroll");
+
+    const banner =
+            document.querySelector(".football-jersey-banner");
+
+    if (!scrollSection || !banner)
+        return;
+
+    /*
+     =========================
+     EASING
+     =========================
+     */
+
+    function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+    }
+
+    function updateBannerScale() {
+
+        const rect =
+                scrollSection.getBoundingClientRect();
+
+        const total =
+                scrollSection.offsetHeight - window.innerHeight;
+
+        const current =
+                Math.min(
+                        Math.max(-rect.top, 0),
+                        total
+                        );
+
+        /*
+         =========================
+         RAW PROGRESS
+         =========================
+         */
+
+        const rawProgress =
+                current / total;
+
+        /*
+         =========================
+         SMOOTH PROGRESS
+         =========================
+         */
+
+        const progress =
+                easeOutCubic(rawProgress);
+
+        /*
+         =========================
+         SCALE
+         =========================
+         */
+
+        const startScale = 0.72;
+
+        const scale =
+                startScale +
+                ((1 - startScale) * progress);
+
+        
+
+        /*
+         =========================
+         BORDER RADIUS
+         =========================
+         */
+
+        const radius =
+                32 * (1 - progress);
+
+        /*
+         =========================
+         DEPTH EFFECT
+         =========================
+         */
+
+        const brightness =
+                0.82 + (0.18 * progress);
+
+        const blur =
+                8 * (1 - progress);
+
+        banner.style.transform =
+        `scale(${scale})`;
+
+        banner.style.borderRadius =
+                `${radius}px`;
+
+        banner.style.filter =
+                `
+                brightness(${brightness})
+                blur(${blur * 0.15}px)
+            `;
+    }
+
+    updateBannerScale();
+
+    window.addEventListener(
+            "scroll",
+            updateBannerScale,
+            {passive: true}
+    );
+
+    window.addEventListener(
+            "resize",
+            updateBannerScale
+    );
+});

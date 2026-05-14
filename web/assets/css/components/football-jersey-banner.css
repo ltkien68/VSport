@@ -1,3 +1,36 @@
+.football-jersey-banner-scroll {
+    position: relative;
+    height: 220vh;
+}
+
+.football-jersey-banner-scale {
+    position: sticky;
+    top: 0;
+
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.football-jersey-banner {
+    width: 100%;
+
+    transform-origin: center center;
+
+    will-change: transform, border-radius;
+
+    transition:
+        border-radius 0.15s linear;
+
+    border-radius: 32px;
+
+    overflow: hidden;
+}
+
+
 .football-jersey-banner {
     width: 100%;
     overflow: hidden;
