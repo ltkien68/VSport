@@ -15,6 +15,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/banner.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/footer.css">
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/chat.css">
+
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/football-jersey.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/football-jersey-banner.css">
 

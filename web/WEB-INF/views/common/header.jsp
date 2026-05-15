@@ -81,7 +81,9 @@
                 <div class="user-dropdown">
                     <a href="${pageContext.request.contextPath}/thong_tin_ca_nhan">Thông tin tài khoản</a>
                     <a href="${pageContext.request.contextPath}/don-hang?tab=cho_xac_nhan">Lịch sử đơn hàng</a>
+                    <a href="${pageContext.request.contextPath}/chat">Hỗ trợ trực tuyến</a>
                     <a href="${pageContext.request.contextPath}/dang_xuat">Đăng xuất</a>
+
                 </div>
                 <% }%>
 
@@ -113,6 +115,34 @@
             }
         })();
     </script>
+
+
+    <!-- Popup chat hỗ trợ -->
+    <div id="chatPopup" class="chat-popup" style="display: none;">
+        <div class="chat-popup-header">
+            <span>Hỗ trợ trực tuyến</span>
+            <button class="chat-popup-close-btn">&times;</button>
+        </div>
+        <div class="chat-popup-body">
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input-area">
+                
+                <textarea id="chatInput" placeholder="Nhập tin nhắn... /tim_kiem tên sản phẩm"></textarea>
+                <button id="chatSendBtn">Gửi</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        window.currentUserId = '<%= ((NguoiDung) session.getAttribute("nguoiDung")) != null
+                ? ((NguoiDung) session.getAttribute("nguoiDung")).getMaNguoiDung()
+                : "guest"%>';
+    </script>
+
+    <script src="${pageContext.request.contextPath}/assets/js/components/chat.js"></script>
+
+
 
 </header>
 

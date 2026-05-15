@@ -51,7 +51,7 @@
           >
 
         <!-- HEADER -->
-        <div id="app">
+        <div >
             <div class="header-shell" id="siteHeaderShell">
                 <%@ include file="/WEB-INF/views/common/header.jsp" %>
                 <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
@@ -94,8 +94,8 @@
         <script src="${pageContext.request.contextPath}/assets/js/components/newsletter-bar.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/common/scroll-reveal.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/common/hover-float.js"></script>
-        
-        <script src="${pageContext.request.contextPath}/assets/js/common/loading.js"></script>
+
+
 
 
 

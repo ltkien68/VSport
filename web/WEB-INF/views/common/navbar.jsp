@@ -93,7 +93,7 @@
 
             <li class="navbar-item has-mega-menu">
                 <a href="${pageContext.request.contextPath}/in_theo_yeu_cau" class="navbar-link">
-                    TRÒ CHƠI
+                    IN ÁO THEO ĐỘI
                 </a>
 
                 <div class="mega-menu">
