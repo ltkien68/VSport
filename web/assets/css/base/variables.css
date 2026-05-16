@@ -3,6 +3,62 @@
 ========================= */
 
 :root {
+
+    /*  color text  */
+    --text-highlight: #0DA9FC;
+    --text-hovered: #0DA9FC;
+    --text-heading: #ffffff;
+    --text-normal: #b5b9bd;
+    
+    /*  color background  */
+    --bg-main: #0B0E14;
+    --bg-box: rgba(10,10,10,0.55);
+    --bg-red: rgba(225, 29, 72, 0.1);
+
+
+    /*  font size  */
+    --line-spacing: 0.4px;
+
+    --heading-font-size: 40px;
+    --heading-line-height: 0.9;
+    
+    --heading-scroll-font-size: 24px;
+    --heading-scroll-line-height: 28px;
+
+    --h1-font-size: 32px;
+    --h1-line-height: 36px;
+
+    --h2-font-size: 26px;
+    --h2-line-height: 32px;
+
+    --h3-font-size: 20px;
+    --h3-line-height: 24px;
+
+    --h4-font-size: 18px;
+    --h4-line-height: 16px;
+
+    --caption-font-size: 12px;
+    --caption-line-height: 16px;
+    
+    
+    
+    /*  fonts  */
+    --font-body: 'Juventus Fans Regular', sans-serif;
+    --font-body-2: 'Darley', sans-serif;
+    --font-heading: 'Juventus Fans Bold', sans-serif;
+    --font-display: 'Juventus Fans Bold inline', sans-serif;
+    --font-light: 'Juventus Fans Light', sans-serif;
+
+
+
+
+
+
+
+
+
+
+    /*  color cũ  */
     --color-white: #ffffff;
     --color-off-white: #f7f7f7;
 
@@ -21,15 +77,9 @@
 
     --color-gold: #FFD700;
     --color-green: #18a957;
-    
+
     --overlay-white-strong: rgba(255, 255, 255, 0.97);
     --overlay-white-soft: rgba(255, 255, 255, 0.55);
-
-    --font-body: 'Juventus Fans Regular', sans-serif;
-    --font-body-2: 'Michroma', sans-serif;
-    --font-heading: 'Juventus Fans Bold', sans-serif;
-    --font-display: 'Juventus Fans Bold inline', sans-serif;
-    --font-light: 'Juventus Fans Light', sans-serif;
 
     --text-xs: 12px;
     --text-sm: 14px;
@@ -67,8 +117,8 @@
 
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
-    
-    
+
+
     --toast-success: #16a34a;
     --toast-error: #dc2626;
     --toast-warning: #f59e0b;
@@ -100,7 +150,7 @@ html.dark-mode {
     --color-gray-400: #bdbdbd;
     --color-gray-600: #d1d5db;
     --color-gray-800: #f3f4f6;
-    
+
     --overlay-white-strong: rgba(20, 20, 20, 0.92);
     --overlay-white-soft: rgba(255, 255, 255, 0.18);
 
@@ -135,7 +185,7 @@ body {
         color 0.28s ease,
         border-color 0.28s ease,
         box-shadow 0.28s ease,
-        opacity 0.28s ease, 
+        opacity 0.28s ease,
         transform 0.28s ease;
 }
 

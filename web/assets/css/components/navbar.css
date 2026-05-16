@@ -1,11 +1,6 @@
 /* =========================
    NAVBAR
 ========================= */
-/* =========================
-   NAVBAR MẶC ĐỊNH
-   (trang thường: nền trắng chữ đen)
-========================= */
-
 
 .navbar-link {
     color: var(--color-black);
@@ -55,6 +50,9 @@ body.home-page .header-shell.header-light .sale-link {
     color: var(--color-red);
 }
 
+/* =========================
+   MAIN NAVBAR
+========================= */
 .main-navbar {
     width: 100%;
     background: var(--color-white);
@@ -150,7 +148,6 @@ body.home-page .header-shell.header-light .sale-link {
     pointer-events: none;
 }
 
-/* Hover vào mục chính thì xổ xuống */
 .has-mega-menu:hover .mega-menu {
     opacity: 1;
     visibility: visible;
