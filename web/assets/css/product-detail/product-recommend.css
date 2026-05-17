@@ -1,7 +1,18 @@
 .pd-random-section {
     width: 100%;
     padding: 84px 0 90px;
-    background: var(--color-white);
+
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
+
     overflow: hidden;
     font-family: var(--font-body);
 }
@@ -26,32 +37,35 @@
 .pd-random-kicker {
     margin: 0 0 8px;
     font-family: var(--font-body-2);
-    font-size: 12px;
+    font-size: var(--caption-font-size);
+    line-height: var(--caption-line-height);
     font-weight: 800;
-    letter-spacing: 2px;
+    letter-spacing: var(--letter-spacing);
     text-transform: uppercase;
-    color: var(--color-red);
+    background: var(--text-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .pd-random-title {
     margin: 0;
 
     font-family: var(--font-heading);
-    font-size: 42px;
-    line-height: 1;
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
 
     font-weight: 900;
     letter-spacing: 1px;
     text-transform: uppercase;
 
-    color: var(--color-black);
+    color: var(--text-heading);
 }
 
 .pd-random-line {
     width: 260px;
     height: 3px;
-    background: var(--color-red);
-    margin-top: 14px;
+    background: var(--text-gradient);
+    margin-top: 12px;
     display: block;
 }
 
@@ -77,19 +91,16 @@
 
 .pd-random-btn {
     padding: 12px 28px;
-    border: 2px solid var(--color-black);
-    background: transparent;
+    border: 2px solid var(--text-highlight);
+    border-radius: 18px;
+    background: var(--bg-card);
 
     font-family: var(--font-body);
+    color: var(--text-highlight);
     font-weight: 800;
 
     cursor: pointer;
     transition: 0.25s ease;
-}
-
-.pd-random-btn:hover {
-    background: var(--color-black);
-    color: #fff;
 }
 
 /* =========================
@@ -110,6 +121,7 @@
 .pd-random-image-wrap {
     position: relative;
     background: var(--color-gray-200);
+    border-radius: 18px;
     overflow: hidden;
     aspect-ratio: 1 / 1.18;
 }
@@ -117,6 +129,7 @@
 .pd-random-image {
     width: 100%;
     height: 100%;
+    border-radius: 18px;
     object-fit: cover;
     display: block;
 
@@ -153,24 +166,26 @@
 }
 
 .pd-random-old-price {
-    font-size: 18px;
-    color: var(--color-gray-400);
+    font-size: var(--h4-font-size);
+    line-height: var(--h4-line-height);
+    color: var(--text-normal);
     text-decoration: line-through;
     font-weight: 500;
 }
 
 .pd-random-sale-price {
-    font-size: 28px;
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
     font-weight: 900;
-    line-height: 1.1;
-    color: var(--color-red);
+    color: var(--text-price-sale);
 }
 
 .pd-random-normal-price {
-    font-size: 28px;
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
     font-weight: 900;
     line-height: 1.1;
-    color: var(--color-black);
+    color: var(--text-heading);
 }
 
 /* =========================
@@ -180,11 +195,11 @@
 .pd-random-name {
     margin: 0 0 14px;
 
-    font-size: 28px;
-    line-height: 1.28;
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
     font-weight: 900;
 
-    color: var(--color-black);
+    color: var(--text-heading);
 
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -204,10 +219,10 @@
 .pd-random-desc {
     margin: 0;
 
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
 
-    color: var(--color-gray-600);
+    color: var(--text-normal);
 
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -217,7 +232,7 @@
 
     min-height: 58px;
 
-    font-family: var(--font-body);
+    font-family: var(--font-body-2);
 }
 
 /* =========================
@@ -227,8 +242,9 @@
 .pd-random-empty {
     text-align: center;
     padding: 32px 0;
-    font-size: 18px;
-    color: var(--color-gray-600);
+    font-size: var(--h4-font-size);
+    line-height: var(--h4-line-height);
+    color: var(--text-normal);
     font-family: var(--font-body);
 }
 
@@ -275,6 +291,56 @@
     opacity: 0;
     transform: translateY(64px);
     filter: blur(6px);
+}
+
+.tilt-card {
+    /* Bắt buộc để hiệu ứng 3D hoạt động */
+    transform-style: preserve-3d;
+    perspective: 1000px;
+
+    /* Đổ bóng mặc định – nhẹ nhàng */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;           /* Bo góc thẻ */
+    overflow: hidden;              /* Ẩn phần shine tràn ra ngoài */
+    transition: transform 0.2s ease-out, box-shadow 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;         /* Giữ thẻ a không bị collapse */
+}
+
+/* Đổ bóng mạnh hơn khi hover */
+.tilt-card:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* Lớp phủ bóng kính (shine) – di chuyển theo chuột */
+.tilt-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0) 60%
+        );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;          /* Không cản trở sự kiện chuột */
+    z-index: 2;
+}
+
+/* Khi hover card → hiện shine */
+.tilt-card:hover::after {
+    opacity: 1;
+}
+
+/* Đảm bảo nội dung bên trong nằm trên lớp shine */
+.tilt-card > * {
+    position: relative;
+    z-index: 1;
 }
 
 /* =========================

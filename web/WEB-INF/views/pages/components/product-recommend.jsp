@@ -54,7 +54,7 @@
             <% for (SanPham sp : dsGoiY) {%>
 
 
-            <a class="pd-random-card <%= sp.getGiaKhuyenMai() > 0 ? "has-sale" : ""%>"
+            <a class="pd-random-card tilt-card <%= sp.getGiaKhuyenMai() > 0 ? "has-sale" : ""%>"
                href="<%= request.getContextPath()%>/chi-tiet-san-pham/<%= sp.getMaSanPham()%>">
 
                 <div class="pd-random-image-wrap">

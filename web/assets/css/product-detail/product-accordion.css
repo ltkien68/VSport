@@ -7,11 +7,11 @@
 }
 
 .pd-accordion-item {
-    border-top: 1px solid var(--color-gray-200);
+    border-top: 1px solid var(--text-highlight);
 }
 
 .pd-accordion-item:last-child {
-    border-bottom: 1px solid var(--color-gray-200);
+    border-bottom: 1px solid var(--text-highlight);
 }
 
 .pd-accordion-header {
@@ -30,10 +30,10 @@
 
 .pd-accordion-header > span:first-child {
     font-family: var(--font-heading);
-    font-size: 18px;
+    font-size: var(--h4-font-size);
+    line-height: var(--h4-line-height);
     font-weight: 700;
-    line-height: 1.35;
-    color: var(--color-black);
+    color: var(--text-heading);
 }
 
 .pd-accordion-right {
@@ -44,7 +44,9 @@
 }
 
 .pd-rating-stars {
-    font-size: 16px;
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
+
     letter-spacing: 4px;
     color: var(--color-black);
     white-space: nowrap;
@@ -53,7 +55,7 @@
 .pd-arrow {
     font-size: 28px;
     line-height: 1;
-    color: var(--color-black);
+    color: var(--text-highlight);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -83,42 +85,17 @@
 .pd-accordion-content,
 .pd-empty-content,
 .pd-review-content {
-    font-family: 'Arial';
-    font-size: 16px;
-    line-height: 1.85;
-    color: var(--color-gray-600);
+    font-family: var(--font-body-2);
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
+
+    color: var(--text-normal);
     white-space: normal;
     overflow-y: auto;
     max-height: 220px;
     padding-right: 8px;
     scrollbar-width: thin;
     scrollbar-color: #bdbdbd transparent;
-}
-
-/* Thanh scroll cho Chrome, Edge */
-.pd-accordion-content::-webkit-scrollbar,
-.pd-empty-content::-webkit-scrollbar,
-.pd-review-content::-webkit-scrollbar {
-    width: 5px;
-}
-
-.pd-accordion-content::-webkit-scrollbar-track,
-.pd-empty-content::-webkit-scrollbar-track,
-.pd-review-content::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.pd-accordion-content::-webkit-scrollbar-thumb,
-.pd-empty-content::-webkit-scrollbar-thumb,
-.pd-review-content::-webkit-scrollbar-thumb {
-    background: #c6c6c6;
-    border-radius: 999px;
-}
-
-.pd-accordion-content::-webkit-scrollbar-thumb:hover,
-.pd-empty-content::-webkit-scrollbar-thumb:hover,
-.pd-review-content::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
 }
 
 .pd-review-item {
@@ -140,26 +117,29 @@
 }
 
 .pd-review-top strong {
-    font-size: 15px;
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
     font-weight: 700;
-    color: var(--color-black);
+    color: var(--text-heading);
 }
 
 .pd-review-top span {
-    font-size: 14px;
-    color: var(--color-black);
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
+    color: var(--text-rating);
 }
 
 .pd-review-date {
-    font-size: 13px;
-    color: var(--color-gray-500);
+    font-size: var(--caption-font-size);
+    line-height: var(--caption-line-height);
+    color: var(--text-normal);
     margin-bottom: 10px;
 }
 
 .pd-review-content {
-    font-size: 15px;
-    line-height: 1.8;
-    color: var(--color-gray-600);
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
+    color: var(--text-normal);
 }
 
 .pd-rating-stars,
@@ -181,15 +161,16 @@
 }
 
 .pd-star-icon.empty {
-    color: var(--color-gray-200);
+    color: var(--text-normal);
     fill: none;
 }
 
 .pd-rating-number {
     margin-left: 6px;
     font-family: var(--font-body);
-    font-size: 14px;
-    color: var(--color-black);
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
+    color: var(--text-rating);
     font-weight: 600;
 }
 
@@ -200,8 +181,10 @@
 }
 
 .pd-review-score {
-    font-size: 14px;
-    color: var(--color-black);
+    font-family: var(--font-body);
+    font-size: var(--caption-font-size);
+    line-height: var(--caption-line-height);
+    color: var(--text-rating);
     font-weight: 500;
 }
 

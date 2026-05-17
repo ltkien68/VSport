@@ -23,8 +23,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 40px;
-    line-height: 1;
+    font-size: var(--heading-font-size);
+    line-height: var(--heading-line-height);
+    color: var(--text-highlight);
 }
 
 .pd-fit-content {
@@ -36,17 +37,18 @@
 
 .pd-fit-label {
     font-family: var(--font-heading);
-    font-size: 22px;
-    color: var(--color-black-soft);
-    line-height: 1.35;
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
+
+    color: var(--text-normal);
 }
 
 .pd-fit-value {
     font-family: var(--font-body-2);
-    font-size: 20px;
-    letter-spacing: 2px;
-    line-height: 1.15;
-    color: var(--color-black);
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
+    letter-spacing: var(--letter-spacing);
+    color: var(--text-heading);
 }
 
 @media (max-width: 1200px) {

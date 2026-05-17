@@ -13,6 +13,8 @@
     --text-price-sale: #c62828;
 
     --text-gradient: linear-gradient(90deg, #7ab3d4 0%, #c8dff0 100%);
+    
+    --text-rating: #FFC107;
 
     /*  color background  */
     --bg-main: rgba(13, 18, 33, 1);
