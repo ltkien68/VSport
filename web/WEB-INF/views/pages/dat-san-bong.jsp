@@ -3,8 +3,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Đặt Sân Bóng | VSport - Trải nghiệm 3D</title>
-        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
+        <title>Đặt Sân Bóng .LKsport - Trải nghiệm 3D</title>
+        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo-header.png">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/dat-san-bong.css">
         <jsp:include page="/WEB-INF/views/common/head.jsp" />
     </head>

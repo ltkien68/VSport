@@ -3,10 +3,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Phụ Kiện | Vsport</title>
+        <title>Phụ Kiện .LKsport</title>
 
         <link rel="icon" type="image/png"
-              href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
+              href="${pageContext.request.contextPath}/assets/images/logos/logo-header.png">
 
         <jsp:include page="/WEB-INF/views/common/head.jsp" />
 
@@ -26,7 +26,7 @@
         </script>
     </head>
 
-    <body>
+    <body class="inner">
 
         <div class="header-shell">
             <%@ include file="/WEB-INF/views/common/header.jsp" %>

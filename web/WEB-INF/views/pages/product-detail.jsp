@@ -9,9 +9,9 @@
         <jsp:include page="/WEB-INF/views/common/head.jsp" />
 
 
-        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
+        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo-header.png">
 
-        <title><%= sp.getTenSanPham() %></title>
+        <title><%= sp.getTenSanPham() %> .LKsport</title>
 
         <script>
             (function () {
@@ -27,7 +27,7 @@
             })();
         </script>
     </head>
-    <body>
+    <body class="inner">
         <div class="header-shell">
             <%@ include file="/WEB-INF/views/common/header.jsp" %>
             <%@ include file="/WEB-INF/views/common/navbar.jsp" %>

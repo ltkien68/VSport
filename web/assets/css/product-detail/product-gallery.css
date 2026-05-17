@@ -6,7 +6,16 @@
 }
 
 .pd-gallery-item {
-    background: #ececec;
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
     overflow: hidden;
 }
 

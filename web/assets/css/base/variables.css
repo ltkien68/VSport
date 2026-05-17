@@ -3,6 +3,84 @@
 ========================= */
 
 :root {
+
+    /*  color text  */
+    --text-highlight: #0DA9FC;
+    --text-hovered: #0DA9FC;
+    --text-heading: #ffffff;
+    --text-normal: #b5b9bd;
+
+    --text-price-sale: #c62828;
+
+    --text-gradient: linear-gradient(90deg, #7ab3d4 0%, #c8dff0 100%);
+    
+    --text-rating: #FFC107;
+
+    /*  color background  */
+    --bg-main: rgba(13, 18, 33, 1);
+    --bg-box: rgba(10,10,10,0.55);
+    --bg-red: rgba(225, 29, 72, 0.1);
+    --bg-heading: rgba(10, 14, 28, 0.85);
+    --bg-card: linear-gradient(
+        135deg,
+        rgba(25, 171, 244, 0.12),
+        rgba(10, 20, 40, 0.1)
+        );
+    ;
+    --bg-button: linear-gradient(90deg, rgba(0, 229, 190, 1) 0%, rgba(0, 180, 255, 1) 100%);
+    --bg-section: linear-gradient(180deg, rgba(18, 24, 43, 1) 0%, rgba(10, 13, 26, 1) 100%);
+    --bg-second: #020618;
+
+    /*  color border  */
+    --border-card-color: rgba(25, 171, 244, 1);
+
+
+    /*  font size  */
+    --line-spacing: 0.4px;
+
+    --heading-font-size: 40px;
+    --heading-line-height: 0.9;
+
+    --heading-scroll-font-size: 24px;
+    --heading-scroll-line-height: 28px;
+
+    --h1-font-size: 32px;
+    --h1-line-height: 36px;
+
+    --h2-font-size: 26px;
+    --h2-line-height: 32px;
+
+    --h3-font-size: 20px;
+    --h3-line-height: 24px;
+
+    --h4-font-size: 18px;
+    --h4-line-height: 20px;
+
+    --normal-font-size: 16px;
+    --normal-line-height: 18px;
+
+    --caption-font-size: 12px;
+    --caption-line-height: 16px;
+
+
+
+    /*  fonts  */
+    --font-body: 'Juventus Fans Regular', sans-serif;
+    --font-body-2: 'Darley', sans-serif;
+    --font-heading: 'Juventus Fans Bold', sans-serif;
+    --font-display: 'Juventus Fans Bold inline', sans-serif;
+    --font-light: 'Juventus Fans Light', sans-serif;
+
+
+
+
+
+
+
+
+
+
+    /*  color cũ  */
     --color-white: #ffffff;
     --color-off-white: #f7f7f7;
 
@@ -21,15 +99,9 @@
 
     --color-gold: #FFD700;
     --color-green: #18a957;
-    
+
     --overlay-white-strong: rgba(255, 255, 255, 0.97);
     --overlay-white-soft: rgba(255, 255, 255, 0.55);
-
-    --font-body: 'Juventus Fans Regular', sans-serif;
-    --font-body-2: 'Michroma', sans-serif;
-    --font-heading: 'Juventus Fans Bold', sans-serif;
-    --font-display: 'Juventus Fans Bold inline', sans-serif;
-    --font-light: 'Juventus Fans Light', sans-serif;
 
     --text-xs: 12px;
     --text-sm: 14px;
@@ -67,8 +139,8 @@
 
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
-    
-    
+
+
     --toast-success: #16a34a;
     --toast-error: #dc2626;
     --toast-warning: #f59e0b;
@@ -80,43 +152,20 @@
     --toast-shadow: 0 14px 35px rgba(0, 0, 0, 0.22);
 }
 
-/* =========================
-   DARK MODE
-========================= */
-
-/* =========================
-   DARK MODE
-========================= */
-
-html.dark-mode {
-    --color-white: #0b0b0b;
-    --color-off-white: #171717;
-
-    --color-black: #ffffff;
-    --color-black-soft: #e5e5e5;
-
-    --color-gray-100: #1f1f1f;
-    --color-gray-200: #2a2a2a;
-    --color-gray-400: #bdbdbd;
-    --color-gray-600: #d1d5db;
-    --color-gray-800: #f3f4f6;
-    
-    --overlay-white-strong: rgba(20, 20, 20, 0.92);
-    --overlay-white-soft: rgba(255, 255, 255, 0.18);
-
-    --color-red: #ff2d55;
-    --color-red-hover: #ff4d6d;
-    --color-red-soft: rgba(255, 45, 85, 0.1);
-
-    --color-gold: #FFD700;
-    --color-green: #22c55e;
-}
-
 /* base màu, KHÔNG transition mặc định */
 html,
 body {
-    background: var(--color-white);
-    color: var(--color-black);
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
+    color: var(--text-normal);
 }
 
 /* header mặc định cũng KHÔNG transition */
@@ -135,7 +184,7 @@ body {
         color 0.28s ease,
         border-color 0.28s ease,
         box-shadow 0.28s ease,
-        opacity 0.28s ease, 
+        opacity 0.28s ease,
         transform 0.28s ease;
 }
 

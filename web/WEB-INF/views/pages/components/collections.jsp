@@ -32,7 +32,7 @@
                             String slug = bst.getBstSlug() != null ? bst.getBstSlug() : "";
                     %>
                     <article class="collection-showcase-card collection-reveal-item">
-                        <a class="collection-showcase-image-link"
+                        <a class="collection-showcase-image-link  tilt-card"
                            href="<%= request.getContextPath() %>/bong_da/<%= slug %>">
                             <div class="collection-showcase-image-wrap">
                                 <img src="<%= request.getContextPath() %>/assets/images/collections/<%= anhBia %>"
@@ -49,7 +49,6 @@
                                 </a>
                             </h3>
 
-                            <p class="collection-showcase-desc"><%= moTa %></p>
 
                         </div>
                     </article>

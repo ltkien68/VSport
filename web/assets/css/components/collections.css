@@ -1,6 +1,17 @@
 .collection-showcase-section {
     width: 100%;
-    background: var(--color-white);
+
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
+
     padding: 36px 80px 56px;
     overflow: hidden;
     transition:
@@ -20,13 +31,13 @@
 
 .collection-showcase-heading {
     margin: 0;
-    font-size: var(--text-4xl);
-    line-height: 1;
+    font-size: var(--heading-font-size);
+    line-height: var(--heading-line-height);
     font-weight: 900;
     text-transform: uppercase;
-    color: var(--color-black);
+    color: var(--text-heading);
     font-family: var(--font-heading);
-    transition: color var(--transition-normal);
+    transition: color 0.25s ease;
 }
 
 .collection-showcase-slider {
@@ -45,6 +56,8 @@
 .collection-showcase-track {
     display: flex;
     gap: 14px;
+    
+    padding: 10px;
     transition: transform 0.7s ease;
     will-change: transform;
 }
@@ -59,6 +72,15 @@
     transition:
         transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
         opacity 0.8s ease;
+
+    &:hover .collection-showcase-title a {
+        color: var(--text-highlight);
+    }
+
+    :hover .collection-showcase-image {
+        transform: scale(1.05);
+        filter: brightness(1.03);
+    }
 }
 
 .collection-showcase-card.is-visible {
@@ -93,11 +115,6 @@
     transition: transform 0.7s ease, filter 0.4s ease;
 }
 
-.collection-showcase-card:hover .collection-showcase-image {
-    transform: scale(1.05);
-    filter: brightness(1.03);
-}
-
 .collection-showcase-content {
     padding: 20px 10px 0;
 }
@@ -106,36 +123,72 @@
     margin: 0 0 14px;
     font-family: var(--font-heading);
     text-transform: uppercase;
-    font-size: var(--text-xl);
-    line-height: 1.35;
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
     font-weight: 800;
-    color: var(--color-black);
-    transition: color var(--transition-normal);
+    color: var(--text-normal);
+
+    & a {
+        color: inherit;
+        transition: color 0.25s ease;
+        text-decoration: none;
+
+        &:hover {
+            text-underline-offset: 3px;
+            color: var(--text-highlight);
+        }
+    }
 }
 
-.collection-showcase-title a {
-    color: inherit;
-    text-decoration: none;
-    transition: color var(--transition-fast);
+.tilt-card {
+    /* Bắt buộc để hiệu ứng 3D hoạt động */
+    transform-style: preserve-3d;
+    perspective: 1000px;
+
+    /* Đổ bóng mặc định – nhẹ nhàng */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;           /* Bo góc thẻ */
+    overflow: hidden;              /* Ẩn phần shine tràn ra ngoài */
+    transition: transform 0.2s ease-out, box-shadow 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;         /* Giữ thẻ a không bị collapse */
 }
 
-.collection-showcase-title a:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    color: var(--color-red);
+/* Đổ bóng mạnh hơn khi hover */
+.tilt-card:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
 }
 
-.collection-showcase-desc {
-    margin: 0 0 18px;
-    font-family: var(--font-body);
-    font-size: 17px;
-    line-height: 1.7;
-    color: var(--color-gray-600);
-    min-height: 52px;
-    transition: color var(--transition-normal);
+/* Lớp phủ bóng kính (shine) – di chuyển theo chuột */
+.tilt-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0) 60%
+        );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;          /* Không cản trở sự kiện chuột */
+    z-index: 2;
 }
 
+/* Khi hover card → hiện shine */
+.tilt-card:hover::after {
+    opacity: 1;
+}
 
+/* Đảm bảo nội dung bên trong nằm trên lớp shine */
+.tilt-card > * {
+    position: relative;
+    z-index: 1;
+}
 
 /* NAV BUTTON */
 .collection-showcase-nav {
@@ -145,11 +198,11 @@
 
     width: 56px;
     height: 56px;
-    border: 1px solid var(--color-gray-200);
+    border: 1px solid var(--text-highlight);
     border-radius: 999px;
 
-    background: var(--overlay-white-strong);
-    color: var(--color-black);
+    background: var(--bg-card);
+    color: var(--text-highlight);
     font-size: 30px;
     font-weight: 800;
 
@@ -190,9 +243,9 @@
 }
 
 .collection-showcase-nav:hover {
-    background: var(--color-black);
+    background: var(--bg-button);
     color: var(--color-white);
-    border-color: var(--color-black);
+    border-color: var(--text-highlight);
     transform: translateY(-50%) scale(1.08);
 }
 

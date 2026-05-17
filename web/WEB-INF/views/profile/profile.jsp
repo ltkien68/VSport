@@ -111,7 +111,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Thông tin cá nhân | VSport</title>
+    <title>Thông Tin Cá Nhân .LKsport</title>
         
         <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
         

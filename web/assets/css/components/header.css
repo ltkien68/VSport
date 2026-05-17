@@ -1,15 +1,30 @@
-
-
 /* TRANG HOME: ban đầu nền đen */
 body.home-page .header-shell {
-    background: #000000;
+    position: fixed;
+    top: 0;
+    z-index: 1001;
+    width: 100%;
+    background: transparent;
+    transition: background 0.35s ease;
 }
 
-/* Khi scroll qua banner ở home thì đổi sang trắng */
 body.home-page .header-shell.header-light {
-    background: #ffffff;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    background: var(--bg-heading);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
+
+body.profile-page .header-shell {
+    position: fixed;
+    top: 0;
+    z-index: 1001;
+    width: 100%;
+    background: var(--bg-heading);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: background 0.35s ease;
+}
+
 
 /* =========================
    SITE HEADER
@@ -23,7 +38,6 @@ body.home-page .header-shell.header-light {
     background: transparent;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    border-bottom: 1px solid var(--color-gray-700);
     transition:
         height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
         background 0.35s ease,
@@ -31,23 +45,17 @@ body.home-page .header-shell.header-light {
         border-color 0.35s ease;
 }
 
-/* HOME khi chưa scroll qua banner => border sáng nhẹ trên nền đen */
-body.home-page .header-shell:not(.header-light) .site-header {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
 
-/* HOME khi đã qua banner => border về xám nhạt */
-body.home-page .header-shell.header-light .site-header {
-    border-bottom: 1px solid var(--color-gray-100);
-}
 
-.header-shell {
+ body.inner .header-shell {
     position: sticky;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 9999;
-    background: var(--color-white);
+    z-index: 1001;
+    background: var(--bg-heading);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     transition:
         background-color 0.35s ease,
         box-shadow 0.35s ease;
@@ -55,7 +63,6 @@ body.home-page .header-shell.header-light .site-header {
 
 /* =========================
    TEXT / ICON MẶC ĐỊNH
-   (trang thường: trắng nền -> chữ đen)
 ========================= */
 .store-title {
     color: #0b0b0b;
@@ -66,7 +73,6 @@ body.home-page .header-shell.header-light .site-header {
     color: #0b0b0b;
 }
 
-/* search mặc định */
 .search-box {
     border-bottom: 1px solid var(--color-gray-400);
 }
@@ -88,85 +94,17 @@ body.home-page .header-shell.header-light .site-header {
     color: #0b0b0b;
 }
 
-/* user đã login vẫn giữ đỏ */
 .header-icon.logged-in {
     color: #0b0b0b;
 }
 
-
-
-/* =========================
-   HOME + CHƯA QUA BANNER
-   nền đen chữ trắng
-========================= */
-body.home-page .header-shell:not(.header-light) .store-title,
-body.home-page .header-shell:not(.header-light) .subtitle-address,
-body.home-page .header-shell:not(.header-light) .header-icon {
-    color: #ffffff;
-}
-
-body.home-page .header-shell:not(.header-light) .search-box {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.28);
-}
-
-body.home-page .header-shell:not(.header-light) .search-box span,
-body.home-page .header-shell:not(.header-light) .search-box svg {
-    color: rgba(255, 255, 255, 0.85);
-}
-
-body.home-page .header-shell:not(.header-light) .search-box:hover {
-    border-bottom-color: #ffffff;
-}
-
-body.home-page .header-shell:not(.header-light) .search-box:hover span,
-body.home-page .header-shell:not(.header-light) .search-box:hover svg {
-    color: #ffffff;
-}
-
-/* login rồi thì vẫn đỏ như cũ, không ép sang trắng */
-body.home-page .header-shell:not(.header-light) .header-icon.logged-in {
-    color: var(--color-red);
-}
-
-/* =========================
-   HOME + ĐÃ QUA BANNER
-   trở lại nền trắng chữ đen
-========================= */
-body.home-page .header-shell.header-light .store-title {
-    color: #0b0b0b;
-}
-
-body.home-page .header-shell.header-light .subtitle-address,
-body.home-page .header-shell.header-light .header-icon {
-    color: #0b0b0b;
-}
-
-body.home-page .header-shell.header-light .search-box {
-    border-bottom: 1px solid var(--color-gray-400);
-}
-
-body.home-page .header-shell.header-light .search-box span {
-    color: var(--color-gray-400);
-}
-
-body.home-page .header-shell.header-light .search-box svg {
-    color: var(--color-gray-600);
-}
-
-body.home-page .header-shell.header-light .search-box:hover {
-    border-bottom-color: #0b0b0b;
-}
-
-body.home-page .header-shell.header-light .search-box:hover span,
-body.home-page .header-shell.header-light .search-box:hover svg {
-    color: #0b0b0b;
-}
-
-/* login rồi vẫn đỏ */
 body.home-page .header-shell.header-light .header-icon.logged-in {
     color: var(--color-red);
 }
 
+/* =========================
+   HEADER CONTAINER
+========================= */
 .header-container {
     width: 100%;
     max-width: 1920px;
@@ -180,7 +118,7 @@ body.home-page .header-shell.header-light .header-icon.logged-in {
     column-gap: var(--space-4);
 
     transition: padding 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                column-gap 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        column-gap 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* =========================
@@ -207,8 +145,9 @@ body.home-page .header-shell.header-light .header-icon.logged-in {
     object-fit: contain;
     transform-origin: left center;
     transition: height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                opacity 0.3s ease;
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.3s ease;
+
 }
 
 /* =========================
@@ -218,48 +157,50 @@ body.home-page .header-shell.header-light .header-icon.logged-in {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-left: 235px;
+    margin-left: 160px;
     align-items: center;
     justify-content: space-between;
     flex: 1;
     min-width: 0;
 
     transition: gap 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                margin 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        margin 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .store-title {
-    color: var(--color-black);
+    color: var(--text-heading);
     font-family: var(--font-heading);
-    font-size: 40px;
+    font-size: var(--heading-font-size);
     font-weight: var(--fw-bold);
-    line-height: 0.9;
-    letter-spacing: 0.5px;
+    line-height: var(--heading-line-height);
+    letter-spacing: var(--line-spacing);
     text-transform: uppercase;
     text-align: center;
     white-space: nowrap;
     text-decoration: none;
 
     transition: font-size 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                letter-spacing 0.45s ease,
-                transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                opacity 0.3s ease;
+        letter-spacing 0.45s ease,
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.3s ease;
+
+    & .store-title-highlight {
+        color: var(--text-highlight);
+    }
 }
 
-.store-title span {
-    color: var(--color-red);
-}
 
 .subtitle-address {
-    color: var(--color-black);
+    color: var(--text-normal);
     font-family: var(--font-body-2);
-    font-size: var(--text-sm);
+    font-size: var(--caption-font-size);
+    line-height: vả(--caption-line-height);
     font-weight: bold;
     transition: font-size 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                opacity 0.3s ease,
-                color 0.35s ease;
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.3s ease,
+        color 0.35s ease;
 }
 
 /* =========================
@@ -269,19 +210,18 @@ body.home-page .header-shell.header-light .header-icon.logged-in {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 18px;
     flex-shrink: 0;
 
     transition: gap 0.35s ease, transform 0.35s ease;
 }
 
-/* Search */
 .search-box {
     width: 80px;
     height: 36px;
     border: none;
-    border-bottom: 1px solid var(--color-gray-400);
+    border-bottom: 1px solid var(--text-normal);
     background: transparent;
 
     display: flex;
@@ -293,69 +233,75 @@ body.home-page .header-shell.header-light .header-icon.logged-in {
     padding: 0;
 
     transition: width 0.35s ease,
-                height 0.35s ease,
-                border-color 0.3s ease,
-                transform 0.3s ease,
-                opacity 0.3s ease;
+        height 0.35s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease,
+        opacity 0.3s ease;
+
+    & span {
+        font-family: var(--font-body);
+        font-size: var(--h3-font-size);
+        line-height: var(--h3-line-height);
+        color: var(--text-normal);
+        transition: font-size 0.35s ease, color 0.3s ease, opacity 0.3s ease;
+    }
+
+    & svg {
+        width: 18px;
+        height: 18px;
+        color: var(--text-normal);
+        transition: width 0.35s ease,
+            height 0.35s ease,
+            color 0.3s ease,
+            transform 0.3s ease;
+    }
+
+    &:hover {
+        border-bottom-color: var(--text-hovered);
+        transform: translateY(-1px);
+
+        & span,svg {
+            color: var(--text-hovered);
+        }
+
+        & svg {
+            transform: scale(1.08);
+        }
+    }
+
 }
 
-.search-box span {
-    font-family: var(--font-body);
-    font-size: 20px;
-    color: var(--color-gray-400);
-    transition: font-size 0.35s ease, color 0.3s ease, opacity 0.3s ease;
-}
-
-.search-box svg {
-    width: 18px;
-    height: 18px;
-    color: var(--color-gray-600);
-    transition: width 0.35s ease,
-                height 0.35s ease,
-                color 0.3s ease,
-                transform 0.3s ease;
-}
-
-.search-box:hover {
-    border-bottom-color: var(--color-black);
-    transform: translateY(-1px);
-}
-
-.search-box:hover span,
-.search-box:hover svg {
-    color: var(--color-black);
-}
-
-.search-box:hover svg {
-    transform: scale(1.08);
-}
-
-/* Icon chung */
-/* wrapper */
+/* =========================
+   USER / DROPDOWN
+========================= */
 .header-user {
     position: relative;
+
+    &:hover .user-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
 }
 
-/* icon */
 .header-icon {
-    color: var(--color-black);
+    color: var(--text-normal);
     transition: 0.3s;
+
+    &.logged-in {
+        color: var(--color-red);
+    }
 }
 
-/* khi login đổi màu */
-.header-icon.logged-in {
-    color: var(--color-red);
-}
 
-/* dropdown */
 .user-dropdown {
     position: absolute;
     top: 120%;
     right: 0;
 
-    background: var(--color-black); /* đổi sang nền tối */
-    border: 1px solid var(--color-gray-800);
-
+    background-color: var(--bg-box);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     min-width: 240px;
 
     opacity: 0;
@@ -363,84 +309,74 @@ body.home-page .header-shell.header-light .header-icon.logged-in {
     transform: translateY(10px);
     transition: 0.25s ease;
 
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4); /* shadow đậm kiểu GitHub */
-    border-radius: 10px; /* bo góc mềm */
-
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    border-radius: 18px;
     z-index: 99999999;
+
+    & a {
+        display: block;
+        padding: 12px 16px;
+        text-decoration: none;
+        color: var(--text-normal);
+        font-family: var(--font-body);
+        font-size: var(--h4-font-size);
+        line-height: var(--h4-line-height);
+        transition: 0.2s;
+
+        &:hover {
+            color: var(--text-hovered);
+        }
+
+        &:last-child {
+            color: var(--color-red);
+
+            &:hover {
+                background: var(--bg-red);
+
+            }
+        }
+    }
 }
 
-/* item */
-.user-dropdown a {
-    display: block;
-    padding: 12px 16px; /* nhỏ lại cho gọn */
-
-    text-decoration: none;
-    color: var(--color-gray-200); /* chữ xám sáng */
-
-    font-family: var(--font-body);
-    font-size: 18px; /* giảm từ 18 -> 14 cho giống GitHub */
-
-    transition: 0.2s;
-}
-
-/* hover giống GitHub */
-.user-dropdown a:hover {
-    background: var(--color-gray-800);
-    color: var(--color-white);
-}
-
-/* item cuối (đăng xuất) hơi nổi */
-.user-dropdown a:last-child {
-    border-top: 1px solid var(--color-gray-800);
-    color: var(--color-red);
-}
-
-.user-dropdown a:last-child:hover {
-    background: rgba(225, 29, 72, 0.1);
-}
-
-/* hover show dropdown */
-.header-user:hover .user-dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-/* Cart badge */
+/* =========================
+   CART
+========================= */
 .cart-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     text-decoration: none;
+
 }
+
 .header-icon.cart-link svg {
     width: 20px;
     height: 20px;
+
+    transition: color 0.25s ease;
+
+    &:hover {
+        color: var(--text-hovered);
+    }
 }
 
 .cart-count {
     min-width: 20px;
     height: 20px;
     padding: 0;
-
     border-radius: 50%;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     background: var(--color-red);
-    color: var(--color-white) !important;
-    -webkit-text-fill-color: var(--color-white) !important;
-
-    font-family: 'Arial';
-    font-size: 12px !important;
-    line-height: 1;
-
+    color: var(--text-heading) !important;
+    -webkit-text-fill-color: var(--text-heading) !important;
+    font-family: var(--font-body-2);
+    font-size: var(--caption-font-size) !important;
+    line-height: var(--caption-line-height);
     margin: 0;
 }
 
-/* Hover nhẹ */
 .logo-link:hover,
 .header-icon:hover {
     opacity: 0.78;
@@ -451,134 +387,31 @@ body.home-page .header-shell.header-light .header-icon.logged-in {
 ========================= */
 .site-header.shrink {
     height: 50px;
+
+    & .header-container {
+        padding: 0 var(--space-4);
+        column-gap: var(--space-3);
+    }
+
+    & .logo-img {
+        height: 42px;
+        transform: scale(0.98);
+    }
+
+    & .header-center {
+        gap: 5px;
+    }
+
+    & .store-title {
+        font-size: var(--heading-scroll-font-size);
+        line-height: var(--heading-scroll-line-height);
+    }
+
+    & .subtitle-address {
+        font-size: 8px;
+    }
 }
 
-.site-header.shrink .header-container {
-    padding: 0 var(--space-4);
-    column-gap: var(--space-3);
-}
-
-.site-header.shrink .logo-img {
-    height: 42px;
-    transform: scale(0.98);
-}
-
-.site-header.shrink .header-center {
-    gap: 5px;
-}
-
-.site-header.shrink .store-title {
-    font-size: 24px;
-}
-
-.site-header.shrink .subtitle-address {
-    font-size: 8px;
-}
-
-.theme-toggle-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.theme-toggle-btn {
-    border: none;
-    background: transparent;
-    padding: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.theme-toggle-track {
-    position: relative;
-    width: 52px;
-    height: 28px;
-    border-radius: 999px;
-    background: var(--color-gray-200);
-    border: 1px solid var(--color-gray-400);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 7px;
-    overflow: hidden;
-    transition:
-        background-color 0.35s ease,
-        border-color 0.35s ease,
-        box-shadow 0.35s ease;
-}
-
-.theme-toggle-btn:hover .theme-toggle-track {
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10);
-}
-
-.theme-icon {
-    position: relative;
-    width: 12px;
-    height: 12px;
-    z-index: 3;
-    transition:
-        color 0.35s ease,
-        opacity 0.35s ease,
-        transform 0.35s ease;
-}
-
-.theme-icon-sun {
-    color: var(--color-gold);
-    opacity: 1;
-    transform: scale(1);
-}
-
-.theme-icon-moon {
-    color: var(--color-black);
-    transform: scale(0.9);
-}
-
-.theme-toggle-thumb {
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--color-white);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
-    z-index: 1;
-    transition:
-        transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
-        background-color 0.35s ease;
-}
-
-.dark-mode .theme-toggle-track {
-    background: var(--color-black);
-    border-color: var(--color-gray-600);
-}
-
-.theme-toggle-wrap,
-.theme-toggle-btn,
-.theme-toggle-track {
-    position: relative;
-    z-index: 1002;
-    pointer-events: auto;
-}
-
-.dark-mode .theme-toggle-thumb {
-    transform: translateX(24px);
-    background: var(--color-white);
-}
-
-.dark-mode .theme-icon-sun {
-    opacity: 0.45;
-    transform: scale(0.88);
-    color: var(--color-white);
-}
-
-.dark-mode .theme-icon-moon {
-    opacity: 1;
-    transform: scale(1);
-    color: var(--color-gold);
-}
 
 /* =========================
    RESPONSIVE
@@ -650,60 +483,4 @@ body.home-page .header-shell.header-light .header-icon.logged-in {
     .site-header.shrink .subtitle-address {
         font-size: 11px;
     }
-}
-
-/* =========================
-   PROFILE HEADER DARK MODE
-========================= */
-
-/* nền đen */
-body.profile-page .header-shell {
-    background: #000000;
-}
-
-/* chữ trắng */
-body.profile-page .store-title,
-body.profile-page .subtitle-address,
-body.profile-page .header-icon {
-    color: #ffffff;
-}
-
-/* search */
-body.profile-page .search-box {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.28);
-}
-
-body.profile-page .search-box span,
-body.profile-page .search-box svg {
-    color: rgba(255, 255, 255, 0.85);
-}
-
-body.profile-page .search-box:hover {
-    border-bottom-color: #ffffff;
-}
-
-body.profile-page .search-box:hover span,
-body.profile-page .search-box:hover svg {
-    color: #ffffff;
-}
-
-/* navbar */
-body.profile-page .main-navbar {
-    background: #000000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-body.profile-page .navbar-link {
-    color: #ffffff;
-}
-
-body.profile-page .navbar-link:hover,
-body.profile-page .navbar-link.active,
-body.profile-page .sale-link {
-    color: var(--color-red);
-}
-
-/* giữ icon login màu đỏ */
-body.profile-page .header-icon.logged-in {
-    color: var(--color-red);
 }

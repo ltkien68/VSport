@@ -35,13 +35,13 @@
     <div class="header-container">
         <div class="header-left">
             <a href="${pageContext.request.contextPath}/trang_chu" class="logo-link">
-                <img src="${pageContext.request.contextPath}/assets/images/logos/logo.png" alt="Logo" class="logo-img">
+                <img src="${pageContext.request.contextPath}/assets/images/logos/logo-header.png" alt="Logo" class="logo-img">
             </a>
         </div>
 
         <div class="header-center">
             <a href="${pageContext.request.contextPath}/trang_chu" class="store-title">
-                <span>VIET<span style="color: #D4AF37">$</span>PORT</span> OFFICIAL ONLINE STORE
+                <span class="store-title-highlight">LK<span style="color: #D4AF37">$</span>PORT</span> OFFICIAL ONLINE STORE
             </a>
 
             <div class="store-subtitle">
@@ -87,16 +87,6 @@
                 </div>
                 <% }%>
 
-            </div>
-
-            <div class="theme-toggle-wrap">
-                <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Chuyển giao diện">
-                    <span class="theme-toggle-track">
-                        <i data-lucide="sun" class="theme-icon theme-icon-sun"></i>
-                        <i data-lucide="moon" class="theme-icon theme-icon-moon"></i>
-                        <span class="theme-toggle-thumb"></span>
-                    </span>
-                </button>
             </div>
         </div>
     </div>

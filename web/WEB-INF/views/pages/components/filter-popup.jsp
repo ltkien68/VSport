@@ -39,7 +39,7 @@
 
         <div class="filter-header-right">
             <a href="<%= currentUrl %>" class="filter-clear-all">Xoá tất cả</a>
-            <button type="button" class="filter-close-btn" id="closeFilterPopup">✕</button>
+            <button type="button" class="filter-close-btn" id="closeFilterPopup">×</button>
         </div>
     </div>
 
@@ -199,7 +199,7 @@
 
         <!-- FOOTER -->
         <div class="filter-footer">
-            <div class="filter-found-text">Tìm thấy <span style="color: var(--color-red)"><%= tongSanPhamLoc %></span> sản phẩm</div>
+            <div class="filter-found-text">Tìm thấy <span style="color: var(--text-highlight)"><%= tongSanPhamLoc %></span> sản phẩm</div>
 
             <button type="submit" class="filter-apply-btn">
                 Áp dụng →

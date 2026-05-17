@@ -132,7 +132,7 @@
                 }%>
         </div>
 
-        <div id="pd-size-guide" style="margin-top: 18px; font-size: 18px; font-weight: 700; font-family: 'Arial';">
+        <div id="pd-size-guide" class="pd-size-guide">
             Hãy chọn kích cỡ phù hợp 
         </div>
 
@@ -183,12 +183,12 @@
     <div class="pd-member-box">
         <div class="pd-member-top">
             <span>Thành viên có thể nhận</span>
-            <span class="pd-member-brand">Xu V<span style="color: #D4AF37">$</span></span>
+            <span class="pd-member-brand">Xu K<span style="color: #D4AF37">$</span></span>
         </div>
 
         <div class="pd-member-xu">
             <i data-lucide="circle-pound-sterling" class="pd-member-icon"></i>
-            <span><%= vsXu%> Xu VS</span>
+            <span><%= vsXu%> Xu KS</span>
         </div>
     </div>
 

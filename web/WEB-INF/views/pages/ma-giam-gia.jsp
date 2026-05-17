@@ -6,9 +6,9 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Mã giảm giá | V$port</title>
+    <title>Kho Coupon Của Bạn .LKsport</title>
     
-    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo-header.png">
         
     <jsp:include page="/WEB-INF/views/common/head.jsp" />
     
@@ -25,7 +25,7 @@
     })();
     </script>
 </head>
-<body>
+<body class="inner">
 
 <div class="header-shell">
             <%@ include file="/WEB-INF/views/common/header.jsp" %>

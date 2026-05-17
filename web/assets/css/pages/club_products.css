@@ -1,6 +1,16 @@
 .club-products-page {
-    background: var(--color-white);
-    color: var(--color-black);
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
+
+    color: var(-text-normal);
     min-height: 100vh;
     padding-top: 40px;
 }
@@ -29,13 +39,14 @@
     justify-content: flex-start !important;
     margin-left: 120px !important;
     gap: 10px;
-    font-size: 16px;
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
 }
 
 .club-back-link,
 .club-breadcrumb-home,
 .club-breadcrumb-current {
-    color: var(--color-black);
+    color: var(--text-normal);
     text-decoration: none;
 }
 
@@ -50,16 +61,29 @@
 .club-hero {
     position: relative;
     padding: 18px 0 0;
-    background: var(--color-white);
+
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
 }
 
 .club-title {
     font-family: var(--font-heading);
-    font-size: clamp(38px, 4.3vw, 15px);
+    font-size: var(--heading-font-size);
     font-weight: 700;
+    background: var(--text-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     letter-spacing: 3px;
     text-transform: uppercase;
-    line-height: 1.02;
+    line-height: var(--heading-line-height);
     margin-bottom: 22px;
     position: relative;
     z-index: 3;
@@ -78,10 +102,11 @@
 }
 
 .club-mini-card {
-    background: var(--color-white);
+    background: var(--bg-section);
     width: 180px;
     display: flex;
     flex-direction: column;
+    border-radius: 18px;
     text-decoration: none;
     align-content: center;
     justify-content: center;
@@ -97,9 +122,14 @@
     width: 100%;
     height: 110px;
     background: var(--color-gray-200);
+    border-radius: 18px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
+    & img {
+        border-radius: 18px;
+    }
 }
 
 .mini-banner {
@@ -111,21 +141,32 @@
     display: block;
     padding: 18px 18px 22px;
     font-family: var(--font-heading);
-    font-size: 18px;
+    font-size: var(--h4-font-size);
     font-weight: 600;
-    letter-spacing: 2px;
+    letter-spacing: var(--letter-spacing);
     text-transform: uppercase;
     text-align: left;
-    color: var(--color-black);
+    color: var(--text-normal);
     text-decoration: underline;
     cursor: pointer;
-    line-height: 1.35;
+    line-height: var(--h4-line-height);
 }
 
 .club-hero-bottom-strip {
     width: 100%;
     height: 100px;
-    background: var(--color-gray-100);
+
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
+
     position: relative;
     z-index: 1;
 }
@@ -152,23 +193,26 @@
 .club-product-card {
     position: relative;
     width: 300px;
-    background: var(--color-white);
+    background: var(--bg-section);
+    border-radius: 18px;
     transform-origin: center center;
+    cursor: pointer;
     z-index: 1;
-}
 
-.club-product-card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border: 1.5px solid transparent;
-    pointer-events: none;
-    z-index: 8;
-}
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 18px;
+        border: 1.5px solid var(--color-black);
+        pointer-events: none;
+        z-index: 8;
+    }
 
-.club-product-card:hover {
-    transform: scale(1.045);
-    z-index: 20;
+    &:hover {
+        transform: scale(1.045);
+        z-index: 20;
+    }
 }
 
 .club-product-card:hover::after {
@@ -181,6 +225,7 @@
     aspect-ratio: 0.9 / 1;
     background: var(--color-gray-100);
     overflow: hidden;
+    border-radius: 18px;
 }
 
 .club-product-image {
@@ -191,6 +236,7 @@
     object-fit: cover;
     display: block;
     will-change: transform, opacity;
+    border-radius: 18px;
 }
 
 .club-product-image-primary {
@@ -222,7 +268,8 @@
     border: none;
     background: rgba(255, 255, 255, 0.9);
     color: var(--color-black);
-    font-size: 28px;
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
     border-radius: 50%;
     cursor: pointer;
     z-index: 2;
@@ -260,14 +307,14 @@
     font-family: var(--font-body);
     font-size: 20px;
     font-weight: 700;
-    color: var(--color-black);
+    color: var(--text-normal);
 }
 
 .club-product-name {
     font-family: var(--font-body);
-    font-size: 22px;
-    line-height: 1.45;
-    color: var(--color-black);
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
+    color: var(--text-heading);
     margin-bottom: 8px;
     font-weight: 700;
 }
@@ -275,10 +322,10 @@
 .club-product-desc {
     position: relative;
 
-    font-family: Arial, sans-serif;
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--color-gray-600);
+    font-family: var(--font-body-2);
+    font-size: var(--caption-font-size);
+    line-height: var(--normal-line-height);
+    color: var(--text-normal);
 
     max-height: calc(1.6em * 3);
     overflow: hidden;
@@ -298,7 +345,7 @@
     background: linear-gradient(
         to bottom,
         rgba(255,255,255,0),
-        var(--color-white)
+        var(--color-black)
         );
 }
 
@@ -326,6 +373,56 @@
     font-size: 38px;
     letter-spacing: 3px;
     text-transform: uppercase;
+}
+
+.tilt-card {
+    /* Bắt buộc để hiệu ứng 3D hoạt động */
+    transform-style: preserve-3d;
+    perspective: 1000px;
+
+    /* Đổ bóng mặc định – nhẹ nhàng */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;           /* Bo góc thẻ */
+    overflow: hidden;              /* Ẩn phần shine tràn ra ngoài */
+    transition: transform 0.2s ease-out, box-shadow 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;         /* Giữ thẻ a không bị collapse */
+}
+
+/* Đổ bóng mạnh hơn khi hover */
+.tilt-card:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* Lớp phủ bóng kính (shine) – di chuyển theo chuột */
+.tilt-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0) 60%
+        );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;          /* Không cản trở sự kiện chuột */
+    z-index: 2;
+}
+
+/* Khi hover card → hiện shine */
+.tilt-card:hover::after {
+    opacity: 1;
+}
+
+/* Đảm bảo nội dung bên trong nằm trên lớp shine */
+.tilt-card > * {
+    position: relative;
+    z-index: 1;
 }
 
 /* =========================

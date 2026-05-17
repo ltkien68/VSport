@@ -13,10 +13,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><%= doiBongHienTai != null ? doiBongHienTai.getTenDoiBong() : "Sản phẩm bóng đá" %> | Vsport</title>
+        <title><%= doiBongHienTai != null ? doiBongHienTai.getTenDoiBong() : "Sản phẩm bóng đá" %> .LKsport</title>
         
         
-        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
+        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo-header.png">
         
         <jsp:include page="/WEB-INF/views/common/head.jsp" />
         
@@ -33,7 +33,7 @@
         })();
         </script>
     </head>
-    <body>
+    <body class="inner">
         <div class="header-shell">
             <%@ include file="/WEB-INF/views/common/header.jsp" %>
             <%@ include file="/WEB-INF/views/common/navbar.jsp" %>

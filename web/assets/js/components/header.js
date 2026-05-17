@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let ticking = false;
 
     // 👇 CHỈNH Ở ĐÂY
-    const bannerHeight = 790; // px - m tự set theo banner
+    const bannerHeight = 750; // px - m tự set theo banner
 
     function updateHeader() {
         const scrollY = window.scrollY;

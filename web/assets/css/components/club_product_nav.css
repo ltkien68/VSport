@@ -1,5 +1,5 @@
 .club-filter-bar-section {
-    background: var(--color-white);
+    background: var(--bg-second);
     padding: 40px 0 0;
 }
 
@@ -21,9 +21,8 @@
     overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: none;
-    border-bottom: 1px solid var(--color-gray-200);
     padding: 0 64px; /* chừa chỗ cho 2 nút arrow đè lên */
-    background: var(--color-white);
+    background: var(--bg-second);
 }
 
 .club-links-scroll-wrapper::-webkit-scrollbar {
@@ -46,32 +45,32 @@
     height: 64px;
     padding: 0 20px;
     white-space: nowrap;
-    color: var(--color-gray-800);
+    color: var(--text-heading);
     text-decoration: none;
     font-family: var(--font-body);
-    font-size: 24px;
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
     font-weight: 400;
     transition: background 0.25s ease, color 0.25s ease;
-}
 
-.club-filter-link:hover {
-    background: var(--color-gray-100);
-}
+    &:hover {
+        color: var(--text-hovered);
+    }
 
-.club-filter-link.active {
-    font-weight: 700;
-    color: var(--color-red);
+    &.active {
+        font-weight: 700;
+        color: var(--text-highlight);
+    }
 }
 
 .club-filter-link.active::after {
     content: "";
     position: absolute;
     left: 0;
-    color: var(--color-red);
+    color: var(--text-highlight);
     right: 0;
     bottom: -1px;
     height: 2px;
-    background: var(--color-black);
 }
 
 /* Nút mũi tên chỉ nằm trên thanh link */
@@ -83,11 +82,11 @@
 
     width: 60px;
     height: 60px;
-    border: 1px solid var(--color-black);
-    background: var(--color-white);
-    color: var(--color-black);
-    font-size: 28px;
-    line-height: 1;
+    border: 1px solid var(--text-highlight);
+    background: var(--bg-button);
+    color: var(--text-heading);
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,8 +111,8 @@
 }
 
 .club-scroll-btn:hover {
-    background: var(--color-black);
-    color: var(--color-white);
+    background: var(--bg-button);
+    color: var(--text-heading);
 }
 
 /* Nút lọc */
@@ -122,19 +121,21 @@
     height: 60px;
     min-width: 190px;
     padding: 0 24px;
-    border: 1px solid var(--color-black);
-    background: transparent;
-    color: var(--color-black);
+    border-radius: 18px;
+    border: 1px solid var(--text-highlight);
+    background: var(--bg-card);
+    color: var(--text-highlight);
     font-family: var(--font-body);
-    font-size: 24px;
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
     font-weight: 500;
     cursor: pointer;
     transition: all 0.25s ease;
-}
 
-.club-sort-btn:hover {
-    background: var(--color-black);
-    color: var(--color-white);
+    &:hover {
+        background: var(--bg-button);
+        color: var(--color-white);
+    }
 }
 
 @media (max-width: 1200px) {
