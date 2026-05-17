@@ -26,7 +26,7 @@
 <html lang="vi">
     <head>
         <meta charset="UTF-8">
-        <title>Đơn hàng của tôi | VSport</title>
+        <title>Đơn Hàng Của Bạn .LKsport</title>
 
         <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo-header.png">
         <jsp:include page="/WEB-INF/views/common/head.jsp" />

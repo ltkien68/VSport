@@ -11,7 +11,7 @@
 
         <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo-header.png">
 
-        <title><%= sp.getTenSanPham() %></title>
+        <title><%= sp.getTenSanPham() %> .LKsport</title>
 
         <script>
             (function () {

@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>In theo yêu cầu | VSport</title>
+        <title>In Theo Yêu Cầu .LKsport</title>
         
         <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo-header.png">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/header.css">

@@ -30,7 +30,7 @@
         <jsp:include page="/WEB-INF/views/common/head.jsp" />
         <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
 
-        <title>Giỏ hàng | VSport</title>
+        <title>Giỏ hàng .LKsport</title>
 
         <script>
             (function () {
