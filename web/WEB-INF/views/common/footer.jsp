@@ -2,9 +2,9 @@
 
 <footer class="site-footer">
     <div class="footer-logo-wrap">
-        <a href="${pageContext.request.contextPath}/home" class="footer-logo-link">
+        <a href="${pageContext.request.contextPath}/trang_chu" class="footer-logo-link">
             <img 
-                src="${pageContext.request.contextPath}/assets/images/logos/logo-footer.png" 
+                src="${pageContext.request.contextPath}/assets/images/logos/logo-header.png" 
                 alt="VSport Logo" 
                 class="footer-logo"
             >
@@ -12,12 +12,12 @@
     </div>
 
     <div class="footer-top-slogan">
-        <h2 class="footer-slogan left">#ALWAYSVSPORT</h2>
-        <h2 class="footer-slogan right">#SEMPREVSPORT</h2>
+        <h2 class="footer-slogan left">#LTKIEN68</h2>
+        <h2 class="footer-slogan right">#LKSPORT</h2>
     </div>
 
     <div class="footer-social-block">
-        <h3 class="footer-social-title">KẾT NỐI VỚI V<span style="color: #D4AF37">$</span>PORT</h3>
+        <h3 class="footer-social-title">KẾT NỐI VỚI LK<span style="color: #D4AF37">$</span>PORT</h3>
 
         <div class="footer-social-grid">
             <a href="#" class="social-item" aria-label="Twitch">

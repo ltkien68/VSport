@@ -4,7 +4,7 @@
 .site-footer {
     position: relative;
     background: #0b0b0b;
-    color: #ffffff;
+    color: var(--text-normal);
     padding: calc(var(--space-9) - 8px) var(--space-7) var(--space-7);
     overflow: visible;
     margin-top: 80px;
@@ -26,6 +26,10 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
+
+    :hover .footer-logo {
+        transform: scale(1.04);
+    }
 }
 
 .footer-logo {
@@ -37,9 +41,6 @@
     transition: transform var(--transition-normal), filter var(--transition-normal);
 }
 
-.footer-logo-link:hover .footer-logo {
-    transform: scale(1.04);
-}
 
 /* =========================
    SLOGAN
@@ -56,23 +57,23 @@
 
 .footer-slogan {
     margin: 0;
-    color: #ffffff;
+    color: var(--text-heading);
     font-family: var(--font-heading);
-    font-size: var(--text-4xl);
+    font-size: var(--heading-font-size);
+    line-height: var(--heading-line-height);
     font-weight: var(--fw-bold);
-    letter-spacing: 0.5px;
-    line-height: 1.2;
+    letter-spacing: var(--letter-spacing);
     text-transform: uppercase;
-}
 
-.footer-slogan.left {
-    flex: 1;
-    text-align: right;
-}
+    &.left {
+        flex: 1;
+        text-align: right;
+    }
 
-.footer-slogan.right {
-    flex: 1;
-    text-align: left;
+    &.right {
+        flex: 1;
+        text-align: left;
+    }
 }
 
 /* =========================
@@ -87,13 +88,13 @@
 
 .footer-social-title {
     margin: 0 0 var(--space-4);
-    color: #e11d48;
-    font-family: var(--font-display);
-    font-size: var(--text-2xl);
+    color: var(--text-highlight);
+    font-family: var(--font-heading);
+    font-size: var(--h2-font-size);
     font-weight: var(--fw-bold);
-    line-height: 1.3;
+    line-height: var(--h2-line-height);
     text-transform: uppercase;
-    letter-spacing: 0.4px;
+    letter-spacing: var(--letter-spacing);
 }
 
 .footer-social-grid {
@@ -164,23 +165,25 @@
     align-items: start;
 }
 
-.footer-bottom-left p {
-    margin: 0 0 var(--space-2);
-    color: rgba(255, 255, 255, 0.82);
-    font-family: 'Arial';
-    font-size: var(--text-sm);
-    font-weight: var(--fw-regular);
-    line-height: 1.8;
-}
+.footer-bottom-left {
+    & p {
+        margin: 0 0 var(--space-2);
+        color: rgba(255, 255, 255, 0.82);
+        font-family: var(--font-body-2);
+        font-size: var(--caption-font-size);
+        font-weight: var(--fw-regular);
+        line-height: var(--caption-line-height);
+    }
 
-.footer-bottom-left .footer-name {
-    margin-top: var(--space-3);
-    font-family: var(--font-heading);
-    font-size: var(--text-2xl);
-}
+    & .footer-name {
+        margin-top: var(--space-3);
+        font-family: var(--font-heading);
+        font-size: var(--h2-font-size);
 
-.footer-bottom-left .footer-name .brand-footer {
-    color: #e11d48;
+        & .brand-footer {
+            color: var(--text-highlight);
+        }
+    }
 }
 
 .footer-bottom-links {
@@ -193,26 +196,27 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
-}
 
-.footer-link-column p {
-    font-family: var(--font-heading);
-    color: #e11d48;
-    font-size: var(--text-lg);
-}
+    & p {
+        font-family: var(--font-heading);
+        color: var(--text-highlight);
+        font-size: var(--h4-font-size);
+        line-height: var(--h4-line-height);
+    }
 
-.footer-link-column a {
-    color: rgba(255, 255, 255, 0.82);
-    text-decoration: none;
-    font-family: 'Arial';
-    font-size: var(--text-sm);
-    line-height: 1.45;
-    text-transform: uppercase;
-    transition: color var(--transition-fast);
-}
+    & a {
+        color: var(--text-normal);
+        text-decoration: none;
+        font-family: var(--font-body-2);
+        font-size: var(--normal-font-size);
+        line-height: var(--normal-line-height);
+        text-transform: uppercase;
+        transition: color var(--transition-fast);
 
-.footer-link-column a:hover {
-    color: #FFD700;
+            &:hover {
+            color: var(--text-heading);
+        }
+    }
 }
 
 /* =========================
