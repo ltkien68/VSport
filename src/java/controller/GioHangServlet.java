@@ -24,10 +24,6 @@ public class GioHangServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        System.out.println("RAW tenInAo=" + request.getParameter("tenInAo"));
-        System.out.println("RAW soInAo=" + request.getParameter("soInAo"));
-        System.out.println("ContentType=" + request.getContentType());
-
         request.setCharacterEncoding("UTF-8");
 
         try {
@@ -77,6 +73,9 @@ public class GioHangServlet extends HttpServlet {
                 soLuong = 1;
             }
 
+            System.out.println("tenInAo length=" + (tenInAo != null ? tenInAo.length() : "null"));
+            System.out.println("tenInAo bytes=" + (tenInAo != null ? java.util.Arrays.toString(tenInAo.getBytes()) : "null"));
+
             // TEST TẠM
             // BẬT LẠI KHI CÓ LOGIN
             Object userObj = request.getSession().getAttribute("nguoiDung");
@@ -96,7 +95,7 @@ public class GioHangServlet extends HttpServlet {
                 return;
             }
 
-            if (!"1".equals(sanPham.getNhomSanPham())) {
+            if (sanPham.getNhomSanPham() != 1) {
                 tenInAo = null;
                 soInAo = null;
             }
