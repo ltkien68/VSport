@@ -35,7 +35,7 @@
     <div class="header-container">
         <div class="header-left">
             <a href="${pageContext.request.contextPath}/trang_chu" class="logo-link">
-                <img src="${pageContext.request.contextPath}/assets/images/logos/lk-logo-black.png" alt="Logo" class="logo-img">
+                <img src="${pageContext.request.contextPath}/assets/images/logos/logo-header.png" alt="Logo" class="logo-img">
             </a>
         </div>
 
