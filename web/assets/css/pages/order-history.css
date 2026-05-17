@@ -1,8 +1,17 @@
 .order-history-page {
     width: 100%;
     min-height: 100vh;
-    background: var(--color-white);
-    color: var(--color-black);
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
+    color: var(--text-heading);
     padding: var(--space-7) 0;
 }
 
@@ -21,18 +30,19 @@
 
 .order-history-title {
     margin: 0 0 14px;
-    font-size: var(--text-4xl);
+    font-size: var(--heading-font-size);
+    line-height: var(--heading-font-size);
     font-family: var(--font-heading);
-    color: var(--color-black);
+    color: var(--text-heading);
 }
 
 .order-history-desc {
     max-width: 720px;
     margin: 0 auto;
     font-family: var(--font-body);
-    font-size: 18px;
-    color: var(--color-gray-600);
-    line-height: 1.8;
+    font-size: var(--h4-font-size);
+    color: var(--text-normal);
+    line-height: var(--h4-line-height);
 }
 
 .order-review-btn {
@@ -41,14 +51,11 @@
 
 .order-review-btn.reviewed {
 
-    background: #f1f1f1;
+    background: var(--bg-button);
 
     font-family: var(--font-body);
 
-
-    color: #666;
-
-    border: 1px solid #ddd;
+    color: var(--text-heading);
 
     cursor: not-allowed;
 
@@ -62,9 +69,8 @@
     flex-wrap: wrap;
     margin-bottom: var(--space-5);
     padding: 16px;
-    background: var(--color-off-white);
-    border: 1px solid var(--color-gray-200);
-    border-radius: var(--radius-lg);
+    background: var(--bg-main);
+    border-radius: 18px;
 }
 
 .order-tab {
@@ -72,21 +78,23 @@
     border-radius: 999px;
     text-decoration: none;
     font-family: var(--font-heading);
-    font-size: var(--text-sm);
-    color: var(--color-gray-600);
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
+    color: var(--text-normal);
     border: 1px solid transparent;
     transition: all var(--transition-fast);
 }
 
 .order-tab:hover {
-    color: var(--color-black);
-    background: var(--color-gray-100);
+    color: var(--text-highlight);
+    background: var(--bg-card);
+    border: 1px solid var(--text-highlight);
 }
 
 .order-tab.active {
-    background: var(--color-red);
-    color: var(--color-white);
-    border-color: var(--color-red);
+    color: var(--text-highlight);
+    background: var(--bg-card);
+    border: 1px solid var(--text-highlight);
 }
 
 .order-history-list {
@@ -96,8 +104,16 @@
 }
 
 .order-card {
-    background: var(--color-white);
-    border: 1px solid var(--color-gray-200);
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
     overflow: hidden;
 }
 
@@ -107,29 +123,32 @@
     justify-content: space-between;
     gap: var(--space-3);
     padding: 20px 24px;
-    border-bottom: 1px solid var(--color-gray-200);
+    border-bottom: 1px solid var(--text-highlight);
 }
 
 .order-card-label {
     display: inline-block;
     margin-bottom: 4px;
-    font-size: 18px;
+    font-size: var(--h4-font-size);
+    line-height: var(--h4-line-height);
     font-family: var(--font-body);
-    color: var(--color-gray-600);
+    color: var(--text-normal);
 }
 
 .order-card-code {
     margin: 0 0 6px;
-    font-size: 35px;
+    font-size: var(--heading-font-size);
+    line-height: var(--heading-line-height);
     font-family: var(--font-heading);
-    color: var(--color-black);
+    color: var(--text-heading);
 }
 
 .order-card-date {
     margin: 0;
-    font-size: 18px;
+    font-size: var(--h4-font-size);
+    line-height: var(--h4-line-height);
     font-family: var(--font-body);
-    color: var(--color-gray-600);
+    color: var(--text-heading);
 }
 
 .order-card-status {
@@ -143,13 +162,15 @@
 
 .order-status-text,
 .payment-status-text {
-    font-size: 18px;
+    font-size: var(--h4-font-size);
+    line-height: var(--h4-line-height);
     font-family: var(--font-heading);
 }
 
 .order-status-divider {
-    color: var(--color-gray-400);
-    font-size: 18px;
+    color: var(--text-normal);
+    font-size: var(--h4-font-size);
+    line-height: var(--h4-line-height);
 }
 
 .order-status-text-cho_xac_nhan {
@@ -215,7 +236,7 @@
     justify-content: space-between;
     gap: var(--space-3);
     padding: 16px 0;
-    border-bottom: 1px solid var(--color-gray-200);
+    border-bottom: 1px solid var(--color-gray-600);
 }
 
 .order-product-item:last-child {
@@ -243,7 +264,7 @@
 
 .order-print-value {
     font-weight: 600;
-    color: var(--color-black);
+    color: var(--text-heading);
 }
 
 /* hover nhẹ cho có hồn */
@@ -251,7 +272,6 @@
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
-
 
 
 .order-product-left {
@@ -271,6 +291,7 @@
     flex-shrink: 0;
     background: var(--color-white);
     border: 1px solid var(--color-gray-200);
+    border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -281,6 +302,8 @@
 .order-product-thumb img {
     width: 100%;
     height: 100%;
+    border-radius: 18px;
+
     object-fit: cover;
     display: block;
 }
@@ -291,7 +314,7 @@
 }
 
 .order-product-name-link:hover .order-product-name {
-    color: var(--color-red);
+    color: var(--text-highlight);
 }
 
 .order-product-content {
@@ -303,10 +326,10 @@
 
 .order-product-name {
     font-family: var(--font-heading);
-    font-size: 16px;          /* giảm từ ~20+ xuống */
+    font-size: var(--normal-font-size);          /* giảm từ ~20+ xuống */
     font-weight: 600;
-    line-height: 1.3;
-    color: var(--color-red);
+    line-height: var(--normal-line-height);
+    color: var(--text-heading);
 
     display: -webkit-box;
     -webkit-line-clamp: 2;    /* tối đa 2 dòng */
@@ -318,15 +341,17 @@
 .order-product-qty,
 .order-print-row {
     font-family: var(--font-body);
-    font-size: 15px;
-    line-height: 1.4;
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
+    color: var(--text-normal);
 }
 
 .order-product-right {
     flex-shrink: 0;
-    font-size: 22px;
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
     font-family: var(--font-heading);
-    color: var(--color-black);
+    color: var(--text-highlight);
     white-space: nowrap;
 }
 
@@ -336,15 +361,17 @@
     justify-content: flex-end;
     gap: 12px;
     padding: 20px 24px;
-    border-top: 1px solid var(--color-gray-200);
+    border-top: 1px solid var(--text-highlight);
     font-family: var(--font-body);
-    font-size: 20px;
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
 }
 
 .order-card-total strong {
     font-family: var(--font-heading);
-    font-size: 34px;
-    color: var(--color-red);
+    font-size: var(--heading-font-size);
+    line-height: var(--heading-line-height);
+    color: var(--text-heading);
 }
 
 .order-card-actions {
@@ -365,8 +392,9 @@
 .order-btn {
     height: 48px;
     padding: 0 22px;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-gray-200);
+    border-radius: 18px;
+    background: var(--bg-button);
+    color: var(--text-heading);
     cursor: pointer;
     font-family: var(--font-heading);
     font-size: 18px;
@@ -378,30 +406,21 @@
 }
 
 .order-btn-primary {
-    background: var(--color-red);
-    border-color: var(--color-red);
-    color: var(--color-white);
+    background: var(--bg-card);
+    border-color: var(--text-highlight);
+    color: var(--text-highlight);
 }
 
 .order-btn-primary:hover {
-    background: var(--color-red-hover);
-    border-color: var(--color-red-hover);
+    background: var(--bg-card);
+    border-color: var(--text-highlight);
     transform: translateY(-1px);
 }
 
 .order-btn-ghost {
-    background: var(--color-white);
-    color: var(--color-black);
-}
-
-.order-btn-ghost:hover {
-    border-color: var(--color-red);
-    color: var(--color-red);
-}
-
-.order-toggle-detail.active {
-    border-color: var(--color-red);
-    color: var(--color-red);
+    background: var(--bg-card);
+    border: 1px solid var(--text-highlight);
+    color: var(--text-highlight);
 }
 
 .order-toggle-detail svg {
@@ -416,8 +435,8 @@
 
 .order-detail-panel {
     display: none;
-    border-top: 1px solid var(--color-gray-200);
-    background: var(--color-white);
+    background: var(--bg-main);
+    border-radius: 18px;
     padding: 22px 24px 24px;
 }
 
@@ -433,9 +452,9 @@
 }
 
 .order-detail-item {
-    background: var(--color-off-white);
-    border: 1px solid var(--color-gray-200);
-    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    border: 1px solid var(--text-highlight);
+    border-radius: 18px;
     padding: 14px 16px;
     display: flex;
     flex-direction: column;
@@ -447,21 +466,22 @@
 }
 
 .order-detail-item span {
-    font-size: var(--text-sm);
-    font-family: var(--font-body);
-    color: var(--color-gray-600);
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
+    font-family: var(--font-body-2);
+    color: var(--text-normal);
 }
 
 .order-detail-item strong {
-    font-size: var(--text-base);
+    font-size: var(--h4-font-size);
+    line-height: var(--h4-line-height);
     font-family: var(--font-heading);
-    color: var(--color-black);
-    line-height: 1.6;
+    color: var(--text-heading);
 }
 
 .order-detail-summary {
-    background: var(--color-black);
-    border-radius: var(--radius-md);
+    background: var(--bg-main);
+    border-radius: 18px;
     padding: 18px 20px;
 }
 
@@ -471,7 +491,7 @@
     justify-content: space-between;
     gap: 12px;
     padding: 10px 0;
-    color: var(--color-white);
+    color: var(--text-heading);
     font-family: var(--font-body);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -485,11 +505,13 @@
 }
 
 .order-detail-summary-row.total {
-    font-size: 22px;
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
 }
 
 .order-detail-summary-row.total strong {
     font-family: var(--font-heading);
+    color: var(--text-highlight);
 }
 
 .order-empty {
@@ -561,8 +583,8 @@
     left: 50%;
     width: min(460px, calc(100% - 32px));
     transform: translate(-50%, -50%);
-    background: var(--color-white);
-    border-radius: 20px;
+    background: var(--bg-main);
+    border-radius: 18px;
     padding: 28px 24px 24px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
 }
@@ -576,23 +598,31 @@
     font-size: 28px;
     line-height: 1;
     cursor: pointer;
-    color: #333;
+    color: var(--text-normal);
+    
+    transition: all 0.25s ease;
+    
+    &:hover {
+        transform: rotate(90deg);
+        color: var(--text-highlight);
+    }
 }
 
 .cancel-order-head h3 {
     margin: 0 0 10px;
     font-family: var(--font-heading);
-    font-size: 28px;
+    font-size: var(--h1-font-size);
+    line-height: var(--h1-line-height);
     font-weight: 700;
-    color: var(--color-black);
+    color: var(--text-heading);
 }
 
 .cancel-order-head p {
     margin: 0;
     font-family: var(--font-body);
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--color-gray-500);
+    font-size: var(--h4-font-size);
+    line-height: var(--h4-line-height);
+    color: var(--text-normal);
 }
 
 .cancel-order-body {
@@ -602,24 +632,25 @@
 .cancel-order-input {
     width: 100%;
     height: 50px;
-    border: 1px solid #d8d8d8;
-    border-radius: 12px;
+    border: 1px solid var(--text-highlight);
+    background: var(--bg-card);
+    border-radius: 18px;
     padding: 0 16px;
     font-family: var(--font-body);
-    font-size: 17px;
+    font-size: var(--h4-font-size);
+    line-height: var(--h4-line-height);
+    color: var(--text-highlight);
     outline: none;
 }
 
-.cancel-order-input:focus {
-    border-color: #111;
-}
 
 .cancel-order-error {
     min-height: 20px;
     margin: 10px 0 0;
     font-family: var(--font-heading);
-    font-size: 20px;
-    color: var(--color-black);
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
+    color: var(--text-price-sale);
 }
 
 .cancel-order-actions {
@@ -633,17 +664,19 @@
     min-width: 120px;
     height: 46px;
     border: none;
-    border-radius: 12px;
+    border-radius: 18px;
     font-family: var(--font-heading);
-    font-size: 16px;
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
     font-weight: 700;
     cursor: pointer;
     transition: 0.2s ease;
 }
 
 .cancel-order-btn-secondary {
-    background: var(--color-gray-200);
-    color: var(--color-black);
+    border: 1px solid var(--text-highlight);
+    background: var(--bg-card);
+    color: var(--text-highlight);
 }
 
 .cancel-order-btn-danger {

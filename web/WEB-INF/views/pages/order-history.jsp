@@ -46,7 +46,7 @@
                     <h1 class="order-history-title">
 
                         ĐƠN HÀNG CỦA
-                        <span style="font-family: var(--font-display)">
+                        <span style="font-family: var(--font-display); color: var(--text-highlight)">
                             <%= ten != null && !ten.isEmpty() ? ten.toUpperCase() : "BẠN" %>
                         </span>
                     </h1>
@@ -107,7 +107,7 @@
 
                                             <div class="order-card-code-wrap">
                                                 <span class="order-card-label">Mã đơn hàng</span>
-                                                <h3 class="order-card-code">ĐƠN <span style="color: var(--color-red)">V<span style="color: #D4AF37">$</span>${donHang.maDonHang}</span></h3>
+                                                <h3 class="order-card-code">ĐƠN <span style="color: var(--text-highlight)">LK<span style="color: #D4AF37">$</span>${donHang.maDonHang}</span></h3>
                                                 <p class="order-card-date">
                                                 <fmt:formatDate value="${donHang.ngayDat}" pattern="dd/MM/yyyy HH:mm"/>
                                                 </p>
