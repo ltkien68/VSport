@@ -4,7 +4,6 @@
 ========================= */
 body.home-page .header-shell:not(.header-light) .main-navbar {
     background: transparent;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: none;
 }
 
@@ -22,9 +21,7 @@ body.home-page .header-shell:not(.header-light) .sale-link {
    HOME + ĐÃ QUA BANNER
 ========================= */
 body.home-page .header-shell.header-light .main-navbar {
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: transparent;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
@@ -43,8 +40,7 @@ body.home-page .header-shell.header-light .sale-link {
 ========================= */
 .main-navbar {
     width: 100%;
-    background: var(--color-white);
-    border-bottom: 1px solid var(--color-gray-100);
+    background: transparent;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
     position: relative;
     z-index: 1000;
