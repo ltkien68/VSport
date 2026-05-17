@@ -1,6 +1,15 @@
 .shop-category-section {
     width: 100%;
-    background: var(--color-white);
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
 
     /* 👉 tăng padding 2 bên */
     padding: 0 80px 60px;
@@ -23,28 +32,32 @@
 .shop-category-kicker {
     margin: 0 0 8px;
     font-family: var(--font-body-2);
-    font-size: 12px;
+    font-size: var(--caption-font-size);
+    line-height: var(--caption-line-height);
     font-weight: 800;
-    letter-spacing: 2px;
+    letter-spacing: var(--letter-spacing);
     text-transform: uppercase;
-    color: var(--color-red);
+    background: var(--text-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .shop-category-heading h2 {
     margin: 0;
     font-family: var(--font-heading);
-    font-size: 28px;
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
     font-weight: 900;
-    letter-spacing: 1px;
+    letter-spacing: var(--letter-spacing);
     text-transform: uppercase;
-    color: var(--color-black);
+    color: var(--text-heading);
     line-height: 1.1;
 }
 
 .shop-category-line {
     width: 220px;
     height: 3px;
-    background: var(--color-red);
+    background: var(--text-gradient);
     margin-top: 12px;
     display: block;
 }
@@ -82,30 +95,31 @@
 
     /* 👉 bo nhẹ + premium hơn */
     border-radius: 8px;
+
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+
+        /* 👉 zoom nhẹ khi hover */
+        transition: transform 0.4s ease;
+    }
+
+    &:hover img {
+        transform: scale(1.05);
+    }
 }
 
-.shop-category-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-
-    /* 👉 zoom nhẹ khi hover */
-    transition: transform 0.4s ease;
-}
-
-.shop-category-card:hover img {
-    transform: scale(1.05);
-}
 
 /* 👉 TITLE */
 .shop-category-card h3 {
     margin: 18px 12px 0;
     font-family: var(--font-heading);
-    font-size: 20px; /* 👉 giảm nhẹ */
+    font-size: var(--h2-font-size); /* 👉 giảm nhẹ */
     font-weight: 500;
-    line-height: 1.4;
-    color: var(--color-black);
+    line-height: var(--h2-font-size);
+    color: var(--text-normal);
 }
 
 /* ================= RESPONSIVE ================= */
