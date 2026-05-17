@@ -1,3 +1,16 @@
+.profile-page {
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
+}
+
 .profile-hero {
     position: relative;
     min-height: 860px;
@@ -17,16 +30,17 @@
     inset: 0;
     background:
         linear-gradient(
-            to bottom,
-            rgba(0,0,0,0.34) 0%,
-            rgba(0,0,0,0.50) 24%,
-            rgba(0,0,0,0.66) 48%,
-            rgba(0,0,0,0.76) 66%
+        to bottom,
+        rgba(13, 18, 33, 0.08) 0%,
+        rgba(13, 18, 33, 0.18) 20%,
+        rgba(13, 18, 33, 0.42) 45%,
+        rgba(13, 18, 33, 0.72) 70%,
+        rgba(13, 18, 33, 0.96) 100%
         ),
         linear-gradient(
-            to right,
-            rgba(0,0,0,0.48) 0%,
-            rgba(0,0,0,0.20) 100%
+        to right,
+        rgba(13, 18, 33, 0.32) 0%,
+        rgba(13, 18, 33, 0.08) 100%
         );
 }
 
@@ -41,13 +55,11 @@
     pointer-events: none;
     background: linear-gradient(
         to bottom,
-        rgba(243,243,243,0) 0%,
-        rgba(243,243,243,0.08) 18%,
-        rgba(243,243,243,0.18) 36%,
-        rgba(243,243,243,0.34) 56%,
-        rgba(243,243,243,0.56) 74%,
-        rgba(243,243,243,0.80) 90%,
-        var(--color-gray-100) 100%
+        rgba(13, 18, 33, 0) 0%,
+        rgba(13, 18, 33, 0.18) 20%,
+        rgba(13, 18, 33, 0.48) 45%,
+        rgba(13, 18, 33, 0.82) 75%,
+        rgba(13, 18, 33, 1) 100%
     );
 }
 
@@ -85,7 +97,7 @@
     font-size: 80px;
     line-height: 0.88;
     letter-spacing: 2px;
-    color: var(--color-red);
+    color: var(--text-highlight);
     text-transform: uppercase;
     margin-top: 20px;
 }
@@ -122,7 +134,7 @@
 .profile-help-link {
     display: inline-block;
     margin-top: 18px;
-    color: var(--color-red);
+    color: var(--text-highlight);
     font-family: var(--font-body);
     font-size: 20px;
     text-decoration: none;
@@ -171,7 +183,7 @@
     height: 52px;
     border-radius: 50%;
     border: none;
-    background: var(--color-red);
+    background: var(--text-highlight);
     color: var(--color-white);
     display: flex;
     align-items: center;
@@ -211,7 +223,7 @@
     font-family: var(--font-body);
     font-size: 35px;
     font-weight: 700;
-    color: var(--color-red);
+    color: var(--text-highlight);
 }
 
 .profile-progress-title {
@@ -230,7 +242,7 @@
 .profile-complete-btn {
     border: none;
     background: transparent;
-    color: var(--color-red);
+    color: var(--text-highlight);
     font-family: var(--font-heading);
     font-size: 24px;
     cursor: pointer;
@@ -248,7 +260,7 @@
 
 .profile-progress-fill {
     height: 100%;
-    background: var(--color-red);
+    background: var(--text-highlight);
     border-radius: 999px;
 }
 
@@ -258,7 +270,7 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    background: var(--color-red);
+    background: var(--text-highlight);
     color: var(--color-white);
     transition: 0.25s ease;
 }
@@ -268,7 +280,16 @@
     position: relative;
     margin-top: -20px;
     padding: 0 0 80px;
-    background: var(--color-white);
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
 }
 
 .profile-main-container {
@@ -416,7 +437,7 @@
     height: 56px;
     padding: 0 24px;
     border: none;
-    background: var(--color-red);
+    background: var(--text-highlight);
     color: var(--color-white);
     font-family: var(--font-heading);
     font-size: 20px;
@@ -425,7 +446,7 @@
 }
 
 .profile-save-btn:hover {
-    background: var(--color-red);
+    background: var(--text-highlight);
 }
 
 /* POPUP */
@@ -490,13 +511,13 @@
     background: var(--color-gray-100);
     font-size: 34px;
     cursor: pointer;
-    
+
     transition: transform var(--transition-fast), background var(--transition-fast);
 }
 
 .profile-popup-close:hover {
-    background: var(--color-red-soft);
-    color: var(--color-red);
+    background: var(--text-highlight-soft);
+    color: var(--text-highlight);
     transform: rotate(90deg);
 }
 
@@ -536,7 +557,7 @@
 
 .profile-popup-field input:focus,
 .profile-popup-field textarea:focus {
-    border-color: var(--color-red);
+    border-color: var(--text-highlight);
 }
 
 .profile-popup-field small {
@@ -572,7 +593,7 @@
 }
 
 .profile-submit-btn {
-    background: var(--color-red);
+    background: var(--text-highlight);
     color: var(--color-white);
 }
 

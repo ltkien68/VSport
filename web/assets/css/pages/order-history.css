@@ -625,6 +625,10 @@
     color: var(--text-normal);
 }
 
+.cancel-order-head strong {
+    color: var(--text-highlight);
+}
+
 .cancel-order-body {
     margin-top: 20px;
 }
