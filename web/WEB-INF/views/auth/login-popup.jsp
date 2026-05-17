@@ -126,7 +126,7 @@
             </p>
 
             <p class="login-popup-note" id="authPopupNote">
-                Nhập thông tin tài khoản của bạn để tiếp tục mua sắm cùng LK$port
+                Nhập thông tin tài khoản của bạn để tiếp tục mua sắm cùng LK$port!
             </p>
 
             <div id="loginFormWrap" class="auth-form-wrap active">

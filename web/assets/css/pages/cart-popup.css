@@ -13,7 +13,7 @@
 .cart-popup-modal {
     width: 100%;
     max-width: 960px;
-    background: var(--color-white);
+    background: var(--bg-main);
     position: relative;
     padding: 28px 24px 24px;
     box-shadow: var(--shadow-md);
@@ -24,10 +24,10 @@
 
 .cart-popup-header {
     font-family: var(--font-heading);
-    font-size: 54px;
-    line-height: 1;
-    letter-spacing: 1px;
-    color: var(--color-black);
+    font-size: var(--heading-font-size);
+    line-height: var(--heading-line-height);
+    letter-spacing: var(--letter-spacing);
+    color: var(--text-heading);
     margin-bottom: 34px;
     text-transform: uppercase;
 }
@@ -38,17 +38,18 @@
     right: 12px;
     width: 62px;
     height: 62px;
-    border: 1px solid var(--color-black);
-    background: var(--color-white);
-    color: var(--color-black);
-    font-size: 40px;
-    line-height: 1;
+    background: none;
+    border: none;
+    color: var(--text-normal);
+    font-size: var(--heading-font-size);
+    line-height: var(--heading-line-height);
     cursor: pointer;
-    transition: var(--transition-fast);
-}
+    transition: all 0.25s ease;
 
-.cart-popup-close:hover {
-    background: var(--color-gray-100);
+    &:hover {
+        color: var(--text-highlight);
+        transform: rotate(90deg);
+    }
 }
 
 .cart-popup-main {
@@ -62,7 +63,7 @@
 }
 
 .cart-popup-right {
-    border-left: 1px solid var(--color-black);
+    border-left: 1px solid var(--text-highlight);
     padding-left: 26px;
 }
 
@@ -77,12 +78,15 @@
     min-width: 195px;
     height: 195px;
     background: var(--color-gray-100);
+    border-radius: 18px;
     overflow: hidden;
 }
 
 .cart-popup-product-image img {
     width: 100%;
     height: 100%;
+    border-radius: 18px;
+
     object-fit: cover;
     display: block;
 }
@@ -93,32 +97,35 @@
 
 .cart-popup-product-name {
     font-family: var(--font-body);
-    font-size: 28px;
-    line-height: 1.18;
-    color: var(--color-black);
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
+    color: var(--text-heading);
     margin: 0 0 8px;
     font-weight: var(--fw-regular);
 }
 
 .cart-popup-product-price {
     font-family: var(--font-body);
-    font-size: 24px;
-    color: var(--color-black);
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
+    color: var(--text-highlight);
     font-weight: var(--fw-bold);
     margin-bottom: 10px;
 }
 
 .cart-popup-product-meta {
     font-family: var(--font-body);
-    font-size: 20px;
-    color: var(--color-black);
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
+    color: var(--text-normal);
 }
 
 .cart-popup-cart-title {
     font-family: var(--font-body);
-    font-size: 34px;
+    font-size: var(--h1-font-size);
+    line-height: var(--h1-line-height);
     font-weight: var(--fw-bold);
-    color: var(--color-black);
+    color: var(--text-highlight);
     margin-bottom: 18px;
     text-transform: uppercase;
 }
@@ -128,9 +135,9 @@
     justify-content: space-between;
     gap: 20px;
     font-family: var(--font-body);
-    font-size: 20px;
-    color: var(--color-black);
-    line-height: 1.45;
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
+    color: var(--text-normal);
     margin-bottom: 4px;
 }
 
@@ -139,29 +146,31 @@
 }
 
 .cart-popup-cart-total {
-    border-top: 1px solid var(--color-gray-200);
+    border-top: 1px solid var(--text-highlight);
     margin-top: 8px;
     padding-top: 10px;
 }
 
 .cart-popup-total-line {
-    font-size: 22px;
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
     margin-bottom: 0;
 }
 
 .cart-popup-tax-note {
     font-family: var(--font-body);
-    font-size: 17px;
-    color: var(--color-black);
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
+    color: var(--text-highlight);
 }
 
 .cart-popup-member-note {
     margin-top: 24px;
     margin-bottom: 18px;
     font-family: var(--font-body);
-    font-size: 20px;
-    line-height: 1.45;
-    color: var(--color-red);
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
+    color: var(--text-heading);
     font-weight: var(--fw-bold);
     max-width: 360px;
 }
@@ -173,6 +182,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 22px;
+    border-radius: 18px;
     text-decoration: none;
     font-family: var(--font-body);
     font-size: 20px;
@@ -182,9 +192,9 @@
 }
 
 .cart-popup-btn-primary {
-    background: var(--color-red);
-    color: var(--color-white);
-    border: 1px solid var(--color-green);
+    background: var(--bg-card);
+    color: var(--text-highlight);
+    border: 1px solid var(--text-highlight);
 }
 
 .cart-popup-btn-primary:hover {
@@ -192,14 +202,10 @@
 }
 
 .cart-popup-btn-secondary {
-    background: var(--color-white);
-    color: var(--color-black);
-    border: 1px solid var(--color-black);
+    background: var(--bg-button);
+    color: var(--text-heading);
 }
 
-.cart-popup-btn-secondary:hover {
-    background: var(--color-gray-100);
-}
 
 .cart-popup-btn-arrow {
     font-size: 34px;
@@ -212,9 +218,11 @@
 }
 
 .cart-popup-suggest-title {
-    font-family: var(--font-body);
-    font-size: 22px;
-    color: var(--color-black);
+    font-family: var(--font-heading);
+    font-size: var(--h1-font-size);
+    line-height: var(--h1-line-height);
+    text-transform: uppercase;
+    color: var(--text-heading);
     margin-bottom: 14px;
 }
 
@@ -228,12 +236,14 @@
     display: block;
     width: 280px;
     background: var(--color-gray-100);
+    border-radius: 18px;
     overflow: hidden;
 }
 
 .cart-popup-suggest-card img {
     width: 100%;
     height: 100%;
+    border-radius: 18px;
     object-fit: cover;
     display: block;
     transition: transform 0.3s ease;
@@ -266,9 +276,63 @@ body.cart-popup-open {
     color: var(--color-red);
 }
 
+.tilt-card {
+    /* Bắt buộc để hiệu ứng 3D hoạt động */
+    transform-style: preserve-3d;
+    perspective: 1000px;
+
+    /* Đổ bóng mặc định – nhẹ nhàng */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;           /* Bo góc thẻ */
+    overflow: hidden;              /* Ẩn phần shine tràn ra ngoài */
+    transition: transform 0.2s ease-out, box-shadow 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;         /* Giữ thẻ a không bị collapse */
+}
+
+/* Đổ bóng mạnh hơn khi hover */
+.tilt-card:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* Lớp phủ bóng kính (shine) – di chuyển theo chuột */
+.tilt-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0) 60%
+        );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;          /* Không cản trở sự kiện chuột */
+    z-index: 2;
+}
+
+/* Khi hover card → hiện shine */
+.tilt-card:hover::after {
+    opacity: 1;
+}
+
+/* Đảm bảo nội dung bên trong nằm trên lớp shine */
+.tilt-card > * {
+    position: relative;
+    z-index: 1;
+}
+
 @keyframes cartPopupFadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes cartPopupZoomIn {

@@ -24,12 +24,12 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.classList.remove("active");
     });
 
-    editTenInAo.addEventListener("input", function () {
-        this.value = this.value
-                .toUpperCase()
-                .replace(/[^A-ZÀ-Ỹ\s]/gi, "")
-                .slice(0, 20);
-    });
+   editTenInAo.addEventListener("input", function () {
+    this.value = this.value
+        .toUpperCase()
+        .replace(/[^\p{L}\s]/gu, "")
+        .slice(0, 25);
+});
 
     editSoInAo.addEventListener("input", function () {
         this.value = this.value

@@ -121,7 +121,7 @@
             <div class="cart-popup-suggest-list">
                 <% if (goiYList != null && !goiYList.isEmpty()) { %>
                 <% for (SanPham sp : goiYList) {%>
-                <a class="cart-popup-suggest-card"
+                <a class="cart-popup-suggest-card tilt-card"
                    href="<%= ctx%>/chi-tiet-san-pham/<%= sp.getMaSanPham()%>">
                     <img src="<%= ctx%>/<%= sp.getAnhChinh() != null ? sp.getAnhChinh() : "assets/images/no-image.png"%>"
                          alt="<%= sp.getTenSanPham()%>">
