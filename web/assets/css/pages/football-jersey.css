@@ -4,29 +4,29 @@
 
 #football-jersey-section {
     padding: var(--space-7) 0;
-    scroll-margin-top: 160px;
+    scroll-margin-top: 180px;
 }
 
-.football-jersey-section .football-section-container {
+.football-section-container {
     width: min(100% - 48px, var(--container-width));
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
-.football-jersey-section .football-section-header {
+.football-section-header {
     margin-bottom: var(--space-5);
 }
 
-.football-jersey-section .football-section-title {
+.football-section-title {
     margin: 0 0 var(--space-4);
-    color: var(--color-black);
+    color: var(--text-heading);
     font-family: var(--font-heading);
-    font-size: var(--text-4xl);
+    font-size: var(--heading-font-size);
+    line-height: var(--heading-line-height);
     text-transform: uppercase;
-    
-}
 
-.football-section-title.typing-active {
-    animation: footballTyping 2.4s steps(28) forwards, footballCursor 0.7s infinite;
+    &.typing-active {
+        animation: footballTyping 2.4s steps(28) forwards, footballCursor 0.7s infinite;
+    }
 }
 /*
 =========================================
@@ -75,19 +75,25 @@ CURSOR
 .football-team-tab {
     min-width: 165px;
     padding: 14px 18px;
-    border: 1px solid var(--color-black);
-    background: var(--color-white);
-    color: var(--color-black);
+    border: 1px solid var(--text-highlight);
+    background: var(--bg-card);
+    color: var(--text-heading);
+    border-radius: 18px;
     cursor: pointer;
     font-family: var(--font-heading);
-    font-size: var(--text-2xl);
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
     transition: var(--transition-fast);
-}
 
-.football-team-tab.active,
-.football-team-tab:hover {
-    background: var(--color-black);
-    color: var(--color-white);
+    &.active {
+        background: var(--bg-button);
+        color: var(--color-white);
+    }
+
+    &:hover {
+        background: var(--bg-button);
+        color: var(--color-white);
+    }
 }
 
 /* =========================
@@ -97,10 +103,10 @@ CURSOR
     position: relative;
     display: none;
     margin-top: var(--space-5);
-}
 
-.football-team-slider-wrapper.active {
-    display: block;
+    &.active {
+        display: block;
+    }
 }
 
 .football-team-slider {
@@ -111,7 +117,7 @@ CURSOR
     overflow-y: hidden;
     scroll-behavior: smooth;
     scrollbar-width: none;
-    padding-bottom: var(--space-1);
+    padding: var(--space-1);
 }
 
 .football-team-slider::-webkit-scrollbar {
@@ -122,10 +128,11 @@ CURSOR
     flex: 0 0 200px;
     min-height: 150px;
     padding: var(--space-2);
-    background: var(--color-gray-200);
+    background: var(--bg-card);
     text-decoration: none;
-    color: var(--color-black);
-    border: 1px solid transparent;
+    color: var(--text-normal);
+    border: 1px solid var(--text-highlight);
+    border-radius: 18px;
     transition: var(--transition-normal);
 
     display: flex;
@@ -159,9 +166,9 @@ CURSOR
     width: fit-content;
     padding: 8px 8px;
     font-family: var(--font-body);
-    font-size: var(--text-lg);
+    font-size: var(--h4-font-size);
     font-weight: var(--fw-semibold);
-    line-height: 1.2;
+    line-height: var(--h4-line-height);
 }
 
 .football-slider-btn {
@@ -172,17 +179,17 @@ CURSOR
 
     width: 52px;
     height: 52px;
-    border: 1px solid var(--color-black);
-    background: rgba(255, 255, 255, 0.92);
-    color: var(--color-black);
+    border: 1px solid var(--text-highlight);
+    background: var(--bg-card);
+    color: var(--text-heading);
     cursor: pointer;
     font-size: 24px;
-    transition: var(--transition-fast);
-}
+    transition: all 0.25s ease;
 
-.football-slider-btn:hover {
-    background: var(--color-black);
-    color: var(--color-white);
+    &:hover {
+        background: var(--bg-button);
+        color: var(--color-white);
+    }
 }
 
 .football-slider-btn-left {
@@ -198,9 +205,59 @@ CURSOR
 ========================= */
 .football-section-divider {
     width: 100%;
-    height: 4px;
-    background: var(--color-black);
+    height: 2px;
+    background: var(--text-gradient);
     margin: var(--space-2) 0 var(--space-1);
+}
+
+.tilt-card {
+    /* Bắt buộc để hiệu ứng 3D hoạt động */
+    transform-style: preserve-3d;
+    perspective: 1000px;
+
+    /* Đổ bóng mặc định – nhẹ nhàng */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;           /* Bo góc thẻ */
+    overflow: hidden;              /* Ẩn phần shine tràn ra ngoài */
+    transition: transform 0.2s ease-out, box-shadow 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;         /* Giữ thẻ a không bị collapse */
+}
+
+/* Đổ bóng mạnh hơn khi hover */
+.tilt-card:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* Lớp phủ bóng kính (shine) – di chuyển theo chuột */
+.tilt-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0) 60%
+        );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;          /* Không cản trở sự kiện chuột */
+    z-index: 2;
+}
+
+/* Khi hover card → hiện shine */
+.tilt-card:hover::after {
+    opacity: 1;
+}
+
+/* Đảm bảo nội dung bên trong nằm trên lớp shine */
+.tilt-card > * {
+    position: relative;
+    z-index: 1;
 }
 
 /* =========================

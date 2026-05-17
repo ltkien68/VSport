@@ -18,13 +18,14 @@
     --bg-main: rgba(13, 18, 33, 1);
     --bg-box: rgba(10,10,10,0.55);
     --bg-red: rgba(225, 29, 72, 0.1);
-    --bg-heading: rgba(0, 0, 0, 0.75);
+    --bg-heading: rgba(10, 14, 28, 0.85);
     --bg-card: linear-gradient(
         135deg,
         rgba(25, 171, 244, 0.12),
         rgba(10, 20, 40, 0.1)
         );
     ;
+    --bg-button: linear-gradient(90deg, rgba(0, 229, 190, 1) 0%, rgba(0, 180, 255, 1) 100%);
 
     /*  color border  */
     --border-card-color: rgba(25, 171, 244, 1);

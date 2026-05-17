@@ -169,19 +169,6 @@
     color: var(--text-normal);
 }
 
-.home-favorite-desc {
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--color-gray-600);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    min-height: 58px;
-}
-
 .home-favorite-arrow {
     width: 52px;
     height: 52px;

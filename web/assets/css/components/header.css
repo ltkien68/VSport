@@ -52,7 +52,7 @@ body.profile-page .header-shell {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 9999;
+    z-index: 1001;
     background: var(--bg-heading);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
