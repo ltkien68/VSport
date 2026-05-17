@@ -85,24 +85,25 @@ body.home-page .header-shell.header-light .sale-link {
     text-decoration: none;
     text-transform: uppercase;
 
-    color: var(--color-black);
+    color: var(--text-heading);
     font-family: var(--font-body);
-    font-size: 20px;
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
     font-weight: 400;
-    letter-spacing: 0.03em;
+    letter-spacing: var(--line-spacing);
     transition: color 0.25s ease;
-}
 
-.navbar-link.active {
-    color: var(--color-red);
-}
+    &.active {
+        color: var(--text-hovered);
+    }
 
-.navbar-link:hover {
-    color: var(--color-red);
+    &:hover {
+        color: var(--text-hovered);
+    }
 }
 
 .sale-link {
-    color: var(--color-red);
+    color: var(--text-hovered);
 }
 
 /* =========================
@@ -117,7 +118,7 @@ body.home-page .header-shell.header-light .sale-link {
     top: 55px;
     left: 0;
     width: 100%;
-    background: rgba(10, 10, 10, 0.92);
+    background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -163,20 +164,22 @@ body.home-page .header-shell.header-light .sale-link {
     margin: 0;
     padding-bottom: 10px;
 
-    color: #e5e5e5;
+    color: var(--text-heading);
     font-family: var(--font-heading);
-    font-size: 20px;
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
     text-transform: uppercase;
     text-decoration: none;
 
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid var(--text-heading);
     transition: color 0.3s ease;
+
+    &:hover {
+        color: var(--text-hovered);
+        border-bottom: 1px solid var(--text-hovered);
+    }
 }
 
-.mega-title:hover {
-    color: #ffffff;
-    border-bottom: 1px solid var(--color-red);
-}
 
 .mega-submenu {
     margin: 0;
@@ -195,11 +198,11 @@ body.home-page .header-shell.header-light .sale-link {
 
 .mega-submenu a {
     text-decoration: none;
-    color: #e5e5e5;
-    font-family: 'Arial';
-    font-size: 12px;
+    color: var(--text-normal);
+    font-family: var(--font-body-2);
+    font-size: var(--caption-font-size);
+    line-height: var(--caption-line-height);
     font-weight: 400;
-    line-height: 1.5;
     transition: color 0.25s ease;
     display: inline-block;
 }
