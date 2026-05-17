@@ -14,12 +14,11 @@
     width: min(1240px, 96vw);
     max-height: 92vh;
     overflow: auto;
-    background: var(--color-white);
-    color: var(--color-black);
+    background: var(--bg-main);
+    color: var(--text-normal);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
     position: relative;
-    border: 1px solid var(--color-gray-200);
 }
 
 .checkout-popup::-webkit-scrollbar {
@@ -38,9 +37,10 @@
 
 .checkout-popup-sub {
     margin: 0 0 6px;
-    font-size: 20px;
-    color: var(--color-red);
-    letter-spacing: 1.5px;
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
+    color: var(--text-highlight);
+    letter-spacing: var(--letter-spacing);
     text-transform: uppercase;
     font-family: var(--font-heading);
 }
@@ -49,27 +49,24 @@
     flex: 1;
     height: 36px;
     padding: 0 18px;
-    border: 1px solid #d9d9d9;
-    border-radius: 12px;
-    background: var(--color-white);
+    border: 1px solid var(--text-highlight);
+    border-radius: 18px;
+    background: var(--bg-card);
     font-family: var(--font-body);
-    font-size: 20px;
-    color: var(--color-black);
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
+    color: var(--text-highlight);
     outline: none;
     appearance: none;
     cursor: pointer;
 }
 
-.checkout-voucher-select:focus {
-    border-color: var(--color-gray-200);
-}
-
 .checkout-popup-title {
     margin: 0;
-    font-family: var(--font-body);
-    font-size: var(--text-3xl);
-    font-family: var(--font-body);
-    color: var(--color-black);
+    font-family: var(--font-heading);
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
+    color: var(--text-heading);
 }
 
 .checkout-popup-close {
@@ -79,17 +76,17 @@
     width: 42px;
     height: 42px;
     border: none;
+    background: none;
     border-radius: 999px;
-    background: var(--color-gray-100);
-    color: var(--color-black);
+    color: var(--text-normal);
     font-size: 28px;
     cursor: pointer;
     transition: transform var(--transition-fast), background var(--transition-fast);
 }
 
 .checkout-popup-close:hover {
-    background: var(--color-red-soft);
-    color: var(--color-red);
+    border: none;
+    color: var(--text-highlight);
     transform: rotate(90deg);
 }
 
@@ -112,17 +109,18 @@
 }
 
 .checkout-card {
-    background: var(--color-off-white);
-    border: 1px solid var(--color-gray-200);
-    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    border: 1px solid var(--text-highlight);
+    border-radius: 18px;
     padding: var(--space-4);
 }
 
 .checkout-card-title {
     margin: 0 0 var(--space-3);
-    font-size: var(--text-xl);
     font-family: var(--font-heading);
-    color: var(--color-black);
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
+    color: var(--text-heading);
 }
 
 .checkout-form-grid {
@@ -139,8 +137,9 @@
 }
 
 .checkout-form-group label {
-    font-size: 18px;
-    color: var(--color-gray-600);
+    font-size: var(--h4-font-size);
+    line-height: var(--h4-line-height);
+    color: var(--text-normal);
     font-family: var(--font-heading);
 }
 
@@ -148,28 +147,21 @@
 .checkout-form-group textarea,
 .checkout-coupon-row input {
     width: 100%;
-    border: 1px solid var(--color-gray-200);
-    background: var(--color-white);
-    color: var(--color-black);
-    border-radius: var(--radius-sm);
+    border: 1px solid var(--text-highlight);
+    background: var(--bg-card);
+    color: var(--text-highlight);
+    border-radius: 18px;
     padding: 14px 16px;
-    font-size: var(--text-base);
+    font-size: var(--font-body-2);
     outline: none;
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.checkout-form-group input:focus,
-.checkout-form-group textarea:focus,
-.checkout-coupon-row input:focus {
-    border-color: var(--color-red);
-    box-shadow: 0 0 0 3px var(--color-red-soft);
-}
-
 .checkout-note {
     margin: 0;
-    font-size: var(--text-sm);
-    color: var(--color-gray-600);
-    line-height: 1.6;
+    font-size: var(--caption-font-size);
+    color: var(--text-normal);
+    line-height: var(--caption-line-height);
 }
 
 .checkout-note-warning {
@@ -178,18 +170,12 @@
 
 .checkout-radio-card {
     display: block;
-    border: 1px solid var(--color-gray-200);
-    border-radius: var(--radius-md);
-    background: var(--color-white);
+    border: 1px solid var(--text-highlight);
+    border-radius: 18px;
+    background: var(--bg-card);
     padding: var(--space-3);
     cursor: pointer;
     transition: border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-.checkout-radio-card:hover {
-    border-color: var(--color-red);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
 }
 
 .checkout-radio-card input {
@@ -197,11 +183,11 @@
 }
 
 .checkout-radio-card input:checked + .checkout-radio-content {
-    color: var(--color-black);
+    color: var(--text-highlight);
 }
 
 .checkout-radio-card input:checked + .checkout-radio-content .checkout-radio-top strong {
-    color: var(--color-red);
+    color: var(--text-highlight);
 }
 
 .checkout-radio-content {
@@ -237,17 +223,17 @@
 .checkout-apply-btn {
     min-width: 120px;
     border: none;
-    border-radius: var(--radius-sm);
-    background: var(--color-black);
-    color: var(--color-white);
-    font-size: 20px;
+    border-radius: 18px;
+    background: var(--bg-button);
+    color: var(--text-heading);
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
     font-family: var(--font-body);
     cursor: pointer;
     transition: background var(--transition-fast), transform var(--transition-fast);
 }
 
 .checkout-apply-btn:hover {
-    background: var(--color-red);
     transform: translateY(-1px);
 }
 
@@ -280,7 +266,7 @@
     justify-content: space-between;
     gap: var(--space-3);
     padding-bottom: var(--space-3);
-    border-bottom: 1px solid var(--color-gray-200);
+    border-bottom: 1px solid var(--text-highlight);
 }
 
 /* Chrome, Edge, Brave */
@@ -329,20 +315,26 @@
 
 .checkout-item-name {
     margin: 0 0 6px;
-    font-size: var(--text-base);
-    color: var(--color-black);
+    font-family: var(--font-body);
+    font-size: var(--normal-font-size);
+    line-hegiht: var(--normal-line-height);
+    color: var(--text-heading);
 }
 
 .checkout-item-sub {
     margin: 0;
-    font-size: var(--text-sm);
-    color: var(--color-gray-600);
+    font-family: var(--font-body-2);
+    font-size: var(--caption-font-size);
+    line-hegiht: var(--caption-line-height);
+
+    color: var(--text-normal);
 }
 
 .checkout-order-item-right {
-    font-size: 30px;
+    font-size: var(--h2-font-size);
+    line-hegiht: var(--h1-line-height);
     font-family: var(--font-heading);
-    color: var(--color-black);
+    color: var(--text-highlight);
     white-space: nowrap;
 }
 
@@ -359,7 +351,7 @@
     margin-top: -6px;
     padding: 8px 0 14px 0;
 
-    border-bottom: 1px solid var(--color-gray-200);
+    border-bottom: 1px solid var(--text-highlight);
 }
 
 .checkout-gift-product {
@@ -372,7 +364,7 @@
     width: 48px;
     height: 48px;
     object-fit: cover;
-    border-radius: var(--radius-sm);
+    border-radius: 18px;
     background: var(--color-gray-100);
 }
 
@@ -382,8 +374,9 @@
 
 .checkout-gift-name {
     margin: 0 0 4px;
-    font-size: var(--text-sm);
-    color: var(--color-gray-700);
+    font-size: var(--caption-font-size);
+    line-height: var(--caption-line-height);
+    color: var(--text-heading);
 
     white-space: nowrap;
     overflow: hidden;
@@ -395,12 +388,12 @@
     margin-right: 6px;
     padding: 1px 4px;
 
-    border: 1px solid var(--color-red);
-    color: var(--color-red);
-    background: #fff;
+    border: 1px solid var(--text-highlight);
+    color: var(--text-highlight);
+    background: var(--bg-card);
 
-    font-size: 11px;
-    line-height: 1.2;
+    font-size: var(--caption-font-size);
+    line-height: var(--caption-line-height);
 }
 
 .checkout-gift-shop {
@@ -423,13 +416,13 @@
 }
 
 .checkout-summary-card {
-    background: var(--color-black);
-    color: var(--color-white);
+    background: var(--bg-main);
+    color: var(--text-heading);
     border: none;
 }
 
 .checkout-summary-card .checkout-card-title {
-    color: var(--color-white);
+    color: var(--text-heading);
 }
 
 .checkout-summary-row {
@@ -439,9 +432,10 @@
     gap: var(--space-3);
     padding: 12px 0;
     border-bottom: 1px solid rgba(255,255,255,0.08);
-    
+
     font-family: var(--font-body);
-    font-size: var(--text-base);
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
 }
 
 .checkout-summary-row.discount strong {
@@ -452,26 +446,24 @@
     border-bottom: none;
     padding-top: var(--space-3);
     font-family: var(--font-heading);
-    font-size: var(--text-xl);
+    font-size: var(--h1-font-size);
+    line-height: var(--h1-line-height);
+    color: var(--text-highlight);
 }
 
 .checkout-submit-btn {
     width: 100%;
     margin-top: var(--space-4);
     border: none;
-    border-radius: var(--radius-md);
-    background: var(--color-red);
-    color: #ffffff;
+    border-radius: 18px;
+    background: var(--bg-button);
+    color: var(--text-heading);
     padding: 16px 18px;
-    font-size: 28px;
+    font-size: var(--h1-font-size);
+    line-height: var(--h1-line-height);
     font-family: var(--font-heading);
     cursor: pointer;
     transition: background var(--transition-fast), transform var(--transition-fast);
-}
-
-.checkout-submit-btn:hover {
-    background: var(--color-red-hover);
-    transform: translateY(-1px);
 }
 
 .checkout-radio-card {
@@ -494,6 +486,7 @@
 
 .checkout-radio-card.active[data-payment="chuyen_khoan"] .checkout-qr-box {
     max-height: 500px;
+
     opacity: 1;
     margin-top: 18px;
 }
@@ -501,6 +494,7 @@
 .checkout-qr-image {
     width: 300px;
     height: 350px;
+    border-radius: 18px;
 
     display: block;
     margin: 0 auto 16px;
@@ -510,17 +504,17 @@
 }
 
 .checkout-qr-info {
-    font-size: 14px;
-    line-height: 1.7;
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
 
-    color: var(--color-black);
+    color: var(--text-normal);
 }
 
 .checkout-qr-note {
     margin-top: 12px;
 
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: var(--caption-font-size);
+    line-height: var(--caption-line-height);
 
     color: var(--color-red);
 }

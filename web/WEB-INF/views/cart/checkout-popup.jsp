@@ -8,7 +8,7 @@
         <button type="button" class="checkout-popup-close" id="closeCheckoutPopup">×</button>
 
         <div class="checkout-popup-header">
-            <p class="checkout-popup-sub">V<span style="color: #D4AF37">$</span>PORT CHECKOUT</p>
+            <p class="checkout-popup-sub">LK<span style="color: #D4AF37">$</span>PORT CHECKOUT</p>
             <h2 class="checkout-popup-title">XÁC NHẬN ĐƠN HÀNG</h2>
         </div>
 
