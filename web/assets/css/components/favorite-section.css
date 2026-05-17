@@ -1,7 +1,17 @@
 .home-favorite-section {
     width: 100%;
     padding: 0px 24px 72px;
-    background: var(--color-white);
+
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
 }
 
 .home-favorite-container {
@@ -15,30 +25,39 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 38px;
+
+    &::after {
+        content: "";
+        width: 260px;
+        height: 3px;
+        background: var(--text-gradient);
+        margin-top: 12px;
+        display: block;
+    }
 }
 
 .home-favorite-kicker {
     margin: 0 0 8px;
     font-family: var(--font-body-2);
-    font-size: 12px;
+    font-size: var(--caption-font-size);
+    line-height: var(--caption-line-height);
     font-weight: 800;
-    letter-spacing: 2px;
+    letter-spacing: var(--letter-spacing);
     text-transform: uppercase;
-    color: var(--color-red);
+    background: var(--text-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .home-favorite-title {
     margin: 0;
     font-family: var(--font-heading);
-    font-size: 28px;
-    line-height: 1;
+    font-size: var(--h1-font-size);
+    line-height: var(--h1-line-height);
     font-weight: 900;
-    letter-spacing: 1px;
+    letter-spacing: var(--letter-spacing);
     text-transform: uppercase;
-    color: var(--color-black);
-    
-
-    white-space: normal; /* cho phép xuống dòng toàn bộ card */
+    color: var(--text-heading)
 
 }
 
@@ -67,18 +86,12 @@
     white-space: normal;
 }
 
-.home-favorite-line {
-    width: 260px;
-    height: 3px;
-    background: var(--color-red);
-    margin-top: 12px;
-    display: block;
-}
 
 .home-favorite-empty {
     text-align: center;
-    font-size: 18px;
-    color: var(--color-gray-600);
+    font-size: var(--h4-font-size);
+    line-height: var(--h4-line-height);
+    color: var(--text-base);
     padding: 24px 0;
 }
 
@@ -147,37 +160,13 @@
     margin-bottom: 14px;
 }
 
-.home-favorite-old-price {
-    font-family: var(--font-body);
-    font-size: 18px;
-    color: var(--color-gray-400);
-    text-decoration: line-through;
-    font-weight: 500;
-}
-
-.home-favorite-sale-price {
-    font-family: var(--font-body);
-    font-size: 28px;
-    color: var(--color-red);
-    font-weight: 900;
-    line-height: 1.1;
-}
-
-.home-favorite-normal-price {
-    font-family: var(--font-body);
-    font-size: 28px;
-    color: var(--color-black);
-    font-weight: 900;
-    line-height: 1.1;
-}
-
 .home-favorite-name {
     margin: 0 0 14px;
-    font-size: 28px;
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
     font-family: var(--font-body);
-    line-height: 1.28;
     font-weight: 900;
-    color: var(--color-black);
+    color: var(--text-normal);
 }
 
 .home-favorite-desc {
@@ -198,23 +187,23 @@
     height: 52px;
     border: none;
     background: transparent;
-    color: var(--color-red);
-    
+    color: var(--text-highlight);
+
     font-size: 40px;
     line-height: 1;
     cursor: pointer;
     flex-shrink: 0;
     transition: transform 0.2s ease, opacity 0.2s ease;
-}
 
-.home-favorite-arrow:hover {
-    transform: scale(1.08);
-}
+    &:hover {
+        transform: scale(1.08);
+    }
 
-.home-favorite-arrow:disabled {
-    opacity: 0.35;
-    cursor: default;
-    transform: none;
+    &:disabled {
+        opacity: 0.35;
+        cursor: default;
+        transform: none;
+    }
 }
 
 .home-favorite-dots {
@@ -229,14 +218,14 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: var(--color-gray-200);
+    background: var(--text-normal);
     cursor: pointer;
     transition: all 0.25s ease;
-}
 
-.home-favorite-dot.active {
-    background: var(--color-gray-800);
-    transform: scale(1.15);
+    &.active {
+        background: var(--text-highlight);
+        transform: scale(1.15);
+    }
 }
 
 .club-favorite-btn {
