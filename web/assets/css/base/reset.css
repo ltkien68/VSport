@@ -20,7 +20,6 @@ input {
 
 body {
     scroll-behavior: smooth;
-    overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -49,3 +48,4 @@ body {
     scrollbar-width: thin;
     scrollbar-color: var(--text-highlight) transparent;
 }
+
