@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (subtitle) subtitle.textContent = "Đăng nhập để không bỏ lỡ bất kỳ sản phẩm và ưu đãi nào.";
         if (note) {
             note.innerHTML =
-                'Nhập thông tin tài khoản của bạn để tiếp tục mua sắm cùng <span style="font-weight: bold"><span style="color: var(--color-red)">V</span>$PORT</span>';
+                'Nhập thông tin tài khoản của bạn để tiếp tục mua sắm cùng <span style="font-weight: bold"><span style="color: var(--color-red)">LK</span>$PORT</span>';
         }
 
         clearLoginError();
@@ -141,10 +141,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (registerWrap) registerWrap.classList.add("active");
 
         if (title) title.textContent = "TẠO TÀI KHOẢN";
-        if (subtitle) subtitle.textContent = "Đăng ký để bắt đầu mua sắm và săn ưu đãi cùng VSport.";
+        if (subtitle) subtitle.textContent = "Nhập thông tin tài khoản của bạn để tiếp tục mua sắm cùng LK$port!";
         if (note) {
             note.innerHTML =
-                'Điền thông tin của bạn để tạo tài khoản mới cùng <span style="font-weight: bold"><span style="color: var(--color-red)">V</span>$PORT</span>';
+                'Điền thông tin của bạn để tạo tài khoản mới cùng <span style="font-weight: bold"><span style="color: var(--color-red)">LK</span>$PORT</span>';
         }
 
         clearRegisterError();

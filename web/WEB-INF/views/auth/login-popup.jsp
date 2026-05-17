@@ -116,7 +116,7 @@
 
         <div class="login-popup-inner">
             <div class="login-logo">
-                <img src="${pageContext.request.contextPath}/assets/images/logos/logo.png" alt="logo"/>
+                <img src="${pageContext.request.contextPath}/assets/images/logos/logo-header.png" alt="logo"/>
             </div>
 
             <h2 class="login-popup-title" id="authPopupTitle">CHÀO MỪNG TRỞ LẠI</h2>
@@ -126,10 +126,7 @@
             </p>
 
             <p class="login-popup-note" id="authPopupNote">
-                Nhập thông tin tài khoản của bạn để tiếp tục mua sắm cùng
-                <span style="font-weight: bold">
-                    <span style="color: var(--color-red)">V</span>$PORT
-                </span>
+                Nhập thông tin tài khoản của bạn để tiếp tục mua sắm cùng LK$port
             </p>
 
             <div id="loginFormWrap" class="auth-form-wrap active">
