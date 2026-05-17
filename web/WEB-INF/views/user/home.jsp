@@ -19,7 +19,7 @@
 
         <title>Trang chủ | LKsport</title>
 
-        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
+        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo-header.png">
 
         <!-- CSS nền tảng -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base/reset.css">
