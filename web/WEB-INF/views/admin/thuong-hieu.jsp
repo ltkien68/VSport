@@ -26,7 +26,7 @@
 
         <section class="admin-brand-header">
             <div>
-                <p class="admin-brand-label">VSport Admin</p>
+                <p class="admin-brand-label">LKsport Admin</p>
                 <h1>Quản lý thương hiệu</h1>
                 <span>Thêm, sửa, xóa thương hiệu sản phẩm trong hệ thống.</span>
             </div>

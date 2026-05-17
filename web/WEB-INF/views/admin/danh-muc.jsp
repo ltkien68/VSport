@@ -26,7 +26,7 @@
 
                 <section class="admin-category-header">
                     <div>
-                        <p class="admin-category-label">VSport Admin</p>
+                        <p class="admin-category-label">LKsport Admin</p>
                         <h1>Quản lý danh mục</h1>
                         <span>Thêm, sửa, xóa danh mục sản phẩm trong hệ thống.</span>
                     </div>

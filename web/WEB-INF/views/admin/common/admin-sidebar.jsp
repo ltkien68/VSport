@@ -104,9 +104,9 @@
 <aside class="admin-sidebar">
     <div class="admin-sidebar-top">
         <a href="${pageContext.request.contextPath}/admin/dashboard" class="admin-sidebar-brand">
-            <div class="admin-sidebar-brand-icon"><img src="${pageContext.request.contextPath}/assets/images/logos/logo.png" alt="alt"/></div>
+            <div class="admin-sidebar-brand-icon"><img src="${pageContext.request.contextPath}/assets/images/logos/lk-logo.png" alt="alt"/></div>
             <div class="admin-sidebar-brand-text">
-                <h2><span style="color: var(--color-red)">VIET</span><span style="color: #D4AF37">$</span>PORT</h2>
+                <h2><span style="color: var(--text-highlight)">LK</span><span style="color: #D4AF37">$</span>PORT</h2>
                 <span class="admin-sidebar-sub">Admin Panel</span>
             </div>
         </a>
