@@ -32,7 +32,7 @@
 
         <title>Giỏ hàng .LKsport</title>
 
-       
+
     </head>
     <body class="inner">
         <div class="header-shell">
@@ -224,6 +224,7 @@
 
             </div>
         </div>
+
 
         <c:if test="${not empty checkoutSuccess}">
             <script>

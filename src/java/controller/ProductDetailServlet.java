@@ -50,9 +50,9 @@ public class ProductDetailServlet extends HttpServlet {
             String activePage = xacDinhActivePage(sp);
             String backUrl = xacDinhBackUrl(request, sp);
             String breadcrumbLabel = xacDinhBreadcrumbLabel(sp);
-            
+
             List<SanPham> dsGoiY = sanPhamDAO.getRandomSanPham(20);
-            
+
             System.out.println("dsGoiY size = " + dsGoiY.size());
 
             request.setAttribute("dsGoiY", dsGoiY);
@@ -65,8 +65,6 @@ public class ProductDetailServlet extends HttpServlet {
             request.setAttribute("activePage", activePage);
             request.setAttribute("backUrl", backUrl);
             request.setAttribute("breadcrumbLabel", breadcrumbLabel);
-
-            
 
             request.getRequestDispatcher("/WEB-INF/views/pages/product-detail.jsp").forward(request, response);
 
