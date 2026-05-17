@@ -12,7 +12,7 @@
     </div>
 
     <div class="footer-top-slogan">
-        <h2 class="footer-slogan left">#LTKIEN68</h2>
+        <h2 class="footer-slogan left">#LTRNGKIEN</h2>
         <h2 class="footer-slogan right">#LKSPORT</h2>
     </div>
 
