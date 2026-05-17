@@ -47,7 +47,6 @@
 
             <!-- BREADCRUMB -->
 
-
             <!-- HERO -->
             <section class="club-hero">
                 <div class="club-container">
@@ -131,7 +130,7 @@
                                     SanPham sp = danhSachSanPham.get(i);
                         %>
 
-                        <div class="club-product-card <%= sp.getGiaKhuyenMai() > 0 ? "has-sale" : ""%>">
+                        <div class="club-product-card  tilt-card <%= sp.getGiaKhuyenMai() > 0 ? "has-sale" : ""%>">
                             <a href="${pageContext.request.contextPath}/chi-tiet-san-pham/<%= sp.getMaSanPham()%>" class="club-product-image-link">
                                 <div class="club-product-image-wrap">
 
