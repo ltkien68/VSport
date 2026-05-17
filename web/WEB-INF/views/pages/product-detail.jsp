@@ -27,7 +27,7 @@
             })();
         </script>
     </head>
-    <body>
+    <body class="inner">
         <div class="header-shell">
             <%@ include file="/WEB-INF/views/common/header.jsp" %>
             <%@ include file="/WEB-INF/views/common/navbar.jsp" %>

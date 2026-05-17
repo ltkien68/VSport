@@ -32,7 +32,7 @@
         <jsp:include page="/WEB-INF/views/common/head.jsp" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/order-history.css">
     </head>
-    <body>
+    <body class="inner">
 
         <div class="header-shell">
             <%@ include file="/WEB-INF/views/common/header.jsp" %>

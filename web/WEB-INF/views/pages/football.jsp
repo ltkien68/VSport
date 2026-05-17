@@ -31,7 +31,7 @@
         </script>
     </head>
 
-    <body>
+    <body class="inner">
         
         <!-- HEADER -->
         <div class="header-shell">

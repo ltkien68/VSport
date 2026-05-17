@@ -1,5 +1,10 @@
 /* TRANG HOME: ban đầu nền đen */
 body.home-page .header-shell {
+    position: fixed;
+    top: 0;
+    z-index: 1001;
+    width: 100%;
+    height: 75px;
     background: transparent;
     transition: background 0.35s ease,
         box-shadow 0.35s ease;
@@ -11,6 +16,20 @@ body.home-page .header-shell.header-light {
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
+
+body.profile-page .header-shell {
+    position: fixed;
+    top: 0;
+    z-index: 1001;
+    width: 100%;
+    height: 75px;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: background 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
 
 /* =========================
    SITE HEADER
@@ -32,13 +51,17 @@ body.home-page .header-shell.header-light {
         border-color 0.35s ease;
 }
 
-.header-shell {
-    position: fixed;
+
+
+ body.inner .header-shell {
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 9999;
-    background: var(--color-white);
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     transition:
         background-color 0.35s ease,
         box-shadow 0.35s ease;
@@ -330,15 +353,15 @@ body.home-page .header-shell.header-light .header-icon.logged-in {
     align-items: center;
     gap: 6px;
     text-decoration: none;
-    
+
 }
 
 .header-icon.cart-link svg {
     width: 20px;
     height: 20px;
-    
+
     transition: color 0.25s ease;
-    
+
     &:hover {
         color: var(--text-hovered);
     }
@@ -396,64 +419,6 @@ body.home-page .header-shell.header-light .header-icon.logged-in {
     }
 }
 
-/* =========================
-   PROFILE PAGE
-========================= */
-body.profile-page .header-shell {
-    background: transparent;
-    transition: background 0.35s ease,
-        box-shadow 0.35s ease;
-}
-
-body.profile-page .header-shell.header-light {
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-}
-
-body.profile-page .store-title,
-body.profile-page .subtitle-address,
-body.profile-page .header-icon {
-    color: #ffffff;
-}
-
-body.profile-page .search-box {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.28);
-}
-
-body.profile-page .search-box span,
-body.profile-page .search-box svg {
-    color: rgba(255, 255, 255, 0.85);
-}
-
-body.profile-page .search-box:hover {
-    border-bottom-color: #ffffff;
-}
-
-body.profile-page .search-box:hover span,
-body.profile-page .search-box:hover svg {
-    color: #ffffff;
-}
-
-body.profile-page .main-navbar {
-    background: #000000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-body.profile-page .navbar-link {
-    color: #ffffff;
-}
-
-body.profile-page .navbar-link:hover,
-body.profile-page .navbar-link.active,
-body.profile-page .sale-link {
-    color: var(--color-red);
-}
-
-body.profile-page .header-icon.logged-in {
-    color: var(--color-red);
-}
 
 /* =========================
    RESPONSIVE

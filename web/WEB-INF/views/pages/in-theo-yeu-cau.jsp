@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/header.css">
         <jsp:include page="/WEB-INF/views/common/head.jsp" />
     </head>
-    <body>
+    <body class="inner">
         <div class="header-shell">
             <%@ include file="/WEB-INF/views/common/header.jsp" %>
             <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
