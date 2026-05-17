@@ -67,7 +67,7 @@
                 <c:choose>
                     <c:when test="${not empty dsMaSoHuu}">
                         <c:forEach var="item" items="${dsMaSoHuu}">
-                            <div class="voucher-card owned ${item.trangThaiSoHuu}">
+                            <div class="voucher-card tilt-card owned ${item.trangThaiSoHuu}">
                                 <div class="voucher-card-top">
                                     <span class="voucher-code">${item.maCode}</span>
                                     <span class="voucher-status
@@ -295,6 +295,8 @@
 <script src="${pageContext.request.contextPath}/assets/js/components/header.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/components/search-popup.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/components/login-popup.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/pages/ma-giam-gia.js"></script>
+
 
 <%-- jQuery bắt buộc cho Toastr --%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
