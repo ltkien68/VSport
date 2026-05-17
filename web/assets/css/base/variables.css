@@ -9,11 +9,13 @@
     --text-hovered: #0DA9FC;
     --text-heading: #ffffff;
     --text-normal: #b5b9bd;
-    
+
     --text-price-sale: #c62828;
 
+    --text-gradient: linear-gradient(90deg, #7ab3d4 0%, #c8dff0 100%);
+
     /*  color background  */
-    --bg-main: #0B0E14;
+    --bg-main: rgba(13, 18, 33, 1);
     --bg-box: rgba(10,10,10,0.55);
     --bg-red: rgba(225, 29, 72, 0.1);
     --bg-heading: rgba(0, 0, 0, 0.75);
@@ -145,43 +147,20 @@
     --toast-shadow: 0 14px 35px rgba(0, 0, 0, 0.22);
 }
 
-/* =========================
-   DARK MODE
-========================= */
-
-/* =========================
-   DARK MODE
-========================= */
-
-html.dark-mode {
-    --color-white: #0b0b0b;
-    --color-off-white: #171717;
-
-    --color-black: #ffffff;
-    --color-black-soft: #e5e5e5;
-
-    --color-gray-100: #1f1f1f;
-    --color-gray-200: #2a2a2a;
-    --color-gray-400: #bdbdbd;
-    --color-gray-600: #d1d5db;
-    --color-gray-800: #f3f4f6;
-
-    --overlay-white-strong: rgba(20, 20, 20, 0.92);
-    --overlay-white-soft: rgba(255, 255, 255, 0.18);
-
-    --color-red: #ff2d55;
-    --color-red-hover: #ff4d6d;
-    --color-red-soft: rgba(255, 45, 85, 0.1);
-
-    --color-gold: #FFD700;
-    --color-green: #22c55e;
-}
-
 /* base màu, KHÔNG transition mặc định */
 html,
 body {
-    background: var(--color-white);
-    color: var(--color-black);
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
+    color: var(--text-normal);
 }
 
 /* header mặc định cũng KHÔNG transition */
