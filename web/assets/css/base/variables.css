@@ -10,10 +10,22 @@
     --text-heading: #ffffff;
     --text-normal: #b5b9bd;
     
+    --text-price-sale: #c62828;
+
     /*  color background  */
     --bg-main: #0B0E14;
     --bg-box: rgba(10,10,10,0.55);
     --bg-red: rgba(225, 29, 72, 0.1);
+    --bg-heading: rgba(0, 0, 0, 0.75);
+    --bg-card: linear-gradient(
+        135deg,
+        rgba(25, 171, 244, 0.12),
+        rgba(10, 20, 40, 0.1)
+        );
+    ;
+
+    /*  color border  */
+    --border-card-color: rgba(25, 171, 244, 1);
 
 
     /*  font size  */
@@ -21,7 +33,7 @@
 
     --heading-font-size: 40px;
     --heading-line-height: 0.9;
-    
+
     --heading-scroll-font-size: 24px;
     --heading-scroll-line-height: 28px;
 
@@ -35,13 +47,16 @@
     --h3-line-height: 24px;
 
     --h4-font-size: 18px;
-    --h4-line-height: 16px;
+    --h4-line-height: 20px;
+
+    --normal-font-size: 16px;
+    --normal-line-height: 18px;
 
     --caption-font-size: 12px;
     --caption-line-height: 16px;
-    
-    
-    
+
+
+
     /*  fonts  */
     --font-body: 'Juventus Fans Regular', sans-serif;
     --font-body-2: 'Darley', sans-serif;
