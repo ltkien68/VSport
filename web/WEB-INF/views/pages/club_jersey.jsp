@@ -16,7 +16,7 @@
         <title><%= doiBongHienTai != null ? doiBongHienTai.getTenDoiBong() : "Sản phẩm bóng đá" %> | Vsport</title>
         
         
-        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
+        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo-header.png">
         
         <jsp:include page="/WEB-INF/views/common/head.jsp" />
         

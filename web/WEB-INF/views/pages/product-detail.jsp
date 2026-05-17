@@ -9,7 +9,7 @@
         <jsp:include page="/WEB-INF/views/common/head.jsp" />
 
 
-        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
+        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo-header.png">
 
         <title><%= sp.getTenSanPham() %></title>
 

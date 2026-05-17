@@ -8,7 +8,7 @@
 
         <title>Bóng đá | VSport</title>
 
-        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
+        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo-header.png">
 
         <!-- CSS nền tảng -->
 

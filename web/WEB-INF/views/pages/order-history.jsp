@@ -28,7 +28,7 @@
         <meta charset="UTF-8">
         <title>Đơn hàng của tôi | VSport</title>
 
-        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
+        <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/images/logos/logo-header.png">
         <jsp:include page="/WEB-INF/views/common/head.jsp" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/order-history.css">
     </head>

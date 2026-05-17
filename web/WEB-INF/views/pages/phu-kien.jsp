@@ -6,7 +6,7 @@
         <title>Phụ Kiện | Vsport</title>
 
         <link rel="icon" type="image/png"
-              href="${pageContext.request.contextPath}/assets/images/logos/logo.png">
+              href="${pageContext.request.contextPath}/assets/images/logos/logo-header.png">
 
         <jsp:include page="/WEB-INF/views/common/head.jsp" />
 
