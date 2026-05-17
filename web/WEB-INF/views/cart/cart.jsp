@@ -32,19 +32,7 @@
 
         <title>Giỏ hàng .LKsport</title>
 
-        <script>
-            (function () {
-                try {
-                    const theme = localStorage.getItem("theme");
-                    if (theme === "dark") {
-                        document.documentElement.classList.add("dark-mode");
-                    } else {
-                        document.documentElement.classList.remove("dark-mode");
-                    }
-                } catch (e) {
-                }
-            })();
-        </script>
+       
     </head>
     <body class="inner">
         <div class="header-shell">

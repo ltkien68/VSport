@@ -11,7 +11,7 @@
         <div class="shop-category-grid">
             <a href="${pageContext.request.contextPath}/bong_da#football_jersey_section" class="shop-category-card">
                 <div class="shop-category-image">
-                    <img src="${pageContext.request.contextPath}/assets/images/others/category/ao-dtqg.webp" alt="Áo đội tuyển">
+                    <img src="${pageContext.request.contextPath}/assets/images/others/category/ao-dtqg.avif" alt="Áo đội tuyển">
                 </div>
                 <h3>BỘ KIT TUYỂN QUỐC GIA</h3>
             </a>
