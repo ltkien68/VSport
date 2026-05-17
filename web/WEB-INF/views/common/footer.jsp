@@ -20,27 +20,27 @@
         <h3 class="footer-social-title">KẾT NỐI VỚI LK<span style="color: #D4AF37">$</span>PORT</h3>
 
         <div class="footer-social-grid">
-            <a href="#" class="social-item" aria-label="Twitch">
-                <img src="${pageContext.request.contextPath}/assets/images/icons/icon-socials/twitch.webp" alt="twitch" class="icon-footer"/>
+            <a href="https://github.com/ltkien68" class="social-item" aria-label="Twitch">
+                <img src="${pageContext.request.contextPath}/assets/images/icons/icon-socials/github_logo.png" alt="github" class="icon-footer" style="filter: brightness(0) invert(1)"/>
             </a>
-            <a href="#" class="social-item" aria-label="Facebook">
+            <a href="https://www.facebook.com/ltk6805" class="social-item" aria-label="Facebook">
                 <img src="${pageContext.request.contextPath}/assets/images/icons/icon-socials/fb.webp" alt="fb" class="icon-footer"/>
             </a>
-            <a href="#" class="social-item" aria-label="Instagram">
+            <a href="https://www.instagram.com/cihn.68/" class="social-item" aria-label="Instagram">
                 <img src="${pageContext.request.contextPath}/assets/images/icons/icon-socials/insta.webp" alt="instagram" class="icon-footer"/>
             </a>
-            <a href="#" class="social-item" aria-label="LinkedIn">
+            <a href="https://www.youtube.com/@CihnYildiz19" class="social-item" aria-label="LinkedIn">
                 <img src="${pageContext.request.contextPath}/assets/images/icons/icon-socials/youtube.webp" alt="youtube" class="icon-footer"/>
             </a>
 
-            <a href="#" class="social-item" aria-label="TikTok">
+            <a href="https://www.tiktok.com/@cihn.68" class="social-item" aria-label="TikTok">
                 <img src="${pageContext.request.contextPath}/assets/images/icons/icon-socials/tiktok.webp" alt="tiktok" class="icon-footer"/>
             </a>
-            <a href="#" class="social-item" aria-label="YouTube">
-                <img src="${pageContext.request.contextPath}/assets/images/icons/icon-socials/twitter.webp" alt="x" class="icon-footer"/>
+            <a href="https://www.linkedin.com/in/ltkien68/" class="social-item" aria-label="YouTube">
+                <img src="${pageContext.request.contextPath}/assets/images/icons/icon-socials/linkedin.png" alt="x" class="icon-footer"/>
             </a>
-            <a href="#" class="social-item" aria-label="X">
-                <img src="${pageContext.request.contextPath}/assets/images/icons/icon-socials/whatsapp.webp" alt="whatsapp" class="icon-footer"/>
+            <a href="https://ltkien-portfolio--68.vercel.app/" class="social-item" aria-label="X">
+                <img src="${pageContext.request.contextPath}/assets/images/logos/lk-logo.png" alt="myportfolio" class="icon-footer"/>
             </a>
             <a href="#" class="social-item" aria-label="Whatsapp">
                 <img src="${pageContext.request.contextPath}/assets/images/icons/icon-socials/zalo.jpg" alt="zalo" class="icon-footer"/>
