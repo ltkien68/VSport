@@ -17,12 +17,16 @@ import java.util.List;
 
 @WebServlet(name = "AddToCartServlet", urlPatterns = {"/gio-hang/them"})
 public class GioHangServlet extends HttpServlet {
-    
+
     SanPhamDAO sanPhamDAO = new SanPhamDAO();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        System.out.println("RAW tenInAo=" + request.getParameter("tenInAo"));
+        System.out.println("RAW soInAo=" + request.getParameter("soInAo"));
+        System.out.println("ContentType=" + request.getContentType());
 
         request.setCharacterEncoding("UTF-8");
 
@@ -105,6 +109,13 @@ public class GioHangServlet extends HttpServlet {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Không thể thêm vào giỏ hàng");
                 return;
             }
+
+            System.out.println("=== BEFORE DAO ===");
+            System.out.println("maSanPham=" + maSanPham);
+            System.out.println("maBienThe=" + maBienThe);
+            System.out.println("tenInAo=[" + tenInAo + "]");
+            System.out.println("soInAo=[" + soInAo + "]");
+            System.out.println("nhomSanPham=[" + sanPham.getNhomSanPham() + "]");
 
             GioHang item = gioHangDAO.getThongTinPopupItem(maNguoiDung, maBienThe, tenInAo, soInAo);
             GioHangSum summary = gioHangDAO.getTongQuanGioHang(maNguoiDung);

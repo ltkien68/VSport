@@ -1,4 +1,69 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const printCheckbox = document.getElementById("printShirtCheckbox");
+    const printFields = document.getElementById("printShirtFields");
+    const tenInAoInput = document.getElementById("tenInAo");
+    const soInAoInput = document.getElementById("soInAo");
+
+    // Chỉ bind events nếu có elements
+    if (printCheckbox && printFields && tenInAoInput && soInAoInput) {
+        printCheckbox.addEventListener("change", function () {
+            const checked = this.checked;
+            printFields.classList.toggle("active", checked);
+            if (!checked) {
+                tenInAoInput.value = "";
+                soInAoInput.value = "";
+            }
+        });
+
+        tenInAoInput.addEventListener("input", function () {
+            this.value = this.value
+                    .toUpperCase()
+                    .replace(/[^A-ZÀ-Ỹ\s]/gi, "")
+                    .slice(0, 20);
+        });
+
+        soInAoInput.addEventListener("input", function () {
+            this.value = this.value
+                    .replace(/\D/g, "")
+                    .slice(0, 2);
+        });
+    }
+
+    // Luôn gán window.getPrintShirtData dù có elements hay không
+    window.getPrintShirtData = function () {
+        if (!printCheckbox || !printCheckbox.checked) {
+            return {tenInAo: "", soInAo: ""};
+        }
+
+        const tenInAo = tenInAoInput.value.trim();
+        const soInAo = soInAoInput.value.trim();
+
+        if (tenInAo.length === 0) {
+            toastr.error("Vui lòng nhập tên muốn in trên áo.");
+            tenInAoInput.focus();
+            return null;
+        }
+        if (tenInAo.length > 20) {
+            toastr.error("Tên in áo tối đa 20 ký tự.");
+            tenInAoInput.focus();
+            return null;
+        }
+        if (soInAo.length === 0) {
+            toastr.error("Vui lòng nhập số áo muốn in.");
+            soInAoInput.focus();
+            return null;
+        }
+        if (soInAo.length > 2) {
+            toastr.error("Số áo tối đa 2 ký tự.");
+            soInAoInput.focus();
+            return null;
+        }
+
+        return {tenInAo, soInAo};
+    };
+});
+
+document.addEventListener("DOMContentLoaded", function () {
     const sizeButtons = document.querySelectorAll(".pd-size-btn");
     const addCartBtn = document.getElementById("pdAddCartBtn");
     const selectedVariantInput = document.getElementById("selectedVariantId");
@@ -165,6 +230,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             console.log("PRINT DATA:", printData);
 
+            console.log("formData string:", formData.toString());
+            console.log("printData:", printData);
+            console.log("getPrintShirtData fn:", window.getPrintShirtData);
+
             try {
                 const response = await fetch(`${window.contextPath}/gio-hang/them`, {
                     method: "POST",
@@ -215,81 +284,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    const printCheckbox = document.getElementById("printShirtCheckbox");
-    const printFields = document.getElementById("printShirtFields");
-    const tenInAoInput = document.getElementById("tenInAo");
-    const soInAoInput = document.getElementById("soInAo");
-
-    if (!printCheckbox || !printFields || !tenInAoInput || !soInAoInput)
-        return;
-
-    printCheckbox.addEventListener("change", function () {
-        const checked = this.checked;
-
-        printFields.classList.toggle("active", checked);
-
-        if (!checked) {
-            tenInAoInput.value = "";
-            soInAoInput.value = "";
-        }
-    });
-
-    tenInAoInput.addEventListener("input", function () {
-        this.value = this.value
-                .toUpperCase()
-                .replace(/[^A-ZÀ-Ỹ\s]/gi, "")
-                .slice(0, 20);
-    });
-
-    soInAoInput.addEventListener("input", function () {
-        this.value = this.value
-                .replace(/\D/g, "")
-                .slice(0, 2);
-    });
-
-    window.getPrintShirtData = function () {
-        if (!printCheckbox.checked) {
-            return {
-                tenInAo: "",
-                soInAo: ""
-            };
-        }
-
-        const tenInAo = tenInAoInput.value.trim();
-        const soInAo = soInAoInput.value.trim();
-
-        if (tenInAo.length === 0) {
-            toastr.error("Vui lòng nhập tên muốn in trên áo.");
-            tenInAoInput.focus();
-            return null;
-        }
-
-        if (tenInAo.length > 20) {
-            toastr.error("Tên in áo tối đa 20 ký tự.");
-            tenInAoInput.focus();
-            return null;
-        }
-
-        if (soInAo.length === 0) {
-            toastr.error("Vui lòng nhập số áo muốn in.");
-            soInAoInput.focus();
-            return null;
-        }
-
-        if (soInAo.length > 2) {
-            toastr.error("Số áo tối đa 2 ký tự.");
-            soInAoInput.focus();
-            return null;
-        }
-
-        return {
-            tenInAo: tenInAo,
-            soInAo: soInAo
-        };
-    };
-});
-
-document.addEventListener("DOMContentLoaded", function () {
 
     const randomSection =
             document.getElementById("pdRandomSection");
@@ -332,45 +326,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-  const tiltCards = document.querySelectorAll('.tilt-card');
+document.addEventListener('DOMContentLoaded', function () {
+    const tiltCards = document.querySelectorAll('.tilt-card');
 
-  tiltCards.forEach(function(card) {
-    // Khi di chuyển chuột bên trong thẻ
-    card.addEventListener('mousemove', function(e) {
-      const rect = card.getBoundingClientRect();
+    tiltCards.forEach(function (card) {
+        // Khi di chuyển chuột bên trong thẻ
+        card.addEventListener('mousemove', function (e) {
+            const rect = card.getBoundingClientRect();
 
-      // Vị trí chuột tính theo tỉ lệ 0 -> 1 trong card
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
+            // Vị trí chuột tính theo tỉ lệ 0 -> 1 trong card
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
 
-      // Góc nghiêng tối đa ±15 độ, đảo chiều Y để tự nhiên
-      const rotateY = (x - 0.5) * 30;   // -15deg đến 15deg
-      const rotateX = (0.5 - y) * 30;   // 15deg đến -15deg (nghiêng lên/xuống)
+            // Góc nghiêng tối đa ±15 độ, đảo chiều Y để tự nhiên
+            const rotateY = (x - 0.5) * 30;   // -15deg đến 15deg
+            const rotateX = (0.5 - y) * 30;   // 15deg đến -15deg (nghiêng lên/xuống)
 
-      // Áp dụng transform 3D
-      card.style.transform = `
+            // Áp dụng transform 3D
+            card.style.transform = `
         perspective(1000px)
         rotateX(${rotateX}deg)
         rotateY(${rotateY}deg)
         translateZ(20px)
       `;
 
-      // Cập nhật biến CSS cho vị trí shine
-      card.style.setProperty('--mouse-x', (x * 100) + '%');
-      card.style.setProperty('--mouse-y', (y * 100) + '%');
-    });
+            // Cập nhật biến CSS cho vị trí shine
+            card.style.setProperty('--mouse-x', (x * 100) + '%');
+            card.style.setProperty('--mouse-y', (y * 100) + '%');
+        });
 
-    // Khi chuột rời khỏi thẻ – trả về trạng thái phẳng
-    card.addEventListener('mouseleave', function() {
-      card.style.transform = `
+        // Khi chuột rời khỏi thẻ – trả về trạng thái phẳng
+        card.addEventListener('mouseleave', function () {
+            card.style.transform = `
         perspective(1000px)
         rotateX(0deg)
         rotateY(0deg)
         translateZ(0px)
       `;
-      // Không cần reset --mouse-x/y vì shine đã ẩn (opacity: 0)
+            // Không cần reset --mouse-x/y vì shine đã ẩn (opacity: 0)
+        });
     });
-  });
 });
 
