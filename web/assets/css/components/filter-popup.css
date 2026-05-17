@@ -43,7 +43,18 @@
     width: 380px;
     max-width: 100%;
     height: 100vh;
-    background: var(--color-white);
+
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
+
     box-shadow: -6px 0 30px rgba(0, 0, 0, 0.12);
     transform: translateX(100%);
     transition: transform 0.32s ease;
@@ -59,8 +70,19 @@
 .filter-header {
     height: 104px;
     padding: 0 34px;
-    border-bottom: 1px solid var(--color-gray-200);
-    background: var(--color-white);
+    border-bottom: 1px solid var(--text-highlight);
+    
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
+    
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -68,12 +90,12 @@
 
 .filter-header h2 {
     margin: 0;
-    font-size: 28px;
-    line-height: 1;
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
     font-family: var(--font-heading);
     font-weight: bold;
     text-transform: uppercase;
-    color: var(--color-black);
+    color: var(--text-heading);
 }
 
 .filter-header-right {
@@ -83,20 +105,28 @@
 }
 
 .filter-clear-all {
-    color: var(--color-black);
+    color: var(--text-normal);
     font-family: var(--font-body);
-    font-size: 18px;
+    font-size: var(--h4-font-size);
+    line-height: var(--h4-line-height);
     font-weight: 700;
 }
 
 .filter-close-btn {
     border: none;
     background: transparent;
-    font-size: 25px;
-    line-height: 1;
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
     cursor: pointer;
-    color: var(--color-black);
+    color: var(--text-normal);
     padding: 0;
+    
+    transition: transform 0.25s ease;
+    
+    &:hover {
+        transform: rotate(90deg);
+        color: var(--text-hovered);
+    }
 }
 
 .filter-form {
@@ -112,7 +142,7 @@
 }
 
 .filter-group {
-    border-bottom: 1px solid var(--color-gray-200);
+    border-bottom: 1px solid var(--text-highlight);
 }
 
 .filter-group-head {
@@ -126,15 +156,17 @@
     justify-content: space-between;
     cursor: pointer;
     font-family: var(--font-heading);
-    font-size: 20px;
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
     font-weight: 700;
-    color: var(--color-black);
+    color: var(--text-heading);
     text-align: left;
 }
 
 .filter-arrow {
-    font-size: 26px;
-    line-height: 1;
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
+    color: var(--text-normal);
     transition: transform 0.25s ease;
 }
 
@@ -159,15 +191,16 @@
     gap: 16px;
     min-height: 62px;
     font-family: var(--font-body);
-    font-size: 20px;
-    color: var(--color-black);
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
+    color: var(--text-normal);
     cursor: pointer;
 }
 
 .filter-radio-row input[type="radio"] {
     width: 20px;
     height: 20px;
-    accent-color: var(--color-black);
+    accent-color: var(--text-highlight);
     margin-right: 16px;
 }
 
@@ -189,8 +222,19 @@
 .fake-check {
     width: 20px;
     height: 20px;
-    border: 1.5px solid var(--color-gray-400);
-    background: var(--color-white);
+    border: 1.5px solid var(--text-highlight);
+    
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
+    
     position: relative;
     flex-shrink: 0;
 }
@@ -226,16 +270,21 @@
     display: flex;
     justify-content: center;
     gap: 14px;
-    margin-bottom: 50px;    
+    margin-bottom: 50px;
 }
 
 .filter-price-item input {
     width: 160px;
     height: 50px;
     padding: 0 15px;
-    
+    background: var(--bg-main);
+    border-radius: 18px;
+    border: var(--text-highlight);
+    color: var(--text-heading);
+
     font-family: var(--font-body);
-    font-size: 16px;
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
     font-weight: bold;
 }
 
@@ -252,7 +301,7 @@
 
 /* HOVER */
 .filter-price-item input:hover {
-    border-color: var(--color-gray-400);
+    border-color: var(--text-highlight);
 }
 
 /* FIX khoảng cách label phía trên */
@@ -273,8 +322,19 @@
 
 .filter-footer {
     padding: 24px 28px 28px;
-    border-top: 1px solid var(--color-gray-200);
-    background: var(--color-white);
+    border-top: 1px solid var(--text-highlight);
+     
+    background-color: var(--bg-main);
+
+    background-size: 9px 9px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08) 0,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 40%
+        );
+    
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -283,26 +343,27 @@
 .filter-found-text {
     margin-bottom: 16px;
     font-family: var(--font-body);
-    font-size: 20px;
+    font-size: var(--h3-font-size);
+    line-height: var(--h3-line-height);
     font-weight: 700;
-    color: var(--color-black);
+    color: var(--text-normal);
 }
 
 .filter-apply-btn {
     width: 100%;
     height: 64px;
-    border: 1px solid var(--color-black);
-    background: var(--color-black);
+    background: var(--bg-button);
     color: var(--color-white);
     padding: 0 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-family: var(--font-heading);
-    font-size: 24px;
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
     font-weight: 800;
     cursor: pointer;
-    box-shadow: 4px 4px 0 var(--color-white), 5px 5px 0 var(--color-black);
+    box-shadow: 4px 4px 0 var(--color-white);
     transition: 0.2s ease;
 }
 
@@ -311,8 +372,8 @@
 }
 
 .filter-apply-arrow {
-    font-size: 28px;
-    line-height: 1;
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
 }
 
 body.filter-lock {
