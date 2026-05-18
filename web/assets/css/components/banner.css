@@ -12,19 +12,19 @@
     overflow: hidden;
     background: #0b0b0b;
 
-    &::after {
+/*    &::after {
         content: "";
         position: absolute;
         inset: 0;
         background: linear-gradient(
             to bottom,
-            rgba(0, 0, 0, 0.65) 0%,
-            rgba(0, 0, 0, 0.15) 40%,
-            rgba(0, 0, 0, 0.04) 75%,
+            rgba(0, 0, 0, 0.45) 0%,
+            rgba(0, 0, 0, 0.10) 40%,
+            rgba(0, 0, 0, 0.0) 75%,
             rgba(0, 0, 0, 0) 100%
             );
         z-index: 1;
-    }
+    }*/
 }
 
 .hero-track {

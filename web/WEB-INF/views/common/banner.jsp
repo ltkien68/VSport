@@ -55,7 +55,7 @@
             </div>
 
             <div class="hero-slide">
-                <img src="${pageContext.request.contextPath}/assets/images/banners/bida.png" alt="Phụ kiện thể thao">
+                <img src="${pageContext.request.contextPath}/assets/images/banners/lewy-banner.webp" alt="Phụ kiện thể thao">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                     <h2>GAME IS OVER</h2>

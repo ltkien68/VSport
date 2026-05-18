@@ -260,11 +260,16 @@
             <file>file:/D:/Code_files/VSPORT/VsportWeb/src/java/controller/ChatServlet.java</file>
             <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/css/pages/dat-san-bong.css</file>
             <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/css/pages/home.css</file>
-            <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/images/logos/logo-header.png</file>
-            <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/js/components/football-jersey.js</file>
             <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/css/components/loading.css</file>
             <file>file:/D:/Code_files/VSPORT/VsportWeb/web/WEB-INF/views/common/loading.jsp</file>
             <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/css/components/chat.css</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/css/product-detail/product-recommend.css</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/js/pages/dat-san-bong.js</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/src/java/filter/EncodingFilter.java</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/js/components/football-jersey.js</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/web/assets/js/pages/ma-giam-gia.js</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/web/WEB-INF/views/admin/ma-giam-gia.jsp</file>
+            <file>file:/D:/Code_files/VSPORT/VsportWeb/web/WEB-INF/views/admin/phieu-nhap.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -38,7 +38,7 @@
                 <section class="admin-voucher-header">
 
                     <div>
-                        <p class="admin-voucher-label">VSport Admin</p>
+                        <p class="admin-voucher-label">LKsport Admin</p>
 
                         <h1>Quản lý mã giảm giá</h1>
 
