@@ -49,9 +49,9 @@
           data-login-success="<%= loginSuccessFlag%>"
           data-logout-success="<%= logoutSuccessFlag%>"
           >
-        
+
         <!-- Loading -->
-        <%--  <jsp:include page="/WEB-INF/views/common/loading.jsp" />  --%>
+        <jsp:include page="/WEB-INF/views/common/loading.jsp" /> 
 
         <!-- HEADER -->
         <div >
