@@ -55,6 +55,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/ma-giam-gia.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/checkout-popup.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/order-history.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/fan-zone.css">
+
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/review-popup.css">
 

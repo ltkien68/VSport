@@ -72,6 +72,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const images = [
         "messi.jpg",
+        "pick.webp",
+        "yildiz.jpg",
+        "doue.webp",
+        "yamal.jpg",
+        "yamalxrap.jpg",
         "lewy-banner.webp",
         "football-banner.jpg",
         "gym.webp",
