@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/in_theo_yeu_cau")
-public class InTheoYeuCauServlet extends HttpServlet {
+@WebServlet("/fan_zone")
+public class FanZoneServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -20,7 +20,7 @@ public class InTheoYeuCauServlet extends HttpServlet {
 
         request.setAttribute("dsBoSuuTap", boSuuTapDAO.getAllBoSuuTapHienThi());
         request.setAttribute("activePage", "in_theo_yeu_cau");
-        request.getRequestDispatcher("/WEB-INF/views/pages/in-theo-yeu-cau.jsp")
+        request.getRequestDispatcher("/WEB-INF/views/pages/fan-zone.jsp")
                 .forward(request, response);
     }
 }

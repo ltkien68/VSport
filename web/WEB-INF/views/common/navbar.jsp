@@ -92,30 +92,15 @@
             </li>
 
             <li class="navbar-item has-mega-menu">
-                <a href="${pageContext.request.contextPath}/in_theo_yeu_cau" class="navbar-link">
-                    IN ÁO THEO ĐỘI
+                <a href="${pageContext.request.contextPath}/fan_zone" class="navbar-link">
+                    Fan Zone
                 </a>
-
-                <div class="mega-menu">
-                    <div class="mega-menu-inner">
-
-
-
-                    </div>
-                </div>
             </li>
 
             <li class="navbar-item has-mega-menu">
                 <a href="${pageContext.request.contextPath}/dat_san_bong" class="navbar-link">
                     ĐẶT SÂN BÓNG
                 </a>
-
-                <div class="mega-menu">
-                    <div class="mega-menu-inner">
-
-
-                    </div>
-                </div>
             </li>
 
 

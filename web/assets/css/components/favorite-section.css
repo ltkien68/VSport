@@ -134,6 +134,12 @@
     aspect-ratio: 1 / 1.18;
 
     perspective: 1200px;
+    
+    transition: transform 0.25s ease;
+
+    & img:hover {
+        transform: scale(1.02);
+    }
 }
 
 .home-favorite-image {

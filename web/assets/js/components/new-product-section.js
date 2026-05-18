@@ -422,31 +422,4 @@ document.querySelectorAll(".new-product-slide").forEach((card) => {
     });
 });
 
-document.querySelectorAll(".new-product-card").forEach((card) => {
-    const img = card.querySelector(".new-product-image");
 
-    card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-        img.style.transform = `
-            perspective(1200px)
-            translateZ(40px)
-            scale(1.2)
-            rotateX(${-y * 10}deg)
-            rotateY(${x * 10}deg)
-        `;
-    });
-
-    card.addEventListener("mouseleave", () => {
-        img.style.transform = `
-            perspective(1200px)
-            translateZ(0px)
-            scale(1)
-            rotateX(0deg)
-            rotateY(0deg)
-        `;
-    });
-});

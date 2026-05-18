@@ -230,10 +230,10 @@
 }
 
 .login-popup-forgot {
-    color: var(--text-price-sale);
+    color: var(--text-normal);
     font-size: 15px;
     font-weight: 700;
-    text-decoration: underline;
+    text-decoration: none;
     text-underline-offset: 3px;
 }
 
