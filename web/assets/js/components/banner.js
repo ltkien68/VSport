@@ -63,3 +63,33 @@ document.addEventListener("DOMContentLoaded", function () {
     updateSlider(currentIndex);
     startAutoSlide();
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const bannerPath = document
+        .getElementById("heroBannerPath")
+        .dataset.path;
+
+    const images = [
+        "messi.jpg",
+        "lewy-banner.webp",
+        "football-banner.jpg",
+        "gym.webp",
+        "volley.jpg",
+        "tennis.webp"
+    ];
+
+    // shuffle
+    const shuffled = [...images].sort(() => Math.random() - 0.5);
+
+    const slides = document.querySelectorAll(".hero-slide");
+
+    slides.forEach((slide, index) => {
+
+        const img = slide.querySelector("img");
+
+        img.src = bannerPath + shuffled[index];
+
+    });
+
+});

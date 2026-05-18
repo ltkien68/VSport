@@ -44,7 +44,7 @@
             </li>
 
             <li class="navbar-item has-mega-menu">
-                <a href="${pageContext.request.contextPath}/giay_gang_bong_da" class="navbar-link">
+                <a href="${pageContext.request.contextPath}/giay_gang_bong_da" class="navbar-link ${activePage == "giay_gang_bong_da"  ? "active" : "" }">
                     GIÀY / GĂNG BÓNG ĐÁ 
                 </a>
 
@@ -65,7 +65,7 @@
             </li>
 
             <li class="navbar-item has-mega-menu">
-                <a href="${pageContext.request.contextPath}/phu_kien" class="navbar-link">
+                <a href="${pageContext.request.contextPath}/phu_kien" class="navbar-link ${activePage == "phu_kien"  ? "active" : "" }">
                     PHỤ KIỆN BÓNG ĐÁ 
                 </a>
 
@@ -92,13 +92,13 @@
             </li>
 
             <li class="navbar-item has-mega-menu">
-                <a href="${pageContext.request.contextPath}/fan_zone" class="navbar-link">
+                <a href="${pageContext.request.contextPath}/fan_zone" class="navbar-link ${activePage == "fan_zone"  ? "active" : "" }">
                     Fan Zone
                 </a>
             </li>
 
             <li class="navbar-item has-mega-menu">
-                <a href="${pageContext.request.contextPath}/dat_san_bong" class="navbar-link">
+                <a href="${pageContext.request.contextPath}/dat_san_bong" class="navbar-link ${activePage == "dat_san_bong"  ? "active" : "" }">
                     ĐẶT SÂN BÓNG
                 </a>
             </li>
