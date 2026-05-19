@@ -98,7 +98,7 @@
                                                 || (activeTab == 'dang_giao' && donHang.trangThaiDonHang == 'dang_giao')
                                                 || (activeTab == 'da_giao' && donHang.trangThaiDonHang == 'da_giao')
                                                 || (activeTab == 'da_huy' && donHang.trangThaiDonHang == 'da_huy')
-                                                || (activeTab == 'tra_hang' && false)}" />
+                                                || (activeTab == 'tra_hang' && donHang.trangThaiDonHang == 'cho_tra_hang')}" />
 
                                 <c:if test="${showCard}">
                                     <div class="order-card">
@@ -239,13 +239,26 @@
                                         <div class="order-card-actions">
                                             <div class="order-card-actions-left">
                                                 <c:choose>
-
-
+                                                    <%-- Nút Hủy đơn khi đơn hàng chờ xác nhận --%>
                                                     <c:when test="${donHang.trangThaiDonHang == 'cho_xac_nhan'}">
                                                         <button type="button" class="order-btn order-btn-danger btn-huy-don" data-ma-don-hang="${donHang.maDonHang}">
                                                             Hủy đơn
                                                         </button>
                                                     </c:when>
+
+                                                    <%-- Nút Trả hàng / Hoàn tiền khi đơn đã giao và đã thanh toán --%>
+                                                    <c:when test="${donHang.trangThaiDonHang == 'da_giao' and donHang.trangThaiThanhToan == 'da_thanh_toan'}">
+                                                        <button type="button" 
+                                                                class="order-btn order-btn-warning btn-tra-hang" 
+                                                                data-ma-don-hang="${donHang.maDonHang}"
+                                                                data-tong-tien="${donHang.tongThanhToan}">
+                                                            Trả hàng / Hoàn tiền
+                                                        </button>
+                                                    </c:when>
+
+                                                    <%-- Các trạng thái khác không hiển thị nút gì --%>
+                                                    <c:otherwise>
+                                                    </c:otherwise>
                                                 </c:choose>
                                             </div>
 
@@ -341,6 +354,7 @@
             </div>
         </section>
 
+        <jsp:include page="/WEB-INF/views/pages/components/tra-hang-popup.jsp" />
         <jsp:include page="/WEB-INF/views/pages/components/review-popup.jsp" />
         <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
@@ -423,7 +437,13 @@
         </div>
 
 
+
+
+
         <script src="${pageContext.request.contextPath}/assets/js/pages/order-history.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/components/tra-hang-popup.js"></script>
+
+
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

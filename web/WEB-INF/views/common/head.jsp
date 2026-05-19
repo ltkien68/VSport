@@ -15,6 +15,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/banner.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/footer.css">
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/tra-hang-popup.css">
+
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/components/chat.css">
 
 

@@ -2,6 +2,7 @@ package utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DBConnection {
@@ -17,6 +18,10 @@ public class DBConnection {
         } catch (ClassNotFoundException e) {
             throw new SQLException("Không tìm thấy MySQL JDBC Driver!", e);
         }
+    }
+
+    public static void closeResources(Connection conn, PreparedStatement ps, Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
    

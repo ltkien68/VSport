@@ -209,10 +209,15 @@ public class DonHangServlet extends HttpServlet {
                 "da_huy",
                 "Đã hủy"
         );
+        
+        mapTrangThai.put(
+                "cho_tra_hang",
+                "Chờ duyệt trả hàng"
+        );
 
         mapTrangThai.put(
-                "tra_hang",
-                "Trả hàng / Hoàn tiền"
+                "da_tra_hang",
+                "Đã trả hàng / Hoàn tiền"
         );
 
         request.setAttribute(
