@@ -6,6 +6,50 @@
             <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/src/java/controller/CapNhatInAoServlet.java</file>
             <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/src/java/controller/TaoDonHangServlet.java</file>
             <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/src/java/dao/DonHangDAO.java</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/css/components/navbar.css</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/WEB-INF/views/auth/login-popup.jsp</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/css/components/login-popup.css</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/js/components/new-product-section.js</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/css/components/new-product-section.css</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/WEB-INF/views/pages/components/new-product-section.jsp</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/WEB-INF/views/pages/components/favorite-section.jsp</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/css/components/favorite-section.css</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/js/components/football-jersey-banner.js</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/js/components/favorite-section.js</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/js/components/checkout-popup.js</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/js/pages/order-history.js</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/src/java/controller/DonHangServlet.java</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/WEB-INF/views/user/home.jsp</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/WEB-INF/views/common/navbar.jsp</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/src/java/controller/FanZoneServlet.java</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/WEB-INF/views/pages/fan-zone.jsp</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/WEB-INF/views/common/football-jersey-banner.jsp</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/WEB-INF/views/pages/order-history.jsp</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/WEB-INF/views/pages/ma-giam-gia.jsp</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/css/base/variables.css</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/WEB-INF/views/common/banner.jsp</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/css/components/banner.css</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/js/components/banner.js</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/WEB-INF/views/pages/phu-kien.jsp</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/css/pages/fan-zone.css</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/WEB-INF/views/common/head.jsp</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/js/pages/fan-zone.js</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/css/components/chat.css</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/WEB-INF/views/common/header.jsp</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/js/components/chat.js</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/WEB-INF/views/pages/components/review-popup.jsp</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/css/components/review-popup.css</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/js/components/login-popup.js</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/src/java/controller/auth/DangKyServlet.java</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/src/java/controller/auth/DangNhapServlet.java</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/src/java/controller/auth/DangXuatServlet.java</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/src/java/dao/NguoiDungDAO.java</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/src/java/dao/BoSuuTapDAO.java</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/src/java/model/MaGiamGiaResult.java</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/src/java/model/MaGiamGia.java</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/src/java/model/MaGiamGiaSoHuu.java</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/WEB-INF/views/pages/football-sections/football-jersey.jsp</file>
+            <file>file:/D:/02_PERSONAL/Study/2026_ThucHanhWeb-Lksport/source_code/LksportWeb/web/assets/css/pages/football-jersey.css</file>
         </group>
     </open-files>
 </project-private>

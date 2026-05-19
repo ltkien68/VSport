@@ -152,15 +152,15 @@
                                                     <span class="voucher-status ${mg.trangThai}">
 
                                                         <c:choose>
-
                                                             <c:when test="${mg.trangThai == 'hoat_dong'}">
                                                                 Hoạt động
                                                             </c:when>
-
+                                                            <c:when test="${mg.trangThai == 'het_han'}">
+                                                                Hết hạn
+                                                            </c:when>
                                                             <c:otherwise>
                                                                 Ẩn
                                                             </c:otherwise>
-
                                                         </c:choose>
 
                                                     </span>
@@ -540,7 +540,7 @@
         </div>
 
         <script>
-    window.APP_CONTEXT = "${pageContext.request.contextPath}";
+            window.APP_CONTEXT = "${pageContext.request.contextPath}";
         </script>
 
         <script src="https://unpkg.com/lucide@latest"></script>
