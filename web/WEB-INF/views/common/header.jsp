@@ -91,39 +91,6 @@
         </div>
     </div>
 
-
-    <script>
-        (function () {
-            try {
-                const theme = localStorage.getItem("theme");
-                if (theme === "dark") {
-                    document.documentElement.classList.add("dark-mode");
-                } else {
-                    document.documentElement.classList.remove("dark-mode");
-                }
-            } catch (e) {
-            }
-        })();
-    </script>
-
-
-    <!-- Popup chat hỗ trợ -->
-    <div id="chatPopup" class="chat-popup" style="display: none;">
-        <div class="chat-popup-header">
-            <span>Hỗ trợ trực tuyến</span>
-            <button class="chat-popup-close-btn">&times;</button>
-        </div>
-        <div class="chat-popup-body">
-            <div class="chat-messages" id="chatMessages"></div>
-            <div class="chat-input-area">
-                
-                <textarea id="chatInput" placeholder="Nhập tin nhắn... /tim_kiem tên sản phẩm"></textarea>
-                <button id="chatSendBtn">Gửi</button>
-            </div>
-        </div>
-    </div>
-
-
     <script>
         window.currentUserId = '<%= ((NguoiDung) session.getAttribute("nguoiDung")) != null
                 ? ((NguoiDung) session.getAttribute("nguoiDung")).getMaNguoiDung()
@@ -131,7 +98,6 @@
     </script>
 
     <script src="${pageContext.request.contextPath}/assets/js/components/chat.js"></script>
-
 
 
 </header>
@@ -161,6 +127,21 @@
             <div class="search-empty-state">
                 <p>Gõ tên sản phẩm, đội bóng, thương hiệu, danh mục, size...</p>
             </div>
+        </div>
+    </div>
+</div>
+
+<div id="chatPopup" class="chat-popup" style="display: none;">
+    <div class="chat-popup-header">
+        <span>Hỗ trợ trực tuyến</span>
+        <button class="chat-popup-close-btn">&times;</button>
+    </div>
+    <div class="chat-popup-body">
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input-area">
+
+            <textarea id="chatInput" placeholder="Nhập tin nhắn... /tim_kiem tên sản phẩm"></textarea>
+            <button id="chatSendBtn">Gửi</button>
         </div>
     </div>
 </div>

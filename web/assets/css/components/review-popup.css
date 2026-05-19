@@ -33,7 +33,7 @@
     width: 560px;
     max-width: 92%;
 
-    background: #fff;
+    background: var(--bg-main);
 
     border-radius: 28px;
 
@@ -71,6 +71,7 @@
 }
 
 .review-popup-head h2 {
+    color: var(--text-heading);
     font-family: var(--font-heading);
     text-transform: uppercase;
     font-size: 28px;
@@ -124,7 +125,7 @@
 }
 
 .review-star.active {
-    color: #ffb400;
+    color: var(--text-highlight);
 }
 
 .review-textarea {
@@ -134,7 +135,9 @@
     resize: none;
 
     border-radius: 18px;
-    border: 1px solid #ddd;
+    background: var(--bg-card);
+    border: 1px solid var(--text-highlight);
+    color: var(--text-highlight);
 
     padding: 16px;
 
@@ -154,7 +157,7 @@
 
     padding: 12px 20px;
 
-    border-radius: 14px;
+    border-radius: 18px;
     font-family: var(--font-body);
 
 
@@ -188,8 +191,8 @@
 
     border-radius: 18px;
 
-    background: #000;
-    color: #fff;
+    background: var(--bg-button);
+    color: var(--text-heading);
 
     font-size: 18px;
     font-weight: 700;

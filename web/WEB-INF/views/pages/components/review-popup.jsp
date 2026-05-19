@@ -73,11 +73,11 @@
 
             <div class="review-stars">
 
-                <i class="review-star active" data-value="1">★</i>
-                <i class="review-star active" data-value="2">★</i>
-                <i class="review-star active" data-value="3">★</i>
-                <i class="review-star active" data-value="4">★</i>
-                <i class="review-star active" data-value="5">★</i>
+                <i class="review-star active" data-value="1"><i data-lucide="star"></i></i>
+                <i class="review-star active" data-value="2"><i data-lucide="star"></i></i>
+                <i class="review-star active" data-value="3"><i data-lucide="star"></i></i>
+                <i class="review-star active" data-value="4"><i data-lucide="star"></i></i>
+                <i class="review-star active" data-value="5"><i data-lucide="star"></i></i>
 
             </div>
 
@@ -89,21 +89,7 @@
 
             <div class="review-upload-wrap">
 
-                <label class="review-upload-label">
 
-                    <input
-                        type="file"
-                        name="anhDanhGia"
-                        id="reviewImageInput"
-                        accept="image/*"
-                        hidden
-                        >
-
-                    <span>
-                        Chọn ảnh đánh giá
-                    </span>
-
-                </label>
 
                 <img
                     id="reviewPreviewImage"
